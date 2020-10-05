@@ -1,0 +1,7 @@
+/bin
+/target
+*.class
+datosDB.txt
+datosDB.json
+hs_err*
+*.cfg.xml
