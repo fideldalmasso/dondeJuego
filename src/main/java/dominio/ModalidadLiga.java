@@ -1,14 +1,14 @@
 package dominio;
 
-public class Liga extends Modalidad {
+public class ModalidadLiga extends Modalidad {
 	private Boolean permiteEmpate;
 	private Integer puntosPorPresentarse;
 	private Integer puntosPorEmpate;
 	private Integer puntosPorGanar;
-	public Liga() {
+	public ModalidadLiga() {
 		super();
 	}
-	public Liga(Integer id,Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorEmpate, Integer puntosPorGanar) {
+	public ModalidadLiga(Integer id,Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorEmpate, Integer puntosPorGanar) {
 		super(id);
 		this.permiteEmpate = permiteEmpate;
 		this.puntosPorPresentarse = puntosPorPresentarse;

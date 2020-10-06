@@ -1,17 +1,26 @@
 package dominio;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Fixture {
 	private Integer id;
 	private Timestamp fechaCreacion;
-	public Fixture(Integer id, Timestamp fechaCreacion) {
+	private List<Fecha> fechas;
+	public Fixture() {
+		super();
+	}
+	public Fixture(Integer id, Timestamp fechaCreacion, List<Fecha> fechas) {
 		super();
 		this.id = id;
 		this.fechaCreacion = fechaCreacion;
+		this.fechas = fechas;
 	}
-	public Fixture() {
-		super();
+	public List<Fecha> getFechas() {
+		return fechas;
+	}
+	public void setFechas(List<Fecha> fechas) {
+		this.fechas = fechas;
 	}
 	public Integer getId() {
 		return id;

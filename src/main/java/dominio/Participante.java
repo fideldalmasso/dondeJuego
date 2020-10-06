@@ -10,6 +10,11 @@ public class Participante {
 		this.nombre = nombre;
 		this.email = email;
 	}
+	
+	public Participante() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
