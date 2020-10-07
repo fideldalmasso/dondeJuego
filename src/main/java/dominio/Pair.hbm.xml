@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="dominio.Pair" table="PAIR">
+        <id name="first" type="dominio.Pair$T1">
+            <column name="FIRST" />
+            <generator class="assigned" />
+        </id>
+        <property name="second" type="dominio.Pair$T2">
+            <column name="SECOND" />
+        </property>
+    </class>
+</hibernate-mapping>

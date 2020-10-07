@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="dominio.RenglonTabla" table="RENGLONTABLA">
+        <id name="partidosGanados" type="java.lang.Integer">
+            <column name="PARTIDOSGANADOS" />
+            <generator class="assigned" />
+        </id>
+        <property name="partidosEmpatados" type="java.lang.Integer">
+            <column name="PARTIDOSEMPATADOS" />
+        </property>
+        <property name="partidosPerdidos" type="java.lang.Integer">
+            <column name="PARTIDOSPERDIDOS" />
+        </property>
+        <property name="tantosAFavor" type="java.lang.Integer">
+            <column name="TANTOSAFAVOR" />
+        </property>
+        <property name="tantosEnContra" type="java.lang.Integer">
+            <column name="TANTOSENCONTRA" />
+        </property>
+        <many-to-one name="participante" class="dominio.Participante" fetch="join">
+            <column name="PARTICIPANTE" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

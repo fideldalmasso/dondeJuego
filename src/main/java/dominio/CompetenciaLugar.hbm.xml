@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="dominio.CompetenciaLugar" table="COMPETENCIALUGAR">
+        <id name="disponibilidad" type="java.lang.Integer">
+            <column name="DISPONIBILIDAD" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="competencia" class="dominio.Competencia" fetch="join">
+            <column name="COMPETENCIA" />
+        </many-to-one>
+        <many-to-one name="lugar" class="dominio.LugarRealizacion" fetch="join">
+            <column name="LUGAR" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

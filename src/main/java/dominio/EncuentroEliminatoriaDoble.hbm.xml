@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <joined-subclass name="dominio.EncuentroEliminatoriaDoble" extends="dominio.Encuentro" table="ENCUENTROELIMINATORIADOBLE" lazy="false">
+        <key>
+            <column name="ID" />
+        </key>
+        <many-to-one name="ganador" class="dominio.EncuentroEliminatoriaDoble" fetch="join">
+            <column name="GANADOR" />
+        </many-to-one>
+        <many-to-one name="perdedor" class="dominio.EncuentroEliminatoriaDoble" fetch="join">
+            <column name="PERDEDOR" />
+        </many-to-one>
+    </joined-subclass>
+</hibernate-mapping>
