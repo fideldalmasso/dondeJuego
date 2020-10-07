@@ -4,7 +4,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name = "Employee" table = "EMPLOYEE">
+   <class name = "RenglonTabla" table = "renglonTabla">
       
       <meta attribute = "class-description">
          This class contains the employee detail. 
@@ -14,28 +14,28 @@
          <generator class="native"/>
       </id>
       
-      <property name = "firstName" column = "first_name" type = "string"/>
-      <property name = "lastName" column = "last_name" type = "string"/>
-      <property name = "salary" column = "salary" type = "int"/>
-      <many-to-one name = "address" column = "address" unique="true" 
-         class="Address" not-null="true"/>
+      <property name = "partidosEmpatados" column = "partidosEmpatados" type = "int"/>
+      <property name = "partidosGanados" column = "partidosGanados" type = "int"/>
+      <property name = "partidosPerdidos" column = "partidosPerdidos" type = "int"/>
+      <property name = "tantosAFavor" column = "tantosAFavor" type = "int"/>
+      <property name = "tantosEnContra" column = "tantosEnContra" type = "int"/>
+
+      <many-to-one name = "participante" column = "idParticipante" unique="true" 
+         class="Participante" not-null="true"/>
          
    </class>
 
-   <class name = "Address" table="ADDRESS">
+   <class name = "Participante" table = "participante">
       
       <meta attribute = "class-description">
-         This class contains the address detail. 
       </meta>
       
       <id name = "id" type = "int" column = "id">
          <generator class="native"/>
       </id>
       
-      <property name = "street" column = "street_name" type = "string"/>
-      <property name = "city" column = "city_name" type = "string"/>
-      <property name = "state" column = "state_name" type = "string"/>
-      <property name = "zipcode" column = "zipcode" type = "string"/>
+      <property name = "nombre" column = "nombre" type = "string"/>
+      <property name = "email" column = "email" type = "string"/>
       
    </class>
 
