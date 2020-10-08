@@ -20,6 +20,16 @@ public class RenglonTabla {
 		this.tantosEnContra = tantosEnContra;
 		this.participante = participante;
 	}
+	public RenglonTabla(Integer id) {
+		super();
+		this.id=id;
+		this.partidosEmpatados = null;
+		this.partidosGanados = null;
+		this.partidosPerdidos = null;
+		this.tantosAFavor = null;
+		this.tantosEnContra = null;
+		this.participante = null;
+	}
 	public RenglonTabla() {
 		super();
 	}

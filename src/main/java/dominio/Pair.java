@@ -1,26 +1,32 @@
 package dominio;
 
-public class Pair<T1, T2> {
-	private T1 first;
-	private T2 second;
-	public Pair(T1 first, T2 second) {
+public class Pair{
+	private Integer id;
+	private Integer first;
+	private Integer second;
+	public Pair(Integer id,Integer first, Integer second) {
 		super();
+		this.id = id;
 		this.first = first;
 		this.second = second;
+	}
+	public Pair(Integer id) {
+		super();
+		this.id = id;
 	}
 	public Pair() {
 		super();
 	}
-	public T1 getFirst() {
+	public Integer getFirst() {
 		return first;
 	}
-	public void setFirst(T1 first) {
+	public void setFirst(Integer first) {
 		this.first = first;
 	}
-	public T2 getSecond() {
+	public Integer getSecond() {
 		return second;
 	}
-	public void setSecond(T2 second) {
+	public void setSecond(Integer second) {
 		this.second = second;
 	}
 	

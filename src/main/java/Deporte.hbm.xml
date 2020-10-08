@@ -9,7 +9,7 @@
    <generator class="assigned"/>
   </id>
   <property generated="never" lazy="false" name="nombre" type="java.lang.String">
-   <column name="NOMBRE"/>
+   <column name="nombre"/>
   </property>
  </class>
 </hibernate-mapping>

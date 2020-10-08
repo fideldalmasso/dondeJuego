@@ -3,16 +3,13 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 8 oct. 2020 15:31:42 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="dominio.Pair" table="sett">
-        <id name="id" type="java.lang.Integer" access="field">
-            <column name="id" />
+    <class name="dominio.Resultado" table="RESULTADO">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="first" type="java.lang.Integer">
-            <column name="puntajea" />
-        </property>
-        <property name="second" type="java.lang.Integer">
-            <column name="puntajeb" />
+        <property name="fechaRegistro" type="java.sql.Timestamp">
+            <column name="FECHAREGISTRO" />
         </property>
     </class>
 </hibernate-mapping>

@@ -9,7 +9,7 @@
    <generator class="assigned"/>
   </id>
   <many-to-one class="dominio.Pais" fetch="join" name="pais">
-   <column name="id"/>
+   <column name="idpais"/>
   </many-to-one>
   <property generated="never" lazy="false" name="nombre" type="java.lang.String">
    <column name="nombre"/>

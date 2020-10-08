@@ -17,7 +17,7 @@
   <many-to-one class="dominio.Usuario" fetch="join" name="usuario">
    <column name="idUsuario"/>
    </many-to-one>
-  <set name = "deportes" cascade="save-update" table="deporte">
+  <set name = "deportes" cascade="save-update" table="deportelugar">
          <key column = "idLugar"/>
          <many-to-many column = "idDeporte" class="dominio.Deporte"/>
       </set>

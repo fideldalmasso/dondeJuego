@@ -8,6 +8,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import dominio.Deporte;
+import dominio.Participante;
+import dominio.RenglonTabla;
 
 public class Prueba {
 	private static SessionFactory factory; 
@@ -21,21 +23,22 @@ public class Prueba {
 	      }
 	      
 	      Prueba p = new Prueba();
-	      System.out.println(p.addDeporte("Damianci"));
+	      System.out.println(p.addRt(13));
 
 	     
 	   }
 	   
 	   /* Method to CREATE an employee in the database */
-	   public Integer addDeporte(String name){
+	   public Integer addRt(Integer id){
 	      Session session = factory.openSession();
 	      Transaction tx = null;
 	      Integer depId = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         Deporte dep = new Deporte(name);
-	         depId = (Integer) session.save(dep); 
+	         Deporte rt = new Deporte();
+	         rt.setId(id);
+	         depId = (Integer) session.save(rt); 
 	         tx.commit();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();

@@ -10,6 +10,12 @@ public class Participante {
 		this.nombre = nombre;
 		this.email = email;
 	}
+	public Participante(Integer id) {
+		super();
+		this.id = id;
+		this.nombre = null;
+		this.email = null;
+	}
 	
 	public Participante() {
 		super();
