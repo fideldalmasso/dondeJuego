@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="dominio.ModalidadEliminatoriaSimple" extends="dominio.Modalidad" table="MODALIDADELIMINATORIASIMPLE" lazy="false">
-        <key>
-            <column name="ID" />
-        </key>
-        <property name="id" type="java.lang.Long">
-            <column name="ID" />
-        </property>
-    </joined-subclass>
+ <joined-subclass extends="dominio.Modalidad" lazy="false"
+  name="dominio.ModalidadEliminatoriaSimple" table="MODALIDADELIMINATORIASIMPLE">
+  <key>
+   <column name="id"/>
+  </key>
+ </joined-subclass>
 </hibernate-mapping>

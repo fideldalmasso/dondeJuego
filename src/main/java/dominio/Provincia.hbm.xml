@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="dominio.Provincia" table="PROVINCIA">
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="pais" class="dominio.Pais" fetch="join">
-            <column name="PAIS" />
-        </many-to-one>
-        <property name="nombre" type="java.lang.String">
-            <column name="NOMBRE" />
-        </property>
-        <list name="localidades" inverse="false" table="LOCALIDAD" lazy="true">
-            <key>
-                <column name="ID" />
-            </key>
-            <list-index></list-index>
-            <one-to-many class="dominio.Localidad" />
-        </list>
-    </class>
+ <class name="dominio.Provincia" table="PROVINCIA">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="assigned"/>
+  </id>
+  <many-to-one class="dominio.Pais" fetch="join" name="pais">
+   <column name="id"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="java.lang.String">
+   <column name="nombre"/>
+  </property>
+  <list lazy="true" name="localidades" table="LOCALIDAD">
+   <key>
+    <column name="id"/>
+   </key>
+   <list-index base="0"/>
+   <one-to-many class="dominio.Localidad"/>
+  </list>
+ </class>
 </hibernate-mapping>

@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="dominio.ResultadoPuntuacion" extends="dominio.Resultado" table="RESULTADOPUNTUACION" lazy="false">
-        <key>
-            <column name="IDCOMPETENCIA" />
-        </key>
-        <property name="puntajeFinalA" type="java.lang.Integer">
-            <column name="PUNTAJEFINALA" />
-        </property>
-        <property name="puntajeFinalB" type="java.lang.Integer">
-            <column name="PUNTAJEFINALB" />
-        </property>
-    </joined-subclass>
+ <joined-subclass extends="dominio.Resultado" lazy="false"
+  name="dominio.ResultadoPuntuacion" table="RESULTADOPUNTUACION">
+  <key>
+   <column name="idCompetencia"/>
+  </key>
+  <property generated="never" lazy="false" name="puntajeFinalA" type="java.lang.Integer">
+   <column name="PUNTAJEFINALA"/>
+  </property>
+  <property generated="never" lazy="false" name="puntajeFinalB" type="java.lang.Integer">
+   <column name="PUNTAJEFINALB"/>
+  </property>
+ </joined-subclass>
 </hibernate-mapping>

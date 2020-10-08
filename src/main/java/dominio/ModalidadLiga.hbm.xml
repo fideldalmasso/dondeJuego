@@ -1,23 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="dominio.ModalidadLiga" extends="dominio.Modalidad" table="MODALIDADLIGA" lazy="false">
-        <key>
-            <column name="ID" />
-        </key>
-        <property name="permiteEmpate" type="java.lang.Boolean">
-            <column name="PERMITEEMPATE" />
-        </property>
-        <property name="puntosPorEmpate" type="java.lang.Integer">
-            <column name="PUNTOSPOREMPATE" />
-        </property>
-        <property name="puntosPorPresentarse" type="java.lang.Integer">
-            <column name="PUNTOSPORPRESENTARSE" />
-        </property>
-        <property name="puntosPorGanar" type="java.lang.Integer">
-            <column name="PUNTOSPORGANAR" />
-        </property>
-    </joined-subclass>
+ <joined-subclass extends="dominio.Modalidad" lazy="false"
+  name="dominio.ModalidadLiga" table="MODALIDADLIGA">
+  <key>
+   <column name="id"/>
+  </key>
+  <property generated="never" lazy="false" name="permiteEmpate" type="java.lang.Boolean">
+   <column name="PERMITEEMPATE"/>
+  </property>
+  <property generated="never" lazy="false" name="puntosPorEmpate" type="java.lang.Integer">
+   <column name="PUNTOSPOREMPATE"/>
+  </property>
+  <property generated="never" lazy="false" name="puntosPorPresentarse" type="java.lang.Integer">
+   <column name="PUNTOSPORPRESENTARSE"/>
+  </property>
+  <property generated="never" lazy="false" name="puntosPorGanar" type="java.lang.Integer">
+   <column name="PUNTOSPORGANAR"/>
+  </property>
+ </joined-subclass>
 </hibernate-mapping>

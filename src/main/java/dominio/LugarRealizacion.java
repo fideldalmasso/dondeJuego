@@ -1,21 +1,23 @@
 package dominio;
 
+import java.util.List;
+
 public class LugarRealizacion {
 	private Integer id;
 	private String nombre;
 	private String descripcion;
 	private Usuario usuario;
-	private Deporte deporte;
+	private List<Deporte> deportes;
 	public LugarRealizacion() {
 		super();
 	}
-	public LugarRealizacion(Integer id, String nombre, String descripcion, Usuario usuario, Deporte deporte) {
+	public LugarRealizacion(Integer id, String nombre, String descripcion, Usuario usuario, List<Deporte> deportes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.usuario = usuario;
-		this.deporte = deporte;
+		this.deportes = deportes;
 	}
 	public Integer getId() {
 		return id;
@@ -41,10 +43,10 @@ public class LugarRealizacion {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Deporte getDeporte() {
-		return deporte;
+	public List<Deporte> getDeportes() {
+		return deportes;
 	}
-	public void setDeporte(Deporte deporte) {
-		this.deporte = deporte;
+	public void setDeportes(List<Deporte> deportes) {
+		this.deportes = deportes;
 	}
 }

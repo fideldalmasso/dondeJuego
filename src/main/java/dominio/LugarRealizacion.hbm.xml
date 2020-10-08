@@ -1,24 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="dominio.LugarRealizacion" table="LUGARREALIZACION">
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="assigned" />
-        </id>
-        <property name="nombre" type="java.lang.String">
-            <column name="NOMBRE" />
-        </property>
-        <property name="descripcion" type="java.lang.String">
-            <column name="DESCRIPCION" />
-        </property>
-        <many-to-one name="usuario" class="dominio.Usuario" fetch="join">
-            <column name="USUARIO" />
-        </many-to-one>
-        <many-to-one name="deporte" class="dominio.Deporte" fetch="join">
-            <column name="DEPORTE" />
-        </many-to-one>
-    </class>
+ <class name="dominio.LugarRealizacion" table="lugarRealizacion">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="java.lang.String">
+   <column name="nombre"/>
+  </property>
+  <property generated="never" lazy="false" name="descripcion" type="java.lang.String">
+   <column name="descripcion"/>
+  </property>
+  <many-to-one class="dominio.Usuario" fetch="join" name="usuario">
+   <column name="idUsuario"/>
+   </many-to-one>
+  <set name = "deportes" cascade="save-update" table="deporte">
+         <key column = "idLugar"/>
+         <many-to-many column = "idDeporte" class="dominio.Deporte"/>
+      </set>
+ </class>
 </hibernate-mapping>
