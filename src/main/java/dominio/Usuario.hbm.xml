@@ -6,11 +6,8 @@
     <class name="dominio.Usuario" table="USUARIO">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="sequence" />
         </id>
-        <property name="registrado" type="java.lang.Boolean">
-            <column name="REGISTRADO" />
-        </property>
         <property name="nombre" type="java.lang.String">
             <column name="NOMBRE" />
         </property>
@@ -28,7 +25,7 @@
             </type>
         </property>
         <property name="numeroDocumento" type="java.lang.String">
-            <column name="NUMERODOCUMENTO" />
+            <column name="dni" />
         </property>
         <property name="email" type="java.lang.String">
             <column name="EMAIL" />

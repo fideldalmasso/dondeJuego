@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:33:45 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="guiejemplos.GridLayoutDemo" table="GRIDLAYOUTDEMO">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="horGapComboBox" type="javax.swing.JComboBox" access="field">
+            <column name="HORGAPCOMBOBOX" />
+        </property>
+        <property name="verGapComboBox" type="javax.swing.JComboBox" access="field">
+            <column name="VERGAPCOMBOBOX" />
+        </property>
+        <property name="applyButton" type="javax.swing.JButton" access="field">
+            <column name="APPLYBUTTON" />
+        </property>
+        <property name="experimentLayout" type="java.awt.GridLayout" access="field">
+            <column name="EXPERIMENTLAYOUT" />
+        </property>
+    </class>
+</hibernate-mapping>
