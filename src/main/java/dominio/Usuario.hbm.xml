@@ -32,21 +32,21 @@
         </property>
         <list name="competencias" inverse="false" table="COMPETENCIA" lazy="true">
             <key>
-                <column name="ID" />
+                <column name="IDUSUARIO" />
             </key>
             <list-index></list-index>
             <one-to-many class="dominio.Competencia" />
         </list>
         <list name="registros" inverse="false" table="REGISTROSESION" lazy="true">
             <key>
-                <column name="ID" />
+                <column name="DOCUMENTOUSUARIO" />
             </key>
             <list-index></list-index>
             <one-to-many class="dominio.RegistroSesion" />
         </list>
         <list name="lugares" inverse="false" table="LUGARREALIZACION" lazy="true">
             <key>
-                <column name="ID" />
+                <column name="IDUSUARIO" />
             </key>
             <list-index></list-index>
             <one-to-many class="dominio.LugarRealizacion" />
