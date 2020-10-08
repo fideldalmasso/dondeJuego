@@ -28,4 +28,7 @@ public class CompetenciaDao {
 	 public Deporte getDeporte(Integer id) {
 		 return factory.openSession().get(Deporte.class, id);
 	 }
+	 public Integer save(Competencia c) {
+		 return (Integer) factory.openSession().save(c);
+	 }
 }

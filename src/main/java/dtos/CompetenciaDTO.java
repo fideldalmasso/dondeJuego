@@ -2,16 +2,18 @@ package dtos;
 
 import java.util.List;
 
+import dominio.Pair;
+
 public class CompetenciaDTO {
 	String nombre;
 	Integer deporte;
-	List<Integer> lugares;
+	List<Pair> lugares;
 	String modalidad;
 	String reglamento;
 	Boolean permiteEmpate;
 	Integer puntosPorPresentarse;
 	Integer puntosPorGanar;
-	public CompetenciaDTO(String nombre, Integer deporte, List<Integer> lugares, String modalidad, String reglamento,
+	public CompetenciaDTO(String nombre, Integer deporte, List<Pair> lugares, String modalidad, String reglamento,
 			Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorGanar) {
 		super();
 		this.nombre = nombre;
@@ -35,10 +37,10 @@ public class CompetenciaDTO {
 	public void setDeporte(Integer deporte) {
 		this.deporte = deporte;
 	}
-	public List<Integer> getLugares() {
+	public List<Pair> getLugares() {
 		return lugares;
 	}
-	public void setLugares(List<Integer> lugares) {
+	public void setLugares(List<Pair> lugares) {
 		this.lugares = lugares;
 	}
 	public String getModalidad() {

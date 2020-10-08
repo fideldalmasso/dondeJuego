@@ -1,5 +1,6 @@
 package gestores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import daos.CompetenciaDao;
@@ -9,8 +10,12 @@ import enumerados.EstadoCompetencia;
 
 public class GestorCompetencia {
 	private CompetenciaDao cd;
+	private GestorLugarRealizacion lr;
+	private GestorUsuario gu;
 	public GestorCompetencia() {
 		cd= new CompetenciaDao();
+		lr = new GestorLugarRealizacion();
+		gu = new GestorUsuario();
 	}
 	public void crearCompetencia(CompetenciaDTO cdto) {
 		List<Competencia> competencias= cd.getAllCompetencias();
@@ -23,9 +28,15 @@ public class GestorCompetencia {
 		Deporte d = cd.getDeporte(cdto.getDeporte());
 		if(d==null) System.out.println("F");
 		compe.setDeporte(d);
-		
-		compe
-		
+		CompetenciaLugar lugares = new CompetenciaLugar();
+		for(Pair p : cdto.getLugares()) {
+			LugarRealizacion l = lr.getLugarRealizacion(p.getFirst());
+			if(l==null) System.out.println("F");
+			CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
+			compe.getLugares().add(cl);
+		}
+		compe.setId(this.cd.save(compe));
+		gu.guardar(new GestorAutenticacion().getUsuario().getCompetencias().add(compe));
 	}
 
 }
