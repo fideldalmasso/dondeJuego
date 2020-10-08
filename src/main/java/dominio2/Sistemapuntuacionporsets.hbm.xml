@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Sistemapuntuacionporsets" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="sistemapuntuacionporsets">
+        <id name="idcompetencia" type="int">
+            <column name="idcompetencia"/>
+            <generator class="foreign">
+                <param name="property">sistemapuntuacion</param>
+            </generator>
+        </id>
+        <one-to-one class="dominio2.Sistemapuntuacion" constrained="true" embed-xml="true" name="sistemapuntuacion"/>
+        <property generated="never" lazy="false" name="cantidadmaximadesets" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="cantidadmaximadesets"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Participante" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="participante">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="dominio2.Competencia" embed-xml="true" fetch="select" insert="true" name="competencia" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idcompetencia"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="nombre"/>
+        </property>
+        <property generated="never" lazy="false" name="email" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="email"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="encuentrosForIdparticipantea" optimistic-lock="true" sort="unsorted" table="encuentro">
+            <key on-delete="noaction">
+                <column name="idparticipantea"/>
+            </key>
+            <one-to-many class="dominio2.Encuentro" embed-xml="true" not-found="exception"/>
+        </set>
+        <one-to-one class="dominio2.Renglontabla" constrained="false" embed-xml="true" name="renglontabla"/>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="encuentrosForIdparticipanteb" optimistic-lock="true" sort="unsorted" table="encuentro">
+            <key on-delete="noaction">
+                <column name="idparticipanteb"/>
+            </key>
+            <one-to-many class="dominio2.Encuentro" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Fixture" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="fixture">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="dominio2.Competencia" embed-xml="true" fetch="select" insert="true" name="competencia" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idcompetencia"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="fechacreacion" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="29" name="fechacreacion"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="fechas" optimistic-lock="true" sort="unsorted" table="fecha">
+            <key on-delete="noaction">
+                <column name="idfixture"/>
+            </key>
+            <one-to-many class="dominio2.Fecha" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

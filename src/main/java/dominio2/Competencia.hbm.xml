@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Competencia" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="competencia">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="dominio2.Deporte" embed-xml="true" fetch="select" insert="true" name="deporte" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="iddeporte"/>
+        </many-to-one>
+        <many-to-one class="dominio2.Modalidad" embed-xml="true" fetch="select" insert="true" name="modalidad" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idmodalidad"/>
+        </many-to-one>
+        <many-to-one class="dominio2.Sistemapuntuacion" embed-xml="true" fetch="select" insert="true" name="sistemapuntuacion" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idsistemapuntuacion"/>
+        </many-to-one>
+        <many-to-one class="dominio2.Usuario" embed-xml="true" fetch="select" insert="true" name="usuario" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idusuario"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="fechafin" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="29" name="fechafin"/>
+        </property>
+        <property generated="never" lazy="false" name="reglamento" optimistic-lock="true" type="string" unique="false">
+            <column length="1024" name="reglamento"/>
+        </property>
+        <property generated="never" lazy="false" name="estado" optimistic-lock="true" type="string" unique="false">
+            <column name="estado"/>
+        </property>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="nombre" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="fechahorabajalogica" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="29" name="fechahorabajalogica"/>
+        </property>
+        <property generated="never" lazy="false" name="fechainicio" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="29" name="fechainicio"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="fixtures" optimistic-lock="true" sort="unsorted" table="fixture">
+            <key on-delete="noaction">
+                <column name="idcompetencia"/>
+            </key>
+            <one-to-many class="dominio2.Fixture" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="false" lazy="true" mutable="true" name="lugarrealizacions" optimistic-lock="true" sort="unsorted" table="competencialugar">
+            <key on-delete="noaction">
+                <column name="idcompetencia" not-null="true"/>
+            </key>
+            <many-to-many embed-xml="true" entity-name="dominio2.Lugarrealizacion" not-found="exception" unique="false">
+                <column name="idlugar" not-null="true"/>
+            </many-to-many>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="participantes" optimistic-lock="true" sort="unsorted" table="participante">
+            <key on-delete="noaction">
+                <column name="idcompetencia"/>
+            </key>
+            <one-to-many class="dominio2.Participante" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Resultado" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="resultado">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="dominio2.Encuentro" embed-xml="true" fetch="select" insert="true" name="encuentro" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idencuentro"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="fecharegistro" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="29" name="fecharegistro"/>
+        </property>
+        <one-to-one class="dominio2.Resultadofinal" constrained="false" embed-xml="true" name="resultadofinal"/>
+        <one-to-one class="dominio2.Resultadoporsets" constrained="false" embed-xml="true" name="resultadoporsets"/>
+        <one-to-one class="dominio2.Resultadoporpuntuacion" constrained="false" embed-xml="true" name="resultadoporpuntuacion"/>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="encuentros" optimistic-lock="true" sort="unsorted" table="encuentro">
+            <key on-delete="noaction">
+                <column name="idresultadoactual"/>
+            </key>
+            <one-to-many class="dominio2.Encuentro" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

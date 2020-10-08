@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Sett" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="sett">
+        <id name="idresultado" type="int">
+            <column name="idresultado"/>
+            <generator class="foreign">
+                <param name="property">resultadoporsets</param>
+            </generator>
+        </id>
+        <one-to-one class="dominio2.Resultadoporsets" constrained="true" embed-xml="true" name="resultadoporsets"/>
+        <property generated="never" lazy="false" name="puntajea" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="puntajea"/>
+        </property>
+        <property generated="never" lazy="false" name="puntajeb" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="puntajeb"/>
+        </property>
+    </class>
+</hibernate-mapping>

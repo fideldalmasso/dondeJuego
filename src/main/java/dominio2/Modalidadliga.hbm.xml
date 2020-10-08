@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Modalidadliga" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="modalidadliga">
+        <id name="idcompetencia" type="int">
+            <column name="idcompetencia"/>
+            <generator class="foreign">
+                <param name="property">modalidad</param>
+            </generator>
+        </id>
+        <one-to-one class="dominio2.Modalidad" constrained="true" embed-xml="true" name="modalidad"/>
+        <property generated="never" lazy="false" name="permiteempate" optimistic-lock="true" type="java.lang.Boolean" unique="false">
+            <column name="permiteempate"/>
+        </property>
+        <property generated="never" lazy="false" name="puntosporpresentarse" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="puntosporpresentarse"/>
+        </property>
+        <property generated="never" lazy="false" name="puntosporempate" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="puntosporempate"/>
+        </property>
+        <property generated="never" lazy="false" name="puntosporganar" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="puntosporganar"/>
+        </property>
+    </class>
+</hibernate-mapping>

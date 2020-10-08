@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 8 oct. 2020 01:08:24 by Hibernate Tools 5.4.14.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="dominio2.Usuario" optimistic-lock="version" polymorphism="implicit" schema="dj" select-before-update="false" table="usuario">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="dominio2.Localidad" embed-xml="true" fetch="select" insert="true" name="localidad" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="idlocalidad"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="dni" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="dni"/>
+        </property>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="nombre" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="apellido"/>
+        </property>
+        <property generated="never" lazy="false" name="contrasenia" optimistic-lock="true" type="string" unique="false">
+            <column length="256" name="contrasenia"/>
+        </property>
+        <property generated="never" lazy="false" name="tipodocumento" optimistic-lock="true" type="string" unique="false">
+            <column name="tipodocumento"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="lugarrealizacions" optimistic-lock="true" sort="unsorted" table="lugarrealizacion">
+            <key on-delete="noaction">
+                <column name="idusuario"/>
+            </key>
+            <one-to-many class="dominio2.Lugarrealizacion" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="registrosesions" optimistic-lock="true" sort="unsorted" table="registrosesion">
+            <key on-delete="noaction">
+                <column name="documentousuario"/>
+            </key>
+            <one-to-many class="dominio2.Registrosesion" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="competencias" optimistic-lock="true" sort="unsorted" table="competencia">
+            <key on-delete="noaction">
+                <column name="idusuario"/>
+            </key>
+            <one-to-many class="dominio2.Competencia" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>
