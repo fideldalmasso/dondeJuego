@@ -3,9 +3,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <joined-subclass name="dominio.EncuentroEliminatoriaSimple" extends="dominio.Encuentro" table="ENCUENTROELIMINATORIASIMPLE" lazy="false">
+    <joined-subclass name="dominio.EncuentroEliminatoriaSimple" extends="dominio.Encuentro" table="encuentroEliminatoriaSimple" lazy="false">
         <key>
-            <column name="ID" />
+            <column name="idEncuentro" />
         </key>
         <one-to-one name="ganador" class="dominio.EncuentroEliminatoriaSimple"></one-to-one>
     </joined-subclass>

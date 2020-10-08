@@ -1,6 +1,7 @@
 package dominio;
 
 public class RenglonTabla {
+	private Integer id;
 	private Integer partidosEmpatados;
 	private Integer partidosGanados;
 	private Integer partidosPerdidos;
@@ -8,9 +9,10 @@ public class RenglonTabla {
 	private Integer tantosEnContra;
 	private Participante participante;
 	
-	public RenglonTabla(Integer partidosEmpatados, Integer partidosGanados, Integer partidosPerdidos,
+	public RenglonTabla(Integer id,Integer partidosEmpatados, Integer partidosGanados, Integer partidosPerdidos,
 			Integer tantosAFavor, Integer tantosEnContra, Participante participante) {
 		super();
+		this.id=id;
 		this.partidosEmpatados = partidosEmpatados;
 		this.partidosGanados = partidosGanados;
 		this.partidosPerdidos = partidosPerdidos;
@@ -56,6 +58,12 @@ public class RenglonTabla {
 	}
 	public void setParticipante(Participante participante) {
 		this.participante = participante;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

@@ -3,58 +3,55 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="dominio.Competencia" table="COMPETENCIA">
+    <class name="dominio.Competencia" table="competencia">
         <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="assigned" />
+            <column name="id" />
+            <generator class="sequence" />
         </id>
         <property name="nombre" type="java.lang.String">
-            <column name="NOMBRE" />
+            <column name="nombre" />
         </property>
         <property name="estado">
-            <column name="ESTADO" />
+            <column name="estado" />
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">enumerados.EstadoCompetencia</param>
                 <param name="type">12</param>
             </type>
         </property>
         <property name="reglamento" type="java.lang.String">
-            <column name="REGLAMENTO" />
+            <column name="reglamento" />
         </property>
         <property name="fechaInicio" type="java.sql.Timestamp">
-            <column name="FECHAINICIO" />
+            <column name="fechaInicio" />
         </property>
         <property name="fechaFin" type="java.sql.Timestamp">
-            <column name="FECHAFIN" />
+            <column name="fechaFin" />
         </property>
         <property name="fechaHoraBajaLogica" type="java.sql.Timestamp">
-            <column name="FECHAHORABAJALOGICA" />
+            <column name="fechaHoraBajaLogica" />
         </property>
         <many-to-one name="deporte" class="dominio.Deporte" fetch="join">
-            <column name="DEPORTE" />
+            <column name="idDeporte" />
         </many-to-one>
         <many-to-one name="sistemaPuntuacion" class="dominio.SistemaPuntuacion" fetch="join">
-            <column name="SISTEMAPUNTUACION" />
+            <column name="idSistemaPuntuacion" />
         </many-to-one>
         <many-to-one name="modalidad" class="dominio.Modalidad" fetch="join">
-            <column name="MODALIDAD" />
+            <column name="idModalidad" />
         </many-to-one>
-        <list name="lugares" inverse="false" table="COMPETENCIALUGAR" lazy="true">
+        <list name="lugares" inverse="false" table="competenciaLugar" lazy="true">
             <key>
-                <column name="ID" />
+                <column name="idCompetencia" />
             </key>
             <list-index></list-index>
             <one-to-many class="dominio.CompetenciaLugar" />
         </list>
-        <list name="participantes" inverse="false" table="PARTICIPANTE" lazy="true">
+        <list name="participantes" inverse="false" table="participante" lazy="true">
             <key>
-                <column name="ID" />
+                <column name="idCompetencia" />
             </key>
             <list-index></list-index>
             <one-to-many class="dominio.Participante" />
         </list>
-        <many-to-one name="fixture" class="dominio.Fixture" fetch="join">
-            <column name="FIXTURE" />
-        </many-to-one>
     </class>
 </hibernate-mapping>

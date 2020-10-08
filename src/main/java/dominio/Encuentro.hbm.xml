@@ -1,37 +1,37 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="dominio.Encuentro" table="ENCUENTRO">
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="assigned" />
-        </id>
-        <property name="fechaEncuentro" type="java.sql.Timestamp">
-            <column name="FECHAENCUENTRO" />
-        </property>
-        <property name="sePresentaB" type="java.lang.Boolean">
-            <column name="SEPRESENTAB" />
-        </property>
-        <property name="sePresentaA" type="java.lang.Boolean">
-            <column name="SEPRESENTAA" />
-        </property>
-        <many-to-one name="participanteA" class="dominio.Participante" fetch="join">
-            <column name="PARTICIPANTEA" />
-        </many-to-one>
-        <many-to-one name="participanteB" class="dominio.Participante" fetch="join">
-            <column name="PARTICIPANTEB" />
-        </many-to-one>
-        <many-to-one name="vigente" class="dominio.Resultado" fetch="join">
-            <column name="VIGENTE" />
-        </many-to-one>
-        <list name="resultados" inverse="false" table="RESULTADO" lazy="true">
-            <key>
-                <column name="ID" />
-            </key>
-            <list-index></list-index>
-            <one-to-many class="dominio.Resultado" />
-        </list>
-    </class>
+ <class name="dominio.Encuentro" table="encuentro">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="fechaEncuentro" type="java.sql.Timestamp">
+   <column name="fechaEncuentro"/>
+  </property>
+  <property generated="never" lazy="false" name="sePresentaB" type="java.lang.Boolean">
+   <column name="sePresentaB"/>
+  </property>
+  <property generated="never" lazy="false" name="sePresentaA" type="java.lang.Boolean">
+   <column name="sePresentaA"/>
+  </property>
+  <many-to-one class="dominio.Participante" fetch="join" name="participanteA">
+   <column name="idParticipanteA"/>
+  </many-to-one>
+  <many-to-one class="dominio.Participante" fetch="join" name="participanteB">
+   <column name="idParticipanteB"/>
+  </many-to-one>
+  <many-to-one class="dominio.Resultado" fetch="join" name="vigente">
+   <column name="idResultadoActual"/>
+  </many-to-one>
+  <list lazy="true" name="resultados" table="resultado">
+   <key>
+    <column name="idEncuentro"/>
+   </key>
+   <list-index base="0"/>
+   <one-to-many class="dominio.Resultado"/>
+  </list>
+ </class>
 </hibernate-mapping>
