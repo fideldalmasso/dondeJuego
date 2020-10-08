@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <joined-subclass name="dominio.ResultadoSets" extends="dominio.Resultado" table="RESULTADOSETS" lazy="false">
+        <key>
+            <column name="ID" />
+        </key>
+        <property name="id" type="java.lang.Long">
+            <column name="ID" />
+        </property>
+        <list name="sets" inverse="false" table="RESULTADOSETS" lazy="true">
+            <key></key>
+            <list-index></list-index>
+            <element type="dominio.Pair&lt;java.lang.Integer,java.lang.Integer&gt;">
+                <column name="SETS" />
+            </element>
+        </list>
+    </joined-subclass>
+</hibernate-mapping>

@@ -1,42 +1,30 @@
-<?xml version = "1.0" encoding = "utf-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC 
-"-//Hibernate/Hibernate Mapping DTD//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
-
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 19:49:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-   <class name = "RenglonTabla" table = "renglonTabla">
-      
-      <meta attribute = "class-description">
-         This class contains the employee detail. 
-      </meta>
-      
-      <id name = "id" type = "int" column = "id">
-         <generator class="native"/>
-      </id>
-      
-      <property name = "partidosEmpatados" column = "partidosEmpatados" type = "int"/>
-      <property name = "partidosGanados" column = "partidosGanados" type = "int"/>
-      <property name = "partidosPerdidos" column = "partidosPerdidos" type = "int"/>
-      <property name = "tantosAFavor" column = "tantosAFavor" type = "int"/>
-      <property name = "tantosEnContra" column = "tantosEnContra" type = "int"/>
-
-      <many-to-one name = "participante" column = "idParticipante" unique="true" 
-         class="Participante" not-null="true"/>
-         
-   </class>
-
-   <class name = "Participante" table = "participante">
-      
-      <meta attribute = "class-description">
-      </meta>
-      
-      <id name = "id" type = "int" column = "id">
-         <generator class="native"/>
-      </id>
-      
-      <property name = "nombre" column = "nombre" type = "string"/>
-      <property name = "email" column = "email" type = "string"/>
-      
-   </class>
-
+    <class name="dominio.RenglonTabla" table="renglonTabla">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="sequence" />
+        </id>
+        <property name="partidosEmpatados" type="java.lang.Integer">
+            <column name="partidosEmpatados" />
+        </property>
+        <property name="partidosGanados" type="java.lang.Integer">
+            <column name="partidosGanados" />
+        </property>
+        <property name="partidosPerdidos" type="java.lang.Integer">
+            <column name="partidosPerdidos" />
+        </property>
+        <property name="tantosAFavor" type="java.lang.Integer">
+            <column name="tantosAFavor" />
+        </property>
+        <property name="tantosEnContra" type="java.lang.Integer">
+            <column name="tantosEnContra" />
+        </property>
+        <many-to-one name="participante" class="dominio.Participante" fetch="join">
+            <column name="idParticipante" />
+        </many-to-one>
+    </class>
 </hibernate-mapping>

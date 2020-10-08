@@ -1,23 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC 
-"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-	<class name="Resultado">
-		<id name="id">
-			<generator class="native"></generator>
-		</id>
-		<property name = "fechaRegistro" column = "fechaRegistro" type = "timestamp"/>
-
-		<joined-subclass name="com.chuidiang.ejemplos.Hija1">
-			<key column="id_padre"></key>
-			<property name="atributoHija1"></property>
-		</joined-subclass>
-
-		<joined-subclass name="com.chuidiang.ejemplos.Hija2">
-			<key column="id_padre"></key>
-			<property name="atributoHija2"></property>
-		</joined-subclass>
-
-	</class>
+ <class name="dominio.Resultado" table="RESULTADO">
+  <id name="id" type="java.lang.Integer">
+   <column name="id"/>
+   <generator class="assigned"/>
+  </id>
+  <property generated="never" lazy="false" name="fechaRegistro" type="java.sql.Timestamp">
+   <column name="fechaRegistro"/>
+  </property>
+ </class>
 </hibernate-mapping>

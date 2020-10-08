@@ -20,6 +20,10 @@ public class Deporte {
 		this.id = id;
 		this.nombre = nombre;
 	}
+	public Deporte(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 	public Deporte() {
 		super();
 	}
