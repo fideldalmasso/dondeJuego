@@ -23,7 +23,7 @@ public class Prueba {
 	      }
 	      
 	      Prueba p = new Prueba();
-	      System.out.println(p.addRt(13));
+	      System.out.println(p.addRt(24));
 
 	     
 	   }
@@ -38,6 +38,7 @@ public class Prueba {
 	         tx = session.beginTransaction();
 	         Deporte rt = new Deporte();
 	         rt.setId(id);
+	         rt.setNombre("Basket");
 	         depId = (Integer) session.save(rt); 
 	         tx.commit();
 	      } catch (HibernateException e) {
