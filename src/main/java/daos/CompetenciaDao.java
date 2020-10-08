@@ -25,7 +25,7 @@ public class CompetenciaDao {
 		 return session.createQuery("from Competencia").list(); 
 	 }
 	 
-	 public Deporte BuscarDeporte(Integer id) {
-		 
+	 public Deporte getDeporte(Integer id) {
+		 return factory.openSession().get(Deporte.class, id);
 	 }
 }

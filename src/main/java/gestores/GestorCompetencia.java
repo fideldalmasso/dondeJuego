@@ -20,8 +20,11 @@ public class GestorCompetencia {
 		compe.setNombre(cdto.getNombre());
 		compe.setEstado(EstadoCompetencia.CREADA);
 		compe.setReglamento(cdto.getReglamento());
-		Deporte d = 
+		Deporte d = cd.getDeporte(cdto.getDeporte());
+		if(d==null) System.out.println("F");
+		compe.setDeporte(d);
 		
+		compe
 		
 	}
 
