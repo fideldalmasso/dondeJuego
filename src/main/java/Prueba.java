@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import dominio.Competencia;
 import dominio.Deporte;
 import dominio.Participante;
 import dominio.RenglonTabla;
@@ -23,21 +24,20 @@ public class Prueba {
 	      }
 	      
 	      Prueba p = new Prueba();
-	      System.out.println(p.addRt(24));
+	      System.out.println(p.addRt());
 
 	     
 	   }
 	   
 	   /* Method to CREATE an employee in the database */
-	   public Integer addRt(Integer id){
+	   public Integer addRt(){
 	      Session session = factory.openSession();
 	      Transaction tx = null;
 	      Integer depId = null;
 	      
 	      try {
 	         tx = session.beginTransaction();
-	         Deporte rt = new Deporte();
-	         rt.setId(id);
+	         Competencia rt = new Competencia();
 	         rt.setNombre("Basket");
 	         depId = (Integer) session.save(rt); 
 	         tx.commit();

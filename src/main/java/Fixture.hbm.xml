@@ -6,7 +6,7 @@
  <class name="dominio.Fixture" table="FIXTURE">
   <id name="id" type="java.lang.Integer">
    <column name="id"/>
-   <generator class="assigned"/>
+   <generator class="increment"/>
   </id>
   <property generated="never" lazy="false" name="fechaCreacion" type="java.sql.Timestamp">
    <column name="fechaCreacion"/>

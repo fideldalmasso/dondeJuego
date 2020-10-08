@@ -11,7 +11,7 @@
       </meta>
       
       <id name = "id" type = "int" column = "id">
-         <generator class="native"/>
+         <generator class="increment"/>
       </id>
       
       <property name = "firstName" column = "first_name" type = "string"/>
