@@ -30,7 +30,7 @@ public class App extends JFrame {
 
 
 	public void setearFuente(String fuente) {
-		 final Font fnt = new Font(fuente, Font.PLAIN, 12);
+		 final Font fnt = new Font(fuente, Font.PLAIN, 14);
          final FontUIResource res = new FontUIResource(fnt);
          UIManager.getLookAndFeelDefaults().put("Button.font", res);
          UIManager.getLookAndFeelDefaults().put("TextField.font", res);

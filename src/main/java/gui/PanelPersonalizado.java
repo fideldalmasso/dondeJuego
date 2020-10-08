@@ -32,7 +32,11 @@ import javax.swing.text.NumberFormatter;
 
 public abstract class PanelPersonalizado extends JPanel{
 
+	
 	private static final long serialVersionUID = 1L;
+	public  static ImageIcon iconoError = emoji("icon/error2.png",24,24);
+	public static JLabel errorLabel = new JLabel(iconoError);
+	
 	protected String fileFondo;
 
 	public  PanelPersonalizado() {
@@ -246,8 +250,8 @@ public abstract class PanelPersonalizado extends JPanel{
 			int ipady, 
 			int fill, 
 			int anchor, 
-			JPanel panel, 
-			JComponent comp/*,
+			int inset, 
+			JPanel panel, JComponent comp/*,
 			int marginTop, int marginLeft, int marginBottom, int marginRight */){
 		//https://stackoverflow.com/questions/45175343/how-do-you-add-empty-cells-to-gridbaglayout
 		//GridBagConstraints constraints = new GridBagConstraints();
@@ -262,7 +266,7 @@ public abstract class PanelPersonalizado extends JPanel{
 		c1.ipady = ipady;		  // espacio extra en y
 		c1.fill = fill;         // 0 NONE, 1 BOTH, 2 HORIZONTAL, 3 VERTICAL
 		c1.anchor = anchor; 	  //10 CENTER
-		c1.insets = new Insets(5,10,5,10);
+		c1.insets = new Insets(inset,inset,inset,inset);
 		//		c1.insets = new Insets( marginTop, marginLeft, marginBottom, marginRight );
 		panel.add(comp,c1);  
 
@@ -270,10 +274,14 @@ public abstract class PanelPersonalizado extends JPanel{
 
 	//CARGAR EMOJIS-------------------------------------------------------------------------------------------------------------------------
 
+	
+	
 	static public ImageIcon emoji(String fileName, int width, int height) {
 		Image imagen = new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
 		return new ImageIcon(imagen);
 	}
+	
+	
 
 
 }
