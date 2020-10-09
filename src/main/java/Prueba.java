@@ -37,7 +37,7 @@ public class Prueba {
 	      lp.add(p);
 	     
 	      GestorCompetencia gc = new GestorCompetencia();
-	      Deporte dep = gc.crearDeporte("Polo");
+	      Deporte dep = gc.crearDeporte("Poloooo");
 	      
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);

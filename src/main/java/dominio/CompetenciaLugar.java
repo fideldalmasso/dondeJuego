@@ -12,6 +12,13 @@ public class CompetenciaLugar {
 		this.lugar = lugar;
 		this.disponibilidad = disponibilidad;
 	}
+	public CompetenciaLugar(Competencia competencia, LugarRealizacion lugar, Integer disponibilidad) {
+		super();
+		this.id=id;
+		this.competencia = competencia;
+		this.lugar = lugar;
+		this.disponibilidad = disponibilidad;
+	}
 	public CompetenciaLugar() {
 		super();
 	}
