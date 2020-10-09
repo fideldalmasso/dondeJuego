@@ -25,5 +25,7 @@ public class EncuentroEliminatoriaDoble extends Encuentro {
 	public void setPerdedor(EncuentroEliminatoriaDoble perdedor) {
 		this.perdedor = perdedor;
 	}
-	
+	public EncuentroEliminatoriaDoble() {
+		super();
+	}
 }
