@@ -10,33 +10,71 @@ import enumerados.EstadoCompetencia;
 
 public class GestorCompetencia {
 	private CompetenciaDao cd;
-	private GestorLugarRealizacion lr;
+	private GestorLugarRealizacion glr;
 	private GestorUsuario gu;
 	public GestorCompetencia() {
 		cd= new CompetenciaDao();
-		lr = new GestorLugarRealizacion();
+		glr = new GestorLugarRealizacion();
 		gu = new GestorUsuario();
 	}
-	public void crearCompetencia(CompetenciaDTO cdto) {
+	
+	public Competencia crearCompetencia(CompetenciaDTO cdto) {
 		List<Competencia> competencias= cd.getAllCompetencias();
-		if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()>0)
-			System.out.println("F");
+		if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()>0); //Agregar mensaje de error
+			
+		
 		Competencia compe = new Competencia();
+		
 		compe.setNombre(cdto.getNombre());
+		
 		compe.setEstado(EstadoCompetencia.CREADA);
+		
 		compe.setReglamento(cdto.getReglamento());
+		
 		Deporte d = cd.getDeporte(cdto.getDeporte());
-		if(d==null) System.out.println("F");
+		if(d==null); // Agregar mensaje de error
 		compe.setDeporte(d);
-		CompetenciaLugar lugares = new CompetenciaLugar();
-		for(Pair p : cdto.getLugares()) {
-			LugarRealizacion l = lr.getLugarRealizacion(p.getFirst());
+		
+		Modalidad m;
+		switch(cdto.getModalidad()) {
+			case "Liga":
+				m = new ModalidadLiga(cdto.getPermiteEmpate(),
+						cdto.getPuntosPorPresentarse(),
+						cdto.getPuntosPorEmpate(),
+						cdto.getPuntosPorGanar());
+				break;
+			case "Eliminatoria doble":
+				m = new ModalidadEliminatoriaDoble();
+				break;
+			case "Eliminatoria simple":
+				m = new ModalidadEliminatoriaSimple();
+				break;
+			default:
+				m=null;
+				break;
+		}
+		if(m.equals(null)); //Agregar mensaje de error
+		cd.saveModalidad(m);
+		compe.setModalidad(m);
+		
+		for(Pair p : cdto.getLugares()){
+			LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
 			if(l==null) System.out.println("F");
 			CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
 			compe.getLugares().add(cl);
 		}
-		compe.setId(this.cd.save(compe));
-		gu.guardar(new GestorAutenticacion().getUsuario().getCompetencias().add(compe));
+		
+		cd.save(compe);
+		//(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
+		
+		//gu.guardar();
+		return compe;
+	}
+	
+	public Deporte crearDeporte(String nombre) {
+		Deporte deporte = new Deporte(nombre);
+		cd.saveDeporte(deporte);
+		return deporte;
 	}
 
 }

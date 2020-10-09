@@ -11,7 +11,7 @@ public class LugarRealizacion {
 	public LugarRealizacion() {
 		super();
 	}
-	public LugarRealizacion(Integer id, String nombre, String descripcion, Usuario usuario, List<Deporte> deportes) {
+	public LugarRealizacion(String nombre, String descripcion, Usuario usuario, List<Deporte> deportes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

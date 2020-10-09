@@ -13,8 +13,9 @@ public class CompetenciaDTO {
 	Boolean permiteEmpate;
 	Integer puntosPorPresentarse;
 	Integer puntosPorGanar;
+	Integer puntosPorEmpate;
 	public CompetenciaDTO(String nombre, Integer deporte, List<Pair> lugares, String modalidad, String reglamento,
-			Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorGanar) {
+			Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorGanar,Integer puntosPorEmpate) {
 		super();
 		this.nombre = nombre;
 		this.deporte = deporte;
@@ -24,6 +25,7 @@ public class CompetenciaDTO {
 		this.permiteEmpate = permiteEmpate;
 		this.puntosPorPresentarse = puntosPorPresentarse;
 		this.puntosPorGanar = puntosPorGanar;
+		this.puntosPorEmpate = puntosPorEmpate;
 	}
 	public String getNombre() {
 		return nombre;
@@ -72,6 +74,12 @@ public class CompetenciaDTO {
 	}
 	public void setPuntosPorGanar(Integer puntosPorGanar) {
 		this.puntosPorGanar = puntosPorGanar;
+	}
+	public Integer getPuntosPorEmpate() {
+		return this.puntosPorEmpate;
+	}
+	public void setPuntosPorEmpate(Integer puntosPorEmpate) {
+		this.puntosPorEmpate = puntosPorEmpate;
 	}
 	
 	

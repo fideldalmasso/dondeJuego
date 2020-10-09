@@ -52,7 +52,7 @@
             <one-to-many class="dominio.LugarRealizacion" />
         </list>
         <many-to-one name="localidad" class="dominio.Localidad" fetch="join">
-            <column name="LOCALIDAD" />
+            <column name="IDLOCALIDAD" />
         </many-to-one>
     </class>
 </hibernate-mapping>

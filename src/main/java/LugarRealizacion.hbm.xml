@@ -16,10 +16,11 @@
   </property>
   <many-to-one class="dominio.Usuario" fetch="join" name="usuario">
    <column name="idUsuario"/>
-   </many-to-one>
-  <set name = "deportes" cascade="save-update" table="deportelugar">
-         <key column = "idLugar"/>
-         <many-to-many column = "idDeporte" class="dominio.Deporte"/>
-      </set>
+  </many-to-one>
+  <list name="deportes" table="deporte">
+   <key column="idCompetencia"/>
+   <index/>
+   <one-to-many class="dominio.Deporte" />
+  </list>
  </class>
 </hibernate-mapping>

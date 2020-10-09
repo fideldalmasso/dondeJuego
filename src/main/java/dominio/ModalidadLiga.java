@@ -8,8 +8,8 @@ public class ModalidadLiga extends Modalidad {
 	public ModalidadLiga() {
 		super();
 	}
-	public ModalidadLiga(Integer id,Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorEmpate, Integer puntosPorGanar) {
-		super(id);
+	public ModalidadLiga(Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorEmpate, Integer puntosPorGanar) {
+		super();
 		this.permiteEmpate = permiteEmpate;
 		this.puntosPorPresentarse = puntosPorPresentarse;
 		this.puntosPorEmpate = puntosPorEmpate;

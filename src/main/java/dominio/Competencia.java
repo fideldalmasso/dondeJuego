@@ -1,6 +1,7 @@
 package dominio;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import enumerados.EstadoCompetencia;
@@ -39,6 +40,8 @@ public class Competencia {
 	}
 	public Competencia() {
 		super();
+		this.lugares = new ArrayList<CompetenciaLugar>();
+		this.participantes = new ArrayList<Participante>();
 	}
 	public Integer getId() {
 		return id;

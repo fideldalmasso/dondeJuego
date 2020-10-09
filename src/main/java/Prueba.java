@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,10 +8,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import daos.LugarRealizacionDao;
 import dominio.Competencia;
 import dominio.Deporte;
+import dominio.LugarRealizacion;
+import dominio.Pair;
 import dominio.Participante;
 import dominio.RenglonTabla;
+import dominio.Usuario;
+import dtos.CompetenciaDTO;
+import gestores.GestorCompetencia;
 
 public class Prueba {
 	private static SessionFactory factory; 
@@ -23,9 +30,21 @@ public class Prueba {
 	         throw new ExceptionInInitializerError(ex); 
 	      }
 	      
-	      Prueba p = new Prueba();
-	      System.out.println(p.addRt());
-
+	      Pair p = new Pair(1,1,1);
+	      List<Pair> lp = new ArrayList<Pair>();
+	      lp.add(p);
+	     
+	      GestorCompetencia gc = new GestorCompetencia();
+	      Deporte dep = gc.crearDeporte("Futbol");
+	      
+	      List<Deporte> deportes = new ArrayList<Deporte>();
+	      deportes.add(dep);
+	      LugarRealizacionDao ld =  new LugarRealizacionDao();
+	      ld.saveLugarRealizacion(new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes));
+	      
+	      CompetenciaDTO c = new CompetenciaDTO("Fede",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
+	      
+	      System.out.println(gc.crearCompetencia(c).getId());
 	     
 	   }
 	   
