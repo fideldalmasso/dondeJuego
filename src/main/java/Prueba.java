@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -35,9 +37,9 @@ public class Prueba {
 	      lp.add(p);
 	     
 	      GestorCompetencia gc = new GestorCompetencia();
-	      Deporte dep = gc.crearDeporte("Futbol");
+	      Deporte dep = gc.crearDeporte("Voley");
 	      
-	      List<Deporte> deportes = new ArrayList<Deporte>();
+	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      LugarRealizacionDao ld =  new LugarRealizacionDao();
 	      ld.saveLugarRealizacion(new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes));

@@ -6,7 +6,7 @@
  <joined-subclass extends="dominio.Modalidad" lazy="false"
   name="dominio.ModalidadEliminatoriaSimple" table="MODALIDADELIMINATORIASIMPLE">
   <key>
-   <column name="id"/>
+   <column name="idCompetencia"/>
   </key>
  </joined-subclass>
 </hibernate-mapping>

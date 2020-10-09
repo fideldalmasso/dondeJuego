@@ -6,7 +6,7 @@
  <joined-subclass extends="dominio.Modalidad" lazy="false"
   name="dominio.ModalidadLiga" table="MODALIDADLIGA">
   <key>
-   <column name="id"/>
+   <column name="idCompetencia"/>
   </key>
   <property generated="never" lazy="false" name="permiteEmpate" type="java.lang.Boolean">
    <column name="PERMITEEMPATE"/>

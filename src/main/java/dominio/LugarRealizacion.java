@@ -1,17 +1,20 @@
 package dominio;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LugarRealizacion {
 	private Integer id;
 	private String nombre;
 	private String descripcion;
 	private Usuario usuario;
-	private List<Deporte> deportes;
+	private Set<Deporte> deportes;
 	public LugarRealizacion() {
 		super();
+		deportes = new HashSet<Deporte>();
 	}
-	public LugarRealizacion(String nombre, String descripcion, Usuario usuario, List<Deporte> deportes) {
+	public LugarRealizacion(String nombre, String descripcion, Usuario usuario, Set<Deporte> deportes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -43,10 +46,10 @@ public class LugarRealizacion {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public List<Deporte> getDeportes() {
+	public Set<Deporte> getDeportes() {
 		return deportes;
 	}
-	public void setDeportes(List<Deporte> deportes) {
+	public void setDeportes(Set<Deporte> deportes) {
 		this.deportes = deportes;
 	}
 }
