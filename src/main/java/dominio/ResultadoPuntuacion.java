@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 public class ResultadoPuntuacion extends Resultado {
 	private Integer puntajeFinalA;
 	private Integer puntajeFinalB;
+	public ResultadoPuntuacion() {
+		super();
+	}
 	public Integer getPuntajeFinalA() {
 		return puntajeFinalA;
 	}

@@ -7,7 +7,9 @@ import java.util.List;
 
 public class ResultadoSets extends Resultado {
 	private List<Pair> sets;
-
+	public ResultadoSets() {
+		super();
+	}
 	public List<Pair> getSets() {
 		return sets;
 	}

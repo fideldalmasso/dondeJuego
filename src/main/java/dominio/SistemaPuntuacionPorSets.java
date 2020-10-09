@@ -2,7 +2,9 @@ package dominio;
 
 public class SistemaPuntuacionPorSets extends SistemaPuntuacion {
 	private Integer cantidadMaximaDeSets;
-
+	public SistemaPuntuacionPorSets() {
+		super();
+	}
 	public SistemaPuntuacionPorSets(Integer id, Integer cantidadMaximaDeSets) {
 		super(id);
 		this.cantidadMaximaDeSets = cantidadMaximaDeSets;

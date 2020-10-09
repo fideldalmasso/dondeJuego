@@ -6,6 +6,9 @@ public class ResultadoFinal extends Resultado {
 	private Boolean empate; 
 	private Boolean ganaA;
 	private Boolean ganaB;
+	public ResultadoFinal() {
+		super();
+	}
 	public Boolean getEmpate() {
 		return empate;
 	}

@@ -2,7 +2,9 @@ package dominio;
 
 public class SistemaPuntuacionPorPuntuacion extends SistemaPuntuacion {
 	private Integer puntosPorAbandono;
-
+	public SistemaPuntuacionPorPuntuacion() {
+		super();
+	}
 	public SistemaPuntuacionPorPuntuacion(Integer id,Integer puntosPorAbandono) {
 		super(id);
 		this.puntosPorAbandono = puntosPorAbandono;
