@@ -1,5 +1,7 @@
 package gestores;
 
+import java.util.List;
+
 import daos.LugarRealizacionDao;
 import dominio.*;
 
@@ -11,4 +13,7 @@ public class GestorLugarRealizacion {
 	public LugarRealizacion getLugarRealizacion(Integer id) {
 		return this.lrd.getLugarRealizacion(id);
 	}
+	public List<LugarRealizacion> getAllLugarRealizacion(){
+		return this.lrd.getAllLugarRealizacion();
+	 }
 }

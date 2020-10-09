@@ -37,14 +37,14 @@ public class Prueba {
 	      lp.add(p);
 	     
 	      GestorCompetencia gc = new GestorCompetencia();
-	      Deporte dep = gc.crearDeporte("Poloooo");
+	      Deporte dep = gc.crearDeporte("PATONAsdTFFFFvvvvO");
 	      
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      LugarRealizacionDao ld =  new LugarRealizacionDao();
 	      ld.saveLugarRealizacion(new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes));
 	      
-	      CompetenciaDTO c = new CompetenciaDTO("Fede",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
+	      CompetenciaDTO c = new CompetenciaDTO("ABERSFvvvvdsFFF",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
 	      
 	      System.out.println(gc.crearCompetencia(c).getId());
 	     

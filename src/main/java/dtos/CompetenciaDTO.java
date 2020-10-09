@@ -31,7 +31,7 @@ public class CompetenciaDTO {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombre = nombre.toUpperCase();
 	}
 	public Integer getDeporte() {
 		return deporte;

@@ -3,6 +3,9 @@ package gestores;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import daos.CompetenciaDao;
 import dominio.*;
 import dtos.CompetenciaDTO;
@@ -57,16 +60,20 @@ public class GestorCompetencia {
 		cd.saveModalidad(m);
 		compe.setModalidad(m);
 		
+		
+		
+		
+		//(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
+		
 		for(Pair p : cdto.getLugares()){
 			LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
 			if(l==null) System.out.println("F");
 			CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
-			compe.getLugares().add(cl);
+			compe.getLugares().add(cl);	
+	//		cd.save(cl);
 		}
-		
+	//	cd.update(compe);
 		cd.save(compe);
-		//(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
-		
 		//gu.guardar();
 		return compe;
 	}
@@ -76,5 +83,9 @@ public class GestorCompetencia {
 		cd.saveDeporte(deporte);
 		return deporte;
 	}
+	
+	public List<Deporte> getAllDeportes(){
+	return this.cd.getAllDeportes();
+ }
 
 }

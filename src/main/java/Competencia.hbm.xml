@@ -39,19 +39,17 @@
         <many-to-one name="modalidad" class="dominio.Modalidad" fetch="join">
             <column name="idModalidad" />
         </many-to-one>
-        <list name="lugares" inverse="false" table="competenciaLugar" lazy="true">
+        <bag name="lugares" cascade="all" inverse="false" table="competenciaLugar" lazy="true">
             <key>
                 <column name="idCompetencia" />
             </key>
-            <list-index></list-index>
             <one-to-many class="dominio.CompetenciaLugar" />
-        </list>
-        <list name="participantes" inverse="false" table="participante" lazy="true">
+        </bag>
+        <bag name="participantes" cascade="all" inverse="false" table="participante" lazy="true">
             <key>
                 <column name="idCompetencia" />
             </key>
-            <list-index></list-index>
             <one-to-many class="dominio.Participante" />
-        </list>
+        </bag>
     </class>
 </hibernate-mapping>
