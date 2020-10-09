@@ -56,7 +56,7 @@ public class CustomTip implements Runnable {
 				}
 				JLabel text = new JLabel("You've clicked at: " + e.getPoint());
 				panel2.removeAll();
-				PanelPersonalizado.colocar(0, 0, 1, 1, 0, 0, 0, 0, 0, GridBagConstraints.WEST, 10, panel2, new JLabel(PanelPersonalizado.emoji("icon/error4.png", 24, 24)));
+//				PanelPersonalizado.colocar2(0, 0, 1, 1, 0, 0, 0, 0, 0, GridBagConstraints.WEST, 10, panel2, new JLabel(PanelPersonalizado.emoji("icon/error4.png", 24, 24)));
 				GridBagConstraints c = new GridBagConstraints(1, 0, 1, 1, 1, 0, GridBagConstraints.WEST,  GridBagConstraints.HORIZONTAL, new Insets(10,10,10,10),0,0);
 				panel2.add(text, c);
 				text.setForeground(Color.WHITE);

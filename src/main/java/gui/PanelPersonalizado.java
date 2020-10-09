@@ -12,7 +12,10 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -32,11 +35,29 @@ import javax.swing.text.NumberFormatter;
 
 public abstract class PanelPersonalizado extends JPanel{
 
-	
 	private static final long serialVersionUID = 1L;
-	public  static ImageIcon iconoError = emoji("icon/error2.png",24,24);
-	public static JLabel errorLabel = new JLabel(iconoError);
-	
+
+	public static final Insets insetpredeterminado = new Insets(5,5,5,5);
+	public static final Insets inseterror = new Insets(0,20,0,0);
+	public static final Insets insetvacio = new Insets(0,0,0,0);
+
+	public  static ImageIcon errorIcono = emoji("icon/error2.png",24,24);
+	public JLabel terror() {
+		return new JLabel(errorIcono);
+	}
+
+	public JPanel crearComponenteConError(JComponent componente, JLabel error) {
+		JPanel panel01 = new JPanel(new GridBagLayout());
+		
+		colocar2(0,0,1,1,1,0,0,0,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER,insetvacio,panel01,componente);
+
+		colocar2(1,0,1,1,0,0,0,0,GridBagConstraints.NONE,GridBagConstraints.CENTER,inseterror,panel01,error);
+		
+		return panel01;
+
+	}
+
+
 	protected String fileFondo;
 
 	public  PanelPersonalizado() {
@@ -239,8 +260,8 @@ public abstract class PanelPersonalizado extends JPanel{
 	}
 
 	//USAR ESTE MÉTODO SOLO CON JPANEL QUE TENGAN GRIDBAGLAYOUT
-	static public void colocar(
-			int column,
+
+	static public void colocar(int column,
 			int row, 
 			int width, 
 			int height, 
@@ -249,39 +270,52 @@ public abstract class PanelPersonalizado extends JPanel{
 			int ipadx, 
 			int ipady, 
 			int fill, 
-			int anchor, 
-			int inset, 
-			JPanel panel, JComponent comp/*,
-			int marginTop, int marginLeft, int marginBottom, int marginRight */){
-		//https://stackoverflow.com/questions/45175343/how-do-you-add-empty-cells-to-gridbaglayout
-		//GridBagConstraints constraints = new GridBagConstraints();
-		GridBagConstraints c1 = new GridBagConstraints();
-		c1.gridx = column;      // column to start
-		c1.gridy = row;         // row to start
-		c1.gridwidth = width;   // number of cells wide
-		c1.gridheight = height; // number of cells tall
-		c1.weightx = weightX;   // when size is changed, grow in x direction
-		c1.weighty = weightY;   // when size is changed, grow in y direction
-		c1.ipadx = ipadx;       // espacio extra en x
-		c1.ipady = ipady;		  // espacio extra en y
-		c1.fill = fill;         // 0 NONE, 1 BOTH, 2 HORIZONTAL, 3 VERTICAL
-		c1.anchor = anchor; 	  //10 CENTER
-		c1.insets = new Insets(inset,inset,inset,inset);
-		//		c1.insets = new Insets( marginTop, marginLeft, marginBottom, marginRight );
-		panel.add(comp,c1);  
-
+			int anchor,
+			JPanel panel, JComponent comp){
+		colocar2(column,row,width,height,weightX,weightY,ipadx,ipady,fill,anchor,insetpredeterminado,panel,comp);
 	}
 
-	//CARGAR EMOJIS-------------------------------------------------------------------------------------------------------------------------
 
-	
-	
-	static public ImageIcon emoji(String fileName, int width, int height) {
-		Image imagen = new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
-		return new ImageIcon(imagen);
+		static public void colocar2(
+				int column,
+				int row, 
+				int width, 
+				int height, 
+				double weightX, 
+				double weightY, 
+				int ipadx, 
+				int ipady, 
+				int fill, 
+				int anchor, 
+				Insets inset, 
+				JPanel panel, JComponent comp) {
+			GridBagConstraints c1 = new GridBagConstraints();
+			c1.gridx = column;      // column to start
+			c1.gridy = row;         // row to start
+			c1.gridwidth = width;   // number of cells wide
+			c1.gridheight = height; // number of cells tall
+			c1.weightx = weightX;   // when size is changed, grow in x direction
+			c1.weighty = weightY;   // when size is changed, grow in y direction
+			c1.ipadx = ipadx;       // espacio extra en x
+			c1.ipady = ipady;		  // espacio extra en y
+			c1.fill = fill;         // 0 NONE, 1 BOTH, 2 HORIZONTAL, 3 VERTICAL
+			c1.anchor = anchor; 	  //10 CENTER
+			c1.insets = inset;
+
+			panel.add(comp,c1);  
+
+		}
+
+		//CARGAR EMOJIS-------------------------------------------------------------------------------------------------------------------------
+
+
+
+		static public ImageIcon emoji(String fileName, int width, int height) {
+			Image imagen = new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
+			return new ImageIcon(imagen);
+		}
+
+
+
+
 	}
-	
-	
-
-
-}

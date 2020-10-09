@@ -5,3 +5,4 @@ datosDB.txt
 datosDB.json
 hs_err*
 *.cfg.xml
+*hibernate.*
