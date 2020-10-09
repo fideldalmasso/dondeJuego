@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 7 oct. 2020 18:39:09 by Hibernate Tools 3.5.0.Final -->
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 9 oct. 2020 01:28:55 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="dominio.CompetenciaLugar" table="COMPETENCIALUGAR">
-        <id name="disponibilidad" type="java.lang.Integer">
-            <column name="DISPONIBILIDAD" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="competencia" class="dominio.Competencia" fetch="join">
-            <column name="COMPETENCIA" />
-        </many-to-one>
-        <many-to-one name="lugar" class="dominio.LugarRealizacion" fetch="join">
-            <column name="LUGAR" />
-        </many-to-one>
-    </class>
+ <class name="dominio.CompetenciaLugar" table="COMPETENCIALUGAR">
+  <id name="id" type="java.lang.Integer">
+   <column name="ID"/>
+   <generator class="increment"/>
+  </id>
+  <many-to-one class="dominio.Competencia" fetch="join" name="competencia">
+   <column name="idcompetencia"/>
+  </many-to-one>
+  <many-to-one class="dominio.LugarRealizacion" fetch="join" name="lugar">
+   <column name="idlugar"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="disponibilidad" type="java.lang.Integer">
+   <column name="disponibilidad"/>
+  </property>
+ </class>
 </hibernate-mapping>

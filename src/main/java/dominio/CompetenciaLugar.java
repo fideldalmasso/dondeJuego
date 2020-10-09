@@ -1,11 +1,13 @@
 package dominio;
 
 public class CompetenciaLugar {
+	private Integer id;
 	private Competencia competencia;
 	private LugarRealizacion lugar;
 	private Integer disponibilidad;
-	public CompetenciaLugar(Competencia competencia, LugarRealizacion lugar, Integer disponibilidad) {
+	public CompetenciaLugar(Integer id,Competencia competencia, LugarRealizacion lugar, Integer disponibilidad) {
 		super();
+		this.id=id;
 		this.competencia = competencia;
 		this.lugar = lugar;
 		this.disponibilidad = disponibilidad;
@@ -30,5 +32,11 @@ public class CompetenciaLugar {
 	}
 	public void setDisponibilidad(Integer disponibilidad) {
 		this.disponibilidad = disponibilidad;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
