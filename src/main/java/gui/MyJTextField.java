@@ -6,14 +6,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
-import javax.swing.text.Document;
 
-public class CampoTexto extends JTextField {
+public class MyJTextField extends JTextField {
+
+	private static final long serialVersionUID = 1L;
 	
 	String hint;
 	Boolean changed=false;
 
-	public CampoTexto(String text) {
+	public MyJTextField(String text) {
 		super(text);
 		this.hint=text;
 		this.setText(hint);

@@ -10,6 +10,7 @@ public class Error extends JLabel {
 	public Error() {
 		super();
 		this.setIcon(PanelPersonalizado.emoji("icon/error2.png",24,24));
+		this.setEnabled(false);
 	}
 	
 	public Error(String mensaje) {

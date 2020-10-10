@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.*;
@@ -28,15 +29,19 @@ public class App extends JFrame {
 	JPanel actual = null;
 	List<JPanel> listaPaneles = new ArrayList<JPanel>();
 
-
+	//https://stackoverflow.com/questions/7434845/setting-the-default-font-of-swing-program	
 	public void setearFuente(String fuente) {
 		ToolTipManager.sharedInstance().setInitialDelay(0);
 		 final Font fnt = new Font(fuente, Font.PLAIN, 14);
          final FontUIResource res = new FontUIResource(fnt);
-         UIManager.getLookAndFeelDefaults().put("Button.font", res);
-         UIManager.getLookAndFeelDefaults().put("TextField.font", res);
-         UIManager.getLookAndFeelDefaults().put("Label.font", res);
-         UIManager.getLookAndFeelDefaults().put("TextArea.font", res);
+         Enumeration<Object> keys = UIManager.getDefaults().keys();
+        
+         while (keys.hasMoreElements()) {
+           Object key = keys.nextElement();
+           Object value = UIManager.get (key);
+           if (value instanceof javax.swing.plaf.FontUIResource)
+             UIManager.put (key, res);
+         }
          SwingUtilities.updateComponentTreeUI(this);
 	}
 

@@ -27,18 +27,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
-
 
 public abstract class PanelPersonalizado extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
 	public static final Insets insetpredeterminado = new Insets(5,5,5,5);
-	public static final Insets inseterror = new Insets(0,20,0,0);
+	public static final Insets inseterror = new Insets(0,10,0,0);
 	public static final Insets insetvacio = new Insets(0,0,0,0);
 
 	public  static ImageIcon errorIcono = emoji("icon/error2.png",24,24);
@@ -46,12 +46,25 @@ public abstract class PanelPersonalizado extends JPanel{
 		return new JLabel(errorIcono);
 	}
 
-	public JPanel crearComponenteConError(JComponent componente, JLabel error) {
+	public static JPanel crearComponenteConErrorYLabel(JComponent label, JComponent componente, JLabel error) {
 		JPanel panel01 = new JPanel(new GridBagLayout());
 		
-		colocar2(0,0,1,1,1,0,0,0,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER,insetvacio,panel01,componente);
+		colocar2(0,0,1,1,1,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.NORTHWEST,insetvacio,panel01,label);
+		colocar2(2,0,1,1,0,0,0,0,GridBagConstraints.NONE,GridBagConstraints.NORTHWEST,insetvacio,panel01,componente);
 
-		colocar2(1,0,1,1,0,0,0,0,GridBagConstraints.NONE,GridBagConstraints.CENTER,inseterror,panel01,error);
+		colocar2(3,0,1,1,0,0,0,0,GridBagConstraints.NONE,GridBagConstraints.NORTHEAST,inseterror,panel01,error);
+		
+		return panel01;
+
+	}
+	
+	
+	public static JPanel crearComponenteConError(JComponent componente, JLabel error) {
+		JPanel panel01 = new JPanel(new GridBagLayout());
+		
+		colocar2(0,0,1,1,1,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.NORTHWEST,insetvacio,panel01,componente);
+
+		colocar2(1,0,1,1,0,0,0,0,GridBagConstraints.NONE,GridBagConstraints.NORTHEAST,inseterror,panel01,error);
 		
 		return panel01;
 
@@ -63,7 +76,9 @@ public abstract class PanelPersonalizado extends JPanel{
 	public  PanelPersonalizado() {
 		super();
 		this.setBackground(Color.decode("#eeeeee"));
-		this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.decode("#33658a")));
+		Border borde1 = BorderFactory.createMatteBorder(3, 3, 3, 3, Color.decode("#33658a"));
+		Border borde2 = BorderFactory.createEmptyBorder(5,40,5,40);
+		this.setBorder(new CompoundBorder(borde1,borde2));
 		//this.fileFondo = "icon/fondo2.png";
 	}
 
