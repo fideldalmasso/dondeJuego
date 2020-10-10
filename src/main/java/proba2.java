@@ -1,6 +1,6 @@
 import java.util.List;
 
-import daos.CompetenciaDao;
+import daos.CompetenciaDAO;
 import dominio.Pair;
 import dtos.CompetenciaDTO;
 import gestores.GestorCompetencia;
@@ -8,7 +8,7 @@ import gestores.GestorCompetencia;
 public class proba2 {
 
 	public static void main(String[] args) {
-		CompetenciaDao cd= new CompetenciaDao();
+		CompetenciaDAO cd= new CompetenciaDAO();
 		/*
 		 * CompetenciaDTO(String nombre, Integer deporte, List<Pair> lugares, String modalidad, String reglamento,
 			Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorGanar,Integer puntosPorEmpate)

@@ -21,8 +21,7 @@ public class LocalidadDAO {
 	}
 	
 	public void save(Localidad l) {
-		Session session;
-		session = factory.openSession();
+		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		l.setId((Integer) session.save(l));
 		tx.commit();
