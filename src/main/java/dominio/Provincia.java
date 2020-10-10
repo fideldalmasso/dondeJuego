@@ -38,6 +38,13 @@ public class Provincia {
 		this.nombre = nombre;
 		this.localidades = localidades;
 	}
+	public Provincia(Pais pais, String nombre, List<Localidad> localidades) {
+		super();
+		this.id = id;
+		this.pais = pais;
+		this.nombre = nombre;
+		this.localidades = localidades;
+	}
 	public Provincia() {
 		super();
 	}

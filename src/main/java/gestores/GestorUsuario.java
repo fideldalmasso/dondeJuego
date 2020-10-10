@@ -1,10 +1,20 @@
 package gestores;
 
 import daos.UsuarioDAO;
+import dominio.Usuario;
 
 public class GestorUsuario {
-	void guardar () {
-		UsuarioDAO ud = new UsuarioDAO();
-		ud.saveUsuario(new GestorAutenticacion().getUsuario());
+	private UsuarioDAO ud;
+	
+	public GestorUsuario() {
+		this.ud = new UsuarioDAO();
+	}
+	
+	void save(Usuario usr) {
+		ud.save(usr);
+	}
+	
+	void update(Usuario usr) {
+		ud.update(usr);
 	}
 }

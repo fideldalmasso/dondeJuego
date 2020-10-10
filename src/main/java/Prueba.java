@@ -10,15 +10,25 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import daos.LocalidadDAO;
 import daos.LugarRealizacionDao;
+import daos.PaisDAO;
+import daos.ProvinciaDAO;
+import daos.UsuarioDAO;
 import dominio.Competencia;
 import dominio.Deporte;
+import dominio.Localidad;
 import dominio.LugarRealizacion;
 import dominio.Pair;
+import dominio.Pais;
 import dominio.Participante;
+import dominio.Provincia;
+import dominio.RegistroSesion;
 import dominio.RenglonTabla;
 import dominio.Usuario;
 import dtos.CompetenciaDTO;
+import enumerados.TipoDocumento;
+import gestores.GestorAutenticacion;
 import gestores.GestorCompetencia;
 
 public class Prueba {
@@ -35,13 +45,40 @@ public class Prueba {
 	      Pair p = new Pair(1,1,1);
 	      List<Pair> lp = new ArrayList<Pair>();
 	      lp.add(p);
-	     
-	      GestorCompetencia gc = new GestorCompetencia();
-	      Deporte dep = gc.crearDeporte("PATONAsdTFFFFvvvvO");
 	      
+	      PaisDAO pd = new PaisDAO();
+	      ProvinciaDAO prod = new ProvinciaDAO();
+	      LocalidadDAO locd =  new LocalidadDAO();
+	      UsuarioDAO ud =  new UsuarioDAO();
+	      LugarRealizacionDao ld =  new LugarRealizacionDao();
+	      
+	      GestorCompetencia gc = new GestorCompetencia();
+	      GestorAutenticacion ga = new GestorAutenticacion();
+	      
+	      Pais pais = new Pais("Argentina", new ArrayList<Provincia>());
+	      pd.save(pais);
+	      Provincia prov =  new Provincia(pais, "Santa Fe", new ArrayList<Localidad>());
+	      prod.save(prov);
+	      Localidad loc = new Localidad(prov, "Santa Fe");
+	      locd.save(loc);
+	      
+	      Usuario usr = new Usuario ("Edger",
+	    		  "Dijkstra", 
+	    		  "12345",
+	    		  TipoDocumento.LE, 
+	    		  "10", 
+	    		  "dedgerarrobagmail.com", 
+	    		  new ArrayList<Competencia>(),
+	    		  new ArrayList<RegistroSesion>(),
+	    		  new ArrayList<LugarRealizacion>(),
+	    		  loc);
+	      ud.save(usr);
+	      ga.login("dedgerarrobagmail.com", "12345");
+	      
+	      Deporte dep = gc.crearDeporte("PATONAsdTFFFFvvvvO");
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
-	      LugarRealizacionDao ld =  new LugarRealizacionDao();
+	      
 	      ld.saveLugarRealizacion(new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes));
 	      
 	      CompetenciaDTO c = new CompetenciaDTO("ABERSFvvvvdsFFF",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
@@ -50,7 +87,6 @@ public class Prueba {
 	     
 	   }
 	   
-	   /* Method to CREATE an employee in the database */
 	   public Integer addRt(){
 	      Session session = factory.openSession();
 	      Transaction tx = null;
@@ -69,65 +105,5 @@ public class Prueba {
 	         session.close(); 
 	      }
 	      return depId;
-	   }
-	   
-	   /* Method to  READ all the employees */
-	   public void listEmployees( ){
-	      Session session = factory.openSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         List employees = session.createQuery("FROM Employee").list(); 
-	         for (Iterator iterator = employees.iterator(); iterator.hasNext();){
-	            Employee employee = (Employee) iterator.next(); 
-	            System.out.print("First Name: " + employee.getFirstName()); 
-	            System.out.print("  Last Name: " + employee.getLastName()); 
-	            System.out.println("  Salary: " + employee.getSalary()); 
-	         }
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
-	      }
-	   }
-	   
-	   /* Method to UPDATE salary for an employee */
-	   public void updateEmployee(Integer EmployeeID, int salary ){
-	      Session session = factory.openSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         Employee employee = (Employee)session.get(Employee.class, EmployeeID); 
-	         employee.setSalary( salary );
-			 session.update(employee); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
-	      }
-	   }
-	   
-	   /* Method to DELETE an employee from the records */
-	   public void deleteEmployee(Integer EmployeeID){
-	      Session session = factory.openSession();
-	      Transaction tx = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         Employee employee = (Employee)session.get(Employee.class, EmployeeID); 
-	         session.delete(employee); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
-	      }
 	   }
 }

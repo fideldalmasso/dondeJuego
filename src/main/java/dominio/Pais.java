@@ -33,4 +33,9 @@ public class Pais {
 		this.nombre = nombre;
 		this.provincias = provincias;
 	}
+	public Pais(String nombre, List<Provincia> provincias) {
+		super();
+		this.nombre = nombre;
+		this.provincias = provincias;
+	}
 }

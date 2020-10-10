@@ -57,13 +57,12 @@ public class GestorCompetencia {
 				break;
 		}
 		if(m.equals(null)); //Agregar mensaje de error
+		
 		cd.saveModalidad(m);
 		compe.setModalidad(m);
 		
-		
-		
-		
-		//(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
+		System.out.println((new GestorAutenticacion()).getUsuario().getEmail());
+		(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
 		
 		for(Pair p : cdto.getLugares()){
 			LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
@@ -74,7 +73,9 @@ public class GestorCompetencia {
 		}
 	//	cd.update(compe);
 		cd.save(compe);
-		//gu.guardar();
+		
+		gu.update((new GestorAutenticacion()).getUsuario());
+		
 		return compe;
 	}
 	

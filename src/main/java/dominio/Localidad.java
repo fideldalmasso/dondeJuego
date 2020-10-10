@@ -10,6 +10,12 @@ public class Localidad {
 		this.provincia = provincia;
 		this.nombre = nombre;
 	}
+	public Localidad(Provincia provincia, String nombre) {
+		super();
+		this.id = id;
+		this.provincia = provincia;
+		this.nombre = nombre;
+	}
 	public Localidad() {
 		super();
 	}

@@ -1,12 +1,12 @@
 package dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import enumerados.TipoDocumento;
 
 public class Usuario {
 	private Integer id;
-	private Boolean registrado;
 	private String nombre;
 	private String apellido;
 	private String contrasenia;
@@ -17,12 +17,11 @@ public class Usuario {
 	private List<RegistroSesion> registros;
 	private List<LugarRealizacion> lugares;
 	private Localidad localidad;
-	public Usuario(Integer id, Boolean registrado, String nombre, String apellido, String contrasenia,
+	public Usuario(Integer id, String nombre, String apellido, String contrasenia,
 			TipoDocumento tipoDocumento, String numeroDocumento, String email, List<Competencia> competencias,
 			List<RegistroSesion> registros, List<LugarRealizacion> lugares, Localidad localidad) {
 		super();
 		this.id = id;
-		this.registrado = registrado;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.contrasenia = contrasenia;
@@ -33,6 +32,27 @@ public class Usuario {
 		this.registros = registros;
 		this.lugares = lugares;
 		this.localidad = localidad;
+		this.competencias =  new ArrayList<Competencia>();
+		this.registros = new ArrayList<RegistroSesion>();
+		this.lugares =  new ArrayList<LugarRealizacion>();
+	}
+	public Usuario(String nombre, String apellido, String contrasenia,
+			TipoDocumento tipoDocumento, String numeroDocumento, String email, List<Competencia> competencias,
+			List<RegistroSesion> registros, List<LugarRealizacion> lugares, Localidad localidad) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.contrasenia = contrasenia;
+		this.tipoDocumento = tipoDocumento;
+		this.numeroDocumento = numeroDocumento;
+		this.email = email;
+		this.competencias = competencias;
+		this.registros = registros;
+		this.lugares = lugares;
+		this.localidad = localidad;
+		this.competencias =  new ArrayList<Competencia>();
+		this.registros = new ArrayList<RegistroSesion>();
+		this.lugares =  new ArrayList<LugarRealizacion>();
 	}
 	public Usuario() {
 		super();
@@ -42,12 +62,6 @@ public class Usuario {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Boolean getRegistrado() {
-		return registrado;
-	}
-	public void setRegistrado(Boolean registrado) {
-		this.registrado = registrado;
 	}
 	public String getNombre() {
 		return nombre;

@@ -13,7 +13,7 @@ public class LugarRealizacionDao {
 	private static SessionFactory factory;
 	public LugarRealizacionDao() {
 		 try {
-	         factory = new Configuration().configure().buildSessionFactory();
+			 factory = new HibernateUtil().getSession();
 	      } catch (Throwable ex) { 
 	         System.err.println("Failed to create sessionFactory object." + ex);
 	         throw new ExceptionInInitializerError(ex); 
