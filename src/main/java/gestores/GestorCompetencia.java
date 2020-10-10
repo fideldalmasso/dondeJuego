@@ -6,17 +6,17 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import daos.CompetenciaDao;
+import daos.CompetenciaDAO;
 import dominio.*;
 import dtos.CompetenciaDTO;
 import enumerados.EstadoCompetencia;
 
 public class GestorCompetencia {
-	private CompetenciaDao cd;
+	private CompetenciaDAO cd;
 	private GestorLugarRealizacion glr;
 	private GestorUsuario gu;
 	public GestorCompetencia() {
-		cd= new CompetenciaDao();
+		cd= new CompetenciaDAO();
 		glr = new GestorLugarRealizacion();
 		gu = new GestorUsuario();
 	}

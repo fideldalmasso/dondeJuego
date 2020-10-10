@@ -20,8 +20,7 @@ public class ProvinciaDAO {
 	}
 	
 	public void save(Provincia p) {
-		Session session;
-		session = factory.openSession();
+		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		p.setId((Integer) session.save(p));
 		tx.commit();

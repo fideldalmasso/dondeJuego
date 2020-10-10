@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -8,10 +7,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import daos.LocalidadDAO;
-import daos.LugarRealizacionDao;
+import daos.LugarRealizacionDAO;
 import daos.PaisDAO;
 import daos.ProvinciaDAO;
 import daos.UsuarioDAO;
@@ -21,10 +19,8 @@ import dominio.Localidad;
 import dominio.LugarRealizacion;
 import dominio.Pair;
 import dominio.Pais;
-import dominio.Participante;
 import dominio.Provincia;
 import dominio.RegistroSesion;
-import dominio.RenglonTabla;
 import dominio.Usuario;
 import dtos.CompetenciaDTO;
 import enumerados.TipoDocumento;
@@ -50,7 +46,7 @@ public class Prueba {
 	      ProvinciaDAO prod = new ProvinciaDAO();
 	      LocalidadDAO locd =  new LocalidadDAO();
 	      UsuarioDAO ud =  new UsuarioDAO();
-	      LugarRealizacionDao ld =  new LugarRealizacionDao();
+	      LugarRealizacionDAO ld =  new LugarRealizacionDAO();
 	      
 	      GestorCompetencia gc = new GestorCompetencia();
 	      GestorAutenticacion ga = new GestorAutenticacion();

@@ -11,10 +11,10 @@ import org.hibernate.cfg.Configuration;
 
 import dominio.*;
 
-public class CompetenciaDao {
+public class CompetenciaDAO {
 	 private static SessionFactory factory; 
 	 
-	 public CompetenciaDao() {
+	 public CompetenciaDAO() {
 		 try {
 	        factory = new HibernateUtil().getSession();
 	      } catch (Throwable ex) { 
@@ -23,8 +23,7 @@ public class CompetenciaDao {
 	      }
 	 }
 	 public List<Competencia> getAllCompetencias(){
-		Session session;
-		 session = factory.openSession();
+		 Session session	= factory.openSession();
 		 Transaction tx = session.beginTransaction();
 		 List<Competencia> lc = session.createQuery("from Competencia").list(); 
 		 tx.commit();
@@ -33,8 +32,7 @@ public class CompetenciaDao {
 	 }
 	 
 	 public Deporte getDeporte(Integer id) {
-		Session session;
-		session = factory.openSession();
+		Session session	= factory.openSession();
 		Transaction tx = session.beginTransaction();
 		Deporte deporte =  session.get(Deporte.class, id);
 		tx.commit();
@@ -43,8 +41,7 @@ public class CompetenciaDao {
 	 }
 	 
 	 public void saveModalidad(Modalidad m) {
-		Session session;
-		session = factory.openSession();
+		Session session	= factory.openSession();
 		Transaction tx = session.beginTransaction();
 		m.setId((Integer) session.save(m));
 		tx.commit();
@@ -52,8 +49,7 @@ public class CompetenciaDao {
 	 }
 	 
 	 public void saveDeporte(Deporte d) {
-		Session session;
-		session = factory.openSession();
+		Session session	= factory.openSession();
 		Transaction tx = session.beginTransaction();
 		d.setId((Integer) session.save(d));
 		tx.commit();
@@ -61,32 +57,28 @@ public class CompetenciaDao {
 	 }
 	 
 	 public void save(Competencia c) {
-		Session session;
-		session = factory.openSession();
+		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		c.setId((Integer) session.save(c));
 		tx.commit();
 		session.close();
 	 }
 	 public void update(Competencia c) {
-		Session session;
-		session = factory.openSession();
+		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.update(c);
 		tx.commit();
 		session.close();
 	 }
 	 public void save(CompetenciaLugar lc) {
-		Session session;
-		session = factory.openSession();
+		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		lc.setId((Integer) session.save(lc));
 		tx.commit();
 		session.close();
 	 }
 	 public List<Deporte> getAllDeportes(){
-		Session session;
-		session = factory.openSession();
+		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		List<Deporte> lc = session.createQuery("from Deporte").list(); 
 		tx.commit();

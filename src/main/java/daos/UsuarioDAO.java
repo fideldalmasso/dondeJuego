@@ -22,7 +22,7 @@ public class UsuarioDAO {
 	public void save(Usuario usuario) {
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.save(usuario);
+		usuario.setId((Integer) session.save(usuario));
 		tx.commit();
 		session.close();
 	}
