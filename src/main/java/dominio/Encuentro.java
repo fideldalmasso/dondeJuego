@@ -61,7 +61,6 @@ public class Encuentro {
 	public Encuentro(Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
 			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
 		super();
-		this.id = id;
 		this.fechaEncuentro = fechaEncuentro;
 		this.sePresentaB = sePresentaB;
 		this.sePresentaA = sePresentaA;

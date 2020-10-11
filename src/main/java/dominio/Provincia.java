@@ -23,7 +23,7 @@ public class Provincia {
 	private Pais pais;
 	@Column(name="nombre")
 	private String nombre;
-	@OneToMany(mappedBy="localidad")
+	@OneToMany(mappedBy="provincia")
 	private List<Localidad> localidades;
 	
 	public Provincia(Integer id, Pais pais, String nombre, List<Localidad> localidades) {

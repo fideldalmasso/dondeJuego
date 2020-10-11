@@ -175,5 +175,11 @@ public class Competencia {
 	public void setFixture(Fixture fixture) {
 		this.fixture = fixture;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 }
