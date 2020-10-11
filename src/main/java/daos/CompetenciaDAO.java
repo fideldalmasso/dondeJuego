@@ -24,6 +24,7 @@ public class CompetenciaDAO {
 	         throw new ExceptionInInitializerError(ex); 
 	      }
 	 }
+	 
 	 public List<Competencia> getAllCompetencias(){
 		 EntityManager em	= factory.createEntityManager();
 		 em.getTransaction().begin();
@@ -31,31 +32,6 @@ public class CompetenciaDAO {
 		 em.getTransaction().commit();
 		 em.close();
 		 return lc;
-	 }
-	 
-	 public Deporte getDeporte(Integer id) {
-		 EntityManager em = factory.createEntityManager();
-		 em.getTransaction().begin();
-		 Deporte deporte =  em.find(Deporte.class, id);
-		 em.getTransaction().commit();
-		 em.close();
-		 return deporte;
-	 }
-	 
-	 public void saveModalidad(Modalidad m) {
-		 EntityManager em = factory.createEntityManager();
-		 em.getTransaction().begin();
-		 em.persist(m);
-		 em.getTransaction().commit();
-		 em.close();
-	 }
-	 
-	 public void saveDeporte(Deporte d) {
-		 EntityManager em = factory.createEntityManager();
-		 em.getTransaction().begin();
-		 em.persist(d);
-		 em.getTransaction().commit();
-		 em.close();
 	 }
 	 
 	 public void save(Competencia c) {
@@ -74,19 +50,5 @@ public class CompetenciaDAO {
 		session.close();
 	 }
 	 */
-	 public void save(CompetenciaLugar lc) {
-		 EntityManager em = factory.createEntityManager();
-		 em.getTransaction().begin();
-		 em.persist(lc);
-		 em.getTransaction().commit();
-		 em.close();
-	 }
-	 public List<Deporte> getAllDeportes(){
-		 EntityManager em = factory.createEntityManager();
-		 em.getTransaction().begin();
-		 List<Deporte> lc = em.createQuery("from Deporte").getResultList();
-		 em.getTransaction().commit();
-		 em.close();
-		 return lc;
-	 }
+	 
 }

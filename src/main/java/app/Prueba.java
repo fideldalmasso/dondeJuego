@@ -44,9 +44,7 @@ public class Prueba {
 	         throw new ExceptionInInitializerError(ex); 
 	      }
 	      */
-	      Pair p = new Pair(1,1,1);
-	      List<Pair> lp = new ArrayList<Pair>();
-	      lp.add(p);
+	      
 	      
 	      PaisDAO pd = new PaisDAO();
 	      ProvinciaDAO prod = new ProvinciaDAO();
@@ -64,7 +62,7 @@ public class Prueba {
 	      Localidad loc = new Localidad(prov, "Santa Fe");
 	      locd.save(loc);
 	      
-	      Usuario usr = new Usuario ("EdgefdrsaAafafsgrr",
+	      Usuario usr = new Usuario ("EdgefddrsaAsfssasafafsgrr",
 	    		  "Dijkstra", 
 	    		  "12345",
 	    		  TipoDocumento.LE, 
@@ -77,15 +75,20 @@ public class Prueba {
 	      ud.save(usr);
 	      ga.login("dedgerarrobagmail.com", "12345");
 	      
-	      Deporte dep = gc.crearDeporte("PATONAsdTaFaFFfAsffFdgasavvvvO");
+	      Deporte dep = gc.crearDeporte("PATONfAdsdTaFsasFFafAsssffFdgasavvvvO");
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      
-	      ld.saveLugarRealizacion(new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes));
+	      LugarRealizacion lr = new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes);
+	      ld.save(lr);
 	      
-	      CompetenciaDTO c = new CompetenciaDTO("ABERSFvvvvdsFFF",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
+	      Pair p = new Pair(lr.getId(),1);
+	      List<Pair> lp = new ArrayList<Pair>();
+	      lp.add(p);
 	      
-	      System.out.println(gc.crearCompetencia(c).getId());
+	      CompetenciaDTO c = new CompetenciaDTO("ABEfRSdFsvsassvvvdsFFF",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
+	      
+	      gc.crearCompetencia(c);
 	     
 	   }
 	   

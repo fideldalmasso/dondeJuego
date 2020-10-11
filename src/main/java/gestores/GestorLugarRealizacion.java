@@ -11,9 +11,9 @@ public class GestorLugarRealizacion {
 		lrd = new LugarRealizacionDAO();
 	}
 	public LugarRealizacion getLugarRealizacion(Integer id) {
-		return this.lrd.getLugarRealizacion(id);
+		return this.lrd.get(id);
 	}
 	public List<LugarRealizacion> getAllLugarRealizacion(){
-		return this.lrd.getAllLugarRealizacion();
+		return this.lrd.getAll();
 	 }
 }

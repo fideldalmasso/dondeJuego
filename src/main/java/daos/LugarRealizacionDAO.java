@@ -22,7 +22,7 @@ public class LugarRealizacionDAO {
 	         throw new ExceptionInInitializerError(ex); 
 	      }
 	}
-	public LugarRealizacion getLugarRealizacion(Integer id) {
+	public LugarRealizacion get(Integer id) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		LugarRealizacion lr = em.find(LugarRealizacion.class,id);
@@ -31,7 +31,7 @@ public class LugarRealizacionDAO {
 		return lr;
 	}
 	
-	public void saveLugarRealizacion(LugarRealizacion lr) {
+	public void save(LugarRealizacion lr) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(lr);
@@ -39,7 +39,7 @@ public class LugarRealizacionDAO {
 		em.close();
 	}
 	
-	public List<LugarRealizacion> getAllLugarRealizacion(){
+	public List<LugarRealizacion> getAll(){
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		List<LugarRealizacion> lr = em.createQuery("from LugarRealizacion").getResultList();

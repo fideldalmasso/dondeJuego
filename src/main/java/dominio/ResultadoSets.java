@@ -12,24 +12,24 @@ import javax.persistence.Table;
 @Table(name="dj.resultadoSets")
 public class ResultadoSets extends Resultado {
 	@OneToMany(mappedBy="resultado")
-	private List<Pair> sets;
+	private List<Set> sets;
 	
-	public ResultadoSets(Integer id, Timestamp fechaRegistro, List<Pair> sets) {
+	public ResultadoSets(Integer id, Timestamp fechaRegistro, List<Set> sets) {
 		super(id, fechaRegistro);
 		this.sets = sets;
 	}
-	public ResultadoSets(Timestamp fechaRegistro, List<Pair> sets) {
+	public ResultadoSets(Timestamp fechaRegistro, List<Set> sets) {
 		super(fechaRegistro);
 		this.sets = sets;
 	}
 	public ResultadoSets() {
 		super();
 	}
-	public List<Pair> getSets() {
+	public List<Set> getSets() {
 		return sets;
 	}
 
-	public void setSets(List<Pair> sets) {
+	public void setSets(List<Set> sets) {
 		this.sets = sets;
 	}
 	
