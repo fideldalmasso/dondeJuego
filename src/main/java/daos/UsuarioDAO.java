@@ -31,6 +31,26 @@ public class UsuarioDAO {
 		em.getTransaction().commit();
 		em.close();
 	}
+	public void update(Usuario usuario) {
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		Usuario actual = (Usuario) em.createQuery("from Usuario U where U.id= :elid ")
+				.setParameter("elid",usuario.getId())
+				.getResultList().get(0);
+		if(actual!=null) {
+			actual.setApellido(usuario.getApellido());
+			actual.setCompetencias(usuario.getCompetencias());
+			actual.setContrasenia(usuario.getContrasenia());
+			actual.setEmail(usuario.getEmail());
+			actual.setLocalidad(usuario.getLocalidad());
+			actual.setLugares(usuario.getLugares());
+			actual.setNombre(usuario.getNombre());
+			actual.setNumeroDocumento(usuario.getNumeroDocumento());
+			actual.setRegistros(usuario.getRegistros());
+			actual.setTipoDocumento(usuario.getTipoDocumento());
+		}
+		em.getTransaction().commit();
+	}
 	/*
 	public void update(Usuario usuario) {
 		Session session = factory.openSession();
