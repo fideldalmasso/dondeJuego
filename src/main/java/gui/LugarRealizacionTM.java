@@ -1,6 +1,5 @@
 package gui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -9,6 +8,9 @@ import dominio.LugarRealizacion;
 import gestores.GestorLugarRealizacion;
 
 public class LugarRealizacionTM extends AbstractTableModel {
+
+
+	private static final long serialVersionUID = 1L;
 
 	GestorLugarRealizacion gestor;
 

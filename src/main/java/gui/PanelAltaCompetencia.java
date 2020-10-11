@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.*;
 
+import daos.DeporteDAO;
 import gestores.GestorCompetencia;
 
 public class PanelAltaCompetencia extends PanelPersonalizado {
@@ -55,7 +56,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	
 	
 	
-	private GestorCompetencia gc= new GestorCompetencia();
+	private DeporteDAO dao= new DeporteDAO();
 	
 	public PanelAltaCompetencia() {
 		this.setPreferredSize(new Dimension(780, 734));
@@ -70,7 +71,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			
 		}
 		{
-			String listaDeportes[] = gc.getAllDeportes().stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
+			String listaDeportes[] = dao.getAll().stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
 			//String listaDeportes[] = {"futbol", "basket"};
 			combodeporte = new JComboBox<String>(listaDeportes);
 //			combodeporte.setSelectedIndex(0);
