@@ -15,23 +15,20 @@ public class SistemaPuntuacion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Integer id;
+	
+	public SistemaPuntuacion(Integer id) {
+		super();
+		this.id = id;
+	}
+	public SistemaPuntuacion() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-
-	public SistemaPuntuacion(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-	public SistemaPuntuacion() {
-		super();
 	}
 	
 }

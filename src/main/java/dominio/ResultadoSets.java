@@ -4,10 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,9 +11,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name="dj.resultadoSets")
 public class ResultadoSets extends Resultado {
-	@OneToMany
-	@JoinColumn(name="idResultado")
+	@OneToMany(mappedBy="resultado")
 	private List<Pair> sets;
+	
+	public ResultadoSets(Integer id, Timestamp fechaRegistro, List<Pair> sets) {
+		super(id, fechaRegistro);
+		this.sets = sets;
+	}
+	public ResultadoSets(Timestamp fechaRegistro, List<Pair> sets) {
+		super(fechaRegistro);
+		this.sets = sets;
+	}
 	public ResultadoSets() {
 		super();
 	}
@@ -28,11 +32,5 @@ public class ResultadoSets extends Resultado {
 	public void setSets(List<Pair> sets) {
 		this.sets = sets;
 	}
-
-	public ResultadoSets(Integer id, Timestamp fechaRegistro, List<Pair> sets) {
-		super(id, fechaRegistro);
-		this.sets = sets;
-	}
-	
 	
 }

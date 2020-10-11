@@ -23,6 +23,7 @@ public class CompetenciaLugar {
 	private LugarRealizacion lugar;
 	@Column(name="disponibilidad")
 	private Integer disponibilidad;
+	
 	public CompetenciaLugar(Integer id,Competencia competencia, LugarRealizacion lugar, Integer disponibilidad) {
 		super();
 		this.id=id;

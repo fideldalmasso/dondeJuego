@@ -22,9 +22,15 @@ public class RegistroSesion {
 	@ManyToOne
 	@JoinColumn(name="documentoUsuario")
 	private Usuario usuario;
+	
 	public RegistroSesion(Integer id, Timestamp horarioInicio, Usuario usuario) {
 		super();
 		this.id = id;
+		this.horarioInicio = horarioInicio;
+		this.usuario=usuario;
+	}
+	public RegistroSesion(Timestamp horarioInicio, Usuario usuario) {
+		super();
 		this.horarioInicio = horarioInicio;
 		this.usuario=usuario;
 	}

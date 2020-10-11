@@ -2,9 +2,6 @@ package dominio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -14,14 +11,18 @@ import javax.persistence.Table;
 public class SistemaPuntuacionPorSets extends SistemaPuntuacion {
 	@Column(name="cantidadMaximaDeSets")
 	private Integer cantidadMaximaDeSets;
-	public SistemaPuntuacionPorSets() {
-		super();
-	}
+	
 	public SistemaPuntuacionPorSets(Integer id, Integer cantidadMaximaDeSets) {
 		super(id);
 		this.cantidadMaximaDeSets = cantidadMaximaDeSets;
 	}
-
+	public SistemaPuntuacionPorSets(Integer cantidadMaximaDeSets) {
+		super();
+		this.cantidadMaximaDeSets = cantidadMaximaDeSets;
+	}
+	public SistemaPuntuacionPorSets() {
+		super();
+	}
 	public Integer getCantidadMaximaDeSets() {
 		return cantidadMaximaDeSets;
 	}

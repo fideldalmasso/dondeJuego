@@ -4,9 +4,6 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +15,19 @@ public class ResultadoFinal extends Resultado {
 	private Boolean ganaA;
 	@Column(name="ganaB")
 	private Boolean ganaB;
+	
+	public ResultadoFinal(Integer id, Timestamp fechaRegistro, Boolean empate, Boolean ganaA, Boolean ganaB) {
+		super(id, fechaRegistro);
+		this.empate = empate;
+		this.ganaA = ganaA;
+		this.ganaB = ganaB;
+	}
+	public ResultadoFinal(Timestamp fechaRegistro, Boolean empate, Boolean ganaA, Boolean ganaB) {
+		super(fechaRegistro);
+		this.empate = empate;
+		this.ganaA = ganaA;
+		this.ganaB = ganaB;
+	}
 	public ResultadoFinal() {
 		super();
 	}
@@ -39,12 +49,5 @@ public class ResultadoFinal extends Resultado {
 	public void setGanaB(Boolean ganaB) {
 		this.ganaB = ganaB;
 	}
-	public ResultadoFinal(Integer id, Timestamp fechaRegistro, Boolean empate, Boolean ganaA, Boolean ganaB) {
-		super(id, fechaRegistro);
-		this.empate = empate;
-		this.ganaA = ganaA;
-		this.ganaB = ganaB;
-	}
-	
 	
 }

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,9 +18,20 @@ public class Pais {
 	private Integer id;
 	@Column(name="nombre")
 	private String nombre;
-	@OneToMany
-	@JoinColumn(name="idPais")
+	@OneToMany (mappedBy="pais")
 	private List<Provincia> provincias;
+	
+	public Pais(Integer id, String nombre, List<Provincia> provincias) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.provincias = provincias;
+	}
+	public Pais(String nombre, List<Provincia> provincias) {
+		super();
+		this.nombre = nombre;
+		this.provincias = provincias;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -42,16 +52,5 @@ public class Pais {
 	}
 	public Pais() {
 		super();
-	}
-	public Pais(Integer id, String nombre, List<Provincia> provincias) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.provincias = provincias;
-	}
-	public Pais(String nombre, List<Provincia> provincias) {
-		super();
-		this.nombre = nombre;
-		this.provincias = provincias;
 	}
 }

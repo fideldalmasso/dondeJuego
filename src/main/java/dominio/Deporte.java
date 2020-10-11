@@ -15,6 +15,8 @@ public class Deporte {
 	private Integer id;
 	@Column(name="nombre")
 	private String nombre;
+	
+	
 	public Integer getId() {
 		return id;
 	}

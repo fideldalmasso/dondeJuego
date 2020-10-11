@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +23,9 @@ public class Participante {
 	@ManyToOne
 	@JoinColumn(name="idCompetencia")
 	private Competencia competencia;
+	@OneToOne(mappedBy="participante")
+	RenglonTabla renglon = new RenglonTabla();
+	
 	public Participante(Integer id, String nombre, String email, Competencia competencia) {
 		super();
 		this.id = id;
@@ -29,13 +33,12 @@ public class Participante {
 		this.email = email;
 		this.competencia=competencia;
 	}
-	public Participante(Integer id) {
+	public Participante(String nombre, String email, Competencia competencia) {
 		super();
-		this.id = id;
-		this.nombre = null;
-		this.email = null;
+		this.nombre = nombre;
+		this.email = email;
+		this.competencia=competencia;
 	}
-	
 	public Participante() {
 		super();
 	}

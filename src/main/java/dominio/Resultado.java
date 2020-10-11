@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,14 +22,18 @@ public class Resultado {
 	protected Integer id;
 	@Column(name="fechaRegistro")
 	protected Timestamp fechaRegistro;
+	@ManyToOne
+	@JoinTable(name="idEncuentro")
+	protected Encuentro encuentro;
+	
 	public Resultado(Integer id, Timestamp fechaRegistro) {
 		super();
 		this.id = id;
 		this.fechaRegistro = fechaRegistro;
 	}
-	public Resultado(Integer id) {
+	public Resultado(Timestamp fechaRegistro) {
 		super();
-		this.id = id;
+		this.fechaRegistro = fechaRegistro;
 	}
 	public Resultado() {
 		super();

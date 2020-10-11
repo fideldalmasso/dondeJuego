@@ -23,9 +23,25 @@ public class Provincia {
 	private Pais pais;
 	@Column(name="nombre")
 	private String nombre;
-	@OneToMany
-	@JoinColumn(name="idProvincia")
+	@OneToMany(mappedBy="localidad")
 	private List<Localidad> localidades;
+	
+	public Provincia(Integer id, Pais pais, String nombre, List<Localidad> localidades) {
+		super();
+		this.id = id;
+		this.pais = pais;
+		this.nombre = nombre;
+		this.localidades = localidades;
+	}
+	public Provincia(Pais pais, String nombre, List<Localidad> localidades) {
+		super();
+		this.pais = pais;
+		this.nombre = nombre;
+		this.localidades = localidades;
+	}
+	public Provincia() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -50,22 +66,5 @@ public class Provincia {
 	}
 	public void setLocalidades(List<Localidad> localidades) {
 		this.localidades = localidades;
-	}
-	public Provincia(Integer id, Pais pais, String nombre, List<Localidad> localidades) {
-		super();
-		this.id = id;
-		this.pais = pais;
-		this.nombre = nombre;
-		this.localidades = localidades;
-	}
-	public Provincia(Pais pais, String nombre, List<Localidad> localidades) {
-		super();
-		this.id = id;
-		this.pais = pais;
-		this.nombre = nombre;
-		this.localidades = localidades;
-	}
-	public Provincia() {
-		super();
 	}
 }

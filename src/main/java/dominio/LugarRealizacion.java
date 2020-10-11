@@ -1,7 +1,6 @@
 package dominio;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -33,13 +32,21 @@ public class LugarRealizacion {
 	  joinColumns = @JoinColumn(name = "idLugar"), 
 	  inverseJoinColumns = @JoinColumn(name = "idDeporte"))
 	private Set<Deporte> deportes;
+	
 	public LugarRealizacion() {
 		super();
 		deportes = new HashSet<Deporte>();
 	}
+	public LugarRealizacion(Integer id, String nombre, String descripcion, Usuario usuario, Set<Deporte> deportes) {
+		super();
+		this.id=id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.usuario = usuario;
+		this.deportes = deportes;
+	}
 	public LugarRealizacion(String nombre, String descripcion, Usuario usuario, Set<Deporte> deportes) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.usuario = usuario;

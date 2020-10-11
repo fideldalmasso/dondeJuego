@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,20 +18,23 @@ public class Fecha {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@OneToMany
-	@JoinColumn(name="idFecha")
+	@OneToMany(mappedBy="fecha")
 	private List<Encuentro> encuentros;
 	@Column(name="tipoRonda")
 	private Integer numero;
+	@ManyToOne
+	@JoinColumn(name="idFixture")
+	private Fixture fixture;
+	
 	public Fecha(List<Encuentro> encuentros, Integer id, Integer numero) {
 		super();
 		this.encuentros = encuentros;
 		this.id = id;
 		this.numero = numero;
 	}
-	public Fecha(Integer id, Integer numero) {
+	public Fecha(List<Encuentro> encuentros,Integer numero) {
 		super();
-		this.id = id;
+		this.encuentros = encuentros;
 		this.numero = numero;
 	}
 	public Fecha() {

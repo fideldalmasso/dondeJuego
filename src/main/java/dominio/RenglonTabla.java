@@ -40,15 +40,15 @@ public class RenglonTabla {
 		this.tantosEnContra = tantosEnContra;
 		this.participante = participante;
 	}
-	public RenglonTabla(Integer id) {
+	public RenglonTabla(Integer partidosEmpatados, Integer partidosGanados, Integer partidosPerdidos,
+			Integer tantosAFavor, Integer tantosEnContra, Participante participante) {
 		super();
-		this.id=id;
-		this.partidosEmpatados = null;
-		this.partidosGanados = null;
-		this.partidosPerdidos = null;
-		this.tantosAFavor = null;
-		this.tantosEnContra = null;
-		this.participante = null;
+		this.partidosEmpatados = partidosEmpatados;
+		this.partidosGanados = partidosGanados;
+		this.partidosPerdidos = partidosPerdidos;
+		this.tantosAFavor = tantosAFavor;
+		this.tantosEnContra = tantosEnContra;
+		this.participante = participante;
 	}
 	public RenglonTabla() {
 		super();

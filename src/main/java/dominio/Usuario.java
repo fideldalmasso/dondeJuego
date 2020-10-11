@@ -43,6 +43,7 @@ public class Usuario {
 	@ManyToOne
 	@JoinColumn(name="idLocalidad")
 	private Localidad localidad;
+	
 	public Usuario(Integer id, String nombre, String apellido, String contrasenia,
 			TipoDocumento tipoDocumento, String numeroDocumento, String email, Set<Competencia> competencias,
 			Set<RegistroSesion> registros, Set<LugarRealizacion> lugares, Localidad localidad) {

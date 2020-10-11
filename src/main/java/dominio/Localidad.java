@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +20,7 @@ public class Localidad {
 	private Provincia provincia;
 	@Column(name="nombre")
 	private String nombre;
+	
 	public Localidad(Integer id, Provincia provincia, String nombre) {
 		super();
 		this.id = id;
@@ -29,7 +29,6 @@ public class Localidad {
 	}
 	public Localidad(Provincia provincia, String nombre) {
 		super();
-		this.id = id;
 		this.provincia = provincia;
 		this.nombre = nombre;
 	}

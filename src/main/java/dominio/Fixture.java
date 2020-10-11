@@ -21,18 +21,23 @@ public class Fixture {
 	private Integer id;
 	@Column(name="fechaCreacion")
 	private Timestamp fechaCreacion;
-	@OneToMany
-	@JoinColumn(name="idFixture")
+	@OneToMany(mappedBy="fixture")
 	private List<Fecha> fechas;
 	@OneToOne
 	@JoinColumn(name = "idCompetencia")
 	private Competencia competencia;
+	
 	public Fixture() {
 		super();
 	}
 	public Fixture(Integer id, Timestamp fechaCreacion, List<Fecha> fechas) {
 		super();
 		this.id = id;
+		this.fechaCreacion = fechaCreacion;
+		this.fechas = fechas;
+	}
+	public Fixture(Timestamp fechaCreacion, List<Fecha> fechas) {
+		super();
 		this.fechaCreacion = fechaCreacion;
 		this.fechas = fechas;
 	}

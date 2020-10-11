@@ -15,25 +15,18 @@ public class Modalidad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Integer id;
+	
 	public Integer getId() {
 		return id;
 	}
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 	public Modalidad(Integer id) {
 		super();
 		this.id = id;
 	}
-
-
 	public Modalidad() {
 		super();
 	}
-
-
 }

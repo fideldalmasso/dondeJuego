@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,9 +59,26 @@ public class Competencia {
 	
 	public Competencia(Integer id, String nombre, EstadoCompetencia estado, String reglamento, Timestamp fechaInicio,
 			Timestamp fechaFin, Timestamp fechaHoraBajaLogica, Deporte deporte, SistemaPuntuacion sistemaPuntuacion,
-			Modalidad modalidad, List<CompetenciaLugar> lugares, List<Participante> participantes, Fixture fixture) {
+			Modalidad modalidad, List<CompetenciaLugar> lugares, List<Participante> participantes, Fixture fixture, Usuario usr) {
 		super();
 		this.id = id;
+		this.nombre = nombre;
+		this.estado = estado;
+		this.reglamento = reglamento;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+		this.fechaHoraBajaLogica = fechaHoraBajaLogica;
+		this.deporte = deporte;
+		this.sistemaPuntuacion = sistemaPuntuacion;
+		this.modalidad = modalidad;
+		this.lugares = lugares;
+		this.participantes = participantes;
+		this.fixture = fixture;
+	}
+	public Competencia(String nombre, EstadoCompetencia estado, String reglamento, Timestamp fechaInicio,
+			Timestamp fechaFin, Timestamp fechaHoraBajaLogica, Deporte deporte, SistemaPuntuacion sistemaPuntuacion,
+			Modalidad modalidad, List<CompetenciaLugar> lugares, List<Participante> participantes, Fixture fixture, Usuario usr) {
+		super();
 		this.nombre = nombre;
 		this.estado = estado;
 		this.reglamento = reglamento;

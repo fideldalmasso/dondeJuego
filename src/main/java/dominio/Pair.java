@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,9 +19,18 @@ public class Pair{
 	private Integer first;
 	@Column(name="puntajeB")
 	private Integer second;
+	@ManyToOne
+	@JoinColumn(name="idResultado")
+	private ResultadoSets resultado = new ResultadoSets();
+	
 	public Pair(Integer id,Integer first, Integer second) {
 		super();
 		this.id = id;
+		this.first = first;
+		this.second = second;
+	}
+	public Pair(Integer first, Integer second) {
+		super();
 		this.first = first;
 		this.second = second;
 	}

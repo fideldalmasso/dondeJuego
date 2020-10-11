@@ -1,5 +1,6 @@
 package dominio;
 
+import dominio.Fecha;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -30,19 +32,33 @@ public class Encuentro {
 	@Column(name="sePresentaA")
 	protected Boolean sePresentaA;
 	@ManyToOne
-	@JoinColumn(name="ideParticipanteA")
+	@JoinColumn(name="idParticipanteA")
 	protected Participante participanteA;
 	@ManyToOne
-	@JoinColumn(name="ideParticipanteB")
+	@JoinColumn(name="idParticipanteB")
 	protected Participante participanteB;
 	@OneToOne
 	@JoinColumn(name="idEncuentro")
 	protected Resultado vigente;
-	@OneToMany
-	@JoinColumn(name="idEncuentro")
+	@OneToMany(mappedBy="encuentro")
 	protected List<Resultado> resultados;
+	@ManyToOne
+	@JoinTable(name="idFecha")
+	protected Fecha fecha;
 	
 	public Encuentro(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
+			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
+		super();
+		this.id = id;
+		this.fechaEncuentro = fechaEncuentro;
+		this.sePresentaB = sePresentaB;
+		this.sePresentaA = sePresentaA;
+		this.participanteA = participanteA;
+		this.participanteB = participanteB;
+		this.vigente = vigente;
+		this.resultados = resultados;
+	}
+	public Encuentro(Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
 			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
 		super();
 		this.id = id;
