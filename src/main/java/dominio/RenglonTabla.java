@@ -1,12 +1,32 @@
 package dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.renglonTabla")
 public class RenglonTabla {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(name="partidosEmpatados")
 	private Integer partidosEmpatados;
+	@Column(name="partidosGanados")
 	private Integer partidosGanados;
+	@Column(name="partidosPerdidos")
 	private Integer partidosPerdidos;
+	@Column(name="tantosAFavor")
 	private Integer tantosAFavor;
+	@Column(name="tantosEnContra")
 	private Integer tantosEnContra;
+	@OneToOne
+	@JoinColumn(name="idParticipante")
 	private Participante participante;
 	
 	public RenglonTabla(Integer id,Integer partidosEmpatados, Integer partidosGanados, Integer partidosPerdidos,

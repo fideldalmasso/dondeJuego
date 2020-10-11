@@ -6,8 +6,6 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import dominio.LugarRealizacion;
-import dominio2.Deporte;
-import dominio2.Lugarrealizacion;
 import gestores.GestorLugarRealizacion;
 
 public class LugarRealizacionTM extends AbstractTableModel {

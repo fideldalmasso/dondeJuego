@@ -3,15 +3,45 @@ package dominio;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="dj.encuentro")
 public class Encuentro {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Integer id;
+	@Column(name="fechaEncuentro")
 	protected Timestamp fechaEncuentro;
+	@Column(name="sePresentaB")
 	protected Boolean sePresentaB;
+	@Column(name="sePresentaA")
 	protected Boolean sePresentaA;
+	@ManyToOne
+	@JoinColumn(name="ideParticipanteA")
 	protected Participante participanteA;
+	@ManyToOne
+	@JoinColumn(name="ideParticipanteB")
 	protected Participante participanteB;
+	@OneToOne
+	@JoinColumn(name="idEncuentro")
 	protected Resultado vigente;
+	@OneToMany
+	@JoinColumn(name="idEncuentro")
 	protected List<Resultado> resultados;
+	
 	public Encuentro(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
 			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
 		super();

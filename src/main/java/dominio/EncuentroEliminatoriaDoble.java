@@ -3,9 +3,24 @@ package dominio;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.encuentroEliminatoriaDoble")
 public class EncuentroEliminatoriaDoble extends Encuentro {
+	@OneToOne
+	@JoinColumn(name="destinoPerdedor")
 	private EncuentroEliminatoriaDoble ganador;
+	@OneToOne
+	@JoinColumn(name="destinoGanador")
 	private EncuentroEliminatoriaDoble perdedor;
+	
 	public EncuentroEliminatoriaDoble(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
 			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados,
 			EncuentroEliminatoriaDoble ganador, EncuentroEliminatoriaDoble perdedor) {

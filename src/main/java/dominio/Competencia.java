@@ -4,22 +4,60 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import enumerados.EstadoCompetencia;
 
+@Entity
+@Table(name="dj.competencia")
 public class Competencia {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(name="nombre")
 	private String nombre;
+	@Enumerated(EnumType.STRING)
 	private EstadoCompetencia estado;
+	@Column(name="reglamento")
 	private String reglamento;
+	@Column(name="fechaInicio")
 	private Timestamp fechaInicio;
+	@Column(name="fechaFin")
 	private Timestamp fechaFin;
+	@Column(name="fechaHoraBajaLogica")
 	private Timestamp fechaHoraBajaLogica;
+	@ManyToOne
+	@JoinColumn(name="idDeporte")
 	private Deporte deporte;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="idSistemaPuntuacion")
 	private SistemaPuntuacion sistemaPuntuacion;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="idModalidad")
 	private Modalidad modalidad;
+	@OneToMany(mappedBy="competencia")
 	private List<CompetenciaLugar> lugares;
+	@OneToMany(mappedBy="competencia")
 	private List<Participante> participantes;
+	@OneToOne(mappedBy = "competencia")
 	private Fixture fixture;
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
+	private Usuario usuario;
+	
 	public Competencia(Integer id, String nombre, EstadoCompetencia estado, String reglamento, Timestamp fechaInicio,
 			Timestamp fechaFin, Timestamp fechaHoraBajaLogica, Deporte deporte, SistemaPuntuacion sistemaPuntuacion,
 			Modalidad modalidad, List<CompetenciaLugar> lugares, List<Participante> participantes, Fixture fixture) {

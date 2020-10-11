@@ -2,10 +2,29 @@ package dominio;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="dj.provincia")
 public class Provincia {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@ManyToOne
+	@JoinColumn(name="idPais")
 	private Pais pais;
+	@Column(name="nombre")
 	private String nombre;
+	@OneToMany
+	@JoinColumn(name="idProvincia")
 	private List<Localidad> localidades;
 	public Integer getId() {
 		return id;
@@ -25,6 +44,7 @@ public class Provincia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	public List<Localidad> getLocalidades() {
 		return localidades;
 	}

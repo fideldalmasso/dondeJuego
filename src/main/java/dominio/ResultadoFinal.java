@@ -2,9 +2,21 @@ package dominio;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.resultadoFinal")
 public class ResultadoFinal extends Resultado {
+	@Column(name="empate")
 	private Boolean empate; 
+	@Column(name="ganaA")
 	private Boolean ganaA;
+	@Column(name="ganaB")
 	private Boolean ganaB;
 	public ResultadoFinal() {
 		super();

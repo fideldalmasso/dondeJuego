@@ -13,8 +13,9 @@ public class GestorUsuario {
 	void save(Usuario usr) {
 		ud.save(usr);
 	}
-	
+	/*
 	void update(Usuario usr) {
 		ud.update(usr);
 	}
+	*/
 }

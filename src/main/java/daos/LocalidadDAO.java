@@ -1,5 +1,8 @@
 package daos;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,11 +12,11 @@ import dominio.Localidad;
 import dominio.Provincia;
 
 public class LocalidadDAO {
-	private static SessionFactory factory;
+	private static EntityManagerFactory factory;
 	
 	public LocalidadDAO() {
 		try {
-			factory = new HibernateUtil().getSession();
+			factory = new HibernateUtil().getFactory();
 	    } catch (Throwable ex) { 
 	         System.err.println("Fallo al crear objeto sessionFactory" + ex);
 	         throw new ExceptionInInitializerError(ex); 
@@ -21,10 +24,10 @@ public class LocalidadDAO {
 	}
 	
 	public void save(Localidad l) {
-		Session session = factory.openSession();
-		Transaction tx = session.beginTransaction();
-		l.setId((Integer) session.save(l));
-		tx.commit();
-		session.close();
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(l);
+		em.getTransaction().commit();
+		em.close();
 	}
 }

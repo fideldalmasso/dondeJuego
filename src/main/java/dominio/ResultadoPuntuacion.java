@@ -2,8 +2,19 @@ package dominio;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.resultadoPuntuacion")
 public class ResultadoPuntuacion extends Resultado {
+	@Column(name="puntajeFinalA")
 	private Integer puntajeFinalA;
+	@Column(name="puntajeFinalB")
 	private Integer puntajeFinalB;
 	public ResultadoPuntuacion() {
 		super();

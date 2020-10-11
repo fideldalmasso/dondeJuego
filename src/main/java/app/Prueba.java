@@ -1,5 +1,8 @@
+package app;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -7,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import daos.LocalidadDAO;
 import daos.LugarRealizacionDAO;
@@ -19,8 +23,10 @@ import dominio.Localidad;
 import dominio.LugarRealizacion;
 import dominio.Pair;
 import dominio.Pais;
+import dominio.Participante;
 import dominio.Provincia;
 import dominio.RegistroSesion;
+import dominio.RenglonTabla;
 import dominio.Usuario;
 import dtos.CompetenciaDTO;
 import enumerados.TipoDocumento;
@@ -58,20 +64,20 @@ public class Prueba {
 	      Localidad loc = new Localidad(prov, "Santa Fe");
 	      locd.save(loc);
 	      
-	      Usuario usr = new Usuario ("Edger",
+	      Usuario usr = new Usuario ("EdgefdrsaAafafsgrr",
 	    		  "Dijkstra", 
 	    		  "12345",
 	    		  TipoDocumento.LE, 
 	    		  "10", 
 	    		  "dedgerarrobagmail.com", 
-	    		  new ArrayList<Competencia>(),
-	    		  new ArrayList<RegistroSesion>(),
-	    		  new ArrayList<LugarRealizacion>(),
+	    		  new HashSet<Competencia>(),
+	    		  new HashSet<RegistroSesion>(),
+	    		  new HashSet<LugarRealizacion>(),
 	    		  loc);
 	      ud.save(usr);
 	      ga.login("dedgerarrobagmail.com", "12345");
 	      
-	      Deporte dep = gc.crearDeporte("PATONAsdTFFFFvvvvO");
+	      Deporte dep = gc.crearDeporte("PATONAsdTaFaFFfAsffFdgasavvvvO");
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      
@@ -83,23 +89,4 @@ public class Prueba {
 	     
 	   }
 	   
-	   public Integer addRt(){
-	      Session session = factory.openSession();
-	      Transaction tx = null;
-	      Integer depId = null;
-	      
-	      try {
-	         tx = session.beginTransaction();
-	         Competencia rt = new Competencia();
-	         rt.setNombre("Basket");
-	         depId = (Integer) session.save(rt); 
-	         tx.commit();
-	      } catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      } finally {
-	         session.close(); 
-	      }
-	      return depId;
-	   }
 }

@@ -74,7 +74,7 @@ public class GestorCompetencia {
 	//	cd.update(compe);
 		cd.save(compe);
 		
-		gu.update((new GestorAutenticacion()).getUsuario());
+		//gu.update((new GestorAutenticacion()).getUsuario());
 		
 		return compe;
 	}

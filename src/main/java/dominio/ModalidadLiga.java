@@ -1,9 +1,24 @@
 package dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.modalidadLiga")
+@PrimaryKeyJoinColumn(name = "idModalidad")
 public class ModalidadLiga extends Modalidad {
+	@Column(name="permiteEmpate")
 	private Boolean permiteEmpate;
+	@Column(name="puntosPorPresentarse")
 	private Integer puntosPorPresentarse;
+	@Column(name="puntosPorEmpate")
 	private Integer puntosPorEmpate;
+	@Column(name="puntosPorGanar")
 	private Integer puntosPorGanar;
 	public ModalidadLiga() {
 		super();

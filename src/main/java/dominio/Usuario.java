@@ -1,25 +1,51 @@
 package dominio;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import enumerados.TipoDocumento;
 
+@Entity
+@Table(name="dj.usuario")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
+	@Column(name="contrasenia")
 	private String contrasenia;
+	@Column(name="tipoDocumento")
 	private TipoDocumento tipoDocumento;
+	@Column(name="dni")
 	private String numeroDocumento;
+	@Column(name="email")
 	private String email;
-	private List<Competencia> competencias;
-	private List<RegistroSesion> registros;
-	private List<LugarRealizacion> lugares;
+	@OneToMany(mappedBy="usuario", fetch=FetchType.EAGER)
+	private Set<Competencia> competencias;
+	@OneToMany(mappedBy="usuario", fetch=FetchType.EAGER)
+	private Set<RegistroSesion> registros;
+	@OneToMany(mappedBy="usuario", fetch=FetchType.EAGER)
+	private Set<LugarRealizacion> lugares;
+	@ManyToOne
+	@JoinColumn(name="idLocalidad")
 	private Localidad localidad;
 	public Usuario(Integer id, String nombre, String apellido, String contrasenia,
-			TipoDocumento tipoDocumento, String numeroDocumento, String email, List<Competencia> competencias,
-			List<RegistroSesion> registros, List<LugarRealizacion> lugares, Localidad localidad) {
+			TipoDocumento tipoDocumento, String numeroDocumento, String email, Set<Competencia> competencias,
+			Set<RegistroSesion> registros, Set<LugarRealizacion> lugares, Localidad localidad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -32,13 +58,13 @@ public class Usuario {
 		this.registros = registros;
 		this.lugares = lugares;
 		this.localidad = localidad;
-		this.competencias =  new ArrayList<Competencia>();
-		this.registros = new ArrayList<RegistroSesion>();
-		this.lugares =  new ArrayList<LugarRealizacion>();
+		this.competencias =  new HashSet<Competencia>();
+		this.registros = new HashSet<RegistroSesion>();
+		this.lugares =  new HashSet<LugarRealizacion>();
 	}
 	public Usuario(String nombre, String apellido, String contrasenia,
-			TipoDocumento tipoDocumento, String numeroDocumento, String email, List<Competencia> competencias,
-			List<RegistroSesion> registros, List<LugarRealizacion> lugares, Localidad localidad) {
+			TipoDocumento tipoDocumento, String numeroDocumento, String email, Set<Competencia> competencias,
+			Set<RegistroSesion> registros, Set<LugarRealizacion> lugares, Localidad localidad) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -50,9 +76,9 @@ public class Usuario {
 		this.registros = registros;
 		this.lugares = lugares;
 		this.localidad = localidad;
-		this.competencias =  new ArrayList<Competencia>();
-		this.registros = new ArrayList<RegistroSesion>();
-		this.lugares =  new ArrayList<LugarRealizacion>();
+		this.competencias =  new HashSet<Competencia>();
+		this.registros = new HashSet<RegistroSesion>();
+		this.lugares =  new HashSet<LugarRealizacion>();
 	}
 	public Usuario() {
 		super();
@@ -99,22 +125,22 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<Competencia> getCompetencias() {
+	public Set<Competencia> getCompetencias() {
 		return competencias;
 	}
-	public void setCompetencias(List<Competencia> competencias) {
+	public void setCompetencias(Set<Competencia> competencias) {
 		this.competencias = competencias;
 	}
-	public List<RegistroSesion> getRegistros() {
+	public Set<RegistroSesion> getRegistros() {
 		return registros;
 	}
-	public void setRegistros(List<RegistroSesion> registros) {
+	public void setRegistros(Set<RegistroSesion> registros) {
 		this.registros = registros;
 	}
-	public List<LugarRealizacion> getLugares() {
+	public Set<LugarRealizacion> getLugares() {
 		return lugares;
 	}
-	public void setLugares(List<LugarRealizacion> lugares) {
+	public void setLugares(Set<LugarRealizacion> lugares) {
 		this.lugares = lugares;
 	}
 	public Localidad getLocalidad() {

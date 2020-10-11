@@ -1,8 +1,21 @@
 package dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.sett")
 public class Pair{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(name="puntajeA")
 	private Integer first;
+	@Column(name="puntajeB")
 	private Integer second;
 	public Pair(Integer id,Integer first, Integer second) {
 		super();

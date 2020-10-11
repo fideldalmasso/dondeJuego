@@ -1,8 +1,25 @@
 package dominio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.localidad")
 public class Localidad {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@ManyToOne
+	@JoinColumn(name="idProvincia")
 	private Provincia provincia;
+	@Column(name="nombre")
 	private String nombre;
 	public Localidad(Integer id, Provincia provincia, String nombre) {
 		super();

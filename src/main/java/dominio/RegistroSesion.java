@@ -2,9 +2,25 @@ package dominio;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dj.registroSesion")
 public class RegistroSesion {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column(name="horaInicio")
 	private Timestamp horarioInicio;
+	@ManyToOne
+	@JoinColumn(name="documentoUsuario")
 	private Usuario usuario;
 	public RegistroSesion(Integer id, Timestamp horarioInicio, Usuario usuario) {
 		super();
