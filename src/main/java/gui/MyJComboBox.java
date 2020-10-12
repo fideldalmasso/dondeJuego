@@ -1,10 +1,9 @@
 package gui;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
-public class MyJComboBox<E> extends JComboBox<E> {
+public class MyJComboBox extends JComboBox<String> {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -15,10 +14,17 @@ public class MyJComboBox<E> extends JComboBox<E> {
 			}
 		});
 	}
+
 	
-    public MyJComboBox(E[] items) {
-        super( items);
+    public MyJComboBox(String[] items) {
+        super(items);
+        if(this.getItemCount()>0)
+        	this.setSelectedIndex(0);
         
+    }
+    
+    public MyJComboBox() {
+    	super();
     }
     
     

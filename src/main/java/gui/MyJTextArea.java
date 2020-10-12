@@ -1,10 +1,12 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 
 public class MyJTextArea extends JTextArea {
@@ -18,7 +20,7 @@ public class MyJTextArea extends JTextArea {
 		super(text);
 		this.hint=text;
 		this.setText(hint);
-		
+		this.setBorder(BorderFactory.createMatteBorder(1,1,1,1, Color.BLACK));
 		
 		this.addKeyListener(new KeyAdapter() {
 			@Override

@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
 
 import gui.PanelAltaCompetencia;
+import gui.PanelAltaCompetencia2;
 import gui.PanelPersonalizado;
 
 
@@ -97,7 +98,7 @@ public class App extends JFrame {
 
 
 		this.actual = new JPanel();
-		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
+		PanelAltaCompetencia2 altaCompetencia = new PanelAltaCompetencia2(); 
 		this.cambiarPanel(altaCompetencia);
 
 

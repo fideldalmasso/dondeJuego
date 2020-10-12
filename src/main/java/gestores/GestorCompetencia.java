@@ -36,7 +36,7 @@ public class GestorCompetencia {
 		
 		Mensaje mensaje = new Mensaje();
 		
-		List<Competencia> competencias= cd.getAllCompetencias();
+		List<Competencia> competencias= cd.getAllCompetencias(); //TODO no se puede hacer una consulta que devuelva solo los nombres de las competencias?
 		Competencia compe = new Competencia();
 		if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()!=0)
 			mensaje.getMensaje().add("Ya existe el nombre elegido, ingrese otro");
@@ -48,7 +48,7 @@ public class GestorCompetencia {
 		compe.setEstado(EstadoCompetencia.CREADA);
 		
 		if(cdto.getReglamento()==null) {
-			mensaje.getMensaje().add("Ingrese un reglamento");
+			mensaje.getMensaje().add("Ingrese un reglamento"); //TODO  el reglamento es opcional creo
 		}else {
 			mensaje.getMensaje().add("1");
 			compe.setReglamento(cdto.getReglamento());

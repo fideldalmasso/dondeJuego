@@ -2,15 +2,13 @@ package gui;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.*;
 
 import daos.DeporteDAO;
-import gestores.GestorCompetencia;
 
-public class PanelAltaCompetencia extends PanelPersonalizado {
+public class PanelAltaCompetencia extends PanelPersonalizado {//OJO: ESTA CLASE ES OBSOLETA. VER PANELALTACOMPETENCIA2!!!
 
 	private static final long serialVersionUID = 1L;
 	private MyTitle titulo = new MyTitle("Crear competencia"); 
@@ -28,8 +26,8 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	
 	private MyJTextField nombre = new MyJTextField("Ingrese uno..");
 	private JComboBox<String> combodeporte = new JComboBox<String>();
-	private MyJComboBox<String> combomodalidad;
-	private MyJComboBox<String> comboformapuntuacion;
+	private MyJComboBox combomodalidad;
+	private MyJComboBox comboformapuntuacion;
 	private MyJTextArea reglamento= new MyJTextArea("Ingrese uno...");
 	
 	private JSpinner[] spinner = new ArrayList<JSpinner>(5).toArray(new JSpinner[5]);
@@ -58,11 +56,11 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	
 	private DeporteDAO dao= new DeporteDAO();
 	
-	public PanelAltaCompetencia() {
+	public PanelAltaCompetencia() { 
 		this.setPreferredSize(new Dimension(780, 734));
 //		this.setBackground(new Color(250, 216, 214));
 		this.setLayout(new GridBagLayout());
-		
+		System.out.println("Estás usando una clase obsoleta. Probá usar Panel Alta Competencia2");
 		
 		{
 			error1[0] = new MyError("error1");
@@ -95,7 +93,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		}
 		{
 			String listaModalidades[] = {"Liga","Eliminatoria simple", "Eliminatoria doble"};
-			combomodalidad = new MyJComboBox<String>(listaModalidades);
+			combomodalidad = new MyJComboBox(listaModalidades);
 			combomodalidad.setSelectedIndex(0);
 			error1[3] = new MyError();
 			panel[3]= crearComponenteConError(combomodalidad, error1[3]);
@@ -103,7 +101,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		}
 		{
 			String listaFormasPuntuacion[] = {"Sets", "Puntuación", "Resultado final"};
-			comboformapuntuacion= new MyJComboBox<String>(listaFormasPuntuacion);
+			comboformapuntuacion= new MyJComboBox(listaFormasPuntuacion);
 			comboformapuntuacion.setSelectedIndex(0);
 			
 			error1[4] = new MyError();
@@ -145,16 +143,16 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				Boolean value = combomodalidad.getSelectedItem().equals("Liga");
 				lspinner[0].setEnabled(value);
 				spinner[0].setEnabled(value);
-				error2[0].show2(value);
+				error2[0].setVisible(value);
 				
 				lspinner[2].setEnabled(value);
 				spinner[2].setEnabled(value);
-				error2[2].show2(value);
+				error2[2].setVisible(value);
 
 				tempatepermitido.setEnabled(value);
 				checkempate.setSelected(false);
 				checkempate.setEnabled(value);
-				error2[1].show2(value);
+				error2[1].setVisible(value);
 				if(!value) {
 					lspinner[1].setEnabled(value);
 					spinner[1].setEnabled(value);
@@ -166,11 +164,11 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				
 				lspinner[3].setEnabled(value.equals("Sets"));
 				spinner[3].setEnabled(value.equals("Sets"));
-				error2[3].show2(value.equals("Sets"));
+				error2[3].setVisible(value.equals("Sets"));
 				
 				lspinner[4].setEnabled(value.equals("Puntuación"));
 				spinner[4].setEnabled(value.equals("Puntuación"));
-				error2[4].show2(value.equals("Puntuación"));
+				error2[4].setVisible(value.equals("Puntuación"));
 			});
 //			comboformapuntuacion.enableComponentOnlyWhenSelected("Puntuación", spinner[4]);
 //			comboformapuntuacion.enableComponentOnlyWhenSelected("Sets", spinner[3]);
@@ -178,7 +176,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			checkempate.addActionListener(e->{
 				lspinner[1].setEnabled(checkempate.isSelected());
 				spinner[1].setEnabled(checkempate.isSelected());
-				error2[1].show2(checkempate.isSelected());
+				error2[1].setVisible(checkempate.isSelected());
 			});
 		}
 		{
