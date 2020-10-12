@@ -1,16 +1,15 @@
 package app;
 
+import daos.LugarRealizacionDAO;
 import daos.UsuarioDAO;
 import dominio.Usuario;
+import gestores.GestorLugarRealizacion;
 
 public class Prueba2 {
 
 	public static void main(String[] args) {
-		Usuario u = new Usuario();
-		u.setId(76);
-		UsuarioDAO ud= new UsuarioDAO();
-		ud.update(u);
-
+		GestorLugarRealizacion lrd = new GestorLugarRealizacion();
+		System.out.println(lrd.getAllLugarRealizacion(81).get(0).getId());
 	}
 
 }

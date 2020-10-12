@@ -16,4 +16,8 @@ public class GestorLugarRealizacion {
 	public List<LugarRealizacion> getAllLugarRealizacion(){
 		return this.lrd.getAll();
 	 }
+	
+	public List<LugarRealizacion> getAllLugarRealizacion(int idDeporte){
+		return this.lrd.getAll(idDeporte);
+	 }
 }

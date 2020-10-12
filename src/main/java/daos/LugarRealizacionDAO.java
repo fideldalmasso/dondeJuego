@@ -47,5 +47,22 @@ public class LugarRealizacionDAO {
 		em.close();
 		return lr;
 	}
+	
+	public List<LugarRealizacion> getAll(int ideporte){
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		List<LugarRealizacion> lr = em.createQuery("SELECT lr FROM LugarRealizacion lr JOIN lr.deportes d WHERE d.id = :idDeporte")
+				.setParameter("idDeporte", ideporte)
+				.getResultList();
+		em.getTransaction().commit();
+		em.close();
+		return lr;
+	}
+	/*
+	 * Query query = entityManager.createQuery("SELECT p FROM Product p 
+    JOIN p.categories c 
+    WHERE c.id = :idCategory");
+query.setParameter("idCategory", category.getId());
+	 */
 
 }
