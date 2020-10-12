@@ -2,15 +2,9 @@ package app;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import daos.LocalidadDAO;
 import daos.LugarRealizacionDAO;
@@ -23,10 +17,8 @@ import dominio.Localidad;
 import dominio.LugarRealizacion;
 import dominio.Pair;
 import dominio.Pais;
-import dominio.Participante;
 import dominio.Provincia;
 import dominio.RegistroSesion;
-import dominio.RenglonTabla;
 import dominio.Usuario;
 import dtos.CompetenciaDTO;
 import enumerados.TipoDocumento;
@@ -34,8 +26,8 @@ import gestores.GestorAutenticacion;
 import gestores.GestorCompetencia;
 
 public class Prueba {
-	private static SessionFactory factory; 
-	   public static void main(String[] args) {
+	
+	public static void main(String[] args) {
 	      /*
 	      try {
 	         factory = new Configuration().configure().buildSessionFactory();
@@ -44,7 +36,6 @@ public class Prueba {
 	         throw new ExceptionInInitializerError(ex); 
 	      }
 	      */
-	      
 	      
 	      PaisDAO pd = new PaisDAO();
 	      ProvinciaDAO prod = new ProvinciaDAO();
@@ -62,7 +53,7 @@ public class Prueba {
 	      Localidad loc = new Localidad(prov, "Santa Fe");
 	      locd.save(loc);
 	      
-	      Usuario usr = new Usuario ("EdgefddrsaAsfssasafafsgrr",
+	      Usuario usr = new Usuario ("EdgefsddrsaadAhsfssasafafsgrr",
 	    		  "Dijkstra", 
 	    		  "12345",
 	    		  TipoDocumento.LE, 
@@ -75,7 +66,7 @@ public class Prueba {
 	      ud.save(usr);
 	      ga.login("dedgerarrobagmail.com", "12345");
 	      
-	      Deporte dep = gc.crearDeporte("PATONfAdsdTaFsasFFafAsssffFdgasavvvvO");
+	      Deporte dep = gc.crearDeporte("PATONfAdsdTaFhsasFdFafaAsssffsFdgasavvvvO");
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      
@@ -86,10 +77,22 @@ public class Prueba {
 	      List<Pair> lp = new ArrayList<Pair>();
 	      lp.add(p);
 	      
-	      CompetenciaDTO c = new CompetenciaDTO("ABEfRSdFsvsassvvvdsFFF",dep.getId(),lp,"Liga","Vale todo",false,0,3,1);
+	      CompetenciaDTO c = new CompetenciaDTO(
+	    		  "ABEfRSdFsvsasadsvhaavvdssFFF",
+	    		  dep.getId(),
+	    		  lp,
+	    		  "Liga",
+	    		  "Vale todo",
+	    		  false,
+	    		  0,
+	    		  3,
+	    		  1,
+	    		  "Puntuacion",
+	    		  0,
+	    		  null);
 	      
-	      gc.crearCompetencia(c);
+	      System.out.println(gc.crearCompetencia(c).getMensaje());
 	     
-	   }
+	}
 	   
 }

@@ -9,13 +9,26 @@ public class CompetenciaDTO {
 	Integer deporte;
 	List<Pair> lugares;
 	String modalidad;
+	String sistemaPuntuacion;
 	String reglamento;
 	Boolean permiteEmpate;
 	Integer puntosPorPresentarse;
 	Integer puntosPorGanar;
 	Integer puntosPorEmpate;
-	public CompetenciaDTO(String nombre, Integer deporte, List<Pair> lugares, String modalidad, String reglamento,
-			Boolean permiteEmpate, Integer puntosPorPresentarse, Integer puntosPorGanar,Integer puntosPorEmpate) {
+	Integer puntosPorAbandono;
+	Integer cantidadMaximaSets;
+	public CompetenciaDTO(String nombre,
+			Integer deporte,
+			List<Pair> lugares,
+			String modalidad,
+			String reglamento,
+			Boolean permiteEmpate,
+			Integer puntosPorPresentarse,
+			Integer puntosPorGanar,
+			Integer puntosPorEmpate,
+			String sistemaPuntuacion,
+			Integer puntosPorAbandono,
+			Integer cantidadMaximaSets) {
 		super();
 		this.nombre = nombre;
 		this.deporte = deporte;
@@ -26,6 +39,9 @@ public class CompetenciaDTO {
 		this.puntosPorPresentarse = puntosPorPresentarse;
 		this.puntosPorGanar = puntosPorGanar;
 		this.puntosPorEmpate = puntosPorEmpate;
+		this.sistemaPuntuacion = sistemaPuntuacion;
+		this.puntosPorAbandono = puntosPorAbandono;
+		this.cantidadMaximaSets = cantidadMaximaSets;
 	}
 	public String getNombre() {
 		return nombre;
@@ -50,6 +66,12 @@ public class CompetenciaDTO {
 	}
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
+	}
+	public String getSistemaPuntuacion() {
+		return sistemaPuntuacion;
+	}
+	public void setSistemaPuntuacion(String sistemaPuntuacion) {
+		this.sistemaPuntuacion = sistemaPuntuacion;
 	}
 	public String getReglamento() {
 		return reglamento;
@@ -81,6 +103,17 @@ public class CompetenciaDTO {
 	public void setPuntosPorEmpate(Integer puntosPorEmpate) {
 		this.puntosPorEmpate = puntosPorEmpate;
 	}
-	
+	public void setPuntosPorAbandono(Integer puntosPorAbandono) {
+		this.puntosPorAbandono = puntosPorAbandono;
+	}
+	public Integer getPuntosPorAbandono() {
+		return this.puntosPorAbandono;
+	}
+	public void setCantidadMaximaSets(Integer cantidadMaximaSets) {
+		this.cantidadMaximaSets =  cantidadMaximaSets;
+	}
+	public Integer getCantidadMaximaSets() {
+		return this.cantidadMaximaSets;
+	}
 	
 }

@@ -22,7 +22,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
         <class>dominio.ModalidadEliminatoriaDoble</class>
         <class>dominio.ModalidadEliminatoriaSimple</class>
         <class>dominio.ModalidadLiga</class>
-        <class>dominio.Pair</class>
         <class>dominio.Pais</class>
         <class>dominio.Participante</class>
         <class>dominio.Provincia</class>
@@ -32,6 +31,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
         <class>dominio.ResultadoFinal</class>
         <class>dominio.ResultadoPuntuacion</class>
         <class>dominio.ResultadoSets</class>
+        <class>dominio.Set</class>
         <class>dominio.SistemaPuntuacion</class>
         <class>dominio.SistemaPuntuacionPorPuntuacion</class>
         <class>dominio.SistemaPuntuacionPorResultadoFinal</class>

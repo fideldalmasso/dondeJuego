@@ -1,15 +1,13 @@
 package gestores;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import daos.CompetenciaDAO;
 import daos.CompetenciaLugarDAO;
 import daos.DeporteDAO;
 import daos.ModalidadDAO;
+import daos.SistemaPuntuacionDAO;
 import dominio.*;
 import dtos.CompetenciaDTO;
 import enumerados.EstadoCompetencia;
@@ -21,6 +19,7 @@ public class GestorCompetencia {
 	private DeporteDAO dd;
 	private GestorLugarRealizacion glr;
 	private GestorUsuario gu;
+	private SistemaPuntuacionDAO sd;
 	
 	
 	public GestorCompetencia() {
@@ -30,23 +29,39 @@ public class GestorCompetencia {
 		this.md = new ModalidadDAO();
 		this.cld = new CompetenciaLugarDAO();
 		this.dd = new DeporteDAO();
+		this.sd = new SistemaPuntuacionDAO();
 	}
 	
-	public Competencia crearCompetencia(CompetenciaDTO cdto) {
+	public Mensaje crearCompetencia(CompetenciaDTO cdto) {
+		
+		Mensaje mensaje = new Mensaje();
+		
 		List<Competencia> competencias= cd.getAllCompetencias();
-		if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()>0); //Agregar mensaje de error
-		
 		Competencia compe = new Competencia();
-		
+		if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()!=0)
+			mensaje.getMensaje().add("Ya existe el nombre elegido, ingrese otro");
+		else {
+			mensaje.getMensaje().add("1");
+		}
 		compe.setNombre(cdto.getNombre());
 		
 		compe.setEstado(EstadoCompetencia.CREADA);
 		
-		compe.setReglamento(cdto.getReglamento());
+		if(cdto.getReglamento()==null) {
+			mensaje.getMensaje().add("Ingrese un reglamento");
+		}else {
+			mensaje.getMensaje().add("1");
+			compe.setReglamento(cdto.getReglamento());
+		}
+			
 		
 		Deporte d = dd.get(cdto.getDeporte());
-		if(d==null); // Agregar mensaje de error
-		compe.setDeporte(d);
+		if(d==null) {
+			mensaje.getMensaje().add("Deporte inexistente");
+		}else {
+			mensaje.getMensaje().add("1");
+			compe.setDeporte(d);
+		}
 		
 		Modalidad m;
 		switch(cdto.getModalidad()) {
@@ -66,10 +81,36 @@ public class GestorCompetencia {
 				m=null;
 				break;
 		}
-		if(m.equals(null)); //Agregar mensaje de error
+		if(m.equals(null)){
+			mensaje.getMensaje().add("Modalidad inexistente");
+		}else {
+			mensaje.getMensaje().add("1");
+			md.save(m);
+			compe.setModalidad(m);
+		}
 		
-		md.saveModalidad(m);
-		compe.setModalidad(m);
+		SistemaPuntuacion s;
+		switch(cdto.getSistemaPuntuacion()) {
+			case "Puntuacion":
+				s = new SistemaPuntuacionPorPuntuacion(cdto.getPuntosPorAbandono());
+				break;
+			case "Resultado Final":
+				s = new SistemaPuntuacionPorResultadoFinal();
+				break;
+			case "Sets":
+				s = new SistemaPuntuacionPorSets(cdto.getCantidadMaximaSets());
+				break;
+			default:
+				s=null;
+				break;
+		}
+		if(s.equals(null)) {
+			mensaje.getMensaje().add("Sistema puntuacion inexistente");
+		}else {
+			mensaje.getMensaje().add("1");
+			sd.save(s);
+			compe.setSistemaPuntuacion(s);
+		}
 		
 		(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
 		
@@ -79,13 +120,12 @@ public class GestorCompetencia {
 		
 		for(Pair p : cdto.getLugares()){
 			LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
-			if(l==null); //Agregar mensaje de error
 			CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
 			compe.getLugares().add(cl);
 			cld.save(cl);
 		}
 		
-		return compe;
+		return mensaje;
 	}
 	
 	public Deporte crearDeporte(String nombre) {
