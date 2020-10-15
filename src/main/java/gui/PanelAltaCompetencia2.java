@@ -14,7 +14,7 @@ import gestores.GestorCompetencia;
 
 public class PanelAltaCompetencia2 extends PanelPersonalizado {
 
-	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO};
+	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO,USUARIO};
 	
 	
 	private EnumMap<errores, MyPack> xd= new EnumMap<PanelAltaCompetencia2.errores, MyPack>(errores.class);

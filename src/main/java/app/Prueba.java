@@ -53,7 +53,7 @@ public class Prueba {
 	      Localidad loc = new Localidad(prov, "Santa Fe");
 	      locd.save(loc);
 	      
-	      Usuario usr = new Usuario ("EdgefsddrsaadAhsfssasafafsgrr",
+	      /*Usuario usr = new Usuario ("EdgefsddrsaadAhsfssasafafsgrr",
 	    		  "Dijkstra", 
 	    		  "12345",
 	    		  TipoDocumento.LE, 
@@ -64,6 +64,7 @@ public class Prueba {
 	    		  new HashSet<LugarRealizacion>(),
 	    		  loc);
 	      ud.save(usr);
+	      */
 	      ga.login("dedgerarrobagmail.com", "12345");
 	      
 	      Deporte dep = gc.crearDeporte("PATONfAdsdTaFhsasFdFafaAsssffsFdgasavvvvO");

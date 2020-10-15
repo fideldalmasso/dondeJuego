@@ -39,21 +39,16 @@ public class GestorCompetencia {
 		
 		List<Competencia> competencias= cd.getAllCompetencias(); //TODO no se puede hacer una consulta que devuelva solo los nombres de las competencias?
 		Competencia compe = new Competencia();
-		if(cdto.getNombre()==null || cdto.getNombre())
-		else if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()!=0)
+		if(cdto.getNombre()==null) {
+			mensaje.put(errores.NOMBRE,"Ingrese el nombre de la competencia");
+		}else if(competencias.stream().filter(c -> c.getNombre().equals(cdto.getNombre())).count()!=0)
 			mensaje.put(errores.NOMBRE,"Ya existe el nombre elegido, ingrese otro");
 	
 		compe.setNombre(cdto.getNombre());
 		
 		compe.setEstado(EstadoCompetencia.CREADA);
 		
-		if(cdto.getReglamento()==null) {
-			mensaje.put(errores.REGLAMENTO,"Ingrese un reglamento"); //TODO  el reglamento es opcional creo
-		}else {
-			mensaje.put(errores.EXITO,"1");
-			compe.setReglamento(cdto.getReglamento());
-		}
-			
+		compe.setReglamento(cdto.getReglamento());
 		
 		Deporte d = dd.get(cdto.getDeporte());
 		if(d==null) {
@@ -89,7 +84,7 @@ public class GestorCompetencia {
 		
 		SistemaPuntuacion s;
 		switch(cdto.getSistemaPuntuacion()) {
-			case "Puntuacion":
+			case "Puntuación":
 				s = new SistemaPuntuacionPorPuntuacion(cdto.getPuntosPorAbandono());
 				break;
 			case "Resultado Final":
@@ -111,20 +106,33 @@ public class GestorCompetencia {
 		
 		(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
 		
-		compe.setUsuario((new GestorAutenticacion()).getUsuario()); //TODO verificar si el usuario esta autenticado, por las dudas, nomas por el nullpointerexception
-		
-		cd.save(compe);
-		
-		for(Pair p : cdto.getLugares()){ //TODO y si la lista esta vacia o tiene lugares con disponibilidad invalida (un numero negativo por ej)?
-			LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
-			CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
-			compe.getLugares().add(cl);
-			cld.save(cl);
+		if((new GestorAutenticacion()).getUsuario()==null) {
+			mensaje.put(errores.USUARIO,"Ingrese con algun usuario");
+		}else{
+			compe.setUsuario((new GestorAutenticacion()).getUsuario());
 		}
 		
-		if(mensaje.getMensaje().isEmpty())
+		if(cdto.getLugares().isEmpty()) {
+			mensaje.put(errores.LUGAR,"Debe seleccionar al menos un lugar de realizacion");
+		}else {
+			for(Pair p : cdto.getLugares()){
+				if(p.getSecond()<1) {
+					mensaje.put(errores.LUGAR,"Debe seleccionar una disponibilidad mayor o igual a 1");
+					break;
+				}else {
+					LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
+					CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
+					compe.getLugares().add(cl);
+					cld.save(cl);
+				}
+			}
+		}
+		
+		if(mensaje.getMensaje().isEmpty()) {
+			cd.save(compe);
 			mensaje.put(errores.EXITO,"Competencia agregada con exito");
-			
+		}
+		
 		return mensaje;
 	}
 	
