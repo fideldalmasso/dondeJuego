@@ -123,7 +123,7 @@ public class App extends JFrame {
 				}
 
 				GestorAutenticacion ga = new GestorAutenticacion();
-				ga.login("dedgerarrobagmail.com", "12345");
+				ga.login("dieguitomaradona@gmail.com", "12345");
 				
 				new App().setVisible(true);
 

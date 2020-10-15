@@ -22,13 +22,16 @@ public class LugarRealizacionTM extends AbstractTableModel {
 	
 	public LugarRealizacionTM() {
 		gestor = new GestorLugarRealizacion();
-		recargarTabla();
+		recargarTabla(-1);
 		
 	}
 	
-	public void recargarTabla() {
+	public void recargarTabla(Integer idDeporte) {
 		//this.data = new ArrayList<LugarRealizacion>();
-		this.data = gestor.getAllLugarRealizacion();
+		if(idDeporte==-1)
+			this.data = gestor.getAllLugarRealizacion();
+		else
+			this.data = gestor.getAllLugarRealizacion(idDeporte);
 		this.data2 = new Object[data.size()][3];
 		
 		for(int i=0; i<data.size(); i++) {
@@ -97,9 +100,9 @@ public class LugarRealizacionTM extends AbstractTableModel {
 		List<Pair> lista = new ArrayList<Pair>();
 		for (int i = 0; i < data.size(); i++) {
 			if(((boolean)data2[i][0])==true)
-				System.out.println("xd");
+				lista.add(new Pair(data.get(i).getId(),(Integer)data2[i][2]));
 		}
-		
+		System.out.println(lista.toString());
 		return lista;
 	}
 

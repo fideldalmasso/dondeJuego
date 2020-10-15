@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -80,5 +81,10 @@ public class MyJTable extends JTable {
 	    }
 	}
 
+	
+	public void update() {
+		((AbstractTableModel)this.getModel()).fireTableDataChanged();
+		this.repaint();
+	}
 
 }

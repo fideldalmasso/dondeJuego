@@ -8,16 +8,17 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 
 import daos.DeporteDAO;
+import dominio.Deporte;
 import dominio.Mensaje;
 import dtos.CompetenciaDTO;
 import gestores.GestorCompetencia;
 
 public class PanelAltaCompetencia2 extends PanelPersonalizado {
 
-	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO,USUARIO};
+	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO,USUARIO,PUNTOSPOREMPATE};
 	
 	
-	private EnumMap<errores, MyPack> xd= new EnumMap<PanelAltaCompetencia2.errores, MyPack>(errores.class);
+	private EnumMap<errores, MyPack> mapacomponentes= new EnumMap<PanelAltaCompetencia2.errores, MyPack>(errores.class);
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -49,6 +50,7 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 	private DeporteDAO dao= new DeporteDAO();
 	private GestorCompetencia gestor = new GestorCompetencia();
 	private CompetenciaDTO dto;
+	private List<Deporte> listaDeportes;
 	
 	public PanelAltaCompetencia2() {
 		
@@ -60,14 +62,15 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 		
 		{
 			nombre.setComponent(new MyJTextField("Ingrese uno..."));
-			xd.put(errores.NOMBRE, nombre);
+			mapacomponentes.put(errores.NOMBRE, nombre);
 			
 		}
 		{
 //			String listaDeportes[] = {"xd", "xd2"}; //TODO los deportes con nombres muy largos hacen fallar la gui
-			String listaDeportes[] = dao.getAll().stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
-			deporte.setComponent(new MyJComboBox(listaDeportes));
-			xd.put(errores.DEPORTE, deporte);
+			 listaDeportes =  dao.getAll();
+			String listaNombresDeportes[] = listaDeportes.stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
+			deporte.setComponent(new MyJComboBox(listaNombresDeportes));
+			mapacomponentes.put(errores.DEPORTE, deporte);
 		}
 		{
 			//[width=165,height=20]
@@ -75,18 +78,18 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			tablalugares = new MyJTable(tablemodel);
 			tablalugares.setColumnWidths(20,290,100);
 			lugar.setComponent(new JScrollPane(tablalugares));
-			xd.put(errores.LUGAR, deporte);
+			mapacomponentes.put(errores.LUGAR, lugar);
 		
 		}
 		{
 			String listaModalidades[] = {"Liga","Eliminatoria simple", "Eliminatoria doble"};
 			modalidad.setComponent(new MyJComboBox(listaModalidades));
-			xd.put(errores.MODALIDAD, modalidad);
+			mapacomponentes.put(errores.MODALIDAD, modalidad);
 		}
 		{
 			String listaFormasPuntuacion[] = {"Sets", "Puntuación", "Resultado final"};
 			formapuntuacion.setComponent(new MyJComboBox(listaFormasPuntuacion));
-			xd.put(errores.SISTEMAPUNTUACION, formapuntuacion);
+			mapacomponentes.put(errores.SISTEMAPUNTUACION, formapuntuacion);
 		}
 		{
 			empatepermitido.setComponent(new JCheckBox());
@@ -94,14 +97,17 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			puntosporpartidoganado.setComponent(new JSpinner(new SpinnerNumberModel(3,1,100,1)));
 			       puntosporempate.setComponent(new JSpinner(new SpinnerNumberModel(1,0,100,1)));
 			  puntosporpresentarse.setComponent(new JSpinner(new SpinnerNumberModel(0,0,100,1)));
-			  cantidadmaximadesets.setComponent(new JSpinner(new SpinnerNumberModel(3,1,100,2)));
+			  cantidadmaximadesets.setComponent(new JSpinner(new SpinnerNumberModel(3,1,10,2)));
 			     puntosporabandono.setComponent(new JSpinner(new SpinnerNumberModel(3,0,100,1)));
+			     
+			mapacomponentes.put(errores.PUNTOSPOREMPATE, puntosporempate);
+			puntosporempate.setEnabled(false);
 			
 		}
 		{
 			reglamento.setComponent(new MyJTextArea("(Opcional)Ingrese uno..."));
 			reglamento.error().setVisible(false);
-			xd.put(errores.REGLAMENTO, reglamento);
+			mapacomponentes.put(errores.REGLAMENTO, reglamento);
 		}
 		{
 			Gui.colocar2(0, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, botoncancelar);
@@ -112,7 +118,7 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 				
 				dto=new CompetenciaDTO();
 				dto.setNombre(nombre.component().getText());
-				dto.setDeporte(deporte.component().getSelectedIndex());
+				dto.setDeporte(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
 				dto.setLugares(tablemodel.getSelected());
 				dto.setModalidad(modalidad.component().getSelectedItem());
 				dto.setReglamento(reglamento.component().getText());
@@ -158,6 +164,12 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 						
 			nombre.component().addActionListener(e->{
 				botonaceptar.setEnabled(nombre.component().hasChanged() && nombre.component().getText()!=null);	
+			});
+			
+			deporte.component().addActionListener(e->{
+				
+				tablemodel.recargarTabla(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
+				tablalugares.update();
 			});
 			
 		}
@@ -207,10 +219,12 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 	}
 	
 	private void validar(Mensaje<errores> m) {
-		if(m.getMensaje().containsKey(errores.EXITO))
+		if(m.getMensaje().containsKey(errores.EXITO)) {
+			
 			return;
+		}
 		for(Map.Entry<errores, String> i : m.getMensaje().entrySet()) {
-			xd
+			mapacomponentes
 			.get(i.getKey())
 			.showError(i.getValue());
 		}

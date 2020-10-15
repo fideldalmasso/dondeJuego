@@ -57,6 +57,10 @@ public class GestorCompetencia {
 			compe.setDeporte(d);
 		}
 		
+		if(cdto.getPermiteEmpate() && cdto.getPuntosPorEmpate()>cdto.getPuntosPorGanar()) {
+			mensaje.put(errores.PUNTOSPOREMPATE, "La cantidad de puntos por empate no puede ser mayor que la cantidad de puntos por ganar.");
+		}
+		
 		Modalidad m;
 		switch(cdto.getModalidad()) {
 			case "Liga":
@@ -119,11 +123,6 @@ public class GestorCompetencia {
 				if(p.getSecond()<1) {
 					mensaje.put(errores.LUGAR,"Debe seleccionar una disponibilidad mayor o igual a 1");
 					break;
-				}else {
-					LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
-					CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
-					compe.getLugares().add(cl);
-					cld.save(cl);
 				}
 			}
 		}
@@ -131,7 +130,15 @@ public class GestorCompetencia {
 		if(mensaje.getMensaje().isEmpty()) {
 			cd.save(compe);
 			mensaje.put(errores.EXITO,"Competencia agregada con exito");
+			System.out.println("Funciona");
+			for(Pair p : cdto.getLugares()){
+				LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
+				CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
+				compe.getLugares().add(cl);
+				cld.save(cl);
+			}
 		}
+		
 		
 		return mensaje;
 	}
