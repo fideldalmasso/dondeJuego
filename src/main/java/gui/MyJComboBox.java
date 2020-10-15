@@ -27,6 +27,10 @@ public class MyJComboBox extends JComboBox<String> {
     	super();
     }
     
+    @Override
+    public String getSelectedItem() {
+    	return (String)super.getSelectedItem();
+    }
     
 
 }

@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public abstract class Gui {
@@ -13,7 +14,9 @@ public abstract class Gui {
 	public static final Insets inseterror = new Insets(0,10,0,0);
 	public static final Insets insetvacio = new Insets(0,0,0,0);
 
-	
+	private static void vacio(JPanel panel, int x, int y) {
+		Gui.colocar(x,y,1,1,0,0,0,0,Gui.BOTH,Gui.CENTER,panel, new JLabel(" "));
+	}
 	
 	public static void colocar(int column,
 			int row, 

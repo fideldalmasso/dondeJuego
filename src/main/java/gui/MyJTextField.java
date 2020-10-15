@@ -11,8 +11,8 @@ public class MyJTextField extends JTextField {
 
 	private static final long serialVersionUID = 1L;
 	
-	String hint;
-	Boolean changed=false;
+	private String hint;
+	private Boolean changed=false;
 
 	public MyJTextField(String text) {
 		super(text);
@@ -48,5 +48,9 @@ public class MyJTextField extends JTextField {
 		
 	}
 
+	public Boolean hasChanged() {
+		return changed;
+	}
+	
 
 }

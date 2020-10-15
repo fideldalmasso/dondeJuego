@@ -17,6 +17,9 @@ public class CompetenciaDTO {
 	Integer puntosPorEmpate;
 	Integer puntosPorAbandono;
 	Integer cantidadMaximaSets;
+	public CompetenciaDTO() {
+		super();
+	}
 	public CompetenciaDTO(String nombre,
 			Integer deporte,
 			List<Pair> lugares,

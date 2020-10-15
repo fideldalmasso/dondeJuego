@@ -1,10 +1,12 @@
 package gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import dominio.LugarRealizacion;
+import dominio.Pair;
 import gestores.GestorLugarRealizacion;
 
 public class LugarRealizacionTM extends AbstractTableModel {
@@ -90,7 +92,20 @@ public class LugarRealizacionTM extends AbstractTableModel {
 	public void setData(List<LugarRealizacion>lista ) {
 		this.data = lista;
 	}
+	
+	public List<Pair> getSelected() {
+		List<Pair> lista = new ArrayList<Pair>();
+		for (int i = 0; i < data.size(); i++) {
+			if(((boolean)data2[i][0])==true)
+				System.out.println("xd");
+		}
+		
+		return lista;
+	}
 
+	
+	
+	
 }
 
 

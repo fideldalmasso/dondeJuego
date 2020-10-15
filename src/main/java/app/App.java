@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
 
+import gestores.GestorAutenticacion;
 import gui.PanelAltaCompetencia;
 import gui.PanelAltaCompetencia2;
 import gui.PanelPersonalizado;
@@ -121,6 +122,9 @@ public class App extends JFrame {
 					System.out.println(e.getMessage());
 				}
 
+				GestorAutenticacion ga = new GestorAutenticacion();
+				ga.login("dedgerarrobagmail.com", "12345");
+				
 				new App().setVisible(true);
 
 			}

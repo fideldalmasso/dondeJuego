@@ -1,23 +1,25 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Mensaje {
+public class Mensaje<T> {
 	
 	public enum Type{ERROR,SUCCESS,CANCEL};
 	
-	private List<String> mensaje;
+	private Map<T,String> mensaje;
 	
 	public Mensaje() {
-		this.mensaje = new ArrayList<String>();
+		this.mensaje = new HashMap<T,String>();
 	}
-	public List<String> getMensaje(){
+	public Map<T,String> getMensaje(){
 		return this.mensaje;
 	}
 	
-	public void add(String text) {
-		this.mensaje.add(text);
+	public void put(T index, String text) {
+		this.mensaje.put(index, text);
 	}
 	
 }

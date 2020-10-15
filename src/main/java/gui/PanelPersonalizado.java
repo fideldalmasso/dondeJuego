@@ -29,6 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
@@ -78,7 +79,8 @@ public abstract class PanelPersonalizado extends JPanel{
 		this.setBackground(Color.decode("#eeeeee"));
 		Border borde1 = BorderFactory.createMatteBorder(3, 3, 3, 3, Color.decode("#33658a"));
 		Border borde2 = BorderFactory.createEmptyBorder(5,40,5,40);
-		this.setBorder(new CompoundBorder(borde1,borde2));
+		LineBorder borde3 = new LineBorder(Color.decode("#33658a"), 5, true);
+		this.setBorder(new CompoundBorder(borde3,borde2));
 		//this.fileFondo = "icon/fondo2.png";
 	}
 

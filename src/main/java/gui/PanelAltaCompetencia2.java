@@ -8,10 +8,18 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 
 import daos.DeporteDAO;
+import dominio.Mensaje;
+import dtos.CompetenciaDTO;
 import gestores.GestorCompetencia;
 
 public class PanelAltaCompetencia2 extends PanelPersonalizado {
 
+	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO};
+	
+	
+	private EnumMap<errores, MyPack> xd= new EnumMap<PanelAltaCompetencia2.errores, MyPack>(errores.class);
+	
+	
 	private static final long serialVersionUID = 1L;
 	private MyTitle titulo = new MyTitle("Crear competencia"); 
 	private MyPack<MyJTextField> nombre = new MyPack<MyJTextField>("Nombre");
@@ -19,8 +27,6 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 	private MyPack<JScrollPane> lugar = new MyPack<JScrollPane>("Lugar(Disponibilidad)");
 	private MyPack<MyJComboBox> modalidad = new MyPack<MyJComboBox>("Modalidad");
 	private MyPack<MyJComboBox> formapuntuacion = new MyPack<MyJComboBox>("Forma de puntuación");
-	
-	
 	
 	private MyPack<JCheckBox> empatepermitido = new MyPack<JCheckBox>("Empate permitido");
 	private MyPack<JSpinner> puntosporpartidoganado = new MyPack<JSpinner>("Puntos por partido ganado");
@@ -41,19 +47,27 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 
 	
 	private DeporteDAO dao= new DeporteDAO();
+	private GestorCompetencia gestor = new GestorCompetencia();
+	private CompetenciaDTO dto;
 	
 	public PanelAltaCompetencia2() {
+		
+		
+		
 		this.setPreferredSize(new Dimension(780, 734));
 //		this.setBackground(new Color(250, 216, 214));
 		this.setLayout(new GridBagLayout());
 		
 		{
 			nombre.setComponent(new MyJTextField("Ingrese uno..."));
+			xd.put(errores.NOMBRE, nombre);
+			
 		}
 		{
-			String listaDeportes[] = {"xd", "xd2"}; //TODO los deportes con nombres muy largos hacen fallar la gui
-			//String listaDeportes[] = dao.getAll().stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
+//			String listaDeportes[] = {"xd", "xd2"}; //TODO los deportes con nombres muy largos hacen fallar la gui
+			String listaDeportes[] = dao.getAll().stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
 			deporte.setComponent(new MyJComboBox(listaDeportes));
+			xd.put(errores.DEPORTE, deporte);
 		}
 		{
 			//[width=165,height=20]
@@ -61,32 +75,58 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			tablalugares = new MyJTable(tablemodel);
 			tablalugares.setColumnWidths(20,290,100);
 			lugar.setComponent(new JScrollPane(tablalugares));
+			xd.put(errores.LUGAR, deporte);
 		
 		}
 		{
 			String listaModalidades[] = {"Liga","Eliminatoria simple", "Eliminatoria doble"};
 			modalidad.setComponent(new MyJComboBox(listaModalidades));
+			xd.put(errores.MODALIDAD, modalidad);
 		}
 		{
 			String listaFormasPuntuacion[] = {"Sets", "Puntuación", "Resultado final"};
 			formapuntuacion.setComponent(new MyJComboBox(listaFormasPuntuacion));
+			xd.put(errores.SISTEMAPUNTUACION, formapuntuacion);
 		}
 		{
 			empatepermitido.setComponent(new JCheckBox());
 			
 			puntosporpartidoganado.setComponent(new JSpinner(new SpinnerNumberModel(3,1,100,1)));
-			puntosporempate.setComponent(new JSpinner(new SpinnerNumberModel(1,0,100,1)));
-			puntosporpresentarse.setComponent(new JSpinner(new SpinnerNumberModel(0,0,100,1)));
-			cantidadmaximadesets.setComponent(new JSpinner(new SpinnerNumberModel(3,1,100,2)));
-			puntosporabandono.setComponent(new JSpinner(new SpinnerNumberModel(3,0,100,1)));
+			       puntosporempate.setComponent(new JSpinner(new SpinnerNumberModel(1,0,100,1)));
+			  puntosporpresentarse.setComponent(new JSpinner(new SpinnerNumberModel(0,0,100,1)));
+			  cantidadmaximadesets.setComponent(new JSpinner(new SpinnerNumberModel(3,1,100,2)));
+			     puntosporabandono.setComponent(new JSpinner(new SpinnerNumberModel(3,0,100,1)));
 			
 		}
 		{
 			reglamento.setComponent(new MyJTextArea("(Opcional)Ingrese uno..."));
 			reglamento.error().setVisible(false);
+			xd.put(errores.REGLAMENTO, reglamento);
+		}
+		{
 			Gui.colocar2(0, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, botoncancelar);
 			Gui.colocar2(1, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, new JLabel("    "));
 			Gui.colocar2(2, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, botonaceptar);
+			botonaceptar.setEnabled(false);
+			botonaceptar.addActionListener(e->{
+				
+				dto=new CompetenciaDTO();
+				dto.setNombre(nombre.component().getText());
+				dto.setDeporte(deporte.component().getSelectedIndex());
+				dto.setLugares(tablemodel.getSelected());
+				dto.setModalidad(modalidad.component().getSelectedItem());
+				dto.setReglamento(reglamento.component().getText());
+				dto.setPermiteEmpate(empatepermitido.component().isSelected());
+				dto.setPuntosPorPresentarse((Integer)puntosporpresentarse.component().getValue());
+				dto.setPuntosPorGanar((Integer)puntosporpartidoganado.component().getValue());
+				dto.setPuntosPorEmpate((Integer)puntosporempate.component().getValue());
+				dto.setSistemaPuntuacion(formapuntuacion.component().getSelectedItem());
+				dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
+				dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
+				
+				this.validar(gestor.crearCompetencia(dto));
+			});
+			
 		}
 		
 		{//enable y disable automaticos
@@ -115,6 +155,11 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			empatepermitido.component().addActionListener(e->{
 				puntosporempate.setEnabled(empatepermitido.component().isSelected());
 			});
+						
+			nombre.component().addActionListener(e->{
+				botonaceptar.setEnabled(nombre.component().hasChanged() && nombre.component().getText()!=null);	
+			});
+			
 		}
 		{
 			
@@ -124,7 +169,6 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 //			Gui.colocar(1,1,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, panel[0]);
 			Gui.colocar(0,1,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, nombre.label());
 			Gui.colocar(1,1,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, nombre.semi2());
-			nombre.showError("error1");
 			
 			Gui.colocar(0,2,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, deporte.label());
 		
@@ -156,20 +200,23 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			Gui.colocar(1,9,2,1,1,1,0,0,Gui.BOTH,Gui.WEST,this, reglamento.semi2());
 			
 			Gui.colocar(2,10,1,1,0,0,0,0,Gui.NONE,Gui.CENTER,this, panelBotones);
-//			
-//			vacio(1,1);
-//			vacio(2,2);
-//			vacio(2,4);
-//			vacio(2,5);
-//			vacio(2,8);
+
 			
 		}
 		
 	}
 	
-	private void vacio(int x, int y) {
-		Gui.colocar(x,y,1,1,0,0,0,0,Gui.BOTH,Gui.CENTER,this, new JLabel("xd"));
+	private void validar(Mensaje<errores> m) {
+		if(m.getMensaje().containsKey(errores.EXITO))
+			return;
+		for(Map.Entry<errores, String> i : m.getMensaje().entrySet()) {
+			xd
+			.get(i.getKey())
+			.showError(i.getValue());
+		}
 	}
+	
+
 	
 	
 }
