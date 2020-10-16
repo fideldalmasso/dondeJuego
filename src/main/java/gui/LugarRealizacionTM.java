@@ -20,9 +20,9 @@ public class LugarRealizacionTM extends AbstractTableModel {
 	private List<LugarRealizacion> data;
 	private String[] columnNames = {"","Lugar","Disponibilidad"};
 	
-	public LugarRealizacionTM() {
+	public LugarRealizacionTM(Integer idDeporte) {
 		gestor = new GestorLugarRealizacion();
-		recargarTabla(-1);
+		recargarTabla(idDeporte);
 		
 	}
 	

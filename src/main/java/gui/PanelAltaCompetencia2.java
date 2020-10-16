@@ -74,7 +74,7 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 		}
 		{
 			//[width=165,height=20]
-			tablemodel = new LugarRealizacionTM();
+			tablemodel = new LugarRealizacionTM(getIdDeporteSeleccionado());
 			tablalugares = new MyJTable(tablemodel);
 			tablalugares.setColumnWidths(20,290,100);
 			lugar.setComponent(new JScrollPane(tablalugares));
@@ -162,13 +162,13 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 				puntosporempate.setEnabled(empatepermitido.component().isSelected());
 			});
 						
-			nombre.component().addActionListener(e->{
+			nombre.component().addChangeListener(e->{
 				botonaceptar.setEnabled(nombre.component().hasChanged() && nombre.component().getText()!=null);	
 			});
 			
 			deporte.component().addActionListener(e->{
 				
-				tablemodel.recargarTabla(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
+				tablemodel.recargarTabla(getIdDeporteSeleccionado());
 				tablalugares.update();
 			});
 			
@@ -220,7 +220,6 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 	
 	private void validar(Mensaje<errores> m) {
 		if(m.getMensaje().containsKey(errores.EXITO)) {
-			
 			return;
 		}
 		for(Map.Entry<errores, String> i : m.getMensaje().entrySet()) {
@@ -230,6 +229,10 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 		}
 	}
 	
+	
+	private Integer getIdDeporteSeleccionado() {
+		return listaDeportes.get(deporte.component().getSelectedIndex()).getId();
+	}
 
 	
 	

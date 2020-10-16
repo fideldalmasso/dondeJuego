@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
 
 import gestores.GestorAutenticacion;
-import gui.PanelAltaCompetencia;
 import gui.PanelAltaCompetencia2;
 import gui.PanelPersonalizado;
 
