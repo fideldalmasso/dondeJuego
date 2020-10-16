@@ -9,12 +9,29 @@ public class MyError extends JLabel {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	public Boolean cargando = false;
+	
 	public MyError() {
+		this(false);
+
+	}
+	
+	public MyError(Boolean cargando) {
 		super();
-		this.setIcon(PanelPersonalizado.emoji("icon/error2.png",24,24));
+		this.cargando = cargando;
+		if(cargando)
+			this.setIcon(PanelPersonalizado.emoji("icon/loading3.gif",24,24));
+		else
+			this.setIcon(PanelPersonalizado.emoji("icon/error2.png",24,24));
+		
 		this.setEnabled(false);
 		this.setPreferredSize(new Dimension(24,24));
+		
+		
 	}
+	
 	
 	public void showError(String toolTipText) {
 		this.setEnabled(true);
@@ -35,8 +52,12 @@ public class MyError extends JLabel {
 	
 	@Override
 	public void setVisible(boolean aFlag) {
-		if(!aFlag)
-			this.setIcon(PanelPersonalizado.emoji("icon/empty.png",24,24));
+		if(!aFlag) {
+			if(cargando)
+				this.setIcon(PanelPersonalizado.emoji("icon/loading3.gif",24,24));
+			else
+				this.setIcon(PanelPersonalizado.emoji("icon/empty.png",24,24));
+		}
 		else
 			this.setIcon(PanelPersonalizado.emoji("icon/error2.png",24,24));
 	}

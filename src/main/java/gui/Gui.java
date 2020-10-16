@@ -1,12 +1,19 @@
 package gui;
 
 
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.Enumeration;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 public abstract class Gui {
 
@@ -63,6 +70,22 @@ public abstract class Gui {
 
 	}
 
+	//https://stackoverflow.com/questions/7434845/setting-the-default-font-of-swing-program
+	public static void setearFuente(String fuente, Component c) {
+		ToolTipManager.sharedInstance().setInitialDelay(0);
+		 final Font fnt = new Font(fuente, Font.PLAIN, 14);
+         final FontUIResource res = new FontUIResource(fnt);
+         Enumeration<Object> keys = UIManager.getDefaults().keys();
+        
+         while (keys.hasMoreElements()) {
+           Object key = keys.nextElement();
+           Object value = UIManager.get (key);
+           if (value instanceof javax.swing.plaf.FontUIResource)
+             UIManager.put (key, res);
+         }
+         SwingUtilities.updateComponentTreeUI(c);
+	}
+	
 
 
 	public static final int RELATIVE = -1;

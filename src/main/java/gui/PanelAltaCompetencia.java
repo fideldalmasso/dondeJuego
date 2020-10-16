@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 import daos.DeporteDAO;
 import dominio.Deporte;
@@ -13,19 +14,19 @@ import dominio.Mensaje;
 import dtos.CompetenciaDTO;
 import gestores.GestorCompetencia;
 
-public class PanelAltaCompetencia2 extends PanelPersonalizado {
+public class PanelAltaCompetencia extends PanelPersonalizado {
 
 	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO,USUARIO,PUNTOSPOREMPATE};
 	
 	
-	private EnumMap<errores, MyPack> mapacomponentes= new EnumMap<PanelAltaCompetencia2.errores, MyPack>(errores.class);
+	private EnumMap<errores, MyPack> mapacomponentes= new EnumMap<PanelAltaCompetencia.errores, MyPack>(errores.class);
 	
 	
 	private static final long serialVersionUID = 1L;
 	private MyTitle titulo = new MyTitle("Crear competencia"); 
 	private MyPack<MyJTextField> nombre = new MyPack<MyJTextField>("Nombre");
-	private MyPack<MyJComboBox> deporte = new MyPack<MyJComboBox>("Deporte");
-	private MyPack<JScrollPane> lugar = new MyPack<JScrollPane>("Lugar(Disponibilidad)");
+	private MyPack<MyJComboBox> deporte = new MyPack<MyJComboBox>("Deporte",true);
+	private MyPack<JScrollPane> lugar = new MyPack<JScrollPane>("Lugar(Disponibilidad)",true);
 	private MyPack<MyJComboBox> modalidad = new MyPack<MyJComboBox>("Modalidad");
 	private MyPack<MyJComboBox> formapuntuacion = new MyPack<MyJComboBox>("Forma de puntuación");
 	
@@ -47,12 +48,15 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 	private JButton botoncancelar = new JButton("Cancelar");
 
 	
-	private DeporteDAO dao= new DeporteDAO();
-	private GestorCompetencia gestor = new GestorCompetencia();
+
 	private CompetenciaDTO dto;
 	private List<Deporte> listaDeportes;
 	
-	public PanelAltaCompetencia2() {
+	private SwingWorker<String[], Void> trabajador1;
+	private SwingWorker<LugarRealizacionTM, Void> trabajador2;
+	
+	
+	public PanelAltaCompetencia() {
 		
 		
 		
@@ -66,19 +70,51 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			
 		}
 		{
-//			String listaDeportes[] = {"xd", "xd2"}; //TODO los deportes con nombres muy largos hacen fallar la gui
-			 listaDeportes =  dao.getAll();
-			String listaNombresDeportes[] = listaDeportes.stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
-			deporte.setComponent(new MyJComboBox(listaNombresDeportes));
+			deporte.setComponent(new MyJComboBox(new String[] {""}));
 			mapacomponentes.put(errores.DEPORTE, deporte);
+			
+			trabajador1 = new SwingWorker<String[], Void>(){
+				private String[] t;
+				@Override
+				protected String[] doInBackground() throws Exception {
+					listaDeportes= new DeporteDAO().getAll();
+					t= listaDeportes.stream().map(d->d.getNombre()).collect(Collectors.toList()).toArray(new String[0]);
+					return t;
+				}
+				@Override 
+				protected void done() {
+					deporte.component().setModel(new DefaultComboBoxModel<String>(t));
+					deporte.stopLoading();
+					trabajador2.execute();
+				}
+				
+			};
+			
 		}
 		{
 			//[width=165,height=20]
-			tablemodel = new LugarRealizacionTM(getIdDeporteSeleccionado());
+			tablemodel = new LugarRealizacionTM();
 			tablalugares = new MyJTable(tablemodel);
 			tablalugares.setColumnWidths(20,290,100);
 			lugar.setComponent(new JScrollPane(tablalugares));
 			mapacomponentes.put(errores.LUGAR, lugar);
+			
+			trabajador2 = new SwingWorker<LugarRealizacionTM, Void>(){
+				private LugarRealizacionTM t;
+				@Override
+				protected LugarRealizacionTM doInBackground() throws Exception {
+					t= new LugarRealizacionTM(getIdDeporteSeleccionado());
+					return t;
+				}
+				@Override 
+				protected void done() {
+					tablemodel=t;
+					tablalugares.setModel(t);
+					tablalugares.setColumnWidths(20,290,100);
+					lugar.stopLoading();
+				}
+				
+			};
 		
 		}
 		{
@@ -130,7 +166,7 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 				dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
 				dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
 				
-				this.validar(gestor.crearCompetencia(dto));
+				this.validar(new GestorCompetencia().crearCompetencia(dto));
 			});
 			
 		}
@@ -177,8 +213,6 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			
 			Gui.colocar(0,0,3,1,0,0,0,0,Gui.NONE,Gui.CENTER,this, titulo);
 
-//			Gui.colocar(0,1,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, tnombre);
-//			Gui.colocar(1,1,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, panel[0]);
 			Gui.colocar(0,1,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, nombre.label());
 			Gui.colocar(1,1,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, nombre.semi2());
 			
@@ -205,7 +239,7 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 			Gui.colocar(1,8,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporpresentarse.full());
 			
 			Gui.colocar(2,6,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, cantidadmaximadesets.full());
-			Gui.colocar(2,7,1,1,1,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporabandono.full());
+			Gui.colocar(2,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporabandono.full());
 			
 			
 			Gui.colocar(0,9,1,1,0,0,0,0,Gui.NONE,Gui.NORTHWEST,this, reglamento.label());
@@ -215,6 +249,7 @@ public class PanelAltaCompetencia2 extends PanelPersonalizado {
 
 			
 		}
+		trabajador1.execute();
 		
 	}
 	

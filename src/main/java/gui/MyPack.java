@@ -26,6 +26,12 @@ public class MyPack<T>  {
 	}
 	
 	
+	public MyPack(String label, Boolean cargando) {
+		super();
+		this.label = new JLabel(label);
+		this.error = new MyError(cargando);
+	}
+	
 	public MyPack(String label) {
 		super();
 		this.label= new JLabel(label);
@@ -98,5 +104,11 @@ public class MyPack<T>  {
 	public void showError(String toolTipText) {
 		this.error.showError(toolTipText);
 	}
+	
+	public void stopLoading() {
+		this.error().cargando=false;
+		this.setEnabled(true);
+	}
+	
 	
 }

@@ -25,7 +25,7 @@ public class MyJTable extends JTable {
 		this.setIgnoreRepaint(false);
 		this.setRowHeight(20);
 		this.getTableHeader().setReorderingAllowed(false);
-//		this.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+		this.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 	}
 
 	public MyJTable(TableModel dm, TableColumnModel cm) {

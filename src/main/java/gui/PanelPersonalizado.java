@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -328,9 +329,11 @@ public abstract class PanelPersonalizado extends JPanel{
 
 
 		static public ImageIcon emoji(String fileName, int width, int height) {
-			Image imagen = new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
+			Image imagen = new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_REPLICATE);
 			return new ImageIcon(imagen);
 		}
+		
+		
 
 
 

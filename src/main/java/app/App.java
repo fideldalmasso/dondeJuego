@@ -16,7 +16,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
 
 import gestores.GestorAutenticacion;
-import gui.PanelAltaCompetencia2;
+import gui.Gui;
+import gui.LugarRealizacionTM;
+import gui.PanelAltaCompetencia;
 import gui.PanelPersonalizado;
 
 
@@ -30,42 +32,10 @@ public class App extends JFrame {
 	JPanel actual = null;
 	List<JPanel> listaPaneles = new ArrayList<JPanel>();
 
-	//https://stackoverflow.com/questions/7434845/setting-the-default-font-of-swing-program	
-	public void setearFuente(String fuente) {
-		ToolTipManager.sharedInstance().setInitialDelay(0);
-		 final Font fnt = new Font(fuente, Font.PLAIN, 14);
-         final FontUIResource res = new FontUIResource(fnt);
-         Enumeration<Object> keys = UIManager.getDefaults().keys();
-        
-         while (keys.hasMoreElements()) {
-           Object key = keys.nextElement();
-           Object value = UIManager.get (key);
-           if (value instanceof javax.swing.plaf.FontUIResource)
-             UIManager.put (key, res);
-         }
-         SwingUtilities.updateComponentTreeUI(this);
-	}
-
-	public void cambiarPanel(PanelPersonalizado p) {
-		Dimension d = this.getSize();
-		this.remove(actual);
-		this.actual = p;
-		//this.setContentPane(panel);
-		this.add(this.actual);
-		this.pack();
-		this.revalidate();
-		this.repaint();
-		this.setSize(d);
-
-	}
-
-
 
 	private App() {
 		this.setTitle("¿Dónde juego?");
-		this.setearFuente("Comic Sans MS");
-		//this.setLayout(new BorderLayout());
-		//		this.setLayout(new GridBagLayout());
+		Gui.setearFuente("Comic Sans MS",this);
 
 		{
 			contenido = new JPanel(new GridBagLayout());
@@ -98,33 +68,56 @@ public class App extends JFrame {
 
 
 		this.actual = new JPanel();
-		PanelAltaCompetencia2 altaCompetencia = new PanelAltaCompetencia2(); 
+		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
 		this.cambiarPanel(altaCompetencia);
 
 
 	}
 
-	
+
+
+	public void cambiarPanel(PanelPersonalizado p) {
+		Dimension d = this.getSize();
+		this.remove(actual);
+		this.actual = p;
+		//this.setContentPane(panel);
+		this.add(this.actual);
+		this.pack();
+		this.revalidate();
+		this.repaint();
+		this.setSize(d);
+
+	}
+
+
+
+
+
 
 	public static void main (String[] args){
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//										UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");			    
-					//					  UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");			    
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");			    
+					//UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");			    
 					UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 
-					//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-					//ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,new File("font/NotoColorEmoji.ttf")));
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 
-				GestorAutenticacion ga = new GestorAutenticacion();
-				ga.login("dieguitomaradona@gmail.com", "12345");
-				
 				new App().setVisible(true);
+
+				SwingWorker<Void, Void> trabajador = new SwingWorker<Void, Void>(){
+					@Override
+					protected Void doInBackground() throws Exception {
+						GestorAutenticacion ga = new GestorAutenticacion();
+						ga.login("dieguitomaradona@gmail.com", "12345");
+						return null;
+					}
+				};
+				trabajador.execute();
 
 			}
 		});

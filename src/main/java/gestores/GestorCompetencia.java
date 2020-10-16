@@ -11,7 +11,7 @@ import daos.SistemaPuntuacionDAO;
 import dominio.*;
 import dtos.CompetenciaDTO;
 import enumerados.EstadoCompetencia;
-import gui.PanelAltaCompetencia2.errores;
+import gui.PanelAltaCompetencia.errores;
 
 public class GestorCompetencia {
 	private CompetenciaDAO cd;
