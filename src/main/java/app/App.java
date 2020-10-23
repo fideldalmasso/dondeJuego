@@ -104,7 +104,7 @@ public class App extends JFrame {
 
 				}
 				catch (Exception e) {
-					System.out.println(e.getMessage());
+					if(Gui.DEBUG) System.out.println(e.getMessage());
 				}
 
 				new App().setVisible(true);

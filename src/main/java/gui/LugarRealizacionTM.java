@@ -111,7 +111,7 @@ public class LugarRealizacionTM extends AbstractTableModel {
 			if(((boolean)data2[i][0])==true)
 				lista.add(new Pair(data.get(i).getId(),(Integer)data2[i][2]));
 		}
-		System.out.println(lista.toString());
+		if(Gui.DEBUG)System.out.println(lista.toString());
 		return lista;
 	}
 

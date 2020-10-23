@@ -68,7 +68,7 @@ public class MyJTable extends JTable {
 	public  void setJTableColumnsWidth(double... percentages) {
 		
 		int tablePreferredWidth= this.preferredViewportSize.width;
-		System.out.println(tablePreferredWidth);
+		if(Gui.DEBUG)System.out.println("Preffered widht de la tabla: "+tablePreferredWidth);
 	    double total = 0;
 	    for (int i = 0; i < this.getColumnModel().getColumnCount(); i++) {
 	        total += percentages[i];

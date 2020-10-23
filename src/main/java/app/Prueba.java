@@ -24,6 +24,7 @@ import dtos.CompetenciaDTO;
 import enumerados.TipoDocumento;
 import gestores.GestorAutenticacion;
 import gestores.GestorCompetencia;
+import gui.Gui;
 
 public class Prueba {
 	
@@ -92,7 +93,7 @@ public class Prueba {
 	    		  0,
 	    		  null);
 	      
-	      System.out.println(gc.crearCompetencia(c).getMensaje());
+	      if(Gui.DEBUG)System.out.println(gc.crearCompetencia(c).getMensaje());
 	     
 	}
 	   

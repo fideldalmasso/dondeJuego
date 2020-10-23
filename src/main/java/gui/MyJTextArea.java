@@ -50,5 +50,9 @@ public class MyJTextArea extends JTextArea {
 		
 	}
 
+	public Boolean hasChanged() {
+		return changed;
+	}
+	
 
 }

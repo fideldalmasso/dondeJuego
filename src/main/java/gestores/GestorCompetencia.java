@@ -96,13 +96,16 @@ public class GestorCompetencia {
 				break;
 			case "Sets":
 				s = new SistemaPuntuacionPorSets(cdto.getCantidadMaximaSets());
+				if(cdto.getCantidadMaximaSets()%2==0) 
+					mensaje.put(errores.CANTIDADMAXIMASETS,"La cantidad de sets debe ser un número impar");
+				
 				break;
 			default:
 				s=null;
 				break;
 		}
 		if(s.equals(null)) {
-			mensaje.put(errores.SISTEMAPUNTUACION,"Sistema puntuacion inexistente");
+			mensaje.put(errores.SISTEMAPUNTUACION,"Sistema puntuación inexistente");
 		}else {
 			//sd.save(s);
 			compe.setSistemaPuntuacion(s);

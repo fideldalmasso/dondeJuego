@@ -16,7 +16,7 @@ import gestores.GestorCompetencia;
 
 public class PanelAltaCompetencia extends PanelPersonalizado {
 
-	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO,USUARIO,PUNTOSPOREMPATE};
+	public enum errores{EXITO,NOMBRE,DEPORTE,LUGAR,MODALIDAD,SISTEMAPUNTUACION,REGLAMENTO,USUARIO,PUNTOSPOREMPATE,CANTIDADMAXIMASETS};
 	
 	
 	private EnumMap<errores, MyPack> mapacomponentes= new EnumMap<PanelAltaCompetencia.errores, MyPack>(errores.class);
@@ -96,6 +96,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			tablemodel = new LugarRealizacionTM();
 			tablalugares = new MyJTable(tablemodel);
 			tablalugares.setColumnWidths(20,290,100);
+			//tablalugares.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 			lugar.setComponent(new JScrollPane(tablalugares));
 			mapacomponentes.put(errores.LUGAR, lugar);
 			
@@ -151,6 +152,14 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			Gui.colocar2(2, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, botonaceptar);
 			botonaceptar.setEnabled(false);
 			botonaceptar.addActionListener(e->{
+				
+				if(tablalugares.isEditing()) {
+					if(Gui.DEBUG) System.out.println("se tuvo que detener la tabla");
+					tablalugares.getCellEditor().stopCellEditing();
+				}
+				
+				if(!nombre.component().hasChanged()) nombre.component().setText(null);
+				if(!reglamento.component().hasChanged()) reglamento.component().setText(null);
 				
 				dto=new CompetenciaDTO();
 				dto.setNombre(nombre.component().getText());
@@ -255,12 +264,19 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	
 	private void validar(Mensaje<errores> m) {
 		if(m.getMensaje().containsKey(errores.EXITO)) {
+			botonaceptar.setToolTipText("Éxito");
 			return;
 		}
 		for(Map.Entry<errores, String> i : m.getMensaje().entrySet()) {
-			mapacomponentes
-			.get(i.getKey())
-			.showError(i.getValue());
+			
+			if(mapacomponentes.get(i.getKey())!=null) {
+				mapacomponentes
+				.get(i.getKey())
+				.showError(i.getValue());				
+			}
+			else {if(Gui.DEBUG)System.out.println("El enum "+ i.getKey() + " no tiene ningun componente asociado");}
+			
+			
 		}
 	}
 	
