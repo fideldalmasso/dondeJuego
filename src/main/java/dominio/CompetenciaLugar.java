@@ -1,5 +1,6 @@
 package dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ public class CompetenciaLugar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idCompetencia")
 	private Competencia competencia;
 	@ManyToOne

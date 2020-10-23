@@ -41,13 +41,13 @@ public class Competencia {
 	@ManyToOne
 	@JoinColumn(name="idDeporte")
 	private Deporte deporte;
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idSistemaPuntuacion")
 	private SistemaPuntuacion sistemaPuntuacion;
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idModalidad")
 	private Modalidad modalidad;
-	@OneToMany(mappedBy="competencia")
+	@OneToMany(mappedBy="competencia", cascade=CascadeType.PERSIST)
 	private List<CompetenciaLugar> lugares;
 	@OneToMany(mappedBy="competencia")
 	private List<Participante> participantes;

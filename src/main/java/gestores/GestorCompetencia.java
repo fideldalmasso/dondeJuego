@@ -82,7 +82,7 @@ public class GestorCompetencia {
 		if(m.equals(null)){
 			mensaje.put(errores.MODALIDAD,"Modalidad inexistente");
 		}else {
-			md.save(m);
+			//md.save(m);
 			compe.setModalidad(m);
 		}
 		
@@ -104,7 +104,7 @@ public class GestorCompetencia {
 		if(s.equals(null)) {
 			mensaje.put(errores.SISTEMAPUNTUACION,"Sistema puntuacion inexistente");
 		}else {
-			sd.save(s);
+			//sd.save(s);
 			compe.setSistemaPuntuacion(s);
 		}
 		
@@ -128,15 +128,14 @@ public class GestorCompetencia {
 		}
 		
 		if(mensaje.getMensaje().isEmpty()) {
-			cd.save(compe);
-			mensaje.put(errores.EXITO,"Competencia agregada con exito");
-			System.out.println("Funciona");
 			for(Pair p : cdto.getLugares()){
 				LugarRealizacion l = glr.getLugarRealizacion(p.getFirst());
 				CompetenciaLugar cl = new CompetenciaLugar(compe, l, p.getSecond());
 				compe.getLugares().add(cl);
-				cld.save(cl);
 			}
+			cd.save(compe);
+			mensaje.put(errores.EXITO,"Competencia agregada con exito");
+			
 		}
 		
 		
