@@ -10,7 +10,7 @@ import javax.swing.table.TableModel;
 
 import daos.DeporteDAO;
 import dominio.Deporte;
-import dominio.Mensaje;
+import dominio.Mensaje2;
 import dtos.CompetenciaDTO;
 import gestores.GestorCompetencia;
 
@@ -262,7 +262,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		
 	}
 	
-	private void validar(Mensaje<errores> m) {
+	private void validar(Mensaje2<errores> m) {
 		if(m.getMensaje().containsKey(errores.EXITO)) {
 			botonaceptar.setToolTipText("Éxito");
 			return;

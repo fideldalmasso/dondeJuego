@@ -33,9 +33,9 @@ public class GestorCompetencia {
 		this.sd = new SistemaPuntuacionDAO();
 	}
 	
-	public Mensaje<errores> crearCompetencia(CompetenciaDTO cdto) {
+	public Mensaje2<errores> crearCompetencia(CompetenciaDTO cdto) {
 		
-		Mensaje<errores> mensaje = new Mensaje<errores>();
+		Mensaje2<errores> mensaje = new Mensaje2<errores>();
 		
 		List<Competencia> competencias= cd.getAllCompetencias(); //TODO no se puede hacer una consulta que devuelva solo los nombres de las competencias?
 		Competencia compe = new Competencia();
