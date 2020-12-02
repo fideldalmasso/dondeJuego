@@ -6,6 +6,7 @@ import java.util.List;
 public class Mensaje {
 	
 	public enum Type{ERROR,SUCCESS,CANCEL};
+	Integer accion;
 	
 	private List<String> mensaje;
 	
@@ -18,6 +19,10 @@ public class Mensaje {
 	
 	public void add(String text) {
 		this.mensaje.add(text);
+	}
+	
+	public void setAccion(Integer accion) {
+		this.accion=accion;
 	}
 	
 }

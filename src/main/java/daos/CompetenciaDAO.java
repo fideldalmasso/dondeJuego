@@ -34,6 +34,15 @@ public class CompetenciaDAO {
 		 return lc;
 	 }
 	 
+	public Competencia getCompetencia(Integer id){
+		EntityManager em	= factory.createEntityManager();
+		em.getTransaction().begin();
+		Competencia compe  = em.find(Competencia.class, id);
+		em.getTransaction().commit();
+		em.close();
+		return compe;
+	}
+	 
 	 public void save(Competencia c) {
 		 EntityManager em = factory.createEntityManager();
 		 em.getTransaction().begin();

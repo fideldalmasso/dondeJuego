@@ -152,7 +152,11 @@ public class GestorCompetencia {
 	}
 	
 	public List<Deporte> getAllDeportes(){
-	return dd.getAll();
- }
+		return dd.getAll();
+	}
+	
+	public Competencia getCompetencia(Integer id) {
+		return (new CompetenciaDAO()).getCompetencia(id);
+	}
 
 }
