@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="dj.localidad")
+@Table(name="dj.participante")
 public class Participante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -50,6 +50,15 @@ public class CompetenciaDAO {
 		 em.getTransaction().commit();
 		 em.close();
 	 }
+	 
+	 public Competencia update(Competencia c) {
+		 EntityManager em = factory.createEntityManager();
+		 em.getTransaction().begin();
+		 Competencia compe = em.merge(c);
+		 em.getTransaction().commit();
+		 em.close();
+		 return compe;
+	 }
 	 /*
 	 public void update(Competencia c) {
 		Session session = factory.openSession();
