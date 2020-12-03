@@ -59,6 +59,8 @@ public class Fixture {
 	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-	
+	public void addFecha(Fecha fecha) {
+		this.fechas.add(fecha);
+	}
 	
 }
