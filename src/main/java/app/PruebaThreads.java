@@ -12,9 +12,9 @@ import javax.swing.SwingWorker;
 import javax.swing.table.TableModel;
 
 import gui.Gui;
-import gui.LugarRealizacionTM;
 import gui.MyPack;
 import gui.MyTitle;
+import paneles.LugarRealizacionTM;
 
 public class PruebaThreads extends JFrame{
 

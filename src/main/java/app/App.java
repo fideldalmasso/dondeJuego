@@ -17,9 +17,9 @@ import javax.swing.plaf.FontUIResource;
 
 import gestores.GestorAutenticacion;
 import gui.Gui;
-import gui.LugarRealizacionTM;
-import gui.PanelAltaCompetencia;
 import gui.PanelPersonalizado;
+import paneles.LugarRealizacionTM;
+import paneles.PanelAltaCompetencia;
 
 
 public class App extends JFrame {

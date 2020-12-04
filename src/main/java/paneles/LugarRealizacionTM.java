@@ -1,4 +1,4 @@
-package gui;
+package paneles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import dominio.LugarRealizacion;
 import dominio.Pair;
 import gestores.GestorLugarRealizacion;
+import gui.Gui;
 
 public class LugarRealizacionTM extends AbstractTableModel {
 

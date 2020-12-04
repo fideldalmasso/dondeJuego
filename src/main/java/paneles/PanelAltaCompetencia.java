@@ -1,18 +1,28 @@
-package gui;
+package paneles;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
-import javax.swing.table.TableModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingWorker;
 
 import daos.DeporteDAO;
 import dominio.Deporte;
 import dominio.Mensaje2;
 import dtos.CompetenciaDTO;
 import gestores.GestorCompetencia;
+import gui.*;
 
 public class PanelAltaCompetencia extends PanelPersonalizado {
 
@@ -25,8 +35,8 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	private static final long serialVersionUID = 1L;
 	private MyTitle titulo = new MyTitle("Crear competencia"); 
 	private MyPack<MyJTextField> nombre = new MyPack<MyJTextField>("Nombre");
-	private MyPack<MyJComboBox> deporte = new MyPack<MyJComboBox>("Deporte",true);
 	private MyPack<JScrollPane> lugar = new MyPack<JScrollPane>("Lugar(Disponibilidad)",true);
+	private MyPack<MyJComboBox> deporte = new MyPack<MyJComboBox>("Deporte",true);
 	private MyPack<MyJComboBox> modalidad = new MyPack<MyJComboBox>("Modalidad");
 	private MyPack<MyJComboBox> formapuntuacion = new MyPack<MyJComboBox>("Forma de puntuación");
 	
