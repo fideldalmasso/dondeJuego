@@ -45,6 +45,9 @@ public class Encuentro {
 	@ManyToOne
 	@JoinTable(name="idFecha")
 	protected Fecha fecha;
+	@OneToOne
+	@JoinColumn(name="id")
+	protected LugarRealizacion lugarRealizacion;
 	
 	public Encuentro(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
 			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
@@ -120,5 +123,10 @@ public class Encuentro {
 	public void setResultados(List<Resultado> resultados) {
 		this.resultados = resultados;
 	}
-	
+	public void setLugarRealizacion(LugarRealizacion lugarRealizacion) {
+		this.lugarRealizacion = lugarRealizacion;
+	}
+	public LugarRealizacion getLugarRealizacion() {
+		return lugarRealizacion;
+	}
 }

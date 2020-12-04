@@ -58,5 +58,8 @@ public class Fecha {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
+	public void addEncuentro(Encuentro encuentro) {
+		this.encuentros.add(encuentro);
+	}
 	
 }

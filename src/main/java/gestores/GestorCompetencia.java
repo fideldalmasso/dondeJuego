@@ -10,6 +10,7 @@ import daos.ModalidadDAO;
 import daos.SistemaPuntuacionDAO;
 import dominio.*;
 import dtos.CompetenciaDTO;
+import dtos.ParticipanteDTO;
 import enumerados.EstadoCompetencia;
 import paneles.PanelAltaCompetencia.errores;
 
@@ -143,6 +144,20 @@ public class GestorCompetencia {
 		
 		
 		return mensaje;
+	}
+	
+	public void agregarParticipante(Participante p, Competencia compe) {
+		compe.getParticipantes().add(p);
+		compe.setEstado(EstadoCompetencia.CREADA);
+		compe.setFixture(null);
+		cd.update(compe);
+	}
+	
+	public Competencia verificarCompetencia(ParticipanteDTO pdto) {
+		Competencia compe = cd.getCompetencia(pdto.getIdCompetencia());
+		if(compe.getEstado().equals(EstadoCompetencia.CREADA) || compe.getEstado().equals(EstadoCompetencia.PLANIFICADA))
+			return compe;
+		return null;
 	}
 	
 	public Deporte crearDeporte(String nombre) {
