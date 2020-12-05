@@ -62,5 +62,11 @@ public class Fixture {
 	public void addFecha(Fecha fecha) {
 		this.fechas.add(fecha);
 	}
+	public Competencia getCompetencia() {
+		return competencia;
+	}
+	public void setCompetencia(Competencia competencia) {
+		this.competencia = competencia;
+	}
 	
 }

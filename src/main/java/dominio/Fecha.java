@@ -61,5 +61,11 @@ public class Fecha {
 	public void addEncuentro(Encuentro encuentro) {
 		this.encuentros.add(encuentro);
 	}
+	public Fixture getFixture() {
+		return fixture;
+	}
+	public void setFixture(Fixture fixture) {
+		this.fixture = fixture;
+	}
 	
 }

@@ -145,7 +145,18 @@ public class GestorCompetencia {
 		
 		return mensaje;
 	}
-	
+	public void actualizarFixture(Competencia compe) {
+		Integer contResultados=0, contEncuentros=0;
+		for(Fecha f: compe.getFixture().getFechas()) {
+			for(Encuentro e: f.getEncuentros()) {
+				contEncuentros++;
+				if(e.getVigente()!=null) contResultados++;
+			}
+		}
+		if(contEncuentros.equals(contResultados)) compe.setEstado(EstadoCompetencia.FINALIZADA);
+		else if (contResultados.equals(1)) compe.setEstado(EstadoCompetencia.ENDISPUTA);
+		cd.update(compe);
+	}
 	public void agregarParticipante(Participante p, Competencia compe) {
 		compe.getParticipantes().add(p);
 		compe.setEstado(EstadoCompetencia.CREADA);
