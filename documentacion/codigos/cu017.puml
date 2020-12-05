@@ -1,0 +1,110 @@
+@startuml
+    title CU017 Generar Fixture
+    actor Usuario as usr
+    boundary GUIVerCompetencia as gvc
+    control GestorFixture as gf
+    control GestorCompetencia as gc
+    control CompetenciaDAO as cd
+    control FixtureDAO as fd
+
+    entity Encuentro as en
+    entity Fecha as fe
+    entity Fixture as fi
+    entity Competencia as compe
+
+    usr --> gvc: generarFixture()
+    gvc --> gf: generarFixture(idCompetencia)
+    gf --> gc: getCompetencia(idCompetencia)
+    gc --> cd: getCompetencia(idCompetencia)
+    cd --> gc: Competencia competencia
+    gc --> gf: Competencia competencia
+    alt competencia.Modalidad == EliminacionSimple
+        gf --> gvc: Mensaje mensaje("Caso de uso no implementado")
+        gvc --> gvc: mostrarMensaje(mensaje)
+        gvc --> usr:
+    else competencia.Modalidad == EliminacionDoble
+        gf --> gvc: Mensaje mensaje("Caso de uso no implementado")
+        gvc --> gvc: mostrarMensaje(mensaje)
+        gvc --> usr:
+    else competencia.Modalidad == Liga
+        alt competencia.estado == EN_DISPUTA || competencia.estado == FINALIZADA
+            gf --> gvc: Mensaje mensaje("No se puede volver a crear el fixture")
+            gvc --> gvc: mostrarMensaje(mensaje)
+            gvc --> usr:
+        else
+            gf --> gvc: Mensaje mensaje("Desea volver a generar el fixture")
+            gvc --> gvc: pedirConfirmacion(mensaje)
+            gvc --> usr:
+
+            alt
+                usr --> gvc: cancelar()
+                gvc --> usr:
+            else
+                usr --> gvc: aceptar()
+                gvc --> gf: crearFixture()
+                gf --> compe: getParticipantes()
+                compe --> gf: List<Participante> participantes
+                gf --> compe: getLugaresRealizacion()
+                compe --> gf: List<LugarRealizacion> lugares
+                
+                loop for each lugar in lugares
+                    gf --> gf: disponibilidad += lugar.getDisponibilidad();
+                end
+
+                alt disponibilidad < participantes.size()/2
+                    gf --> gvc: Mensaje("Lugares de realizacion insuficientes.")
+                    gvc --> gvc: mostrarMensaje(mensaje)
+                    gvc --> usr:
+                else
+                    opt participantes.size()%==1
+                        gf --> gf: participantes.add(new Participante(null,null,null))
+                    end opt
+
+                    gf --> fi: Fixture()
+                    fi --> gf: Fixture fixture
+                    
+                    loop for i in [0,participantes.size())
+                        gf --> fe: Fecha(i)
+                        fe --> gf: Fecha fecha
+                        loop for j in [0,participantes.size()/2)
+                            opt (participantes[i].getEmail()!=null && participantes[i].getEmail()!=null)
+                                gf --> en: Encuentro()
+                                en --> gf: Encuentro encuentro
+                                gf --> en: setParticipantes(participantes[i],participantes[j]
+                                en --> gf:
+                                gf --> en: setLugarRealizacion(lugares.getLugarConDisponibilidad())
+                                en --> gf:
+                                gf --> fe: fecha.addEncuentro(encuentro)
+                            end opt
+                        end loop
+                        gf --> fi: fixture.add(fecha)
+                        fi --> gf:
+
+                        gf --> gf: participanteAux = participantes[participantes.size()-1]
+
+                        loop for j in [2,participantes.size()-1]
+                            gf-->gf: participantes[j]=participantes[j-1]
+                        end loop
+                        gf --> gf: participantes[1]=participanteAux;
+
+                    end loop
+                    
+                    gf --> compe: competencia.setFixture(fixture)
+                    compe --> gf:
+
+                    gf --> compe: competencia.setEstado(PLANIFICADA)
+                    compe --> gf:
+
+                    gf --> cd: update(competencia)
+                    cd --> gf:
+
+                    gf --> gvc: Mensaje mensaje("El fixture se ha creado con exito")
+                    gvc --> usr:
+                end
+            end
+        end
+    end
+
+    
+@enduml
+

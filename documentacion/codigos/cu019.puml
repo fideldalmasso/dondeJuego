@@ -1,0 +1,89 @@
+@startuml
+title CU019 Mostrar Fixture de la Competencia
+actor UsuarioAutenticado
+boundary VerCompetencia as in1
+boundary MostrarFixture
+control GestorFixture
+control "fixtureDao:FixtureDAO" as FD
+activate UsuarioAutenticado
+UsuarioAutenticado -> in1: mostrarFixture()
+activate in1
+in1 -> MostrarFixture: mostrarFixture()
+activate MostrarFixture
+MostrarFixture-> GestorFixture: getFixture(Integer idFixture)
+activate GestorFixture
+GestorFixture-> FD: getFixture(idFixture)
+activate FD
+FD -> GestorFixture: fixture
+deactivate FD
+GestorFixture -> MostrarFixture: FixtureDTO fdto
+deactivate GestorFixture
+MostrarFixture-> MostrarFixture :mostrar(fdto)
+activate MostrarFixture
+loop boton volver no presionado
+
+    opt boton gestionar resultado presionado
+    UsuarioAutenticado-> MostrarFixture: gestionarResultado()
+    activate MostrarFixture
+    ref over MostrarFixture
+    CU018 Gestionar Resultados del Fixture
+    end
+    MostrarFixture--> UsuarioAutenticado
+    deactivate MostrarFixture
+    end
+end
+MostrarFixture-> in1
+deactivate MostrarFixture
+deactivate MostrarFixture
+
+in1-> UsuarioAutenticado
+deactivate in1
+
+
+
+deactivate UsuarioAutenticado
+
+note right of FD
+FixtureDTO
+Integer idFixture
+List<FechaDTO> fechas
+end note
+
+note right of FD
+FechaDTO
+Integer idFecha
+Integer numero
+List<EncuentroDTO> encuentros
+end note
+
+note right of FD
+EncuentroDTO
+Integer idEncuentro
+String nombreParticipanteA
+String nombreParticipanteB
+ResultadoDTO rdto
+end note
+
+note right of FD
+ResultadoFinalDTO
+Integer idResultado
+Boolean empate
+Boolean ganaA
+Boolean ganaB
+end note
+
+note right of FD
+ResultadoPuntuacionDTO
+Integer idResultado
+Integer puntajeFinalA
+Integer puntajeFinalB
+end note
+note right of FD
+ResultadoSetsDTO
+List<Pair<Integer,Integer>> sets
+end note
+
+hide footbox
+
+
+@enduml

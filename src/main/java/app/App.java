@@ -20,6 +20,7 @@ import gui.Gui;
 import gui.PanelPersonalizado;
 import paneles.LugarRealizacionTM;
 import paneles.PanelAltaCompetencia;
+import paneles.PanelMisCompetencias2;
 
 
 public class App extends JFrame {
@@ -69,7 +70,8 @@ public class App extends JFrame {
 
 		this.actual = new JPanel();
 		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
-		this.cambiarPanel(altaCompetencia);
+//		this.cambiarPanel(altaCompetencia);
+		this.cambiarPanel(new PanelMisCompetencias2());
 
 
 	}

@@ -1,0 +1,122 @@
+@startuml
+title CU020 Ver Competencia
+hide footbox
+actor UsuarioAutenticado as us
+boundary VerMisCompetencias as in1
+boundary VerCompetencia as in2
+control GestorCompetencia as g1
+
+note right of g1
+CompetenciaDTO
+String nombre
+String modalidad
+String deporte
+String estado
+String participantes[][]
+String proximosencuentros[][]
+end note
+
+control CompetenciaDAO  as dao1 <<Interfaz>>
+
+activate us
+us -> in1: VerCompetencia()
+
+activate in1
+in1 -> in2: VerCompetencia(idCompetencia)
+deactivate in1
+
+activate in2
+in2 -> g1: getCompetencia(idCompetencia)
+
+activate g1
+g1 -> dao1: getCompetencia(idCompetencia)
+
+activate dao1
+dao1 --> g1: Competencia c
+deactivate dao1
+
+g1 -> g1: generarDTO(c)
+activate g1
+g1 --> g1: CompetenciaDTO dto
+deactivate g1
+
+g1 --> in2:  dto
+deactivate g1
+
+in2 -> in2: mostrarCompetencia()
+activate in2
+in2 --> in2
+deactivate in2
+in2 --> us
+deactivate in2
+
+loop boton volver no presionado
+
+    opt boton 'editar' presionado
+    us -> in2 : editarCompetencia(idCompetencia)
+    activate in2
+    ref over in2
+    CU005 ModificarCompetenciaDeportiva
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+    opt boton 'eliminar' presionado
+    us -> in2 : eliminarCompetencia(idCompetencia)
+    activate in2
+    ref over in2
+    CU006 DarDeBajaCompetenciaDeportiva
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+
+    opt boton 'ver fixture' presionado
+    us -> in2 : verFixture(idCompetencia)
+    activate in2
+    ref over in2
+    CU019 MostrarFixtureDeCompetencia
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+    opt boton 'generar fixture' presionado
+    us -> in2 : generarFixture(idCompetencia)
+    activate in2
+    ref over in2
+    CU017 GenerarFixture
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+    opt boton 'ver tabla de posiciones' presionado
+    us -> in2 : verTablaDePosiciones(idCompetencia)
+    activate in2
+    ref over in2
+    CU021 MostrarTablaDePosiciones
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+    opt boton 'ver participantes' presionado
+    us -> in2 : verParticipante(idParticipante)
+    activate in2
+    ref over in2
+    CU008 ListarParticipantesDeCompetencia
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+
+
+end
+deactivate us
+@enduml
+
+

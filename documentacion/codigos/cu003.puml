@@ -1,0 +1,73 @@
+
+
+@startuml
+title CU003 Listar Competencias Deportivas
+hide footbox
+actor UsuarioAutenticado as U
+boundary VerCompetencias as VC
+control GestorCompetencia as GC
+control GestorAutenticacion as GA
+control CompetenciaDAO as CD
+
+activate U
+U -> VC: ListarCompetencias()
+deactivate U
+activate VC
+VC->VC: ingresarDatos()
+loop filtro.nombre == ''NULL'' && filtro.deporte == ''NULL'' && filtro.modalidad == ''NULL'' && filtro.estado == ''NULL''
+VC->VC: ingresarDatos()
+end
+
+
+VC->GC: getCompetencias(VerInterfazCompetenciaDTO filtro)
+deactivate VC
+activate GC
+GC->GA: getUsuario()
+activate GA
+GA->GC: Usuario usuario
+deactivate GA
+GC->CD: getCompetencias(usuario Usuario, VerInterfazCompetenciaDTO filtro)
+activate CD
+CD->GC: List<Competencia> CompetenciasFiltradas
+deactivate CD
+
+
+GC->VC: List<VerInterfazCompetenciaDTO> ListaCompetencias
+deactivate GC
+activate VC
+loop for each compeDTO in ListaCompetencias
+VC->VC: mostrarDatos(VerInterfazCompetenciaDTO compeDTO)
+end
+loop boton volver no presionado
+
+    opt boton ver Competencia presionado
+    VC -> VC : verCompetencia()
+    ref over VC
+    CU020 VerCompetencia
+    end
+        end
+
+opt boton crear Competencia presionado
+    VC -> VC : crearCompetencia()
+    ref over VC
+    CU004 Dar de Alta CompetenciaDeportiva
+    end
+        end
+
+end
+
+VC->U
+deactivate VC
+
+note right of GC
+VerInterfazCompetenciaDTO
+Integer idCompetencia
+String nombre
+String deporte
+String modalidad
+String estado
+end note
+
+hide footbox
+@enduml
+

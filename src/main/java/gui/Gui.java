@@ -4,9 +4,11 @@ package gui;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Insets;
 import java.util.Enumeration;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -88,6 +90,18 @@ public abstract class Gui {
 	}
 	
 
+	static public ImageIcon emoji(String fileName, int width, int height, boolean smooth) {
+		Image imagen;
+		if (smooth)
+			imagen= new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
+		else
+			imagen= new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_REPLICATE);
+			
+		return new ImageIcon(imagen);
+	}
+	
+	
+	
 
 	public static final int RELATIVE = -1;
 

@@ -1,0 +1,30 @@
+@startuml
+
+[*]-->Activa: guardarCompetencia()
+
+state Activa{
+    [*] --> Creada
+    Creada --> Planificada: generarFixture()
+    Creada : On altaParcipante / agregarParticipante()
+    Creada : On altaLugar / agregarLugar()
+    Creada : Entry / fixture = null
+    Planificada -->  Creada: modificarDeporteAsociado()  
+    Planificada -->  Creada: modificarLugarDeRealizacion()   
+    Planificada -->  Creada: modificarModalidad()  
+    Planificada -->  Creada: agregarParticipante()  
+    Planificada -->  Creada: eliminarParticipante()  
+    Planificada --> EnDisputa: gestionarResultado() [resultado = primerResultado]
+    Planificada --> Planificada: generarFixture() 
+    EnDisputa : On gestionarResultado : guardarResultado()
+    EnDisputa --> Finalizada: gestionarResultado() [resultado = ultimoResultado]
+    EnDisputa -->  EnDisputa: gestionarResultado() [resultado!= ultimoResultado]
+}
+
+state Finalizada{
+
+}
+
+Finalizada --> [*]: eliminarCompetencia()
+Activa --> [*]: eliminarCompetencia()
+
+@enduml

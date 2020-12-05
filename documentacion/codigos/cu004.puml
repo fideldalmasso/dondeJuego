@@ -1,0 +1,163 @@
+@startuml
+title CU04 Dar de Alta Competencia Deportiva
+actor Usuario
+entity LugarRealizacion
+boundary AltaCompetencia
+control GestorCompetencia
+control GestorAutenticacion
+control GestorDeporte
+control LugarRealizacionDAO
+control CompetenciaDAO
+control DeporteDAO
+
+Usuario -> AltaCompetencia: aceptar()
+activate AltaCompetencia
+AltaCompetencia -> GestorCompetencia: crearCompetencia(CompetenciaDTO)
+
+deactivate AltaCompetencia
+activate GestorCompetencia
+GestorCompetencia -> CompetenciaDAO: getCompetencia(CompetenciaDTO.nombre)
+activate CompetenciaDAO
+CompetenciaDAO --> GestorCompetencia: Competencia compe
+deactivate CompetenciaDAO
+
+alt compe != null || lugares==null
+
+    GestorCompetencia --> AltaCompetencia: mostrarMensajeDatosInvalidos()
+    deactivate GestorCompetencia
+    activate AltaCompetencia
+    AltaCompetencia -> AltaCompetencia: mostrarMensajeDatosInvalidos()
+    activate AltaCompetencia
+    AltaCompetencia --> AltaCompetencia:
+    deactivate AltaCompetencia
+    AltaCompetencia --> Usuario
+    deactivate AltaCompetencia
+
+else else
+    create entity Competencia
+    activate GestorCompetencia
+    GestorCompetencia -> Competencia: Competencia(nombre,reglamento)
+       GestorCompetencia -> Competencia: setEstado(EstadoCompetencia.CREADA)
+    GestorCompetencia -> GestorDeporte: getDeporte(competenciaDTO.idDeporte)
+    activate GestorDeporte
+GestorDeporte -> DeporteDAO: getDeporte(competenciaDTO.idDeporte)
+activate DeporteDAO
+DeporteDAO --> GestorDeporte: Deporte deporte
+deactivate DeporteDAO
+GestorDeporte -> GestorCompetencia: Deporte deporte
+deactivate GestorDeporte
+    GestorCompetencia -> Competencia: setDeporte(deporte)
+    activate Competencia
+    Competencia --> GestorCompetencia
+    deactivate Competencia
+        GestorCompetencia -> GestorAutenticacion: getUsuario()
+    activate GestorAutenticacion
+    GestorAutenticacion -> GestorCompetencia: Usuario usuario
+    deactivate GestorAutenticacion
+    GestorCompetencia -> Competencia: setUsuario(usuario)
+    activate Competencia
+    Competencia --> GestorCompetencia
+    deactivate Competencia
+  create entity "m:Modalidad" as m
+ alt modalidad = 'liga'
+GestorCompetencia -> m: Modalidad(liga)
+    GestorCompetencia -> m: Modalidad(puntosPorPresentarse,permiteempate, puntosPorGanar)
+    activate m
+    m -> GestorCompetencia
+    deactivate m
+    alt permiteempate = true
+        GestorCompetencia -> m: Modalidad(puntosPorEmpate)
+        activate m
+         m ->  GestorCompetencia
+        deactivate m
+    end
+    GestorCompetencia -> m: Modalidad()
+    activate m
+    m --> GestorCompetencia: Modalidad m
+    deactivate m
+
+else else modalidad = 'eliminatoriaSimple'
+GestorCompetencia -> m: Modalidad(eliminatoriaSimple)
+activate m
+m -> GestorCompetencia: modalidad m
+deactivate m
+else modalidad = 'eliminatoriaDoble'
+GestorCompetencia -> m: Modalidad(eliminatoriaDoble)
+activate m
+m -> GestorCompetencia: modalidad m
+deactivate m
+end
+GestorCompetencia -> Competencia: setModalidad(m)
+create entity "p:Puntuacion" as p
+alt puntuacion = 'Sets'
+    GestorCompetencia -> p: Puntuacion(sets)
+    
+    GestorCompetencia -> p: Puntuacion(cantMaxSets)
+    activate p
+    p -> GestorCompetencia: Puntuacion p
+deactivate p
+else else puntuacion = 'porPuntuacion'
+    GestorCompetencia -> p: Puntuacion(porPuntuacion)
+    activate p
+    p -> GestorCompetencia: Puntuacion p
+deactivate p 
+else puntuacion = 'porResultadoFinal'
+GestorCompetencia -> p: Puntuacion(porResultadoFinal)
+activate p
+    p -> GestorCompetencia: Puntuacion p
+deactivate p
+end
+GestorCompetencia -> Competencia: setPuntuacion(p)
+
+
+    loop foreach lugar in lugares
+        
+        GestorCompetencia -> LugarRealizacionDAO: getLugar(lugar.first)
+        activate LugarRealizacionDAO
+        LugarRealizacionDAO --> GestorCompetencia: Lugar lugarRealizacion
+        deactivate LugarRealizacionDAO
+     create entity "cl : CompetenciaLugar" as CompetenciaLugar
+     GestorCompetencia -> CompetenciaLugar: CompetenciaLugar(competencia,lugarRealizacion,lugar.second)
+    activate CompetenciaLugar
+    CompetenciaLugar -> GestorCompetencia: CompetenciaLugar cl
+    deactivate CompetenciaLugar
+        GestorCompetencia -> Competencia: addCompetenciaLugar(cl)
+        activate Competencia
+        Competencia --> GestorCompetencia:
+        deactivate Competencia
+    end loop
+    
+
+    GestorCompetencia -> CompetenciaDAO: save(competencia)
+    activate CompetenciaDAO
+    CompetenciaDAO --> GestorCompetencia:
+    deactivate CompetenciaDAO
+    GestorCompetencia --> AltaCompetencia: mostrarMensajeExito()
+    deactivate GestorCompetencia
+    activate AltaCompetencia
+    AltaCompetencia -> AltaCompetencia: mostrarMensajeExito()
+    activate AltaCompetencia
+    AltaCompetencia --> AltaCompetencia:
+    deactivate AltaCompetencia
+    AltaCompetencia --> Usuario
+    deactivate AltaCompetencia
+
+end
+
+
+note right of CompetenciaDAO
+CompetenciaDTO
+String nombre
+int idDeporte
+List<Pair<Integer,Integer>> lugares
+String modalidad
+String reglamento
+Bool permiteEmpate
+Integer puntosPorPresentarse
+Integer puntosPorEmpate
+Integer puntosPorGanar
+end note
+
+hide footbox
+
+@enduml

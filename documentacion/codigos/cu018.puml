@@ -1,0 +1,171 @@
+@startuml
+title CU018 Gestionar Resultados de Fixture
+actor UsuarioAutenticado
+boundary MostrarFixture as in1
+boundary GestionarResultado as in2
+control GestorEncuentro
+control "encuentroDao:EncuentroDAO" as ED
+control GestorCompetencia
+entity "competencia:Competencia" as CC
+control "competenciaDao:CompetenciaDAO" as CD
+entity "fixture:Fixture" as FF
+control GestorResultado
+entity "encuentro:Encuentro" as EE
+
+activate UsuarioAutenticado
+UsuarioAutenticado-> in1: gestionarResultado()
+activate in1
+in1-> in2: gestionarResultado(Integer idEncuentro)
+activate in2
+in2-> GestorEncuentro: getEncuentro(Integer idEncuentro)
+activate GestorEncuentro
+GestorEncuentro-> ED: getEncuentro(Integer idEncuentro)
+activate ED
+ED-> GestorEncuentro
+deactivate ED
+
+
+alt ((modalidad= eliminatoriasimple and e.proximo.vigente!=null) or (modalidad=eliminatoriadoble and e.perdedor.vigente!=null) or (modalidad=eliminatoriadoble and e.ganador.vigente!=null))
+    GestorEncuentro-> in2
+    deactivate GestorEncuentro
+    in2-> in2: mostrarMensajeProximoDefinido()
+    activate in2
+    in2-> in1
+    deactivate in2
+    deactivate in2
+    in1-> UsuarioAutenticado
+    deactivate in1
+    
+else
+activate GestorEncuentro
+GestorEncuentro-> in2: encuentroDTO 
+deactivate GestorEncuentro
+UsuarioAutenticado-> in2: aceptar()
+in2-> GestorEncuentro: asignarResultado(resultadoDTO rdto,Integer idEncuentro)
+activate GestorEncuentro
+alt camposOmitidos
+    GestorEncuentro-> in2: mostrarMensajeCamposOmitidos()
+else  datosInvalidos
+    GestorEncuentro-> in2: mostrarMensajeDatosInvalidos()
+else
+GestorEncuentro-> ED: getEncuentro(Integer idEncuentro)
+activate ED
+ED-> GestorEncuentro
+deactivate ED
+GestorEncuentro-> GestorResultado: crearResultado(rdto)
+activate GestorResultado
+alt rdto instanceof ResultadoSetsDTO
+    create entity "rs:ResultadoSet" as RS
+    GestorResultado -> RS: <<create>>
+GestorResultado -> RS: setDatos(rdto.sets)
+activate RS
+RS-> GestorResultado
+deactivate RS
+else rdto instanceof ResultadoPuntuacionDTO
+    create entity "rf:ResultadoPuntuacion" as RP
+    GestorResultado -> RP: <<create>>
+GestorResultado -> RP: setDatos(rdto.puntajeFinalA,rdto.puntajeFinalB)
+activate RP
+RP-> GestorResultado
+deactivate RP
+else rdto instanceof ResultadoFinalDTO
+    create entity "rf:ResultadoFinal" as RF
+    GestorResultado-> RF: <<create>>
+GestorResultado-> RF: setDatos(rdto.empate, rdto.ganaA,rdto.ganaB)
+activate RF
+RF-> GestorResultado
+deactivate RF
+
+end
+GestorResultado-> GestorEncuentro: resultado
+deactivate GestorResultado
+GestorEncuentro-> EE: getResultadoVigente()
+activate EE
+EE-> GestorEncuentro: resultadoVigente
+deactivate EE
+opt resultadoVigente!=null
+    GestorEncuentro-> EE: addResultado(resultadoVigente)
+    activate EE
+EE-> GestorEncuentro
+deactivate EE
+end
+
+GestorEncuentro-> EE: setResultadoVigente(resultado)
+activate EE
+EE-> GestorEncuentro
+deactivate EE
+
+
+GestorEncuentro-> EE:  getFixture()
+activate EE
+EE-> GestorEncuentro: fixture
+deactivate EE
+
+GestorEncuentro-> FF:  getCompetencia()
+activate FF
+FF-> GestorEncuentro: competencia
+deactivate FF
+
+GestorEncuentro-> GestorCompetencia: actualizarFixture(competencia)
+activate GestorCompetencia
+opt primerResultado
+GestorCompetencia-> CC: setEstado(EstadoCompetencia.EN_DISPUTA)
+activate CC
+CC-> GestorCompetencia
+deactivate CC
+end
+opt ultimoResultado
+GestorCompetencia-> CC: setEstado(EstadoCompetencia.FINALIZADA)
+activate CC
+CC-> GestorCompetencia
+deactivate CC
+end
+GestorCompetencia-> CD: update(competencia)
+activate CD
+CD-> GestorCompetencia
+deactivate CD
+GestorCompetencia-> GestorEncuentro
+deactivate GestorCompetencia
+GestorEncuentro-> in2
+deactivate GestorEncuentro
+in2-> in2: mostrarMensajeExito()
+activate in2
+in2-> UsuarioAutenticado
+deactivate in2
+
+
+end
+end
+
+
+
+note right of RF
+EncuentroDTO
+Integer idEncuentro
+String nombreParticipanteA
+String nombreParticipanteB
+ResultadoDTO rdto
+end note
+
+note right of RF
+ResultadoFinalDTO
+Integer idResultado
+Boolean empate
+Boolean ganaA
+Boolean ganaB
+end note
+
+note right of RF
+ResultadoPuntuacionDTO
+Integer idResultado
+Integer puntajeFinalA
+Integer puntajeFinalB
+end note
+note right of RF
+ResultadoSetsDTO
+List<Pair<Integer,Integer>> sets
+end note
+
+
+hide footbox
+@enduml

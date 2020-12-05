@@ -1,0 +1,149 @@
+
+
+
+
+
+@startuml
+
+actor UsuarioAutenticado
+title CU009 Dar de Alta Participante
+boundary VerParticipantes
+boundary AltaParticipante
+control GestorParticipante
+control GestorCompetencia
+entity "competencia:Competencia" as CC
+control "participanteDao:ParticipanteDAO" as PD
+control "competenciaDao:CompetenciaDAO" as CD
+
+activate UsuarioAutenticado
+UsuarioAutenticado -> VerParticipantes: agregarParticipantes()
+
+activate VerParticipantes
+VerParticipantes -> GestorCompetencia: verificarCompetencia(ParticipanteDTO pdto)
+activate GestorCompetencia
+GestorCompetencia -> CD: getCompetencia(pdto.getId())
+activate CD
+CD -> GestorCompetencia: competencia
+deactivate CD
+
+
+
+
+alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA'
+    GestorCompetencia -> VerParticipantes
+    deactivate GestorCompetencia
+VerParticipantes -> VerParticipantes: mostrarMensajeCompetenciaIniciada()
+    activate VerParticipantes
+    VerParticipantes -> UsuarioAutenticado
+    deactivate VerParticipantes
+    deactivate VerParticipantes
+    
+else else
+
+UsuarioAutenticado -> AltaParticipante: aceptar()
+
+activate AltaParticipante
+AltaParticipante -> GestorParticipante: crearParticipante(ParticipanteDTO pdto)
+activate GestorParticipante
+
+
+GestorParticipante -> PD: verificarExistencia(pdto.getNombre(),pdto.getIdCompetencia(),pdto.getEmail())
+activate PD
+loop existeParticipante
+PD -> GestorParticipante
+ deactivate PD
+GestorParticipante -> AltaParticipante
+ deactivate GestorParticipante
+AltaParticipante -> VerParticipantes
+    deactivate AltaParticipante
+VerParticipantes -> VerParticipantes: mostrarMensajeDatosRepetidos()
+    activate VerParticipantes
+    VerParticipantes -> UsuarioAutenticado
+    deactivate VerParticipantes
+    UsuarioAutenticado -> AltaParticipante: aceptar()
+    activate AltaParticipante
+AltaParticipante -> GestorParticipante: crearParticipante(ParticipanteDTO pdto)
+activate GestorParticipante
+    GestorParticipante -> PD: verificarExistencia(pdto.getNombre(),pdto.getIdCompetencia(),pdto.getEmail())
+activate PD
+
+end
+
+PD -> GestorParticipante
+ deactivate PD
+
+GestorParticipante -> GestorCompetencia: verificarCompetencia(ParticipanteDTO pdto)
+activate GestorCompetencia
+GestorCompetencia -> CD: getCompetencia(pdto.getId())
+activate CD
+CD -> GestorCompetencia: competencia
+deactivate CD
+
+
+
+
+alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA'
+    GestorCompetencia -> GestorParticipante
+    deactivate GestorCompetencia
+GestorParticipante -> AltaParticipante
+deactivate GestorParticipante
+AltaParticipante-> AltaParticipante: mostrarMensajeCompetenciaIniciada()
+    activate AltaParticipante
+    AltaParticipante-> UsuarioAutenticado
+    deactivate AltaParticipante
+    deactivate AltaParticipante
+    
+else else
+activate GestorParticipante
+GestorCompetencia -> GestorParticipante: competencia
+deactivate GestorCompetencia
+create entity "p:Participante" as PP
+
+GestorParticipante -> PP: <<create>>
+GestorParticipante -> PP: setDatos(pdto.getNombre(), pdto.getCorreoElectronico(), competencia)
+
+activate PP
+PP -> GestorParticipante
+deactivate PP
+GestorParticipante -> GestorCompetencia: actualizarParticipantes(p,competencia)  
+activate GestorParticipante
+GestorCompetencia -> CC: addParticipante(p)
+activate CC  
+CC -> GestorCompetencia
+deactivate CC
+GestorCompetencia -> CC: setEstado(EstadoCompetencia.CREADA)
+activate CC  
+CC -> GestorCompetencia
+deactivate CC
+GestorCompetencia -> CC: setFixture(null)
+activate CC  
+CC -> GestorCompetencia
+deactivate CC
+GestorCompetencia -> CD: guardar(competencia)
+activate CD
+CD -> GestorCompetencia
+deactivate CD
+GestorCompetencia -> GestorParticipante
+deactivate GestorCompetencia
+GestorParticipante -> AltaParticipante
+deactivate GestorParticipante
+deactivate GestorParticipante
+deactivate GestorParticipante
+
+AltaParticipante -> AltaParticipante: mostrarMensajeExito()
+
+AltaParticipante -> UsuarioAutenticado  
+deactivate AltaParticipante  
+end
+
+note right of PD
+ParticipanteDTO
+String nombre
+String email
+Integer idCompetencia
+end note
+
+hide footbox
+
+@enduml
+

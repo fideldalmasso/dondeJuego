@@ -1,0 +1,93 @@
+@startuml
+title CU008 Listar participantes de Competencia
+hide footbox
+actor UsuarioAutenticado as us
+boundary VerCompetencia as in1
+boundary VerParticipantes as in2
+control GestorParticipante as g1
+
+note right of g1
+ParticipanteDTO
+String nombre
+String email
+end note
+
+
+
+entity CompetenciaDAO  as dao1 <<Interfaz>>
+'entity "p:Participante" as p
+
+activate us
+us -> in1: VerParticipantes()
+
+activate in1
+in1 -> in2: VerParticipantes(idCompetencia)
+deactivate in1
+
+activate in2
+in2 -> g1: getParticipantes(idCompetencia)
+
+activate g1
+g1 -> dao1: getParticipantes(idCompetencia)
+
+activate dao1
+dao1 --> g1: Participante lista[]
+deactivate dao1
+
+'loop foreach participante in listaParticipantes
+'g1 -> p: getNombre()
+'p --> g1: nombre
+'g1 -> p: getEmail()
+'p --> g1: email
+'end
+
+g1 --> in2: ParticipanteDTO lista[]
+deactivate g1
+
+in2 -> in2: mostrarParticipantes()
+activate in2
+in2 --> in2
+deactivate in2
+in2 --> us
+deactivate in2
+
+loop boton volver no presionado
+
+    opt boton vet competencia presionado
+    us -> in2 : agregarParticipante()
+    activate in2
+    ref over in2
+    CU009 DarDeAltaParticipante
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+    opt boton modificar participante presionado
+    us -> in2 : modificarParticipante(participante)
+    activate in2
+    ref over in2
+    CU010 ModificarParticipante
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+    opt boton eliminar participante presionado
+    us -> in2 : eliminarParticipante(participante)
+    activate in2
+    ref over in2
+    CU011 DarDeBajaParticipante
+    end
+    in2 --> us
+    deactivate in2
+    end
+
+end
+deactivate us
+
+
+
+
+
+@enduml
