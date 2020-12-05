@@ -50,5 +50,11 @@ public class Resultado {
 	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
+	public Encuentro getEncuentro() {
+		return encuentro;
+	}
+	public void setEncuentro(Encuentro encuentro) {
+		this.encuentro = encuentro;
+	}
 	
 }

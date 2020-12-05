@@ -129,4 +129,10 @@ public class Encuentro {
 	public LugarRealizacion getLugarRealizacion() {
 		return lugarRealizacion;
 	}
+	public Fecha getFecha() {
+		return fecha;
+	}
+	public void setFecha(Fecha fecha) {
+		this.fecha = fecha;
+	}
 }
