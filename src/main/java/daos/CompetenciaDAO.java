@@ -59,6 +59,16 @@ public class CompetenciaDAO {
 		 em.close();
 		 return compe;
 	 }
+	 
+	 public List<Participante> getParticipantes(Integer idCompetencia){
+		 EntityManager em	= factory.createEntityManager();
+			em.getTransaction().begin();
+			Competencia compe  = em.find(Competencia.class, idCompetencia);
+			em.getTransaction().commit();
+			em.close();
+			return compe.getParticipantes();
+	 }
+	 
 	 /*
 	 public void update(Competencia c) {
 		Session session = factory.openSession();

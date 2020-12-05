@@ -23,17 +23,7 @@ public class ParticipanteDAO {
 	    }
 	}
 	
-	public List<Participante> getParticipantes(Integer idCompetencia){
-		EntityManager em	= factory.createEntityManager();
-		em.getTransaction().begin();
-	    List<Participante> participantes = em.createQuery("SELECT participante from Participante participante where participante.idCompetencia = ?1")
-	      .setParameter(1, idCompetencia)
-	      .getResultList();
-		 em.getTransaction().commit();
-		 em.close();
-	    return participantes;
-		
-	}
+	
 	public Boolean verificarExistencia(String nombre, Integer idCompetencia, String email) {
 		List<Participante> p1, p2;
 		EntityManager em	= factory.createEntityManager();
