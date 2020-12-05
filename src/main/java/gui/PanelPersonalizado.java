@@ -42,7 +42,8 @@ public abstract class PanelPersonalizado extends JPanel{
 	public static final Insets insetpredeterminado = new Insets(5,5,5,5);
 	public static final Insets inseterror = new Insets(0,10,0,0);
 	public static final Insets insetvacio = new Insets(0,0,0,0);
-
+	protected  static final String fileFondo = "icon/tile.png";
+	
 	public  static ImageIcon errorIcono = emoji("icon/error2.png",24,24);
 	public JLabel terror() {
 		return new JLabel(errorIcono);
@@ -73,7 +74,7 @@ public abstract class PanelPersonalizado extends JPanel{
 	}
 
 
-	protected String fileFondo;
+	
 
 	public  PanelPersonalizado() {
 		super();
@@ -102,26 +103,26 @@ public abstract class PanelPersonalizado extends JPanel{
 	}
 
 
-	//	//Este metodo dibuja la imagen de fondo
-	//	@Override
-	//	protected void paintComponent(Graphics g) {
-	//		//http://bg.siteorigin.com/
-	//		//https://tips4java.wordpress.com/2008/10/12/background-panel/
-	//		super.paintComponent(g);
-	//		Image imagen = new ImageIcon(fileFondo).getImage();
-	//
-	//		Dimension d = this.getSize();
-	//		int width = imagen.getWidth( null );
-	//		int height = imagen.getHeight( null );
-	//
-	//		for (int x = 0; x < d.width; x += width)
-	//		{
-	//			for (int y = 0; y < d.height; y += height)
-	//			{
-	//				g.drawImage( imagen, x, y, null, null );
-	//			}
-	//		}
-	//	}
+		//Este metodo dibuja la imagen de fondo
+//		@Override
+//		protected void paintComponent(Graphics g) {
+//			//http://bg.siteorigin.com/
+//			//https://tips4java.wordpress.com/2008/10/12/background-panel/
+//			super.paintComponent(g);
+//			Image imagen = new ImageIcon(fileFondo).getImage();
+//	
+//			Dimension d = this.getSize();
+//			int width = imagen.getWidth( null );
+//			int height = imagen.getHeight( null );
+//	
+//			for (int x = 0; x < d.width; x += width)
+//			{
+//				for (int y = 0; y < d.height; y += height)
+//				{
+//					g.drawImage( imagen, x, y, null, null );
+//				}
+//			}
+//		}
 
 	//CREAR FORMATTEDTEXTS-------------------------------------------------------------------------------------------------------------------------
 

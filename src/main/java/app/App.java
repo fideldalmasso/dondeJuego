@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import javax.swing.plaf.FontUIResource;
 
 import gestores.GestorAutenticacion;
 import gui.Gui;
+import gui.PanelFondo;
 import gui.PanelPersonalizado;
 import paneles.LugarRealizacionTM;
 import paneles.PanelAltaCompetencia;
@@ -39,9 +42,7 @@ public class App extends JFrame {
 		Gui.setearFuente("Comic Sans MS",this);
 
 		{
-			contenido = new JPanel(new GridBagLayout());
-			contenido.setBackground(Color.WHITE);
-			contenido.setBorder(new EmptyBorder(20, 20, 20, 20));
+			contenido = new PanelFondo();
 			this.setContentPane(contenido);
 		}
 
