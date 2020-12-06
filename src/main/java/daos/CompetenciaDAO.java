@@ -47,6 +47,14 @@ public class CompetenciaDAO {
 		return compe;
 	}
 	
+	public List<Competencia> getCompetencias(Usuario usuario) {
+		List<Competencia> listaCompetencias = this.getAllCompetencias();
+		listaCompetencias = listaCompetencias.parallelStream()
+				.filter(c -> c.getUsuario().equals(usuario))
+				.collect(Collectors.toList());
+		return listaCompetencias;
+	}
+	
 	public List<Competencia> getCompetencias(Usuario usuario, VerInterfazCompetenciaDTO filtro) {
 		List<Competencia> listaCompetencias = this.getAllCompetencias();
 		listaCompetencias = listaCompetencias.parallelStream()

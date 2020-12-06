@@ -17,6 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingWorker;
 
+import app.App;
 import daos.DeporteDAO;
 import dominio.Deporte;
 import dominio.Mensaje2;
@@ -50,7 +51,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	private MyPack<MyJTextArea> reglamento = new MyPack<MyJTextArea>("Reglamento");
 	
 	private MyJTable tablalugares;
-	private LugarRealizacionTM tablemodel;
+	private PanelAltaCompetenciaTM tablemodel;
 	
 	
 	private JPanel panelBotones= new JPanel(new GridBagLayout());
@@ -63,13 +64,14 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	private List<Deporte> listaDeportes;
 	
 	private SwingWorker<String[], Void> trabajador1;
-	private SwingWorker<LugarRealizacionTM, Void> trabajador2;
+	private SwingWorker<PanelAltaCompetenciaTM, Void> trabajador2;
 	
+	private App padre;
 	
-	public PanelAltaCompetencia() {
+	public PanelAltaCompetencia(App padre) {
 		
 		
-		
+		this.padre = padre;
 		this.setPreferredSize(new Dimension(780, 734));
 //		this.setBackground(new Color(250, 216, 214));
 		this.setLayout(new GridBagLayout());
@@ -104,18 +106,18 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		}
 		{
 			//[width=165,height=20]
-			tablemodel = new LugarRealizacionTM();
+			tablemodel = new PanelAltaCompetenciaTM();
 			tablalugares = new MyJTable(tablemodel);
 			tablalugares.setColumnWidths(20,290,100);
 			//tablalugares.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 			lugar.setComponent(new JScrollPane(tablalugares));
 			mapacomponentes.put(errores.LUGAR, lugar);
 			
-			trabajador2 = new SwingWorker<LugarRealizacionTM, Void>(){
-				private LugarRealizacionTM t;
+			trabajador2 = new SwingWorker<PanelAltaCompetenciaTM, Void>(){
+				private PanelAltaCompetenciaTM t;
 				@Override
-				protected LugarRealizacionTM doInBackground() throws Exception {
-					t= new LugarRealizacionTM(getIdDeporteSeleccionado());
+				protected PanelAltaCompetenciaTM doInBackground() throws Exception {
+					t= new PanelAltaCompetenciaTM(getIdDeporteSeleccionado());
 					return t;
 				}
 				@Override 
@@ -226,6 +228,10 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				
 				tablemodel.recargarTabla(getIdDeporteSeleccionado());
 				tablalugares.update();
+			});
+			
+			botoncancelar.addActionListener(e->{
+				padre.volverAtras();
 			});
 			
 		}

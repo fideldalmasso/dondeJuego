@@ -12,6 +12,7 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Stack;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -21,9 +22,10 @@ import gestores.GestorAutenticacion;
 import gui.Gui;
 import gui.PanelFondo;
 import gui.PanelPersonalizado;
-import paneles.LugarRealizacionTM;
+import paneles.PanelAltaCompetenciaTM;
 import paneles.PanelAltaCompetencia;
-import paneles.PanelMisCompetencias2;
+import paneles.PanelHome;
+import paneles.PanelMisCompetencias;
 
 
 public class App extends JFrame {
@@ -34,11 +36,14 @@ public class App extends JFrame {
 	JButton boton_home;
 	JButton boton_volver;
 	JPanel actual = null;
-	List<JPanel> listaPaneles = new ArrayList<JPanel>();
+	Stack<PanelPersonalizado> paneles;
+	PanelHome home;
 
 
 	private App() {
+		
 		this.setTitle("¿Dónde juego?");
+		paneles = new Stack<PanelPersonalizado>();
 		Gui.setearFuente("Comic Sans MS",this);
 
 		{
@@ -46,7 +51,7 @@ public class App extends JFrame {
 			this.setContentPane(contenido);
 		}
 
-
+		
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		//	this.setPreferredSize(new Dimension(800,600));
 		this.setMinimumSize(new Dimension(1280,1024));
@@ -68,17 +73,31 @@ public class App extends JFrame {
 			}
 		});
 
-
-		this.actual = new JPanel();
+		home = new PanelHome(this);
+		this.actual = home;
 //		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
 //		this.cambiarPanel(altaCompetencia);
-		this.cambiarPanel(new PanelMisCompetencias2());
-
+		//this.cambiarPanel(new PanelMisCompetencias2(this));
+		this.nuevoPanel(home);
 
 	}
 
 
+	public void volverAHome() {
+		paneles.clear();
+		nuevoPanel(this.home);
+	}
+	
+	public void volverAtras() {
+		paneles.pop();
+		cambiarPanel(paneles.peek());
+	}
 
+	public void nuevoPanel(PanelPersonalizado p) {
+		paneles.push(p);
+		cambiarPanel(paneles.peek());
+	}
+	
 	public void cambiarPanel(PanelPersonalizado p) {
 		Dimension d = this.getSize();
 		this.remove(actual);

@@ -21,6 +21,14 @@ public class MyJTextField extends JTextField {
 	private String hint;
 	private Boolean changed=false;
 
+	
+	@Override
+	public String getText() {
+		String text = super.getText();
+		
+		return changed?text:"";
+	}
+	
 	public MyJTextField(String text) {
 		super(text);
 		this.hint=text;

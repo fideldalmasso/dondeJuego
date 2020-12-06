@@ -10,7 +10,7 @@ import dominio.Pair;
 import gestores.GestorLugarRealizacion;
 import gui.Gui;
 
-public class LugarRealizacionTM extends AbstractTableModel {
+public class PanelAltaCompetenciaTM extends AbstractTableModel {
 
 
 	private static final long serialVersionUID = 1L;
@@ -23,13 +23,13 @@ public class LugarRealizacionTM extends AbstractTableModel {
 	
 
 	
-	public LugarRealizacionTM() {
+	public PanelAltaCompetenciaTM() {
 		super();
 		data = new ArrayList<LugarRealizacion>();
 		return;
 	}
 	
-	public LugarRealizacionTM(Integer idDeporte) {
+	public PanelAltaCompetenciaTM(Integer idDeporte) {
 		super();
 		gestor = new GestorLugarRealizacion();
 		recargarTabla(idDeporte);

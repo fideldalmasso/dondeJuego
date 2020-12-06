@@ -14,7 +14,7 @@ import javax.swing.table.TableModel;
 import gui.Gui;
 import gui.MyPack;
 import gui.MyTitle;
-import paneles.LugarRealizacionTM;
+import paneles.PanelAltaCompetenciaTM;
 
 public class PruebaThreads extends JFrame{
 
@@ -26,7 +26,7 @@ public class PruebaThreads extends JFrame{
 		TableModel t;
 		@Override
 		protected TableModel doInBackground() throws Exception {
-			t= new LugarRealizacionTM(-1);
+			t= new PanelAltaCompetenciaTM(-1);
 			return t;
 		}
 		
@@ -47,7 +47,7 @@ public class PruebaThreads extends JFrame{
 		JPanel panel = new JPanel(new GridBagLayout());
 		this.setContentPane(panel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tablemodel = new LugarRealizacionTM();
+		tablemodel = new PanelAltaCompetenciaTM();
 		table=new JTable(tablemodel);
 		JScrollPane jsp = new JScrollPane(table);
 		pack.setComponent(jsp);
