@@ -1,11 +1,13 @@
 package gestores;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import daos.CompetenciaDAO;
+import daos.FixtureDAO;
 import dominio.Competencia;
 import dominio.CompetenciaLugar;
 import dominio.Encuentro;
@@ -15,11 +17,13 @@ import dominio.Mensaje;
 import dominio.ModalidadEliminatoriaDoble;
 import dominio.ModalidadEliminatoriaSimple;
 import dominio.Participante;
+import dtos.*;
 import enumerados.EstadoCompetencia;
 
 public class GestorFixture {
 	Competencia c;
 	GestorCompetencia gc;
+	FixtureDAO fd;
 	
 	Mensaje generarFixture(Integer id) {
 		gc = new GestorCompetencia();
@@ -98,4 +102,21 @@ public class GestorFixture {
 		
 		return mensaje;
 	}
+	/*
+	public FixtureDTO getFixture(Integer idFixture) {
+		Fixture fixture = fd.getFixture(idFixture);
+		FixtureDTO fdto = new FixtureDTO();
+		fdto.setIdFixture(idFixture);
+		fdto.setFechas(new ArrayList<FechaDTO>());
+		for(Fecha f : fixture.getFechas()) {
+			FechaDTO fechaDto = new FechaDTO();
+			fechaDto.setIdFecha(f.getId());
+			fechaDto.setNumero(f.getNumero());
+			fechaDto.setEncuentros(new ArrayList<EncuentroDTO>());
+			for(Encuentro e: f.getEncuentros()) {
+				
+			}
+		}
+	}
+	*/
 }

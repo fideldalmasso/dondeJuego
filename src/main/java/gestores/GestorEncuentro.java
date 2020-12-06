@@ -82,5 +82,56 @@ public class GestorEncuentro {
 		return null;
 	}
 	
+	public Mensaje asignarResultado(ResultadoPuntuacionDTO rdto, Integer idEncuentro) {
+		if(idEncuentro == null || rdto.getPuntajeFinalA()==null || rdto.getPuntajeFinalB()==null) {
+			//Manejo de mensajes
+		}
+		else {
+			if( rdto.getPuntajeFinalA() < 0) {
+				//Manejo de mensajes
+			}
+			else if (rdto.getPuntajeFinalB() < 0) {
+				//Manejo de mensajes
+			}
+			//Mas comprobaciones?
+			else {
+				Encuentro encuentro = ed.getEncuentro(idEncuentro);
+				ResultadoPuntuacion rp = gr.crearResulado(rdto);
+				rp.setEncuentro(encuentro);
+				Resultado vigente = encuentro.getVigente();
+				if(vigente!=null) {
+					encuentro.getResultados().add(vigente);
+				}
+				encuentro.setVigente(rp);
+				gc.actualizarFixture(encuentro.getFecha().getFixture().getCompetencia());
+				//Manejo de mensajes
+			}			
+		}
+
+		return null;
+	}
+	
+	public Mensaje asignarResultado(ResultadoSetsDTO rdto, Integer idEncuentro) {
+		if(idEncuentro == null || rdto.getSets()==null) {
+			//Manejo de mensajes
+		}
+		else {
+			//Mas comprobaciones?
+				Encuentro encuentro = ed.getEncuentro(idEncuentro);
+				ResultadoSets rs = gr.crearResultado(rdto);
+				rs.setEncuentro(encuentro);
+				Resultado vigente = encuentro.getVigente();
+				if(vigente!=null) {
+					encuentro.getResultados().add(vigente);
+				}
+				encuentro.setVigente(rs);
+				gc.actualizarFixture(encuentro.getFecha().getFixture().getCompetencia());
+				//Manejo de mensajes
+						
+		}
+
+		return null;
+	}
+	
 	
 }
