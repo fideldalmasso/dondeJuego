@@ -11,4 +11,9 @@ public class ModalidadEliminatoriaSimple extends Modalidad {
 	public ModalidadEliminatoriaSimple() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "Eliminatoria Simple";
+	}
+	
 }

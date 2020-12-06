@@ -11,7 +11,9 @@ import daos.ModalidadDAO;
 import daos.SistemaPuntuacionDAO;
 import dominio.*;
 import dtos.CompetenciaDTO;
+import dtos.EncuentroDTO;
 import dtos.ParticipanteDTO;
+import dtos.VerCompetenciaDTO;
 import dtos.VerInterfazCompetenciaDTO;
 import enumerados.EstadoCompetencia;
 import paneles.PanelAltaCompetencia.errores;
@@ -229,6 +231,26 @@ public class GestorCompetencia {
 		return listaDtos;
 	}
 	
-	
+	public VerCompetenciaDTO getCompetenciaDTO(Integer idCompetencia) {
+		Competencia compe = cd.getCompetencia(idCompetencia);
+		VerCompetenciaDTO vcdto = new VerCompetenciaDTO();
+		vcdto.setNombre(compe.getNombre());
+		vcdto.setModalidad(compe.getModalidad().toString());
+		vcdto.setDeporte(compe.getDeporte().getNombre());
+		vcdto.setEstado(compe.getEstado());
+		vcdto.setParticipantes(new ArrayList<String>());
+		compe.getParticipantes().stream()
+			.map(p -> p.getNombre())
+			.forEach(n -> vcdto.getParticipantes().add(n));
+		vcdto.setProximosEncuetros(new ArrayList<EncuentroDTO>());
+		for(Fecha f: compe.getFixture().getFechas()) {
+			for(Encuentro e: f.getEncuentros()) {
+				if(e.getVigente()!=null) {
+					vcdto.getProximosEncuetros().add(new EncuentroDTO(e.getId(),e.getParticipanteA().getNombre(),e.getParticipanteB().getNombre(),null));
+				}
+			}
+		}
+		return vcdto;
+	}
 
 }

@@ -52,5 +52,9 @@ public class ModalidadLiga extends Modalidad {
 	public void setPuntosPorGanar(Integer puntosPorGanar) {
 		this.puntosPorGanar = puntosPorGanar;
 	}
+	@Override
+	public String toString() {
+		return "Liga";
+	}
 	
 }
