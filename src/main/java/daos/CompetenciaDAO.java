@@ -48,18 +48,18 @@ public class CompetenciaDAO {
 	}
 	
 	public List<Competencia> getCompetencias(Usuario usuario) {
-		List<Competencia> listaCompetencias = this.getAllCompetencias();
-		listaCompetencias = listaCompetencias.parallelStream()
-				.filter(c -> c.getUsuario().equals(usuario))
-				.collect(Collectors.toList());
+		EntityManager em	= factory.createEntityManager();
+		em.getTransaction().begin();
+		List<Competencia> listaCompetencias = em.createQuery("from Competencia C where C.usuario.id= :idusuario")
+				.setParameter("idusuario", usuario.getId())
+				.getResultList();
+		em.getTransaction().commit();
+		em.close();
 		return listaCompetencias;
 	}
 	
 	public List<Competencia> getCompetencias(Usuario usuario, VerInterfazCompetenciaDTO filtro) {
-		List<Competencia> listaCompetencias = this.getAllCompetencias();
-		listaCompetencias = listaCompetencias.parallelStream()
-				.filter(c -> c.getUsuario().equals(usuario))
-				.collect(Collectors.toList());
+		List<Competencia> listaCompetencias = this.getCompetencias(usuario);
 		List<Competencia> listaCompetenciasFiltradas =  new ArrayList<Competencia>();
 		for(Competencia competencia: listaCompetencias) {
 			if((!filtro.getNombre().equals(null) && competencia.getNombre().equals(filtro.getNombre())) ||
