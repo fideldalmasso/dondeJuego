@@ -19,6 +19,11 @@ public class VerInterfazCompetenciaDTO {
 		this.modalidad = modalidad;
 		this.estado = estado;
 	}
+	
+	public VerInterfazCompetenciaDTO() {
+		super();
+	}
+	
 	public Integer getIdCompetencia() {
 		return idCompetencia;
 	}

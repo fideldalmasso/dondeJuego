@@ -1,6 +1,8 @@
 package daos;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +14,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import dominio.*;
+import dtos.VerInterfazCompetenciaDTO;
+import enumerados.EstadoCompetencia;
 
 public class CompetenciaDAO {
 	private static EntityManagerFactory factory;
@@ -41,6 +45,26 @@ public class CompetenciaDAO {
 		em.getTransaction().commit();
 		em.close();
 		return compe;
+	}
+	
+	public List<Competencia> getCompetencias(Usuario usuario, VerInterfazCompetenciaDTO filtro) {
+		List<Competencia> listaCompetencias = this.getAllCompetencias();
+		listaCompetencias = listaCompetencias.parallelStream()
+				.filter(c -> c.getUsuario().equals(usuario))
+				.collect(Collectors.toList());
+		List<Competencia> listaCompetenciasFiltradas =  new ArrayList<Competencia>();
+		for(Competencia competencia: listaCompetencias) {
+			if(competencia.getNombre().contentEquals(filtro.getNombre()) ||
+				competencia.getId().equals(filtro.getIdCompetencia()) ||
+				competencia.getDeporte().getNombre().equals(filtro.getDeporte()) ||
+				(competencia.getModalidad() instanceof ModalidadLiga && filtro.getModalidad().equals("Liga")) ||
+				(competencia.getModalidad() instanceof ModalidadEliminatoriaSimple && filtro.getModalidad().equals("Eliminatoria Simple")) ||
+				(competencia.getModalidad() instanceof ModalidadEliminatoriaDoble && filtro.getModalidad().equals("Eliminatoria Doble")) ||
+				competencia.getEstado().toString().equals(filtro.getEstado())) {
+				listaCompetenciasFiltradas.add(competencia);
+			}
+		}
+		return listaCompetenciasFiltradas;
 	}
 	 
 	 public void save(Competencia c) {

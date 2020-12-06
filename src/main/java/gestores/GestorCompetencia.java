@@ -1,5 +1,6 @@
 package gestores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,6 +12,7 @@ import daos.SistemaPuntuacionDAO;
 import dominio.*;
 import dtos.CompetenciaDTO;
 import dtos.ParticipanteDTO;
+import dtos.VerInterfazCompetenciaDTO;
 import enumerados.EstadoCompetencia;
 import paneles.PanelAltaCompetencia.errores;
 
@@ -184,5 +186,28 @@ public class GestorCompetencia {
 	public Competencia getCompetencia(Integer id) {
 		return (new CompetenciaDAO()).getCompetencia(id);
 	}
+	
+	public List<VerInterfazCompetenciaDTO> getCompetencias(VerInterfazCompetenciaDTO filtro) {
+		List<Competencia>  listaCompetencias = cd.getCompetencias(new GestorAutenticacion().getUsuario(),filtro);
+		List<VerInterfazCompetenciaDTO> listaDtos = new ArrayList<VerInterfazCompetenciaDTO>();
+		for(Competencia c: listaCompetencias) {
+			VerInterfazCompetenciaDTO dto = new VerInterfazCompetenciaDTO();
+			dto.setNombre(c.getNombre());
+			dto.setDeporte(c.getDeporte().getNombre());
+			dto.setEstado(c.getEstado().toString());
+			dto.setIdCompetencia(c.getId());
+			if(c.getModalidad() instanceof ModalidadLiga) {
+				dto.setModalidad("Liga");
+			}else if(c.getModalidad() instanceof ModalidadEliminatoriaSimple) {
+				dto.setModalidad("Eliminatoria Simple");
+			}else if(c.getModalidad() instanceof ModalidadEliminatoriaDoble){
+				dto.setModalidad("Eliminatoria Doble");
+			}
+			listaDtos.add(dto);
+		}
+		return listaDtos;
+	}
+	
+	
 
 }
