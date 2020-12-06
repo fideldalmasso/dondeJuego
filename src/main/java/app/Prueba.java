@@ -17,6 +17,7 @@ import dominio.Localidad;
 import dominio.LugarRealizacion;
 import dominio.Pair;
 import dominio.Pais;
+import dominio.Participante;
 import dominio.Provincia;
 import dominio.RegistroSesion;
 import dominio.Usuario;
@@ -24,29 +25,23 @@ import dtos.CompetenciaDTO;
 import enumerados.TipoDocumento;
 import gestores.GestorAutenticacion;
 import gestores.GestorCompetencia;
+import gestores.GestorFixture;
 import gui.Gui;
 
 public class Prueba {
 	
 	public static void main(String[] args) {
-	      /*
-	      try {
-	         factory = new Configuration().configure().buildSessionFactory();
-	      } catch (Throwable ex) { 
-	         System.err.println("Failed to create sessionFactory object." + ex);
-	         throw new ExceptionInInitializerError(ex); 
-	      }
-	      */
 	      
 	      PaisDAO pd = new PaisDAO();
 	      ProvinciaDAO prod = new ProvinciaDAO();
 	      LocalidadDAO locd =  new LocalidadDAO();
 	      UsuarioDAO ud =  new UsuarioDAO();
 	      LugarRealizacionDAO ld =  new LugarRealizacionDAO();
-	      
-	      GestorCompetencia gc = new GestorCompetencia();
 	      GestorAutenticacion ga = new GestorAutenticacion();
+	      GestorCompetencia gc = new GestorCompetencia();
 	      
+	      ga.login("dieguitomaradona@gmail.com", "12345");
+	      /*
 	      Pais pais = new Pais("Argentina", new ArrayList<Provincia>());
 	      pd.save(pais);
 	      Provincia prov =  new Provincia(pais, "Santa Fe", new ArrayList<Localidad>());
@@ -54,28 +49,14 @@ public class Prueba {
 	      Localidad loc = new Localidad(prov, "Santa Fe");
 	      locd.save(loc);
 	      
-	      /*Usuario usr = new Usuario ("EdgefsddrsaadAhsfssasafafsgrr",
-	    		  "Dijkstra", 
-	    		  "12345",
-	    		  TipoDocumento.LE, 
-	    		  "10", 
-	    		  "dedgerarrobagmail.com", 
-	    		  new HashSet<Competencia>(),
-	    		  new HashSet<RegistroSesion>(),
-	    		  new HashSet<LugarRealizacion>(),
-	    		  loc);
-	      ud.save(usr);
-	      */
-	      ga.login("dedgerarrobagmail.com", "12345");
-	      
-	      Deporte dep = gc.crearDeporte("Futbol");
+	      Deporte dep = gc.crearDeporte("Tenis de mesa 3");
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      
 	      LugarRealizacion lr = new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,deportes);
 	      ld.save(lr);
 	      
-	      Pair p = new Pair(lr.getId(),1);
+	      Pair p = new Pair(lr.getId(),1000);
 	      List<Pair> lp = new ArrayList<Pair>();
 	      lp.add(p);
 	      
@@ -89,11 +70,37 @@ public class Prueba {
 	    		  0,
 	    		  3,
 	    		  1,
-	    		  "Puntuacion",
+	    		  "Puntuación",
 	    		  0,
 	    		  null);
 	      
-	      if(Gui.DEBUG)System.out.println(gc.crearCompetencia(c).getMensaje());
+	      gc.crearCompetencia(c);
+	      */
+	      //Competencia compe = gc.getCompetencia(348);
+	      
+	      /*Participante p1 = new Participante();
+	      p1.setEmail("damianlips@gmail.com");
+	      p1.setNombre("Damian Lipschitz");
+	      Participante p2 = new Participante();
+	      p2.setEmail("fedenq@gmail.com");
+	      p2.setNombre("Federico Quijada");
+	      Participante p3 = new Participante();
+	      p3.setEmail("fideldalmasso@gmail.com");
+	      p3.setNombre("Fidel Dalmasso");
+	      Participante p4 = new Participante();
+	      p4.setEmail("juanpablocabana2@gmail.com");
+	      p4.setNombre("Juan Cabana");
+	      
+	      gc.agregarParticipante(p1, compe);
+	      gc.agregarParticipante(p2, compe);
+	      gc.agregarParticipante(p3, compe);
+	      gc.agregarParticipante(p4, compe);
+	      */
+	      
+	      GestorFixture gf =  new GestorFixture();
+	      gf.generarFixture(348);
+	      gf.crearFixture();
+	      
 	     
 	}
 	   

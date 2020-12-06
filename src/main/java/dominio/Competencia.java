@@ -3,12 +3,15 @@ package dominio;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,11 +50,11 @@ public class Competencia {
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idModalidad")
 	private Modalidad modalidad;
-	@OneToMany(mappedBy="competencia", cascade=CascadeType.PERSIST)
-	private List<CompetenciaLugar> lugares;
-	@OneToMany(mappedBy="competencia")
-	private List<Participante> participantes;
-	@OneToOne(mappedBy = "competencia")
+	@OneToMany(mappedBy="competencia", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private Set<CompetenciaLugar> lugares;
+	@OneToMany(mappedBy="competencia", fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	private Set<Participante> participantes;
+	@OneToOne(mappedBy = "competencia", cascade=CascadeType.ALL)
 	private Fixture fixture;
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
@@ -59,7 +62,7 @@ public class Competencia {
 	
 	public Competencia(Integer id, String nombre, EstadoCompetencia estado, String reglamento, Timestamp fechaInicio,
 			Timestamp fechaFin, Timestamp fechaHoraBajaLogica, Deporte deporte, SistemaPuntuacion sistemaPuntuacion,
-			Modalidad modalidad, List<CompetenciaLugar> lugares, List<Participante> participantes, Fixture fixture, Usuario usr) {
+			Modalidad modalidad, Set<CompetenciaLugar> lugares, Set<Participante> participantes, Fixture fixture, Usuario usr) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -77,7 +80,7 @@ public class Competencia {
 	}
 	public Competencia(String nombre, EstadoCompetencia estado, String reglamento, Timestamp fechaInicio,
 			Timestamp fechaFin, Timestamp fechaHoraBajaLogica, Deporte deporte, SistemaPuntuacion sistemaPuntuacion,
-			Modalidad modalidad, List<CompetenciaLugar> lugares, List<Participante> participantes, Fixture fixture, Usuario usr) {
+			Modalidad modalidad, Set<CompetenciaLugar> lugares, Set<Participante> participantes, Fixture fixture, Usuario usr) {
 		super();
 		this.nombre = nombre;
 		this.estado = estado;
@@ -94,8 +97,8 @@ public class Competencia {
 	}
 	public Competencia() {
 		super();
-		this.lugares = new ArrayList<CompetenciaLugar>();
-		this.participantes = new ArrayList<Participante>();
+		this.lugares = new TreeSet<CompetenciaLugar>();
+		this.participantes = new TreeSet<Participante>();
 	}
 	public Integer getId() {
 		return id;
@@ -157,16 +160,16 @@ public class Competencia {
 	public void setModalidad(Modalidad modalidad) {
 		this.modalidad = modalidad;
 	}
-	public List<CompetenciaLugar> getLugares() {
+	public Set<CompetenciaLugar> getLugares() {
 		return lugares;
 	}
-	public void setLugares(List<CompetenciaLugar> lugares) {
+	public void setLugares(Set<CompetenciaLugar> lugares) {
 		this.lugares = lugares;
 	}
-	public List<Participante> getParticipantes() {
+	public Set<Participante> getParticipantes() {
 		return participantes;
 	}
-	public void setParticipantes(List<Participante> participantes) {
+	public void setParticipantes(Set<Participante> participantes) {
 		this.participantes = participantes;
 	}
 	public Fixture getFixture() {

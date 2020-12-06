@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import daos.CompetenciaDAO;
@@ -25,7 +26,7 @@ public class GestorFixture {
 	GestorCompetencia gc;
 	FixtureDAO fd;
 	
-	Mensaje generarFixture(Integer id) {
+	public Mensaje generarFixture(Integer id) {
 		gc = new GestorCompetencia();
 		c =  gc.getCompetencia(id);
 		
@@ -50,9 +51,9 @@ public class GestorFixture {
 		return mensaje;
 	}
 	
-	Mensaje crearFixture() {
+	public Mensaje crearFixture() {
 		Mensaje mensaje = new Mensaje();
-		List<Participante> ps = c.getParticipantes();
+		List<Participante> ps = c.getParticipantes().parallelStream().collect(Collectors.toList());
 		List<CompetenciaLugar> cls = c.getLugares().parallelStream().collect(Collectors.toList());
 		Map<CompetenciaLugar,Integer> disponibilidad = new HashMap<CompetenciaLugar,Integer>();
 		Integer dt = cls.parallelStream().mapToInt(c->c.getDisponibilidad()).sum();
@@ -95,7 +96,7 @@ public class GestorFixture {
 			c.setFixture(fixture);
 			c.setEstado(EstadoCompetencia.PLANIFICADA);
 			CompetenciaDAO cd = new CompetenciaDAO();
-			cd.save(c);
+			cd.update(c);
 			mensaje.add("El fixture se ha creado con exito.");
 			mensaje.setAccion(0);
 		}

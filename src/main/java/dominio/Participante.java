@@ -1,7 +1,9 @@
 package dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,7 @@ public class Participante {
 	@ManyToOne
 	@JoinColumn(name="idCompetencia")
 	private Competencia competencia;
-	@OneToOne(mappedBy="participante")
+	@OneToOne(mappedBy="participante", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	RenglonTabla renglon = new RenglonTabla();
 	
 	public Participante(Integer id, String nombre, String email, Competencia competencia) {

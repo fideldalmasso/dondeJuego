@@ -1,6 +1,7 @@
 package daos;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,7 +92,7 @@ public class CompetenciaDAO {
 		 return compe;
 	 }
 	 
-	 public List<Participante> getParticipantes(Integer idCompetencia){
+	 public Set<Participante> getParticipantes(Integer idCompetencia){
 		 EntityManager em	= factory.createEntityManager();
 			em.getTransaction().begin();
 			Competencia compe  = em.find(Competencia.class, idCompetencia);
