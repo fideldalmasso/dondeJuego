@@ -54,9 +54,8 @@ public class CompetenciaDAO {
 				.collect(Collectors.toList());
 		List<Competencia> listaCompetenciasFiltradas =  new ArrayList<Competencia>();
 		for(Competencia competencia: listaCompetencias) {
-			if(competencia.getNombre().contentEquals(filtro.getNombre()) ||
-				competencia.getId().equals(filtro.getIdCompetencia()) ||
-				competencia.getDeporte().getNombre().equals(filtro.getDeporte()) ||
+			if((!filtro.getNombre().equals(null) && competencia.getNombre().equals(filtro.getNombre())) ||
+				(!filtro.getDeporte().equals(null) && competencia.getDeporte().getNombre().equals(filtro.getDeporte())) ||
 				(competencia.getModalidad() instanceof ModalidadLiga && filtro.getModalidad().equals("Liga")) ||
 				(competencia.getModalidad() instanceof ModalidadEliminatoriaSimple && filtro.getModalidad().equals("Eliminatoria Simple")) ||
 				(competencia.getModalidad() instanceof ModalidadEliminatoriaDoble && filtro.getModalidad().equals("Eliminatoria Doble")) ||
