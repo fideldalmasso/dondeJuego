@@ -68,7 +68,7 @@ public class Prueba {
 	      */
 	      ga.login("dedgerarrobagmail.com", "12345");
 	      
-	      Deporte dep = gc.crearDeporte("PATONfAdsdTaFhsasFdFafaAsssffsFdgasavvvvO");
+	      Deporte dep = gc.crearDeporte("Futbol");
 	      Set<Deporte> deportes = new HashSet<Deporte>();
 	      deportes.add(dep);
 	      
@@ -80,7 +80,7 @@ public class Prueba {
 	      lp.add(p);
 	      
 	      CompetenciaDTO c = new CompetenciaDTO(
-	    		  "ABEfRSdFsvsasadsvhaavvdssFFF",
+	    		  "Copa Diego Armando Maradona",
 	    		  dep.getId(),
 	    		  lp,
 	    		  "Liga",
