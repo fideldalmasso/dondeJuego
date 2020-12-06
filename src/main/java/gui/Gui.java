@@ -90,12 +90,12 @@ public abstract class Gui {
 	}
 	
 
-	static public ImageIcon emoji(String fileName, int width, int height, boolean smooth) {
+	static public ImageIcon emoji(String fileName, int width, int height, boolean isAnimated) {
 		Image imagen;
-		if (smooth)
-			imagen= new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
-		else
+		if (isAnimated)
 			imagen= new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_REPLICATE);
+		else
+			imagen= new ImageIcon(fileName).getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
 			
 		return new ImageIcon(imagen);
 	}

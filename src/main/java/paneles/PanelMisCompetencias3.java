@@ -33,27 +33,28 @@ import gui.MyPaginator;
 import gui.MyTitle;
 import gui.PanelPersonalizado;
 
-public class PanelMisCompetencias2 extends PanelPersonalizado {
+public class PanelMisCompetencias3 extends PanelPersonalizado {
 
 	PanelMisCompetencias2TM tablemodel;	
 	
 	
-	public PanelMisCompetencias2() {
-		super();
+	public PanelMisCompetencias3() {
+		
 		this.setPreferredSize(new Dimension(700, 734));
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {142, 0};
-		gridBagLayout.rowHeights = new int[] {30, 218, 30, 30, 30};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0};
+		gridBagLayout.columnWidths = new int[] {80, 46, 142, 187, 137, 46, 80};
+		gridBagLayout.rowHeights = new int[] {30, 187, 30, 30, 30};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0};
 		setLayout(gridBagLayout);
 		
 		MyTitle myTitle = new MyTitle("Mis Competencias");
 		GridBagConstraints gbc_myTitle = new GridBagConstraints();
 		gbc_myTitle.fill = GridBagConstraints.HORIZONTAL;
-		gbc_myTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_myTitle.gridx = 0;
+		gbc_myTitle.gridwidth = 3;
+		gbc_myTitle.insets = new Insets(0, 0, 5, 0);
+		gbc_myTitle.gridx = 2;
 		gbc_myTitle.gridy = 0;
 		add(myTitle, gbc_myTitle);
 		
@@ -61,10 +62,10 @@ public class PanelMisCompetencias2 extends PanelPersonalizado {
 		panel.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Filtros", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(5, 5, 5, 5)));
 		panel.setBounds(new Rectangle(30, 50, 0, 0));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.anchor = GridBagConstraints.NORTH;
-		gbc_panel.insets = new Insets(0, 30, 5, 30);
-		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel.gridx = 0;
+		gbc_panel.gridwidth = 3;
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 2;
 		gbc_panel.gridy = 1;
 		add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -125,7 +126,7 @@ public class PanelMisCompetencias2 extends PanelPersonalizado {
 			}
 			@Override 
 			protected void done() {
-				combodeporte.setModel(new DefaultComboBoxModel<String>(t!=null?t:new String[] {" "}));
+				combodeporte.setModel(new DefaultComboBoxModel<String>(t));
 				cargando1.setVisible(false);
 				
 				
@@ -180,9 +181,10 @@ public class PanelMisCompetencias2 extends PanelPersonalizado {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 5;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.insets = new Insets(10, 0, 5, 5);
-		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 2;
 		add(scrollPane, gbc_scrollPane);
 		
@@ -195,49 +197,23 @@ public class PanelMisCompetencias2 extends PanelPersonalizado {
 		
 		scrollPane.setViewportView(myJTable);
 		
-		MyIcon cargando2 = new MyIcon("icon/loading3.gif",24,24,true);
-		GridBagConstraints gbc_cargando2 = new GridBagConstraints();
-		gbc_cargando2.anchor = GridBagConstraints.NORTH;
-		gbc_cargando2.insets = new Insets(0, 0, 5, 0);
-		gbc_cargando2.gridx = 1;
-		gbc_cargando2.gridy = 2;
-		add(cargando2, gbc_cargando2);
+		MyPaginator btnNewButton = new MyPaginator();
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.gridwidth = 2;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0,0 );
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 3;
+		add(btnNewButton, gbc_btnNewButton);
 		
-		JPanel panel_1 = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 3;
-		add(panel_1, gbc_panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{334, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
-		
-		MyPaginator myPaginator = new MyPaginator();
-		GridBagLayout gridBagLayout_1 = (GridBagLayout) myPaginator.getLayout();
-		gridBagLayout_1.rowWeights = new double[]{0.0};
-		gridBagLayout_1.rowHeights = new int[]{23};
-		gridBagLayout_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
-		gridBagLayout_1.columnWidths = new int[]{25, 25, 25, 25, 0};
-		GridBagConstraints gbc_myPaginator = new GridBagConstraints();
-		gbc_myPaginator.anchor = GridBagConstraints.WEST;
-		gbc_myPaginator.insets = new Insets(0, 0, 5, 5);
-		gbc_myPaginator.fill = GridBagConstraints.VERTICAL;
-		gbc_myPaginator.gridx = 0;
-		gbc_myPaginator.gridy = 0;
-		panel_1.add(myPaginator, gbc_myPaginator);
-		
-		JButton button = new JButton("    Nueva competencia");
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.anchor = GridBagConstraints.EAST;
-		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 1;
-		gbc_button.gridy = 0;
-		panel_1.add(button, gbc_button);
+		JButton btnNewButton_1 = new JButton("    Nueva competencia");
+		btnNewButton_1.setIcon(Gui.emoji("icon/mas_negro.png", 24, 24, false));
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.gridwidth = 2;
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1.gridx = 4;
+		gbc_btnNewButton_1.gridy = 3;
+		add(btnNewButton_1, gbc_btnNewButton_1);
 
 	}
 

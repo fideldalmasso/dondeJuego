@@ -70,7 +70,7 @@ public class App extends JFrame {
 
 
 		this.actual = new JPanel();
-		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
+//		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
 //		this.cambiarPanel(altaCompetencia);
 		this.cambiarPanel(new PanelMisCompetencias2());
 

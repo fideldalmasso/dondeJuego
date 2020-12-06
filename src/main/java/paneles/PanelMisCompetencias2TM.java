@@ -36,7 +36,7 @@ public class PanelMisCompetencias2TM extends AbstractTableModel {
 			data2[i][1]=data3.get(i).getDeporte();
 			data2[i][2]=data3.get(i).getModalidad();
 			data2[i][3]=data3.get(i).getEstado();
-			data2[i][4]=Gui.emoji("icon/ver.png", 24, 24, true);
+			data2[i][4]=Gui.emoji("icon/ver.png", 24, 24, false);
 		}
 
 	}

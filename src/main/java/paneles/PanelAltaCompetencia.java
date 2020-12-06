@@ -93,12 +93,13 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				}
 				@Override 
 				protected void done() {
-					deporte.component().setModel(new DefaultComboBoxModel<String>(t));
+					deporte.component().setModel(new DefaultComboBoxModel<String>(t!=null?t:new String[] {" "}));
 					deporte.stopLoading();
 					trabajador2.execute();
 				}
 				
 			};
+			
 			
 		}
 		{
