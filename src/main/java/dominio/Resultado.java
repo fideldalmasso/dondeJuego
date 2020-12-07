@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,7 +24,7 @@ public class Resultado {
 	@Column(name="fechaRegistro")
 	protected Timestamp fechaRegistro;
 	@ManyToOne
-	@JoinTable(name="idEncuentro")
+	@JoinColumn(name="idEncuentro")
 	protected Encuentro encuentro;
 	
 	public Resultado(Integer id, Timestamp fechaRegistro) {

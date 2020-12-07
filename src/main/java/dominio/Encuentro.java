@@ -1,6 +1,7 @@
 package dominio;
 
 import dominio.Fecha;
+import java.util.Set;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Encuentro {
 	@JoinColumn(name="idResultadoActual")
 	protected Resultado vigente;
 	@OneToMany(mappedBy="encuentro")
-	protected List<Resultado> resultados;
+	protected Set<Resultado> resultados;
 	@ManyToOne
 	@JoinColumn(name="idFecha")
 	protected Fecha fecha;
@@ -50,7 +51,7 @@ public class Encuentro {
 	protected LugarRealizacion lugarRealizacion;
 	
 	public Encuentro(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
-			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
+			Participante participanteA, Participante participanteB, Resultado vigente, Set<Resultado> resultados) {
 		super();
 		this.id = id;
 		this.fechaEncuentro = fechaEncuentro;
@@ -62,7 +63,7 @@ public class Encuentro {
 		this.resultados = resultados;
 	}
 	public Encuentro(Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
-			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados) {
+			Participante participanteA, Participante participanteB, Resultado vigente, Set<Resultado> resultados) {
 		super();
 		this.fechaEncuentro = fechaEncuentro;
 		this.sePresentaB = sePresentaB;
@@ -117,10 +118,10 @@ public class Encuentro {
 	public void setVigente(Resultado vigente) {
 		this.vigente = vigente;
 	}
-	public List<Resultado> getResultados() {
+	public Set<Resultado> getResultados() {
 		return resultados;
 	}
-	public void setResultados(List<Resultado> resultados) {
+	public void setResultados(Set<Resultado> resultados) {
 		this.resultados = resultados;
 	}
 	public void setLugarRealizacion(LugarRealizacion lugarRealizacion) {

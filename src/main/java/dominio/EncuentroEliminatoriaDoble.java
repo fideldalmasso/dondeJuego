@@ -1,6 +1,7 @@
 package dominio;
 
 import java.sql.Timestamp;
+import java.util.Set;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,14 +20,14 @@ public class EncuentroEliminatoriaDoble extends Encuentro {
 	private EncuentroEliminatoriaDoble perdedor;
 	
 	public EncuentroEliminatoriaDoble(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
-			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados,
+			Participante participanteA, Participante participanteB, Resultado vigente, Set<Resultado> resultados,
 			EncuentroEliminatoriaDoble ganador, EncuentroEliminatoriaDoble perdedor) {
 		super(id, fechaEncuentro, sePresentaB, sePresentaA, participanteA, participanteB, vigente, resultados);
 		this.ganador = ganador;
 		this.perdedor = perdedor;
 	}
 	public EncuentroEliminatoriaDoble(Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
-			Participante participanteA, Participante participanteB, Resultado vigente, List<Resultado> resultados,
+			Participante participanteA, Participante participanteB, Resultado vigente, Set<Resultado> resultados,
 			EncuentroEliminatoriaDoble ganador, EncuentroEliminatoriaDoble perdedor) {
 		super(fechaEncuentro, sePresentaB, sePresentaA, participanteA, participanteB, vigente, resultados);
 		this.ganador = ganador;
