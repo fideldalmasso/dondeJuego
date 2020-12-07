@@ -36,14 +36,14 @@ public class App extends JFrame {
 	JButton boton_home;
 	JButton boton_volver;
 	JPanel actual = null;
-	Stack<PanelPersonalizado> paneles;
+	Stack<JPanel> paneles;
 	PanelHome home;
 
 
 	private App() {
 		
 		this.setTitle("¿Dónde juego?");
-		paneles = new Stack<PanelPersonalizado>();
+		paneles = new Stack<JPanel>();
 		Gui.setearFuente("Comic Sans MS",this);
 
 		{
@@ -93,12 +93,12 @@ public class App extends JFrame {
 		cambiarPanel(paneles.peek());
 	}
 
-	public void nuevoPanel(PanelPersonalizado p) {
+	public void nuevoPanel(JPanel p) {
 		paneles.push(p);
 		cambiarPanel(paneles.peek());
 	}
 	
-	public void cambiarPanel(PanelPersonalizado p) {
+	public void cambiarPanel(JPanel p) {
 		Dimension d = this.getSize();
 		this.remove(actual);
 		this.actual = p;

@@ -38,6 +38,7 @@ import gui.MyJTextField;
 import gui.MyPaginator;
 import gui.MyTitle;
 import gui.PanelPersonalizado;
+import guiejemplos.BubbleLabelRight;
 
 public class PanelMisCompetencias extends PanelPersonalizado {
 

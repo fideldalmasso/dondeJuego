@@ -60,7 +60,7 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_btnNewButton.gridy = 0;
 		panel.add(botonnuevacompetencia, gbc_btnNewButton);
 		botonnuevacompetencia.addActionListener(e->{
-			padre.nuevoPanel(new PanelAltaCompetencia(padre));
+			padre.nuevoPanel(new PanelAltaCompetenciaConMensajes(padre));
 		});
 		
 		MyHomeButton botonmiscompetencias = new MyHomeButton("Mis competencias", "icon/trofeo_lupa.png");

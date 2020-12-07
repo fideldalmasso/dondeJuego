@@ -19,7 +19,7 @@ import javax.swing.plaf.FontUIResource;
 
 public abstract class Gui {
 
-	public static final Boolean DEBUG = false;
+	public static final Boolean DEBUG = true;
 	public static final Insets insetpredeterminado = new Insets(5,5,5,5);
 	public static final Insets inseterror = new Insets(0,10,0,0);
 	public static final Insets insetvacio = new Insets(0,0,0,0);

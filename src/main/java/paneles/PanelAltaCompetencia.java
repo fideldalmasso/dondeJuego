@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -33,20 +34,20 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	private EnumMap<errores, MyPack> mapacomponentes= new EnumMap<PanelAltaCompetencia.errores, MyPack>(errores.class);
 	
 	
-	private static final long serialVersionUID = 1L;
-	private MyTitle titulo = new MyTitle("Crear competencia"); 
-	private MyPack<MyJTextField> nombre = new MyPack<MyJTextField>("Nombre");
-	private MyPack<JScrollPane> lugar = new MyPack<JScrollPane>("Lugar(Disponibilidad)",true);
-	private MyPack<MyJComboBox> deporte = new MyPack<MyJComboBox>("Deporte",true);
-	private MyPack<MyJComboBox> modalidad = new MyPack<MyJComboBox>("Modalidad");
-	private MyPack<MyJComboBox> formapuntuacion = new MyPack<MyJComboBox>("Forma de puntuación");
-	
-	private MyPack<JCheckBox> empatepermitido = new MyPack<JCheckBox>("Empate permitido");
-	private MyPack<JSpinner> puntosporpartidoganado = new MyPack<JSpinner>("Puntos por partido ganado");
-	private MyPack<JSpinner> puntosporempate = new MyPack<JSpinner>("Puntos por empate");
-	private MyPack<JSpinner> puntosporpresentarse = new MyPack<JSpinner>("Puntos por presentarse");
-	private MyPack<JSpinner> cantidadmaximadesets = new MyPack<JSpinner>("Cantidad máxima de sets");
-	private MyPack<JSpinner> puntosporabandono = new MyPack<JSpinner>("Puntos por abandono");
+	public static final long serialVersionUID = 1L;
+	public MyTitle titulo = new MyTitle("Crear competencia"); 
+	public MyPack<MyJTextField> nombre = new MyPack<MyJTextField>("Nombre");
+	public MyPack<JScrollPane> lugar = new MyPack<JScrollPane>("Lugar(Disponibilidad)",true);
+	public MyPack<MyJComboBox> deporte = new MyPack<MyJComboBox>("Deporte",true);
+	public MyPack<MyJComboBox> modalidad = new MyPack<MyJComboBox>("Modalidad");
+	public MyPack<MyJComboBox> formapuntuacion = new MyPack<MyJComboBox>("Forma de puntuación");
+
+	public MyPack<JCheckBox> empatepermitido = new MyPack<JCheckBox>("Empate permitido");
+	public MyPack<JSpinner> puntosporpartidoganado = new MyPack<JSpinner>("Puntos por partido ganado");
+	public MyPack<JSpinner> puntosporempate = new MyPack<JSpinner>("Puntos por empate");
+	public MyPack<JSpinner> puntosporpresentarse = new MyPack<JSpinner>("Puntos por presentarse");
+	public MyPack<JSpinner> cantidadmaximadesets = new MyPack<JSpinner>("Cantidad máxima de sets");
+	public MyPack<JSpinner> puntosporabandono = new MyPack<JSpinner>("Puntos por abandono");
 	
 	private MyPack<MyJTextArea> reglamento = new MyPack<MyJTextArea>("Reglamento");
 	
@@ -55,8 +56,8 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	
 	
 	private JPanel panelBotones= new JPanel(new GridBagLayout());
-	private JButton botonaceptar = new JButton("Aceptar");
-	private JButton botoncancelar = new JButton("Cancelar");
+	public JButton botonaceptar = new JButton("Aceptar");
+	public JButton botoncancelar = new JButton("Cancelar");
 
 	
 
@@ -68,9 +69,14 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	
 	private App padre;
 	
+	JPanel panel1;
+	JLayeredPane panel2;
+	
+	
 	public PanelAltaCompetencia(App padre) {
 		
-		
+		panel1 = new JPanel(new GridBagLayout());
+		panel2 = new JLayeredPane();
 		this.padre = padre;
 		this.setPreferredSize(new Dimension(780, 734));
 //		this.setBackground(new Color(250, 216, 214));
@@ -123,9 +129,14 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				@Override 
 				protected void done() {
 					tablemodel=t;
-					tablalugares.setModel(t);
-					tablalugares.setColumnWidths(20,290,100);
-					lugar.stopLoading();
+					if(t!=null) {
+						tablalugares.setModel(t);
+						tablalugares.setColumnWidths(20,290,100);
+						lugar.stopLoading();
+					}
+					else {
+						Gui.imprimir("Hubo un error cargando la tabla desde la db");
+					}
 				}
 				
 			};
@@ -164,32 +175,32 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			Gui.colocar2(1, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, new JLabel("    "));
 			Gui.colocar2(2, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, botonaceptar);
 			botonaceptar.setEnabled(false);
-			botonaceptar.addActionListener(e->{
-				
-				if(tablalugares.isEditing()) {
-					Gui.imprimir("se tuvo que detener la tabla");
-					tablalugares.getCellEditor().stopCellEditing();
-				}
-				
-				if(!nombre.component().hasChanged()) nombre.component().setText(null);
-				if(!reglamento.component().hasChanged()) reglamento.component().setText(null);
-				
-				dto=new CompetenciaDTO();
-				dto.setNombre(nombre.component().getText());
-				dto.setDeporte(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
-				dto.setLugares(tablemodel.getSelected());
-				dto.setModalidad(modalidad.component().getSelectedItem());
-				dto.setReglamento(reglamento.component().getText());
-				dto.setPermiteEmpate(empatepermitido.component().isSelected());
-				dto.setPuntosPorPresentarse((Integer)puntosporpresentarse.component().getValue());
-				dto.setPuntosPorGanar((Integer)puntosporpartidoganado.component().getValue());
-				dto.setPuntosPorEmpate((Integer)puntosporempate.component().getValue());
-				dto.setSistemaPuntuacion(formapuntuacion.component().getSelectedItem());
-				dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
-				dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
-				
-				this.validar(new GestorCompetencia().crearCompetencia(dto));
-			});
+//			botonaceptar.addActionListener(e->{
+//				
+//				if(tablalugares.isEditing()) {
+//					Gui.imprimir("se tuvo que detener la tabla");
+//					tablalugares.getCellEditor().stopCellEditing();
+//				}
+//				
+//				if(!nombre.component().hasChanged()) nombre.component().setText(null);
+//				if(!reglamento.component().hasChanged()) reglamento.component().setText(null);
+//				
+//				dto=new CompetenciaDTO();
+//				dto.setNombre(nombre.component().getText());
+//				dto.setDeporte(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
+//				dto.setLugares(tablemodel.getSelected());
+//				dto.setModalidad(modalidad.component().getSelectedItem());
+//				dto.setReglamento(reglamento.component().getText());
+//				dto.setPermiteEmpate(empatepermitido.component().isSelected());
+//				dto.setPuntosPorPresentarse((Integer)puntosporpresentarse.component().getValue());
+//				dto.setPuntosPorGanar((Integer)puntosporpartidoganado.component().getValue());
+//				dto.setPuntosPorEmpate((Integer)puntosporempate.component().getValue());
+//				dto.setSistemaPuntuacion(formapuntuacion.component().getSelectedItem());
+//				dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
+//				dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
+//				
+//				this.validar(new GestorCompetencia().crearCompetencia(dto));
+//			});
 			
 		}
 		
@@ -230,49 +241,51 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				tablalugares.update();
 			});
 			
-			botoncancelar.addActionListener(e->{
-				padre.volverAtras();
-			});
+//			botoncancelar.addActionListener(e->{
+//				padre.volverAtras();
+//			});
 			
 		}
 		{
 			
-			Gui.colocar(0,0,3,1,0,0,0,0,Gui.NONE,Gui.CENTER,this, titulo);
+			Gui.colocar(0,0,3,1,0,0,0,0,Gui.NONE,Gui.CENTER,panel1, titulo);
 
-			Gui.colocar(0,1,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, nombre.label());
-			Gui.colocar(1,1,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, nombre.semi2());
+			Gui.colocar(0,1,1,1,0,0,0,0,Gui.NONE,Gui.WEST,panel1, nombre.label());
+			Gui.colocar(1,1,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,panel1, nombre.semi2());
 			
-			Gui.colocar(0,2,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, deporte.label());
+			Gui.colocar(0,2,1,1,0,0,0,0,Gui.NONE,Gui.WEST,panel1, deporte.label());
 		
 			
-			Gui.colocar(1,2,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, deporte.semi2());
+			Gui.colocar(1,2,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,panel1, deporte.semi2());
 			
-			Gui.colocar(0,3,1,1,0,0,0,0,Gui.NONE,Gui.NORTHWEST,this, lugar.label());
-			Gui.colocar(1,3,2,1,1,1,0,0,Gui.BOTH,Gui.WEST,this, lugar.semi2());
+			Gui.colocar(0,3,1,1,0,0,0,0,Gui.NONE,Gui.NORTHWEST,panel1, lugar.label());
+			Gui.colocar(1,3,2,1,1,1,0,0,Gui.BOTH,Gui.WEST,panel1, lugar.semi2());
 			
-			Gui.colocar(0,4,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, modalidad.label());
-			Gui.colocar(1,4,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, modalidad.semi2());
+			Gui.colocar(0,4,1,1,0,0,0,0,Gui.NONE,Gui.WEST,panel1, modalidad.label());
+			Gui.colocar(1,4,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,panel1, modalidad.semi2());
 			
-			Gui.colocar(0,5,1,1,0,0,0,0,Gui.NONE,Gui.WEST,this, formapuntuacion.label());
-			Gui.colocar(1,5,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,this, formapuntuacion.semi2());
-			
-			
-			
-			Gui.colocar(1,6,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporpartidoganado.full());
-			
-			Gui.colocar(0,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, empatepermitido.semi1());
-			Gui.colocar(1,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporempate.full());
-			Gui.colocar(1,8,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporpresentarse.full());
-			
-			Gui.colocar(2,6,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, cantidadmaximadesets.full());
-			Gui.colocar(2,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,this, puntosporabandono.full());
+			Gui.colocar(0,5,1,1,0,0,0,0,Gui.NONE,Gui.WEST,panel1, formapuntuacion.label());
+			Gui.colocar(1,5,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.WEST,panel1, formapuntuacion.semi2());
 			
 			
-			Gui.colocar(0,9,1,1,0,0,0,0,Gui.NONE,Gui.NORTHWEST,this, reglamento.label());
-			Gui.colocar(1,9,2,1,1,1,0,0,Gui.BOTH,Gui.WEST,this, reglamento.semi2());
 			
-			Gui.colocar(2,10,1,1,0,0,0,0,Gui.NONE,Gui.CENTER,this, panelBotones);
+			Gui.colocar(1,6,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,panel1, puntosporpartidoganado.full());
+			
+			Gui.colocar(0,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,panel1, empatepermitido.semi1());
+			Gui.colocar(1,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,panel1, puntosporempate.full());
+			Gui.colocar(1,8,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,panel1, puntosporpresentarse.full());
+			
+			Gui.colocar(2,6,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,panel1, cantidadmaximadesets.full());
+			Gui.colocar(2,7,1,1,0,0,0,0,Gui.HORIZONTAL,Gui.CENTER,panel1, puntosporabandono.full());
+			
+			
+			Gui.colocar(0,9,1,1,0,0,0,0,Gui.NONE,Gui.NORTHWEST,panel1, reglamento.label());
+			Gui.colocar(1,9,2,1,1,1,0,0,Gui.BOTH,Gui.WEST,panel1, reglamento.semi2());
+			
+			Gui.colocar(2,10,1,1,0,0,0,0,Gui.NONE,Gui.CENTER,panel1, panelBotones);
 
+			
+			Gui.colocar(1, 1, 1, 1, 1, 1, 0, 1, Gui.BOTH, Gui.CENTER, this, panel1);
 			
 		}
 		trabajador1.execute();
@@ -302,6 +315,36 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		return listaDeportes.get(deporte.component().getSelectedIndex()).getId();
 	}
 
+	
+	public void agregarCompetencia() {
+		
+		if(tablalugares.isEditing()) {
+			Gui.imprimir("se tuvo que detener la tabla");
+			tablalugares.getCellEditor().stopCellEditing();
+		}
+		
+		if(!nombre.component().hasChanged()) nombre.component().setText(null);
+		if(!reglamento.component().hasChanged()) reglamento.component().setText(null);
+		
+		dto=new CompetenciaDTO();
+		dto.setNombre(nombre.component().getText());
+		dto.setDeporte(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
+		dto.setLugares(tablemodel.getSelected());
+		dto.setModalidad(modalidad.component().getSelectedItem());
+		dto.setReglamento(reglamento.component().getText());
+		dto.setPermiteEmpate(empatepermitido.component().isSelected());
+		dto.setPuntosPorPresentarse((Integer)puntosporpresentarse.component().getValue());
+		dto.setPuntosPorGanar((Integer)puntosporpartidoganado.component().getValue());
+		dto.setPuntosPorEmpate((Integer)puntosporempate.component().getValue());
+		dto.setSistemaPuntuacion(formapuntuacion.component().getSelectedItem());
+		dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
+		dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
+		
+		this.validar(new GestorCompetencia().crearCompetencia(dto));
+	}
+	
+	
+	
 	
 	
 }

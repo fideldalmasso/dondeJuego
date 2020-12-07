@@ -42,6 +42,8 @@ public class MyJTextArea extends JTextArea {
 			@Override
 			public void focusLost(FocusEvent e) {
 				super.focusLost(e);
+				if(getText()==null || getText().length()==0)
+					changed=false;
 				if(!changed) {
 					setText(hint);
 				}

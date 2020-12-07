@@ -107,6 +107,8 @@ public class PanelAltaCompetenciaTM extends AbstractTableModel {
 	}
 	
 	public List<Pair> getSelected() {
+		if (data==null || data.size()==0) return new ArrayList<Pair>();
+		
 		List<Pair> lista = new ArrayList<Pair>();
 		for (int i = 0; i < data.size(); i++) {
 			if(((boolean)data2[i][0])==true)

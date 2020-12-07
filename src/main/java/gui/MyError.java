@@ -10,7 +10,7 @@ public class MyError extends JLabel {
 	private static final long serialVersionUID = 1L;
 
 	
-	
+	public String message;
 	public Boolean cargando = false;
 	
 	public MyError() {
@@ -20,6 +20,7 @@ public class MyError extends JLabel {
 	
 	public MyError(Boolean cargando) {
 		super();
+		this.message = "";
 		this.cargando = cargando;
 		if(cargando)
 			this.setIcon(PanelPersonalizado.emoji("icon/loading3.gif",24,24));
@@ -35,7 +36,7 @@ public class MyError extends JLabel {
 	
 	public void showError(String toolTipText) {
 		this.setEnabled(true);
-		this.setToolTipText(toolTipText);
+		//this.setToolTipText(toolTipText);
 	}
 	
 	

@@ -14,6 +14,7 @@ public class MyPack<T>  {
 	private JLabel label;
 	private T component;
 	private MyError error;
+	public String message;
 	
 	private void colocarLabel(JPanel temp) {
 		Gui.colocar2(0,0,1,1,1,1,0,0,Gui.BOTH,Gui.NORTHWEST,Gui.insetvacio,temp,this.label);
@@ -102,8 +103,17 @@ public class MyPack<T>  {
 	}
 	
 	public void showError(String toolTipText) {
-		this.error.showError(toolTipText);
+		//this.error.showError(toolTipText);
+		this.error.setEnabled(true);
+		this.error.message = toolTipText;
+		this.message = toolTipText;
 	}
+	
+	public void clearError() {
+		this.error.setEnabled(false);
+		this.message="";
+	}
+	
 	
 	public void stopLoading() {
 		this.error().cargando=false;
