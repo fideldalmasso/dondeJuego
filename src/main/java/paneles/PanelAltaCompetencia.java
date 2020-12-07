@@ -167,7 +167,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			botonaceptar.addActionListener(e->{
 				
 				if(tablalugares.isEditing()) {
-					if(Gui.DEBUG) System.out.println("se tuvo que detener la tabla");
+					Gui.imprimir("se tuvo que detener la tabla");
 					tablalugares.getCellEditor().stopCellEditing();
 				}
 				
@@ -291,7 +291,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 				.get(i.getKey())
 				.showError(i.getValue());				
 			}
-			else {if(Gui.DEBUG)System.out.println("El enum "+ i.getKey() + " no tiene ningun componente asociado");}
+			else {Gui.imprimir("El enum "+ i.getKey() + " no tiene ningun componente asociado");}
 			
 			
 		}

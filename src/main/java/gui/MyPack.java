@@ -93,7 +93,7 @@ public class MyPack<T>  {
 	
 	public T component() {
 		if(component==null)
-			if(Gui.DEBUG)System.out.println("Te olvidaste de inicializar el componente \""+this.label.getText()+"\"");
+			Gui.imprimir("Te olvidaste de inicializar el componente \""+this.label.getText()+"\"");
 		return component;
 	}
 

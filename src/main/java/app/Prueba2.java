@@ -10,7 +10,7 @@ public class Prueba2 {
 
 	public static void main(String[] args) {
 		GestorLugarRealizacion lrd = new GestorLugarRealizacion();
-		if(Gui.DEBUG)System.out.println(lrd.getAllLugarRealizacion(81).get(0).getId());
+		Gui.imprimir(lrd.getAllLugarRealizacion(81).get(0).getId().toString());
 	}
 
 }

@@ -32,7 +32,7 @@ public class App extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	JPanel contenido;
+	JPanel panelfondo;
 	JButton boton_home;
 	JButton boton_volver;
 	JPanel actual = null;
@@ -47,8 +47,8 @@ public class App extends JFrame {
 		Gui.setearFuente("Comic Sans MS",this);
 
 		{
-			contenido = new PanelFondo();
-			this.setContentPane(contenido);
+			panelfondo = new PanelFondo();
+			this.setContentPane(panelfondo);
 		}
 
 		
@@ -126,7 +126,7 @@ public class App extends JFrame {
 
 				}
 				catch (Exception e) {
-					if(Gui.DEBUG) System.out.println(e.getMessage());
+					Gui.imprimir(e.getMessage());
 				}
 
 				new App().setVisible(true);
