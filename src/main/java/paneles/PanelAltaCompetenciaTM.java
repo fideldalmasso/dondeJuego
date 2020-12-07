@@ -112,7 +112,7 @@ public class PanelAltaCompetenciaTM extends AbstractTableModel {
 			if(((boolean)data2[i][0])==true)
 				lista.add(new Pair(data.get(i).getId(),(Integer)data2[i][2]));
 		}
-		if(Gui.DEBUG)System.out.println(lista.toString());
+		Gui.imprimir(lista.toString());
 		return lista;
 	}
 

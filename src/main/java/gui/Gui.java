@@ -24,6 +24,11 @@ public abstract class Gui {
 	public static final Insets inseterror = new Insets(0,10,0,0);
 	public static final Insets insetvacio = new Insets(0,0,0,0);
 
+	public static void imprimir(String texto) {
+		if(DEBUG)
+			System.out.println(texto);
+	}
+	
 	private static void vacio(JPanel panel, int x, int y) {
 		Gui.colocar(x,y,1,1,0,0,0,0,Gui.BOTH,Gui.CENTER,panel, new JLabel(" "));
 	}
