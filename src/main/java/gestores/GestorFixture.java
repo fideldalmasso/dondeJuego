@@ -87,12 +87,14 @@ public class GestorFixture {
 						fecha.addEncuentro(encuentro);
 					}
 				}
+				System.out.println(fecha.getEncuentros().toString());
 				fixture.addFecha(fecha);
 				cls.parallelStream().forEach(c->disponibilidad.put(c,c.getDisponibilidad()));
 				CompetenciaLugar fin = cls.get(cls.size()-1);
 				for(int j=cls.size()-1;j>0;j--) cls.add(j,cls.get(j-1));
 				cls.add(1,fin);
 			}
+			System.out.println(fixture.getFechas().toString());
 			c.setFixture(fixture);
 			c.setEstado(EstadoCompetencia.PLANIFICADA);
 			CompetenciaDAO cd = new CompetenciaDAO();

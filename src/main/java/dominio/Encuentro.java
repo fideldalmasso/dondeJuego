@@ -38,15 +38,15 @@ public class Encuentro {
 	@JoinColumn(name="idParticipanteB")
 	protected Participante participanteB;
 	@OneToOne
-	@JoinColumn(name="idEncuentro")
+	@JoinColumn(name="idResultadoActual")
 	protected Resultado vigente;
 	@OneToMany(mappedBy="encuentro")
 	protected List<Resultado> resultados;
 	@ManyToOne
-	@JoinTable(name="idFecha")
+	@JoinColumn(name="idFecha")
 	protected Fecha fecha;
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="idLugarRealizacion")
 	protected LugarRealizacion lugarRealizacion;
 	
 	public Encuentro(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,

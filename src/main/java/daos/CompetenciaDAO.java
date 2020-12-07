@@ -63,11 +63,11 @@ public class CompetenciaDAO {
 		List<Competencia> listaCompetencias = this.getCompetencias(usuario);
 		List<Competencia> listaCompetenciasFiltradas =  new ArrayList<Competencia>();
 		for(Competencia competencia: listaCompetencias) {
-			if((!filtro.getNombre().equals(null) && competencia.getNombre().equals(filtro.getNombre())) ||
-				(!filtro.getDeporte().equals(null) && competencia.getDeporte().getNombre().equals(filtro.getDeporte())) ||
-				(competencia.getModalidad() instanceof ModalidadLiga && filtro.getModalidad().equals("Liga")) ||
-				(competencia.getModalidad() instanceof ModalidadEliminatoriaSimple && filtro.getModalidad().equals("Eliminatoria Simple")) ||
-				(competencia.getModalidad() instanceof ModalidadEliminatoriaDoble && filtro.getModalidad().equals("Eliminatoria Doble")) ||
+			if((filtro.getNombre().equals(null) || competencia.getNombre().equals(filtro.getNombre())) &&
+				(filtro.getDeporte().equals(null) || competencia.getDeporte().getNombre().equals(filtro.getDeporte())) &&
+				(competencia.getModalidad() instanceof ModalidadLiga && filtro.getModalidad().equals("Liga")) &&
+				(competencia.getModalidad() instanceof ModalidadEliminatoriaSimple && filtro.getModalidad().equals("Eliminatoria Simple")) &&
+				(competencia.getModalidad() instanceof ModalidadEliminatoriaDoble && filtro.getModalidad().equals("Eliminatoria Doble")) &&
 				competencia.getEstado().toString().equals(filtro.getEstado())) {
 				listaCompetenciasFiltradas.add(competencia);
 			}

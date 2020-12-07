@@ -1,9 +1,14 @@
 package dominio;
 
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,32 +23,33 @@ public class Fecha {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@OneToMany(mappedBy="fecha")
-	private List<Encuentro> encuentros;
+	@OneToMany(mappedBy="fecha",fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Encuentro> encuentros;
 	@Column(name="tipoRonda")
 	private Integer numero;
 	@ManyToOne
 	@JoinColumn(name="idFixture")
 	private Fixture fixture;
 	
-	public Fecha(List<Encuentro> encuentros, Integer id, Integer numero) {
+	public Fecha(Set<Encuentro> encuentros, Integer id, Integer numero) {
 		super();
 		this.encuentros = encuentros;
 		this.id = id;
 		this.numero = numero;
 	}
-	public Fecha(List<Encuentro> encuentros,Integer numero) {
+	public Fecha(Set<Encuentro> encuentros,Integer numero) {
 		super();
 		this.encuentros = encuentros;
 		this.numero = numero;
 	}
 	public Fecha() {
 		super();
+		this.encuentros=new TreeSet<Encuentro>();
 	}
-	public List<Encuentro> getEncuentros() {
+	public Set<Encuentro> getEncuentros() {
 		return encuentros;
 	}
-	public void setEncuentros(List<Encuentro> encuentros) {
+	public void setEncuentros(Set<Encuentro> encuentros) {
 		this.encuentros = encuentros;
 	}
 	public Integer getId() {
