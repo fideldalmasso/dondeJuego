@@ -27,6 +27,8 @@ public class MyIcon extends JLabel {
 		this.setEnabled(isEnabled);
 		this.setVisible(isVisible);
 		this.setPreferredSize(new Dimension(width,height));
+		this.setMaximumSize(new Dimension(width,height));
+		this.setMinimumSize(new Dimension(width,height));
 	}
 	
 	

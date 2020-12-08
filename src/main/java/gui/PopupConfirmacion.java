@@ -42,11 +42,7 @@ public class PopupConfirmacion extends JPanel {
 		this.setOpaque(false);
 		this.setBackground(Color.decode("#fff48f"));
 		this.setVisible(false);
-		
-//		texto.setAlignmentX(CENTER_ALIGNMENT);
-//		botonaceptar.setAlignmentX(CENTER_ALIGNMENT);
-//		this.add(Box.createRigidArea(new Dimension(10, 10)));
-		
+	
 		this.closebutton = new JButton(Gui.emoji("icon/cerrar_negro.png", 10, 10, false));
 		this.closebutton.setOpaque(false);
 		this.closebutton.setContentAreaFilled(false);

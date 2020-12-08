@@ -12,33 +12,36 @@ import dtos.VerCompetenciaDTO;
 import gestores.GestorLugarRealizacion;
 import gui.Gui;
 
-public class PanelVerCompetenciaTM1 extends AbstractTableModel {
+public class PanelVerCompetenciaTM2 extends AbstractTableModel {
 
 
 	private static final long serialVersionUID = 1L;
 
 	private Object[][] data2;
-	private String[] columnNames = {"Nombre del equipo / participante","Correo electrónico"};
+	private String[] columnNames = {"Participante A","Participante B","Fecha","Lugar"};
 	private VerCompetenciaDTO dto;
 	private Integer tam;
 
 	
-	public PanelVerCompetenciaTM1() {
+	public PanelVerCompetenciaTM2() {
 		super();
 		tam=0;
 		return;
 	}
 	
-	public PanelVerCompetenciaTM1(VerCompetenciaDTO dto) {
+	public PanelVerCompetenciaTM2(VerCompetenciaDTO dto) {
 		super();
 		this.dto=dto;
 
-		tam=dto.getParticipantes().size();
+		tam=dto.getProximosEncuetros().size();
 		data2= new Object[tam][2];
 				
 		for(int i=0; i<tam; i++) {
-			data2[i][0]=dto.getParticipantes().get(i).getNombre();
-			data2[i][1]=dto.getParticipantes().get(i).getEmail();
+			data2[i][0]=dto.getProximosEncuetros().get(i).getNombreParticipanteA();
+			data2[i][1]=dto.getProximosEncuetros().get(i).getNombreParticipanteB();
+			data2[i][2]=dto.getProximosEncuetros().get(i).getNombreParticipanteA();
+			data2[i][3]=dto.getProximosEncuetros().get(i).getNombreParticipanteB();
+			
 		}
 		
 	}

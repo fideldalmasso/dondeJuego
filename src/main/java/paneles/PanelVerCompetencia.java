@@ -18,9 +18,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import javax.swing.JLabel;
 import gui.MyJTextField;
 import gui.MyJComboBox;
+import gui.Gui;
 import gui.MyIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -32,12 +36,18 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 
 	App padre;
 	
-	MyJTable tabla1;
-	PanelVerCompetenciaTM1 tablemodel1;
-	MyJTable tabla2;
+	public MyJTable tabla1;
+	public MyJTable tabla2;
+	public PanelVerCompetenciaTM1 tablemodel1;
+	public PanelVerCompetenciaTM2 tablemodel2;
+	private int idCompetencia;
 	
+	public JButton botongenerarfixture;
+	public MyIcon iconolapiz;
 	
-	public PanelVerCompetencia(App padre) {
+	public PanelVerCompetencia(App padre, int idCompetencia) {
+		super();
+		this.idCompetencia=idCompetencia;
 		this.padre=padre;
 		this.setPreferredSize(new Dimension(700,734));
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -76,7 +86,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		gbc_myTitle.gridy = 0;
 		panel.add(myTitle, gbc_myTitle);
 		
-		MyIcon iconolapiz = new MyIcon("icon/lapiz.png", 30, 30, false);
+		iconolapiz = new MyIcon("icon/lapiz.png", 30, 30, false);
 		GridBagConstraints gbc_iconolapiz = new GridBagConstraints();
 		gbc_iconolapiz.anchor = GridBagConstraints.WEST;
 		gbc_iconolapiz.insets = new Insets(0, 20, 0, 20);
@@ -188,7 +198,6 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		
 		
 		tablemodel1 = new PanelVerCompetenciaTM1();
-//		tablemodel1=new PanelVerCompetenciaTM1(new VerCompetenciaDTO("Campeonato regional 2020", "Liga", "Futbol", "En disputa", )
 		tabla1 = new MyJTable(tablemodel1);
 		JScrollPane scrollPane1 = new JScrollPane(tabla1);
 		
@@ -217,7 +226,13 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		gbl_panel_3.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		panel_3.setLayout(gbl_panel_3);
 		
-		JScrollPane scrollPane2 = new JScrollPane();
+		
+		tablemodel2 = new PanelVerCompetenciaTM2();
+		tabla2 = new MyJTable(tablemodel2);
+		JScrollPane scrollPane2 = new JScrollPane(tabla2);
+		tabla2.setJTableColumnsWidth(31,31,7,31);
+		
+		
 		GridBagConstraints gbc_scrollPane2 = new GridBagConstraints();
 		gbc_scrollPane2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane2.gridx = 0;
@@ -245,13 +260,20 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		gbc_botonverfixture.gridy = 0;
 		panel_4.add(botonverfixture, gbc_botonverfixture);
 		
-		JButton botongenerarfixture = new JButton("Generar fixture");
+		botongenerarfixture = new JButton("Generar fixture");
 		GridBagConstraints gbc_botongenerarfixture = new GridBagConstraints();
 		gbc_botongenerarfixture.fill = GridBagConstraints.HORIZONTAL;
 		gbc_botongenerarfixture.insets = new Insets(0, 0, 5, 8);
 		gbc_botongenerarfixture.gridx = 1;
 		gbc_botongenerarfixture.gridy = 0;
 		panel_4.add(botongenerarfixture, gbc_botongenerarfixture);
+//		botongenerarfixture.addComponentListener(new ComponentAdapter() {
+//			@Override
+//			public void componentMoved(ComponentEvent e) {
+//				super.componentMoved(e);
+//				Gui.imprimir(botongenerarfixture.getLocation().toString());
+//			}
+//		});
 		
 		JButton botonvertablaposiciones = new JButton("Ver tabla de posiciones");
 		GridBagConstraints gbc_botonvertablaposiciones = new GridBagConstraints();
@@ -277,6 +299,14 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		gbc_botoncancelar.gridx = 0;
 		gbc_botoncancelar.gridy = 1;
 		panel_4.add(botoncancelar, gbc_botoncancelar);
+		
+		botoncancelar.addActionListener(e->{
+			padre.volverAtras();
+		});
+		
+		
+		
+		
 		
 	}
 }
