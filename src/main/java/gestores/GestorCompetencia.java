@@ -244,9 +244,9 @@ public class GestorCompetencia {
 		vcdto.setModalidad(compe.getModalidad().toString());
 		vcdto.setDeporte(compe.getDeporte().getNombre());
 		vcdto.setEstado(compe.getEstado());
-		vcdto.setParticipantes(new ArrayList<String>());
+		vcdto.setParticipantes(new ArrayList<ParticipanteDTO>());
 		compe.getParticipantes().stream()
-			.map(p -> p.getNombre())
+			.map(p -> new ParticipanteDTO(p.getNombre(),p.getEmail(),idCompetencia))
 			.forEach(n -> vcdto.getParticipantes().add(n));
 		vcdto.setProximosEncuetros(new ArrayList<EncuentroDTO>());
 		for(Fecha f: compe.getFixture().getFechas()) {

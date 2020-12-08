@@ -9,7 +9,7 @@ public class VerCompetenciaDTO {
 	private String modalidad;
 	private String deporte;
 	private String estado;
-	private List<String> participantes;
+	private List<ParticipanteDTO> participantes;
 	private List<EncuentroDTO> proximosEncuetros;
 	
 	
@@ -19,7 +19,7 @@ public class VerCompetenciaDTO {
 		super();
 	}
 	
-	public VerCompetenciaDTO(String nombre, String modalidad, String deporte, String estado, List<String> participantes,
+	public VerCompetenciaDTO(String nombre, String modalidad, String deporte, String estado, List<ParticipanteDTO> participantes,
 			List<EncuentroDTO> proximosEncuetros) {
 		super();
 		this.nombre = nombre;
@@ -54,10 +54,10 @@ public class VerCompetenciaDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public List<String> getParticipantes() {
+	public List<ParticipanteDTO> getParticipantes() {
 		return participantes;
 	}
-	public void setParticipantes(List<String> participantes) {
+	public void setParticipantes(List<ParticipanteDTO> participantes) {
 		this.participantes = participantes;
 	}
 	public List<EncuentroDTO> getProximosEncuetros() {
