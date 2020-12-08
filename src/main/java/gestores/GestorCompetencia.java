@@ -252,7 +252,7 @@ public class GestorCompetencia {
 		for(Fecha f: compe.getFixture().getFechas()) {
 			for(Encuentro e: f.getEncuentros()) {
 				if(e.getVigente()!=null) {
-					vcdto.getProximosEncuetros().add(new EncuentroDTO(e.getId(),e.getParticipanteA().getNombre(),e.getParticipanteB().getNombre(),null));
+					vcdto.getProximosEncuetros().add(new EncuentroDTO(e.getId(),e.getParticipanteA().getNombre(),e.getParticipanteB().getNombre(),null,e.getFecha().getNumero(),e.getLugarRealizacion().getNombre()));
 				}
 			}
 		}

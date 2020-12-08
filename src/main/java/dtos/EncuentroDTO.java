@@ -4,7 +4,10 @@ public class EncuentroDTO {
 	private Integer idEncuentro;
 	private String nombreParticipanteA;
 	private String nombreParticipanteB;
-	ResultadoDTO rdto;
+	private ResultadoDTO rdto;
+	private Integer fecha;
+	private String lugar;
+	
 	public EncuentroDTO(Integer idEncuentro, String nombreParticipanteA, String nombreParticipanteB,
 			ResultadoDTO rdto) {
 		super();
@@ -13,6 +16,40 @@ public class EncuentroDTO {
 		this.nombreParticipanteB = nombreParticipanteB;
 		this.rdto = rdto;
 	}
+	
+	
+	public EncuentroDTO(Integer idEncuentro, String nombreParticipanteA, String nombreParticipanteB, ResultadoDTO rdto,
+			Integer fecha, String lugar) {
+		super();
+		this.idEncuentro = idEncuentro;
+		this.nombreParticipanteA = nombreParticipanteA;
+		this.nombreParticipanteB = nombreParticipanteB;
+		this.rdto = rdto;
+		this.fecha = fecha;
+		this.lugar = lugar;
+	}
+
+
+	public Integer getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(Integer fecha) {
+		this.fecha = fecha;
+	}
+
+
+	public String getLugar() {
+		return lugar;
+	}
+
+
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+
+
 	public Integer getIdEncuentro() {
 		return idEncuentro;
 	}
