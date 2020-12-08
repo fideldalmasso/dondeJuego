@@ -167,6 +167,12 @@ public class GestorCompetencia {
 		compe.setFixture(null);
 		cd.update(compe);
 	}
+	public Boolean verificarCompetenciaNoIniciada(Integer idCompetencia) {
+		Competencia compe = cd.getCompetencia(idCompetencia);
+		if(compe.getEstado().equals(EstadoCompetencia.CREADA) || compe.getEstado().equals(EstadoCompetencia.PLANIFICADA))
+			return true;
+		return false;
+	}
 	
 	public Competencia verificarCompetencia(ParticipanteDTO pdto) {
 		Competencia compe = cd.getCompetencia(pdto.getIdCompetencia());
