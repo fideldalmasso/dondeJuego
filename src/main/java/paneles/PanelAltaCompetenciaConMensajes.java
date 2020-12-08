@@ -17,6 +17,7 @@ import gui.MyError;
 import gui.MyPack;
 import gui.PanelPersonalizado;
 import gui.PopupConfirmacion;
+import gui.PopupConfirmacionIzquierda;
 import gui.PopupError;
 import guiejemplos.BubbleLabelRight;
 
@@ -40,7 +41,7 @@ public class PanelAltaCompetenciaConMensajes extends JPanel {
 	PopupError abandonopopup = new PopupError();
 	
 	PopupConfirmacion confirmacionaceptar = new PopupConfirmacion();
-	PopupConfirmacion confirmacioncancelar = new PopupConfirmacion();
+	PopupConfirmacionIzquierda confirmacioncancelar = new PopupConfirmacionIzquierda();
 	
 	
 	public PanelAltaCompetenciaConMensajes(App padre) {
@@ -87,24 +88,26 @@ public class PanelAltaCompetenciaConMensajes extends JPanel {
 		
 		panelinterno.botonaceptar.addActionListener(e->{
 			confirmacionaceptar.setVisible(true);
+			confirmacioncancelar.setVisible(false);
 		});
 		this.colocarPopup(confirmacionaceptar, 805, 732);
-		confirmacionaceptar.botonaceptar.addActionListener(e->{
+		confirmacionaceptar.acceptbutton.addActionListener(e->{
 			confirmacioncancelar.setVisible(false);
 			panelinterno.agregarCompetencia();
+			
 		});
-
 		
 		panelinterno.botoncancelar.addActionListener(e->{
 			confirmacioncancelar.setVisible(true);
+			confirmacionaceptar.setVisible(false);
 		});
-		this.colocarPopup(confirmacioncancelar, 701, 732);
-		confirmacioncancelar.botonaceptar.addActionListener(e->{
+		this.colocarPopup(confirmacioncancelar, 604-confirmacioncancelar.getPreferredSize().width, 732);
+		confirmacioncancelar.acceptbutton.addActionListener(e->{
 			confirmacioncancelar.setVisible(false);
 			padre.volverAtras();
 		});
 
-		
+
 		this.add(panelcapas);
 		
 	}
@@ -148,6 +151,7 @@ public class PanelAltaCompetenciaConMensajes extends JPanel {
 	private void conectarConfirmacion(JButton boton, JPanel popup) {
 		boton.addActionListener(e->{
 			popup.setVisible(true);
+			
 			
 		});
 		

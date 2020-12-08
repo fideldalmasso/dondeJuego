@@ -44,8 +44,8 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 
 	PanelMisCompetenciasTM tablemodel;	
 	App padre;
-	
-	
+
+
 	MyIcon cargando2;
 	VerInterfazCompetenciaDTO filtro;
 	MyJTable table;
@@ -55,7 +55,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 	MyJComboBox comboestado;
 	GestorCompetencia gestorCompetencia;
 	MyPaginator paginador;
-	
+
 	public PanelMisCompetencias(App padre) {
 
 		super();
@@ -210,13 +210,13 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_panel_1.gridy = 3;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{334, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{334, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 
-		MyPaginator paginador = new MyPaginator(0);
+		MyPaginator paginador = new MyPaginator(tablemodel.getRowsperpage());
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) paginador.getLayout();
 		gridBagLayout_1.rowWeights = new double[]{0.0};
 		gridBagLayout_1.rowHeights = new int[]{23};
@@ -230,14 +230,24 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_myPaginator.gridy = 0;
 		panel_1.add(paginador, gbc_myPaginator);
 
+		JButton botonvolver = new JButton("Volver");
+		GridBagConstraints gbc_botonvolver = new GridBagConstraints();
+		gbc_botonvolver.anchor = GridBagConstraints.EAST;
+		gbc_botonvolver.fill = GridBagConstraints.VERTICAL;
+		gbc_botonvolver.insets = new Insets(0, 0, 5, 5);
+		gbc_botonvolver.gridx = 1;
+		gbc_botonvolver.gridy = 0;
+		panel_1.add(botonvolver, gbc_botonvolver);
+
 		JButton botonnuevacompetancia = new JButton("    Nueva competencia");
 		botonnuevacompetancia.setIcon(Gui.emoji("icon/mas_negro.png", 24, 24, false));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.anchor = GridBagConstraints.EAST;
-		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 1;
-		gbc_button.gridy = 0;
-		panel_1.add(botonnuevacompetancia, gbc_button);
+		GridBagConstraints gbc_nuevacompetencia = new GridBagConstraints();
+		gbc_nuevacompetencia.anchor = GridBagConstraints.EAST;
+
+		gbc_nuevacompetencia.insets = new Insets(0, 0, 5, 0);
+		gbc_nuevacompetencia.gridx = 2;
+		gbc_nuevacompetencia.gridy = 0;
+		panel_1.add(botonnuevacompetancia, gbc_nuevacompetencia);
 
 
 		SwingWorker<String[], Void> trabajador1 = new SwingWorker<String[], Void>(){
@@ -268,7 +278,12 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 			@Override
 			protected PanelMisCompetenciasTM doInBackground() throws Exception {
 				cargando2.setVisible(true);
-				t= new PanelMisCompetenciasTM(gestorCompetencia.getCompetencias());
+				//				t= new PanelMisCompetenciasTM(gestorCompetencia.getCompetencias());
+				List<VerInterfazCompetenciaDTO> lista = new ArrayList<VerInterfazCompetenciaDTO>();
+				for(int i=0; i<50; i++) {
+					lista.add(new VerInterfazCompetenciaDTO(i, "xd"+i, "xd", "xd", "xd"));
+				}
+				t = new PanelMisCompetenciasTM(lista);
 				return t;
 			}
 			@Override 
@@ -278,7 +293,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 					table.setModel(t);
 					table.setJTableColumnsWidth(36,14,30,14,6);
 					cargando2.setVisible(false);
-					paginador.update(t.getTam());
+					paginador.setDataSize(t.getTam());
 				}
 				else {
 					Gui.imprimir("Hubo un error cargando la tabla desde la db");
@@ -288,7 +303,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		trabajador2.execute();
 
 
-		
+
 
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -305,14 +320,30 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 
 
 		botonnuevacompetancia.addActionListener(e->{
-			padre.nuevoPanel(new PanelAltaCompetencia(padre));
+			padre.nuevoPanel(new PanelAltaCompetenciaConMensajes(padre));
+		});
+
+		botonvolver.addActionListener(e->{
+			padre.volverAtras();
+		});
+
+		paginador.getFirst().addActionListener(e->{
+			tablemodel.setActualPage(1);
+		});
+		paginador.getBack().addActionListener(e->{
+			tablemodel.setActualPage(tablemodel.getActualpage()-1);
+		});
+		paginador.getNext().addActionListener(e->{
+			tablemodel.setActualPage(tablemodel.getActualpage()+1);
+		});
+		paginador.getLast().addActionListener(e->{
+			tablemodel.setActualPage(tablemodel.getTotalpages());
 		});
 
 
 
-
 	}
-	
+
 	class trabajador3 extends SwingWorker<PanelMisCompetenciasTM, Void>{
 		private PanelMisCompetenciasTM t;
 		@Override
@@ -334,15 +365,13 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 				table.setModel(t);
 				table.setJTableColumnsWidth(36,14,30,14,6);
 				cargando2.setVisible(false);
-				paginador.update(t.getTam());
+				paginador.setDataSize(t.getTam());
 			}
 			else {
 				Gui.imprimir("Hubo un error haciendo la consulta en la db");
 			}
 		}
 	}
-
-	
 
 }
 
