@@ -292,10 +292,12 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		
 	}
 	
-	private void validar(Mensaje2<errores> m) {
+	private boolean validar(Mensaje2<errores> m) {
 		if(m.getMensaje().containsKey(errores.EXITO)) {
-			botonaceptar.setToolTipText("Éxito");
-			return;
+//			botonaceptar.setToolTipText("Éxito");
+				
+			
+			return true;
 		}
 		for(Map.Entry<errores, String> i : m.getMensaje().entrySet()) {
 			
@@ -308,6 +310,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			
 			
 		}
+		return false;
 	}
 	
 	
@@ -316,7 +319,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	}
 
 	
-	public void agregarCompetencia() {
+	public boolean agregarCompetencia() {
 		
 		if(tablalugares.isEditing()) {
 			Gui.imprimir("se tuvo que detener la tabla");
@@ -340,7 +343,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 		dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
 		dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
 		
-		this.validar(new GestorCompetencia().crearCompetencia(dto));
+		return validar(new GestorCompetencia().crearCompetencia(dto));
 	}
 	
 	

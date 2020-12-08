@@ -11,6 +11,25 @@ public class VerCompetenciaDTO {
 	private String estado;
 	private List<String> participantes;
 	private List<EncuentroDTO> proximosEncuetros;
+	
+	
+	
+	
+	public VerCompetenciaDTO() {
+		super();
+	}
+	
+	public VerCompetenciaDTO(String nombre, String modalidad, String deporte, String estado, List<String> participantes,
+			List<EncuentroDTO> proximosEncuetros) {
+		super();
+		this.nombre = nombre;
+		this.modalidad = modalidad;
+		this.deporte = deporte;
+		this.estado = estado;
+		this.participantes = participantes;
+		this.proximosEncuetros = proximosEncuetros;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

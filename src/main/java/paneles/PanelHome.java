@@ -91,6 +91,9 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_botontodaslascompetencias.gridx = 0;
 		gbc_botontodaslascompetencias.gridy = 0;
 		panel_1.add(botontodaslascompetencias, gbc_botontodaslascompetencias);
+		botontodaslascompetencias.addActionListener(e->{
+			padre.nuevoPanel(new PanelVerCompetencia(padre));
+		});
 		
 		MyHomeButton botonmiperfil = new MyHomeButton("Mi perfil", "icon/usuario.png");
 		GridBagConstraints gbc_botonmiperfil = new GridBagConstraints();

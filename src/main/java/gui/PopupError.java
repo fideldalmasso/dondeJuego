@@ -34,7 +34,8 @@ public class PopupError extends JPanel {
 	public PopupError() {
 		super();
 		this.setLayout(new GridBagLayout());
-		this.setPreferredSize(new Dimension(290,38));
+		this.setPreferredSize(new Dimension(250,38));
+//		this.setMinimumSize(new Dimension(100,38));
 		this.setBorder(new EmptyBorder(10,25,10,10));
 		this.setOpaque(false);
 		this.setBackground(Color.decode("#e99998"));

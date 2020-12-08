@@ -1,15 +1,11 @@
 package paneles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 
-import dominio.LugarRealizacion;
-import dominio.Pair;
 import dtos.VerInterfazCompetenciaDTO;
-import gestores.GestorLugarRealizacion;
 import gui.Gui;
 
 public class PanelMisCompetenciasTM extends AbstractTableModel {
@@ -17,7 +13,6 @@ public class PanelMisCompetenciasTM extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
-	GestorLugarRealizacion gestor;
 
 	private Object[][] data;
 	private String[] columnNames = {"Nombre de la competencia", "Deporte", "Modalidad", "Estado", "Ver"};
