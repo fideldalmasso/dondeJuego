@@ -249,10 +249,15 @@ public class GestorCompetencia {
 			.map(p -> new ParticipanteDTO(p.getNombre(),p.getEmail(),idCompetencia))
 			.forEach(n -> vcdto.getParticipantes().add(n));
 		vcdto.setProximosEncuetros(new ArrayList<EncuentroDTO>());
-		for(Fecha f: compe.getFixture().getFechas()) {
-			for(Encuentro e: f.getEncuentros()) {
-				if(e.getVigente()!=null) {
-					vcdto.getProximosEncuetros().add(new EncuentroDTO(e.getId(),e.getParticipanteA().getNombre(),e.getParticipanteB().getNombre(),null,e.getFecha().getNumero(),e.getLugarRealizacion().getNombre()));
+		if(compe.getFixture()!=null) {
+			for(Fecha f: compe.getFixture().getFechas()) {
+				for(Encuentro e: f.getEncuentros()) {
+					if(e.getVigente()!=null) {
+						String pa=null,pb=null;
+						if(e.getParticipanteA()!=null) pa=e.getParticipanteA().getNombre();
+						if(e.getParticipanteB()!=null) pb=e.getParticipanteB().getNombre();
+						vcdto.getProximosEncuetros().add(new EncuentroDTO(e.getId(),pa,pb,null,f.getNumero(),e.getLugarRealizacion().getNombre()));
+					}
 				}
 			}
 		}
