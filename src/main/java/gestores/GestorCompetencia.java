@@ -2,7 +2,7 @@ package gestores;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import daos.CompetenciaDAO;
 import daos.CompetenciaLugarDAO;
@@ -250,7 +250,9 @@ public class GestorCompetencia {
 			.forEach(n -> vcdto.getParticipantes().add(n));
 		vcdto.setProximosEncuetros(new ArrayList<EncuentroDTO>());
 		if(compe.getFixture()!=null) {
-			for(Fecha f: compe.getFixture().getFechas()) {
+			List<Fecha> fechas = compe.getFixture().getFechas().stream().collect(Collectors.toList());
+			fechas.sort((f1,f2)->f1.getNumero().compareTo(f2.getNumero()));
+			for(Fecha f: fechas) {
 				for(Encuentro e: f.getEncuentros()) {
 					if(e.getVigente()!=null) {
 						String pa=null,pb=null;
