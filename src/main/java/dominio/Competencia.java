@@ -44,17 +44,17 @@ public class Competencia {
 	@ManyToOne
 	@JoinColumn(name="idDeporte")
 	private Deporte deporte;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idSistemaPuntuacion")
 	private SistemaPuntuacion sistemaPuntuacion;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idModalidad")
 	private Modalidad modalidad;
 	@OneToMany(mappedBy="competencia", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Set<CompetenciaLugar> lugares;
 	@OneToMany(mappedBy="competencia", fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Participante> participantes;
-	@OneToOne(mappedBy = "competencia", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "competencia", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private Fixture fixture;
 	@ManyToOne
 	@JoinColumn(name="idUsuario")

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="dj.resultadoPuntuacion")
+@Table(name="dj.resultadoPorPuntuacion")
 public class ResultadoPuntuacion extends Resultado {
 	@Column(name="puntajeFinalA")
 	private Integer puntajeFinalA;
