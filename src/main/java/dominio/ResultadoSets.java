@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="dj.resultadoSets")
+@Table(name="dj.resultadoPorSets")
 public class ResultadoSets extends Resultado {
 	@OneToMany(mappedBy="resultado")
 	private List<Set> sets;

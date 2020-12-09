@@ -96,11 +96,12 @@ public class Prueba {
 	      gc.agregarParticipante(p3, compe);
 	      gc.agregarParticipante(p4, compe);
 	      */
-	      
+	      /*
 	      GestorFixture gf =  new GestorFixture();
 	      gf.generarFixture(348);
 	      gf.crearFixture();
-	      
+	      */
+	      gc.getCompetencia(348);
 	     
 	}
 	   

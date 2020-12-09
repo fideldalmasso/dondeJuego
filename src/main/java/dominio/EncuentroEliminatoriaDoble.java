@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.Set;
 import java.util.List;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -13,10 +15,10 @@ import javax.persistence.Table;
 @Table(name="dj.encuentroEliminatoriaDoble")
 public class EncuentroEliminatoriaDoble extends Encuentro {
 	@OneToOne
-	@JoinColumn(name="destinoPerdedor")
+	@JoinColumn(name="destinoGanador")
 	private EncuentroEliminatoriaDoble ganador;
 	@OneToOne
-	@JoinColumn(name="destinoGanador")
+	@JoinColumn(name="destinoPerdedor")
 	private EncuentroEliminatoriaDoble perdedor;
 	
 	public EncuentroEliminatoriaDoble(Integer id, Timestamp fechaEncuentro, Boolean sePresentaB, Boolean sePresentaA,
