@@ -32,7 +32,11 @@ public class PanelVerCompetenciaTM1 extends AbstractTableModel {
 	public PanelVerCompetenciaTM1(VerCompetenciaDTO dto) {
 		super();
 		this.dto=dto;
-
+		if(dto.getParticipantes()==null || dto.getParticipantes().size()==0) {
+			tam=0;
+			Gui.imprimir("la lista de participantes es nula o esta vacia");
+			return;
+		}
 		tam=dto.getParticipantes().size();
 		data2= new Object[tam][2];
 				

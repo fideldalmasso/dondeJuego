@@ -24,5 +24,10 @@ public class Mensaje {
 	public void setAccion(Integer accion) {
 		this.accion=accion;
 	}
+	public Integer getAccion() {
+		return accion;
+	}
+	
+	
 	
 }

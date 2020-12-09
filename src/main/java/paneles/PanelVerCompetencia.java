@@ -12,7 +12,10 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 import app.App;
+import daos.DeporteDAO;
+import dtos.CompetenciaDTO;
 import dtos.VerCompetenciaDTO;
+import gestores.GestorCompetencia;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -20,14 +23,19 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.stream.Collectors;
 
 import javax.swing.JLabel;
 import gui.MyJTextField;
 import gui.MyJComboBox;
 import gui.Gui;
 import gui.MyIcon;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.SwingWorker;
+
 import gui.MyJTable;
 
 public class PanelVerCompetencia extends PanelPersonalizado {
@@ -44,9 +52,12 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 	
 	public JButton botongenerarfixture;
 	public MyIcon iconolapiz;
+	private GestorCompetencia gestor;
+	private VerCompetenciaDTO dto;
 	
 	public PanelVerCompetencia(App padre, int idCompetencia) {
 		super();
+		gestor = new GestorCompetencia();
 		this.idCompetencia=idCompetencia;
 		this.padre=padre;
 		this.setPreferredSize(new Dimension(700,734));
@@ -275,6 +286,8 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 //			}
 //		});
 		
+		
+		
 		JButton botonvertablaposiciones = new JButton("Ver tabla de posiciones");
 		GridBagConstraints gbc_botonvertablaposiciones = new GridBagConstraints();
 		gbc_botonvertablaposiciones.fill = GridBagConstraints.HORIZONTAL;
@@ -304,7 +317,36 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 			padre.volverAtras();
 		});
 		
-		
+		SwingWorker<VerCompetenciaDTO, Void> trabajador1 = new SwingWorker<VerCompetenciaDTO, Void>(){
+			private VerCompetenciaDTO t;
+			@Override
+			protected VerCompetenciaDTO doInBackground() throws Exception {
+				t= gestor.getCompetenciaDTO(idCompetencia);
+				dto = t;
+				return t;
+			}
+			@Override 
+			protected void done() {
+				
+				if(t==null || t.getNombre()== null || t.getModalidad()==null || t.getDeporte() == null || t.getEstado() == null || t.getParticipantes()==null || t.getProximosEncuetros()==null)
+					Gui.imprimir("El dto VerCompetenciaDTO tiene campos nulos REVISAR!");
+				
+				nombre.setText(t.getNombre());
+				modalidad.setText(t.getModalidad());
+				deporte.setText(t.getDeporte());
+				estado.setText(t.getEstado());
+			
+				if(estado.getText().equals("En disputa") || estado.getText().equals("Finalizada") || modalidad.getText().equals("Eliminatoria doble") || modalidad.getText().equals("Eliminatoria Simple"));
+					botongenerarfixture.setEnabled(false);
+				
+				tabla1.setModel(new PanelVerCompetenciaTM1(t));
+				tabla2.setModel(new PanelVerCompetenciaTM2(t));
+				tabla2.setJTableColumnsWidth(31,31,7,31);
+				iconocargando.setVisible(false);
+			}
+			
+		};
+		trabajador1.execute();
 		
 		
 		

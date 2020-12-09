@@ -278,12 +278,12 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 			@Override
 			protected PanelMisCompetenciasTM doInBackground() throws Exception {
 				cargando2.setVisible(true);
-				//				t= new PanelMisCompetenciasTM(gestorCompetencia.getCompetencias());
-				List<VerInterfazCompetenciaDTO> lista = new ArrayList<VerInterfazCompetenciaDTO>();
-				for(int i=0; i<50; i++) {
-					lista.add(new VerInterfazCompetenciaDTO(i, "xd"+i, "xd", "xd", "xd"));
-				}
-				t = new PanelMisCompetenciasTM(lista);
+				t= new PanelMisCompetenciasTM(gestorCompetencia.getCompetencias());
+//				List<VerInterfazCompetenciaDTO> lista = new ArrayList<VerInterfazCompetenciaDTO>();
+//				for(int i=0; i<50; i++) {
+//					lista.add(new VerInterfazCompetenciaDTO(i, "xd"+i, "xd", "xd", "xd"));
+//				}
+//				t = new PanelMisCompetenciasTM(lista);
 				return t;
 			}
 			@Override 
@@ -308,6 +308,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(table.getSelectedColumn()==4) {
+					padre.nuevoPanel(new PanelVerCompetencia(padre, (int)tablemodel.getValueAt(table.getSelectedRow(), 5)));
 					Gui.imprimir("cambiar a panel ver competencia");
 				}
 			}

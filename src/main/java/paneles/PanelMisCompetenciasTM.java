@@ -49,7 +49,7 @@ public class PanelMisCompetenciasTM extends AbstractTableModel {
 		dtos=lista;
 
 		tam=dtos.size();
-		data= new Object[tam][5];
+		data= new Object[tam][6];
 				
 		for(int i=0; i<tam; i++) {
 			data[i][0]=dtos.get(i).getNombre();
@@ -57,6 +57,7 @@ public class PanelMisCompetenciasTM extends AbstractTableModel {
 			data[i][2]=dtos.get(i).getModalidad();
 			data[i][3]=dtos.get(i).getEstado();
 			data[i][4]=Gui.emoji("icon/ver.png", 24, 24, false);
+			data[i][5]=dtos.get(i).getIdCompetencia();
 		}
 
 		this.totalpages= (int) Math.ceil((double) tam/ rowsperpage);
@@ -87,7 +88,13 @@ public class PanelMisCompetenciasTM extends AbstractTableModel {
 
 	@Override
 	public Class getColumnClass(int c) { 
-		return c<4?String.class:ImageIcon.class; 
+		
+		if(c<4) {return String.class;}
+		else if(c==4) {return ImageIcon.class;}
+		else return int.class;
+		
+			
+//		return c<4?String.class:ImageIcon.class; 
 
 	}
 

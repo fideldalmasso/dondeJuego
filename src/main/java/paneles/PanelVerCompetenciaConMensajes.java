@@ -16,10 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import app.App;
+import dominio.Mensaje;
+import gestores.GestorFixture;
 import gui.Gui;
 import gui.PanelPersonalizado;
 import gui.PopupConfirmacion;
 import gui.PopupError;
+import gui.PopupExito;
 
 public class PanelVerCompetenciaConMensajes extends JPanel {
 
@@ -31,7 +34,8 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 
 
 	PopupConfirmacion fixturepopup = new PopupConfirmacion();
-	PopupError error1 = new PopupError();
+	PopupError errorgenerandofixture = new PopupError();
+	PopupExito exitogenerandofixture;
 
 	public PanelVerCompetenciaConMensajes(App padre, int idCompetencia) {
 		this.idCompetencia = idCompetencia;
@@ -39,7 +43,7 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		this.setOpaque(false);
 		this.padre = padre;
 		this.setFocusable(true);
-		
+
 		panelcapas = new JLayeredPane();
 		panelcapas.setLayout(null);
 		panelcapas.setPreferredSize(new Dimension(1200, 800));
@@ -55,12 +59,25 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		panelinterno.setFocusable(true);
 		panelcapas.setFocusable(true);
 
-	
-		colocarPopup(error1, panelinterno.iconolapiz);
-		colocarPopup(fixturepopup, panelinterno.botongenerarfixture);
-//		fixturepopup.setVisible(true);
 
-		
+		colocarPopup(fixturepopup, panelinterno.botongenerarfixture,true);
+		fixturepopup.acceptbutton.addActionListener(e->{
+			GestorFixture gestor = new GestorFixture();
+			Mensaje m = gestor.generarFixture(idCompetencia);
+			if(m.getAccion()==1) {
+				m = gestor.crearFixture();
+				if(m.getAccion()==1) {
+					exitogenerandofixture=new PopupExito(m.getMensaje().get(0), 200);
+					colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
+					return;
+				}
+			}
+				errorgenerandofixture.setText(m.getMensaje().toString());
+				errorgenerandofixture.setVisible(true);
+		});
+		colocarPopup(errorgenerandofixture, panelinterno.botongenerarfixture,false);
+
+
 		this.add(panelcapas);
 
 	}
@@ -82,13 +99,14 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		Dimension popupSize = p.getPreferredSize();
 		p.setBounds(x, y, popupSize.width, popupSize.height);
 	}
-	
-	public void colocarPopup(JPanel p,JComponent c) {
-		
+
+	public void colocarPopup(JPanel p,JComponent c, boolean activarConClic) {
+
 		c.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentMoved(ComponentEvent e) {
 				super.componentMoved(e);
+				Gui.DEBUG=false;
 				Dimension popupSize = p.getPreferredSize();
 				Gui.imprimir(c.toString());
 				Gui.imprimir(c.getLocation().toString());
@@ -100,7 +118,7 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 				panelcapas.setLayer(p, 1);
 				panelcapas.add(p);
 
-//				p.setVisible(true);
+				//				p.setVisible(true);
 				panelcapas.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -109,23 +127,23 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 							p.setVisible(false);
 					}
 				});
-				
-				
-				c.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						super.mouseClicked(e);
-						p.setVisible(true);
-					}
-				});
-				
-				
+
+				if(activarConClic) {
+					c.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							super.mouseClicked(e);
+							p.setVisible(true);
+						}
+					});
+				}
+				Gui.DEBUG=true;
 			}
 		});
-		
 
 
-		
+
+
 	}
 
 
