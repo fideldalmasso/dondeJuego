@@ -1,18 +1,16 @@
 package paneles;
 
-import gui.PanelPersonalizado;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JPanel;
 
 import app.App;
-
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
 import gui.MyHomeButton;
 import gui.MyTitle;
-import javax.swing.JButton;
+import gui.PanelPersonalizado;
 
 public class PanelHome extends PanelPersonalizado {
 	
@@ -92,7 +90,7 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_botontodaslascompetencias.gridy = 0;
 		panel_1.add(botontodaslascompetencias, gbc_botontodaslascompetencias);
 		botontodaslascompetencias.addActionListener(e->{
-			padre.nuevoPanel(new PanelVerCompetenciaConMensajes(padre,1221));
+			padre.nuevoPanel(new PanelVerCompetenciaConMensajes(padre,1));
 		});
 		
 		MyHomeButton botonmiperfil = new MyHomeButton("Mi perfil", "icon/usuario.png");
@@ -101,6 +99,10 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_botonmiperfil.gridx = 1;
 		gbc_botonmiperfil.gridy = 0;
 		panel_1.add(botonmiperfil, gbc_botonmiperfil);
+		botonmiperfil.addActionListener(e->{
+			padre.nuevoPanel(new PanelVerParticipantes(padre,1,"Competencia Uno"));
+		});
+		
 		
 		MyHomeButton botoncerrarsesion = new MyHomeButton("Cerrar sesión", "icon/salir.png");
 		GridBagConstraints gbc_botoncerrarsesion = new GridBagConstraints();
