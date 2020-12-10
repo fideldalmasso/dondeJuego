@@ -2,6 +2,7 @@ package dominio;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -97,8 +98,8 @@ public class Competencia {
 	}
 	public Competencia() {
 		super();
-		this.lugares = new TreeSet<CompetenciaLugar>();
-		this.participantes = new TreeSet<Participante>();
+		this.lugares = new HashSet<CompetenciaLugar>();
+		this.participantes = new HashSet<Participante>();
 	}
 	public Integer getId() {
 		return id;

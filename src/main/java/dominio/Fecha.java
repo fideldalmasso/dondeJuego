@@ -1,6 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Fecha {
 	}
 	public Fecha() {
 		super();
-		this.encuentros=new TreeSet<Encuentro>();
+		this.encuentros=new HashSet<Encuentro>();
 	}
 	public Set<Encuentro> getEncuentros() {
 		return encuentros;

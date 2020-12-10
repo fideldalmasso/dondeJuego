@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ public class Fixture {
 	
 	public Fixture() {
 		super();
-		this.fechas = new TreeSet<Fecha>();
+		this.fechas = new HashSet<Fecha>();
 	}
 	public Fixture(Integer id, Timestamp fechaCreacion, Set<Fecha> fechas) {
 		super();

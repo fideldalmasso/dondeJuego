@@ -3,6 +3,7 @@ package dominio;
 import dominio.Fecha;
 import java.util.Set;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -76,6 +77,7 @@ public class Encuentro {
 	}
 	public Encuentro() {
 		super();
+		this.resultados= new HashSet<Resultado>();
 	}
 	public Integer getId() {
 		return id;
