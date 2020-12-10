@@ -64,7 +64,7 @@ public class Prueba3{
 	      Usuario usr = new Usuario("Diego", "Maradona", "12345",
 	    		  TipoDocumento.DNI, "42241045", "dieguitomaradona@gmail.com", new HashSet<Competencia>(),
 			new HashSet<RegistroSesion>(), new HashSet<LugarRealizacion>(), loc);
-	      gu.save(usr);
+	      Usuario tohaveidusr = gu.save(usr);
 	      ga.login("dieguitomaradona@gmail.com", "12345");
 	      
 	      pais = new Pais("Bolivia", new ArrayList<Provincia>());
@@ -83,16 +83,13 @@ public class Prueba3{
 	      locd.save(loc);
 	      
 	      
-	      LugarRealizacion lr = new LugarRealizacion("Nuevo Gasometro","Estadio temporal",null,new HashSet<Deporte>());
+	      LugarRealizacion lr = new LugarRealizacion("Nuevo Gasometro","Estadio temporal", tohaveidusr.getId() ,new HashSet<Deporte>());
 	      ld.save(lr);
-	      lr = new LugarRealizacion("La Bombonera", "Estadio Boca", null, new HashSet<Deporte>());
+	      lr = new LugarRealizacion("La Bombonera", "Estadio Boca", tohaveidusr.getId(), new HashSet<Deporte>());
 	      ld.save(lr);
-	      lr = new LugarRealizacion("El Monumental", "Estadio River", null, new HashSet<Deporte>());
+	      lr = new LugarRealizacion("El Monumental", "Estadio River", tohaveidusr.getId(), new HashSet<Deporte>());
 	      ld.save(lr);
-	      lr = new LugarRealizacion("El Bosque", "Estadio de Gimnasia", null, new HashSet<Deporte>());
-	      ld.save(lr);
-	      lr = new LugarRealizacion("Cementerio de Elefantes", "Estadio de Colon", null, new HashSet<Deporte>());
-	      ld.save(lr);
+	     
 	      */
 	      
 	      /*
@@ -107,16 +104,16 @@ public class Prueba3{
 	      
 	      Usuario usr2 = new Usuario("Ronaldinho", "Asis", "6789", TipoDocumento.DNI, "43321332", "ronaldinho@hotmail.com",new HashSet<Competencia>(),
 	  			new HashSet<RegistroSesion>(), new HashSet<LugarRealizacion>(), loc);   
-	      gu.save(usr2);
+	      Usuario tohaveidusr2 = gu.save(usr2);
+	      
+	      LugarRealizacion lr = new LugarRealizacion("El Bosque", "Estadio de Gimnasia", tohaveidusr2.getId(), new HashSet<Deporte>());
+	      ld.save(lr);
+	      lr = new LugarRealizacion("Cementerio de Elefantes", "Estadio de Colon", tohaveidusr2.getId(), new HashSet<Deporte>());
+	      ld.save(lr);
 	      
 	      */
 	      // anda bien esto tb
 	      
-	     
-	     
-	      
-	      
-	     
 	      
 	      
 	    //  Pair p = new Pair(lr.getId(),1000);
