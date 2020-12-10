@@ -62,6 +62,8 @@ Integer idEncuentro
 String nombreParticipanteA
 String nombreParticipanteB
 ResultadoDTO rdto
+String lugar
+Integer fecha
 end note
 
 note right of FD
@@ -80,7 +82,7 @@ Integer puntajeFinalB
 end note
 note right of FD
 ResultadoSetsDTO
-List<Pair<Integer,Integer>> sets
+List<Set> sets
 end note
 
 hide footbox
