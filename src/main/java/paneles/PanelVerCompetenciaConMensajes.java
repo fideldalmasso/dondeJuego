@@ -33,9 +33,9 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 	private int idCompetencia;
 
 
-	PopupConfirmacion fixturepopup = new PopupConfirmacion();
-	PopupError errorgenerandofixture = new PopupError();
-	PopupExito exitogenerandofixture;
+//	PopupConfirmacion fixturepopup = new PopupConfirmacion();
+//	PopupError errorgenerandofixture = new PopupError();
+//	PopupExito exitogenerandofixture;
 
 	public PanelVerCompetenciaConMensajes(App padre, int idCompetencia) {
 		this.idCompetencia = idCompetencia;
@@ -60,26 +60,26 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		panelinterno.setFocusable(true);
 		panelcapas.setFocusable(true);
 
-		exitogenerandofixture=new PopupExito();
-		exitogenerandofixture.setWidth(300);
-		colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
-
-		colocarPopup(fixturepopup, panelinterno.botongenerarfixture,true);
-		fixturepopup.acceptbutton.addActionListener(e->{
-			GestorFixture gestor = new GestorFixture();
-			Mensaje m = gestor.generarFixture(idCompetencia);
-			if(m.getAccion()==1) {
-				m = gestor.crearFixture();
-				if(m.getAccion()==0) {
-					exitogenerandofixture.setText(m.getMensaje().get(0));
-					exitogenerandofixture.setVisible(true);
-					return;
-				}
-			}
-				errorgenerandofixture.setText(m.getMensaje().toString());
-				errorgenerandofixture.setVisible(true);
-		});
-		colocarPopup(errorgenerandofixture, panelinterno.botongenerarfixture,false);
+//		exitogenerandofixture=new PopupExito();
+//		exitogenerandofixture.setWidth(300);
+//		colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
+//
+//		colocarPopup(fixturepopup, panelinterno.botongenerarfixture,true);
+//		fixturepopup.acceptbutton.addActionListener(e->{
+//			GestorFixture gestor = new GestorFixture();
+//			Mensaje m = gestor.generarFixture(idCompetencia);
+//			if(m.getAccion()==1) {
+//				m = gestor.crearFixture();
+//				if(m.getAccion()==0) {
+//					exitogenerandofixture.setText(m.getMensaje().get(0));
+//					exitogenerandofixture.setVisible(true);
+//					return;
+//				}
+//			}
+//				errorgenerandofixture.setText(m.getMensaje().toString());
+//				errorgenerandofixture.setVisible(true);
+//		});
+//		colocarPopup(errorgenerandofixture, panelinterno.botongenerarfixture,false);
 
 
 		this.add(panelcapas);

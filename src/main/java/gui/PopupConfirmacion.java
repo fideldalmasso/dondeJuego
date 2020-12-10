@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 //https://stackoverflow.com/questions/35190710/paintcomponent-is-drawing-on-other-components
@@ -32,12 +33,20 @@ public class PopupConfirmacion extends JPanel {
 
 	public JButton acceptbutton;
 	public JButton closebutton;
+	private JTextArea texto;
+	
+	public void setText(String text) {
+		this.texto.setText(text);
+	}
 	
 	public PopupConfirmacion() {
 		super();
 		this.setLayout(new GridBagLayout());
-		this.setPreferredSize(new Dimension(160,90));
-		JLabel texto = new JLabel("¿Estás seguro?");
+		this.setPreferredSize(new Dimension(180,115));
+		texto = new JTextArea("¿Estás seguro?");
+		texto.setLineWrap(true);
+		texto.setWrapStyleWord(true);
+		texto.setOpaque(false);
 		this.setBorder(new EmptyBorder(10,30,10,20));
 		this.setOpaque(false);
 		this.setBackground(Color.decode("#fff48f"));
@@ -58,9 +67,9 @@ public class PopupConfirmacion extends JPanel {
 			this.setVisible(false);
 		});
 		
-		Gui.colocar2(1, 1, 1, 1, 0, 0, 0, 0, Gui.HORIZONTAL, Gui.NORTHWEST, new Insets(5, 0, 0, 0), this, texto);
-		Gui.colocar2(2, 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.NORTHEAST, new Insets(0, 15, 0, 0), this, closebutton);
-		Gui.colocar2(1, 2, 2, 1, 0, 0, 0, 0, Gui.NONE, Gui.CENTER, new Insets(10, 0, 0, 0), this, acceptbutton);
+		Gui.colocar2(1, 1, 1, 1, 1, 1, 0, 0, Gui.HORIZONTAL, Gui.CENTER, new Insets(5, 0, 0, 0), this, texto);
+		Gui.colocar2(2, 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.NORTHEAST, new Insets(5, 15, 0, 0), this, closebutton);
+		Gui.colocar2(1, 2, 2, 1, 0, 0, 0, 0, Gui.NONE, Gui.CENTER, new Insets(7, 0, 0, 0), this, acceptbutton);
 		
 //		this.add(texto);
 //		this.add(acceptbutton);

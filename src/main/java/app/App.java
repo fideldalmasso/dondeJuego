@@ -168,8 +168,8 @@ public class App extends JFrame {
 					@Override
 					protected Void doInBackground() throws Exception {
 						GestorAutenticacion ga = new GestorAutenticacion();
-						ga.login("dieguitomaradona@gmail.com", "12345");
-//						ga.login("ronaldinho@hotmail.com", "6789");
+//						ga.login("dieguitomaradona@gmail.com", "12345");
+						ga.login("ronaldinho@hotmail.com", "6789");
 						return null;
 					}
 				};

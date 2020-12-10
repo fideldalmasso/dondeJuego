@@ -191,7 +191,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		tablemodel = new PanelMisCompetenciasTM();
 
 		table = new MyJTable(tablemodel);
-		table.setJTableColumnsWidth(36,14,30,14,6);
+		table.setJTableColumnsWidth(36,14,25,19,6);
 
 		scrollPane.setViewportView(table);
 
@@ -292,7 +292,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 				tablemodel=t;
 				if(t!=null) { 
 					table.setModel(t);
-					table.setJTableColumnsWidth(36,14,30,14,6);
+					table.setJTableColumnsWidth(36,14,25,19,6);
 					cargando2.setVisible(false);
 					paginador.setDataSize(t.getTam());
 				}
@@ -316,8 +316,8 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		});
 
 		botonbuscar.addActionListener(e->{
-			PanelMisCompetencias.Trabajador3 xd  = this.new Trabajador3();
-			xd.execute();
+			PanelMisCompetencias.Trabajador3 t  = this.new Trabajador3();
+			t.execute();
 		});
 
 
@@ -368,9 +368,10 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 			if(this.t!=null) { 
 
 				PanelMisCompetencias.this.table.setModel(this.t);
-				PanelMisCompetencias.this.table.setJTableColumnsWidth(36,14,30,14,6);
+				PanelMisCompetencias.this.table.setJTableColumnsWidth(36,14,25,19,6);
 				PanelMisCompetencias.this.cargando2.setVisible(false);
 				PanelMisCompetencias.this.paginador.setDataSize(this.t.getTam());
+//				PanelMisCompetencias.this.paginador.setPage(1);
 			}
 			else {
 				Gui.imprimir("Hubo un error haciendo la consulta en la db");

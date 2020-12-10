@@ -76,7 +76,7 @@ public class PanelVerCompetenciaTM1 extends AbstractTableModel {
 	
 	@Override
 	public boolean isCellEditable(int row, int col) {
-		return col==0 || col==2;
+		return false;
 	}
 	
 

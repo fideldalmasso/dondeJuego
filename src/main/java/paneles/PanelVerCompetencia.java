@@ -3,6 +3,10 @@ package paneles;
 import java.awt.Dimension;
 
 import gui.PanelPersonalizado;
+import gui.PopupConfirmacion;
+import gui.PopupError;
+import gui.PopupExito;
+
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
@@ -13,9 +17,11 @@ import javax.swing.border.TitledBorder;
 
 import app.App;
 import daos.DeporteDAO;
+import dominio.Mensaje;
 import dtos.CompetenciaDTO;
 import dtos.VerCompetenciaDTO;
 import gestores.GestorCompetencia;
+import gestores.GestorFixture;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -52,14 +58,20 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 	
 	public JButton botongenerarfixture;
 	public MyIcon iconolapiz;
-	private GestorCompetencia gestor;
+	private GestorCompetencia gestorCompetencia;
 	private VerCompetenciaDTO dto;
 	
+	private PopupConfirmacion fixturepopup = new PopupConfirmacion();
+	private PopupError errorgenerandofixture = new PopupError();
+	private PopupExito exitogenerandofixture;
+	
 	private String nombreCompetencia ="";
+	private GestorFixture gestorFixture;
 	
 	public PanelVerCompetencia(App padre, int idCompetencia, PanelVerCompetenciaConMensajes capas) {
 		super();
-		gestor = new GestorCompetencia();
+		gestorCompetencia = new GestorCompetencia();
+		gestorFixture = new GestorFixture();
 		this.idCompetencia=idCompetencia;
 		this.padre=padre;
 		this.setPreferredSize(new Dimension(700,734));
@@ -284,6 +296,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		gbc_botongenerarfixture.gridx = 1;
 		gbc_botongenerarfixture.gridy = 0;
 		panel_4.add(botongenerarfixture, gbc_botongenerarfixture);
+		botongenerarfixture.setEnabled(false);
 //		botongenerarfixture.addComponentListener(new ComponentAdapter() {
 //			@Override
 //			public void componentMoved(ComponentEvent e) {
@@ -333,8 +346,8 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 			private VerCompetenciaDTO t;
 			@Override
 			protected VerCompetenciaDTO doInBackground() throws Exception {
-				gestor = new GestorCompetencia();
-				t= gestor.getCompetenciaDTO(idCompetencia);
+				gestorCompetencia = new GestorCompetencia();
+				t= gestorCompetencia.getCompetenciaDTO(idCompetencia);
 				dto = t;
 				return t;
 			}
@@ -354,8 +367,11 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 				deporte.setText(t.getDeporte());
 				estado.setText(t.getEstado());
 			
-				if(estado.getText().equals("En disputa") || estado.getText().equals("Finalizada") || modalidad.getText().equals("Eliminatoria doble") || modalidad.getText().equals("Eliminatoria Simple"))
-					botongenerarfixture.setEnabled(false);
+				//if(estado.getText().equals("En disputa") || estado.getText().equals("Finalizada") || modalidad.getText().equals("Eliminatoria doble") || modalidad.getText().equals("Eliminatoria Simple"))
+				//	botongenerarfixture.setEnabled(false);
+				
+				if(t.getParticipantes().size()>=2)
+					botongenerarfixture.setEnabled(true);
 				
 				tabla1.setModel(new PanelVerCompetenciaTM1(t));
 				tabla2.setModel(new PanelVerCompetenciaTM2(t));
@@ -365,6 +381,58 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 			
 		};
 		trabajador1.execute();
+		
+		
+		exitogenerandofixture=new PopupExito();
+		exitogenerandofixture.setWidth(300);
+		capas.colocarPopup(exitogenerandofixture, botongenerarfixture,false);
+
+		botongenerarfixture.addActionListener(e->{
+			exitogenerandofixture.setVisible(false);
+			errorgenerandofixture.setVisible(false);
+			Mensaje m = gestorFixture.generarFixture(idCompetencia);
+			if(m.getAccion()==2) {
+				fixturepopup.setText(m.getMensaje().get(0));
+				fixturepopup.setVisible(true);
+				return;
+			}
+			errorgenerandofixture.setText(m.getMensaje().get(0).toString());
+			errorgenerandofixture.setVisible(true);
+		});
+		
+		
+		capas.colocarPopup(fixturepopup, botongenerarfixture,false);
+		
+		fixturepopup.acceptbutton.addActionListener(e->{
+//			gestorFixture = new GestorFixture();
+			Mensaje m = gestorFixture.crearFixture();
+			if(m.getAccion()==0) {
+		
+					exitogenerandofixture.setText(m.getMensaje().get(0));
+					exitogenerandofixture.setVisible(true);
+					return;
+				
+			}
+				errorgenerandofixture.setText(m.getMensaje().toString());
+				errorgenerandofixture.setVisible(true);
+		});
+		
+//		fixturepopup.acceptbutton.addActionListener(e->{
+//			GestorFixture gestor = new GestorFixture();
+//			Mensaje m = gestor.generarFixture(idCompetencia);
+//			if(m.getAccion()==1) {
+//				m = gestor.crearFixture();
+//				if(m.getAccion()==0) {
+//					exitogenerandofixture.setText(m.getMensaje().get(0));
+//					exitogenerandofixture.setVisible(true);
+//					return;
+//				}
+//			}
+//				errorgenerandofixture.setText(m.getMensaje().toString());
+//				errorgenerandofixture.setVisible(true);
+//		});
+		capas.colocarPopup(errorgenerandofixture, botongenerarfixture,false);
+		
 		
 		
 		

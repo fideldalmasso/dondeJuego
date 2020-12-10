@@ -19,7 +19,7 @@ public class PanelMisCompetenciasTM extends AbstractTableModel {
 	private List<VerInterfazCompetenciaDTO> dtos;
 	
 	private int tam;
-	private int rowsperpage =3;
+	private int rowsperpage =10;
 	private int totalpages;
 	private int actualpage;
 	

@@ -152,7 +152,7 @@ public class MyPaginator extends JPanel {
 
 	private void setPage(Integer i) {
 		if(i<=0 || i>totalpages)
-			Gui.imprimir("el numero del paginador es invalido");
+			Gui.imprimir("el numero del paginador es invalido i= "+i+" total pages= "+totalpages);
 
 		this.actualpage=i;
 		this.page.setText(i.toString());
@@ -162,7 +162,9 @@ public class MyPaginator extends JPanel {
 	public void setDataSize(Integer size) {
 		this.datasize=size;
 		this.totalpages= (int) Math.ceil((double) datasize/ rowsperpage);
-		this.update();
+		if(size==0) totalpages=1; 
+		this.setPage(1);
+//		this.update();
 	}
 
 }

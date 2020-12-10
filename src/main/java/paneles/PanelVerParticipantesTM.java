@@ -19,7 +19,7 @@ public class PanelVerParticipantesTM extends AbstractTableModel {
 	private List<ParticipanteDTO> dtos;
 	
 	private int tam;
-	private int rowsperpage =3;
+	private int rowsperpage =10;
 	private int totalpages;
 	private int actualpage;
 	
