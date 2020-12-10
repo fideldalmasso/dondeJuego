@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
 
 import app.App;
+import dominio.Mensaje;
 import dtos.ParticipanteDTO;
 import dtos.VerInterfazCompetenciaDTO;
 import gestores.GestorCompetencia;
@@ -227,13 +228,18 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 			ParticipanteDTO dto = new ParticipanteDTO(camponombre.getText(), campoemail.getText(), idCompetencia);
 			GestorCompetencia gestorCompetencia = new GestorCompetencia();
 			GestorParticipante gestorParticipante = new GestorParticipante();
-			if(gestorCompetencia.verificarCompetencia(dto) != null) {
-				gestorParticipante.crearParticipante(dto);
+//			if(gestorCompetencia.verificarCompetencia(dto) != null) {
+//				Mensaje m = gestorParticipante.crearParticipante(dto);
+//				if(m.getAccion()==0){
+//					pexito.setText(m.getTexto());
+//					pexito.setVisible(true);
+//				}
 //				
-			}
-			else {
-				
-			}
+//				
+//			}
+//			else {
+//				
+//			}
 			
 				
 			

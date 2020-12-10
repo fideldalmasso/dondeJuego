@@ -9,7 +9,16 @@ public class Mensaje {
 	Integer accion;
 	
 	private List<String> mensaje;
+	private String texto;
 	
+	
+	
+	public String getTexto() {
+		return texto;
+	}
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
 	public Mensaje() {
 		this.mensaje = new ArrayList<String>();
 	}
