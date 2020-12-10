@@ -13,7 +13,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
         <class>dominio.Encuentro</class>
         <class>dominio.EncuentroEliminatoriaDoble</class>
         <class>dominio.EncuentroEliminatoriaSimple</class>
-        <class>dominio.EnucentroLiga</class>
+        <class>dominio.EncuentroLiga</class>
         <class>dominio.Fecha</class>
         <class>dominio.Fixture</class>
         <class>dominio.Localidad</class>
