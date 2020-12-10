@@ -308,7 +308,7 @@ public class GestorCompetencia {
 	}
 	
 	public List<VerInterfazCompetenciaDTO> getCompetencias() {
-		List<Competencia>  listaCompetencias = cd.getAllCompetencias();
+		List<Competencia>  listaCompetencias = cd.getCompetencias(new GestorAutenticacion().getUsuario());
 		List<VerInterfazCompetenciaDTO> listaDtos = new ArrayList<VerInterfazCompetenciaDTO>();
 		for(Competencia c: listaCompetencias) {
 			VerInterfazCompetenciaDTO dto = new VerInterfazCompetenciaDTO();
