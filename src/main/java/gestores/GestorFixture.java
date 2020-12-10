@@ -1,10 +1,8 @@
 package gestores;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import daos.CompetenciaDAO;
@@ -12,6 +10,7 @@ import daos.FixtureDAO;
 import dominio.Competencia;
 import dominio.CompetenciaLugar;
 import dominio.Encuentro;
+import dominio.EncuentroLiga;
 import dominio.Fecha;
 import dominio.Fixture;
 import dominio.Mensaje;
@@ -68,13 +67,13 @@ public class GestorFixture {
 			}
 			Fixture fixture = new Fixture();
 			Integer tam = ps.size();
-			for(int i=0;i<tam;i++) {
+			for(int i=0;i<tam-1;i++) {
 				Fecha fecha = new Fecha();
 				Integer actual=0;
 				for(int j=0; j<tam/2;j++) {
 					if(ps.get(j).getEmail()!=null
 					&& ps.get(tam-1-j).getEmail()!=null) {
-						Encuentro encuentro = new Encuentro();
+						Encuentro encuentro = new EncuentroLiga();
 						encuentro.setParticipanteA(ps.get(j));
 						encuentro.setParticipanteB(ps.get(tam-j-1));
 						if(disponibilidad.get(cls.get(actual))==0) {
@@ -85,16 +84,17 @@ public class GestorFixture {
 								disponibilidad.get(cls.get(actual))-1);
 						encuentro.setLugarRealizacion(cls.get(actual).getLugar());
 						fecha.addEncuentro(encuentro);
+						encuentro.setFecha(fecha);
 					}
 				}
-				System.out.println(fecha.getEncuentros().toString());
 				fixture.addFecha(fecha);
+				fecha.setFixture(fixture);
 				cls.parallelStream().forEach(c->disponibilidad.put(c,c.getDisponibilidad()));
-				CompetenciaLugar fin = cls.get(cls.size()-1);
-				for(int j=cls.size()-1;j>0;j--) cls.add(j,cls.get(j-1));
-				cls.add(1,fin);
+				Participante fin = ps.get(cls.size()-1);
+				for(int j=ps.size()-1;j>0;j--) ps.set(j,ps.get(j-1));
+				ps.set(1,fin);
 			}
-			System.out.println(fixture.getFechas().toString());
+			fixture.setCompetencia(c);
 			c.setFixture(fixture);
 			c.setEstado(EstadoCompetencia.PLANIFICADA);
 			CompetenciaDAO cd = new CompetenciaDAO();
