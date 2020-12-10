@@ -23,6 +23,8 @@ public class PanelHome extends PanelPersonalizado {
 	public PanelHome(App padre) {
 		this.padre = padre;
 		this.setPreferredSize(new Dimension(850,610));
+		this.setMaximumSize(new Dimension(850,610));
+		this.setMinimumSize(new Dimension(850,610));
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -109,6 +111,10 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_botoncerrarsesion.gridx = 2;
 		gbc_botoncerrarsesion.gridy = 0;
 		panel_1.add(botoncerrarsesion, gbc_botoncerrarsesion);
+		
+		botoncerrarsesion.addActionListener(e->{
+			System.exit(0);
+		});
 	}
 
 }

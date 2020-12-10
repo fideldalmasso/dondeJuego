@@ -149,7 +149,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		gbc_botoncancelar.gridy = 0;
 		panel_1.add(botoncancelar, gbc_botoncancelar);
 
-		JButton botonagregarparticipante = new JButton("Agregar participante");
+		JButton botonagregarparticipante = new JButton("    Agregar participante");
 		botonagregarparticipante.setIcon(Gui.emoji("icon/mas_negro.png", 24, 24, false));
 		GridBagConstraints gbc_botonagregarparticipante = new GridBagConstraints();
 		gbc_botonagregarparticipante.anchor = GridBagConstraints.EAST;
@@ -230,7 +230,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 
 
 		botonagregarparticipante.addActionListener(e->{
-//			padre.nuevoPanel(new PanelAltaCompetenciaConMensajes(padre));
+			padre.nuevoPanel(new PanelAgregarParticipanteConMensajes(padre, idCompetencia, nombreCompetencia));
 		});
 
 		botoncancelar.addActionListener(e->{

@@ -19,6 +19,7 @@ public class PanelFondo extends JPanel {
 		this.setLayout(new GridBagLayout());
 		this.setBackground(Color.WHITE);
 		this.setBorder(new EmptyBorder(20, 20, 20, 20));
+		this.setMinimumSize(new Dimension(1280,1024));
 		
 		
 		

@@ -19,7 +19,7 @@ public class GestorParticipante {
 		gc = new GestorCompetencia();
 	}
 	
-	void crearParticipante(ParticipanteDTO pdto) {
+	public void crearParticipante(ParticipanteDTO pdto) {
 		if(pd.verificarExistencia(pdto.getNombre(), pdto.getIdCompetencia(), pdto.getEmail())) {
 			//tirar excepcion o algo
 		}

@@ -24,21 +24,19 @@ import gui.PopupConfirmacion;
 import gui.PopupError;
 import gui.PopupExito;
 
-public class PanelVerCompetenciaConMensajes extends JPanel {
+public class PanelAgregarParticipanteConMensajes extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private App padre;
-	private PanelVerCompetencia panelinterno;
+	private PanelAgregarParticipante panelinterno;
 	private JLayeredPane panelcapas;
 	private int idCompetencia;
 
+	String nombreCompetencia;
 
-	PopupConfirmacion fixturepopup = new PopupConfirmacion();
-	PopupError errorgenerandofixture = new PopupError();
-	PopupExito exitogenerandofixture;
-
-	public PanelVerCompetenciaConMensajes(App padre, int idCompetencia) {
+	public PanelAgregarParticipanteConMensajes(App padre, int idCompetencia, String nombreCompetencia) {
 		this.idCompetencia = idCompetencia;
+		this.nombreCompetencia= nombreCompetencia;
 		this.setPreferredSize(new Dimension(1100, 800));
 		this.setMinimumSize(new Dimension(1100, 800));
 		this.setOpaque(false);
@@ -60,31 +58,12 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		panelinterno.setFocusable(true);
 		panelcapas.setFocusable(true);
 
-
-		colocarPopup(fixturepopup, panelinterno.botongenerarfixture,true);
-		fixturepopup.acceptbutton.addActionListener(e->{
-			GestorFixture gestor = new GestorFixture();
-			Mensaje m = gestor.generarFixture(idCompetencia);
-			if(m.getAccion()==1) {
-				m = gestor.crearFixture();
-				if(m.getAccion()==1) {
-					exitogenerandofixture=new PopupExito(m.getMensaje().get(0), 200);
-					colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
-					return;
-				}
-			}
-				errorgenerandofixture.setText(m.getMensaje().toString());
-				errorgenerandofixture.setVisible(true);
-		});
-		colocarPopup(errorgenerandofixture, panelinterno.botongenerarfixture,false);
-
-
 		this.add(panelcapas);
 
 	}
 
 	private void crearPanelInterno() {
-		panelinterno = new PanelVerCompetencia(padre,idCompetencia);
+		panelinterno = new PanelAgregarParticipante(padre,idCompetencia,nombreCompetencia,this);
 		Dimension di = panelinterno.getPreferredSize();
 		Dimension de = panelcapas.getPreferredSize();
 		int x = (de.width-di.width)/2;

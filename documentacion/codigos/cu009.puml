@@ -29,7 +29,7 @@ deactivate CD
 
 
 
-alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA'
+alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA2'
     GestorCompetencia -> VerParticipantes
     deactivate GestorCompetencia
 VerParticipantes -> VerParticipantes: mostrarMensajeCompetenciaIniciada()

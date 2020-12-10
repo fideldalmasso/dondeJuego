@@ -55,6 +55,8 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 	private GestorCompetencia gestor;
 	private VerCompetenciaDTO dto;
 	
+	private String nombreCompetencia ="";
+	
 	public PanelVerCompetencia(App padre, int idCompetencia) {
 		super();
 		gestor = new GestorCompetencia();
@@ -140,6 +142,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		
 		JLabel nombre = new JLabel("");
 		GridBagConstraints gbc_nombre = new GridBagConstraints();
+		gbc_nombre.anchor = GridBagConstraints.WEST;
 		gbc_nombre.insets = new Insets(0, 0, 5, 5);
 		gbc_nombre.gridx = 1;
 		gbc_nombre.gridy = 0;
@@ -155,6 +158,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		
 		JLabel modalidad = new JLabel("");
 		GridBagConstraints gbc_modalidad = new GridBagConstraints();
+		gbc_modalidad.anchor = GridBagConstraints.WEST;
 		gbc_modalidad.insets = new Insets(0, 0, 5, 5);
 		gbc_modalidad.gridx = 1;
 		gbc_modalidad.gridy = 1;
@@ -170,6 +174,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		
 		JLabel deporte = new JLabel("");
 		GridBagConstraints gbc_deporte = new GridBagConstraints();
+		gbc_deporte.anchor = GridBagConstraints.WEST;
 		gbc_deporte.insets = new Insets(0, 0, 5, 5);
 		gbc_deporte.gridx = 1;
 		gbc_deporte.gridy = 2;
@@ -185,6 +190,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		
 		JLabel estado = new JLabel("");
 		GridBagConstraints gbc_estado = new GridBagConstraints();
+		gbc_estado.anchor = GridBagConstraints.WEST;
 		gbc_estado.insets = new Insets(0, 0, 0, 5);
 		gbc_estado.gridx = 1;
 		gbc_estado.gridy = 3;
@@ -304,6 +310,12 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 		gbc_botonverparticipantes.gridx = 3;
 		gbc_botonverparticipantes.gridy = 0;
 		panel_4.add(botonverparticipantes, gbc_botonverparticipantes);
+		botonverparticipantes.setEnabled(false);
+		botonverparticipantes.addActionListener(e->{
+			padre.nuevoPanel(new PanelVerParticipantes(padre, idCompetencia, nombreCompetencia));
+		});
+		
+		
 		
 		JButton botoncancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_botoncancelar = new GridBagConstraints();
@@ -331,6 +343,8 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 				if(t==null || t.getNombre()== null || t.getModalidad()==null || t.getDeporte() == null || t.getEstado() == null || t.getParticipantes()==null || t.getProximosEncuetros()==null)
 					Gui.imprimir("El dto VerCompetenciaDTO tiene campos nulos REVISAR!");
 				
+				nombreCompetencia = t.getNombre();
+				botonverparticipantes.setEnabled(true);
 				nombre.setText(t.getNombre());
 				modalidad.setText(t.getModalidad());
 				deporte.setText(t.getDeporte());

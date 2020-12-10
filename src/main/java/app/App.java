@@ -5,10 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -20,6 +24,7 @@ import javax.swing.plaf.FontUIResource;
 
 import gestores.GestorAutenticacion;
 import gui.Gui;
+import gui.MyIcon;
 import gui.PanelFondo;
 import gui.PanelPersonalizado;
 import paneles.PanelAltaCompetenciaTM;
@@ -43,6 +48,10 @@ public class App extends JFrame {
 	private App() {
 		
 		this.setTitle("¿Dónde juego?");
+		
+//		this.setLayout(new GridBagLayout());
+//		this.setLayout(new BorderLayout());
+//		this.setContentPane(new JPanel(new BorderLayout()));
 		paneles = new Stack<JPanel>();
 		Gui.setearFuente("Comic Sans MS",this);
 
@@ -54,11 +63,11 @@ public class App extends JFrame {
 		
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		//	this.setPreferredSize(new Dimension(800,600));
-		this.setMinimumSize(new Dimension(1280,1024));
+		this.setMinimumSize(new Dimension(1400,1024));
 		//this.setSize(800,600);
 		this.setLocationRelativeTo(null);
 
-
+		
 
 		//https://stackoverflow.com/questions/2781939/setting-minimum-size-limit-for-a-window-in-java-swing
 		this.addComponentListener(new ComponentAdapter(){
@@ -73,13 +82,35 @@ public class App extends JFrame {
 			}
 		});
 
+		
+		
+		MyIcon botonhome = new MyIcon("icon/home.png", 40, 40, false);
+		GridBagConstraints c = new GridBagConstraints(1, 1, 1, 1, 1,1, Gui.NORTHWEST, Gui.NONE, new Insets(0,0,0,0), 0, 0);
+		this.add(botonhome,c);
+		
+		GridBagConstraints c2 = new GridBagConstraints(3, 3, 1, 1, 1,1, Gui.NORTHWEST, Gui.NONE, new Insets(0,0,0,0), 0, 0);
+		this.add(new MyIcon("icon/empty.png", 40, 40, false),c2);
+//		this.getContentPane().add(botonhome,BorderLayout.NORTH);
+		botonhome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				volverAHome();
+			}
+		});
+		
+		
+		
+		
 		home = new PanelHome(this);
 		this.actual = home;
 //		PanelAltaCompetencia altaCompetencia = new PanelAltaCompetencia(); 
 //		this.cambiarPanel(altaCompetencia);
 		//this.cambiarPanel(new PanelMisCompetencias2(this));
 		this.nuevoPanel(home);
-
+		
+		
+		
 	}
 
 
@@ -103,7 +134,9 @@ public class App extends JFrame {
 		this.remove(actual);
 		this.actual = p;
 		//this.setContentPane(panel);
-		this.add(this.actual);
+		GridBagConstraints c = new GridBagConstraints(2, 2, 1, 1, 0, 0, Gui.NORTH, Gui.BOTH, new Insets(0,0,0,0), 0, 0);
+		this.add(this.actual,c);
+//		this.getContentPane().add(this.actual,BorderLayout.CENTER);
 		this.pack();
 		this.revalidate();
 		this.repaint();
