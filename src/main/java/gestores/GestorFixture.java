@@ -1,5 +1,6 @@
 package gestores;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,6 @@ import dominio.Mensaje;
 import dominio.ModalidadEliminatoriaDoble;
 import dominio.ModalidadEliminatoriaSimple;
 import dominio.Participante;
-import dtos.*;
 import enumerados.EstadoCompetencia;
 
 public class GestorFixture {
@@ -86,7 +86,9 @@ public class GestorFixture {
 						fecha.addEncuentro(encuentro);
 						encuentro.setFecha(fecha);
 					}
+					
 				}
+				fecha.setNumero(i);
 				fixture.addFecha(fecha);
 				fecha.setFixture(fixture);
 				cls.parallelStream().forEach(c->disponibilidad.put(c,c.getDisponibilidad()));
@@ -94,6 +96,7 @@ public class GestorFixture {
 				for(int j=ps.size()-1;j>0;j--) ps.set(j,ps.get(j-1));
 				ps.set(1,fin);
 			}
+			fixture.setFechaCreacion(new Timestamp(System.currentTimeMillis()));
 			fixture.setCompetencia(c);
 			c.setFixture(fixture);
 			c.setEstado(EstadoCompetencia.PLANIFICADA);
