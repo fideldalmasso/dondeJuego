@@ -40,6 +40,15 @@ public class LugarRealizacionDAO {
 		return lr.getId();
 	}
 	
+	 public LugarRealizacion update(LugarRealizacion lr) {
+		 EntityManager em = factory.createEntityManager();
+		 em.getTransaction().begin();
+		 LugarRealizacion lrreturn = em.merge(lr);
+		 em.getTransaction().commit();
+		 em.close();
+		 return lrreturn;
+	 }
+	
 	public List<LugarRealizacion> getAll(){
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();

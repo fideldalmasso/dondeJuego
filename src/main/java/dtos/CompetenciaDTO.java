@@ -33,7 +33,7 @@ public class CompetenciaDTO {
 			Integer puntosPorAbandono,
 			Integer cantidadMaximaSets) {
 		super();
-		this.nombre = nombre;
+		this.nombre = nombre.toUpperCase();
 		this.deporte = deporte;
 		this.lugares = lugares;
 		this.modalidad = modalidad;
