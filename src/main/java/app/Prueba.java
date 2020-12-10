@@ -98,7 +98,7 @@ public class Prueba {
 	      */
 	      
 	      GestorFixture gf =  new GestorFixture();
-	      gf.generarFixture(601);//587
+	      gf.generarFixture(638);//587
 	      gf.crearFixture();
 	      
 	     

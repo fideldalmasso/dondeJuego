@@ -92,8 +92,8 @@ public class GestorFixture {
 				fixture.addFecha(fecha);
 				fecha.setFixture(fixture);
 				cls.parallelStream().forEach(c->disponibilidad.put(c,c.getDisponibilidad()));
-				Participante fin = ps.get(cls.size()-1);
-				for(int j=ps.size()-1;j>0;j--) ps.set(j,ps.get(j-1));
+				Participante fin = ps.get(ps.size()-1);
+				for(int j=ps.size()-1;j>1;j--) ps.set(j,ps.get(j-1));
 				ps.set(1,fin);
 			}
 			fixture.setFechaCreacion(new Timestamp(System.currentTimeMillis()));
