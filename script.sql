@@ -1,6 +1,4 @@
 create schema dj;
-create type dj.tipoDocumento as enum('DNI','LC','LI','LE');
-create type dj.estadoCompetencia as enum('CREADA','PLANIFICADA','ENDISPUTA','FINALIZADA');
 
 create table dj.pais(
 	id serial primary key,
@@ -26,7 +24,8 @@ create table dj.usuario(
 	nombre varchar(256) unique,
 	apellido varchar(256),
 	contrasenia varchar(256),
-	tipoDocumento dj.estadoCompetencia
+	tipoDocumento varchar(256),
+    email varchar(256)
 );
 
 create table dj.registroSesion(
@@ -58,47 +57,43 @@ create table dj.sistemaPuntuacion(
 );
 
 create table dj.sistemaPuntuacionPorResultadoFinal(
-	idCompetencia integer references dj.sistemaPuntuacion(id),
-	primary key(idCompetencia)
+	id integer references dj.sistemaPuntuacion(id),
+	primary key(id)
 );
 
 create table dj.sistemaPuntuacionPorPuntuacion(
-	idCompetencia integer references dj.sistemaPuntuacion(id),
+	id integer references dj.sistemaPuntuacion(id),
 	puntosPorAbandono integer,
-	primary key(idCompetencia)
+	primary key(id)
 );
 
 create table dj.sistemaPuntuacionPorSets(
-	idCompetencia integer references dj.sistemaPuntuacion(id),
+	id integer references dj.sistemaPuntuacion(id),
 	cantidadMaximaDeSets integer,
-	primary key(idCompetencia)
+	primary key(id)
 );
 
 create table dj.modalidad(
-	id serial primary key,
-	permiteEmpate boolean,
-	puntosPorPresentar integer,
-	puntosPorEmpate integer,
-	puntosPorGanar integer
+	id serial primary key
 );
 
 create table dj.modalidadEliminatoriaDoble(
-	idCompetencia integer references dj.modalidad(id),
-	primary key(idCompetencia)
+	id integer references dj.modalidad(id),
+	primary key(id)
 );
 
 create table dj.modalidadEliminatoriaSimple(
-	idCompetencia integer references dj.modalidad(id),
-	primary key(idCompetencia)
+	id integer references dj.modalidad(id),
+	primary key(id)
 );
 
 create table dj.modalidadLiga(
-	idCompetencia integer references dj.modalidad(id),
+	id integer references dj.modalidad(id),
 	permiteEmpate boolean,
 	puntosPorPresentarse integer,
 	puntosPorEmpate integer,
 	puntosPorGanar integer,
-	primary key(idCompetencia)
+	primary key(id)
 );
 
 create table dj.competencia(
@@ -109,16 +104,17 @@ create table dj.competencia(
 	idSistemaPuntuacion integer references dj.sistemaPuntuacion(id),
 	fechaFin timestamp,
 	reglamento varchar(1024),
-	estado dj.estadoCompetencia,
+	estado varchar(256),
 	nombre varchar(256) unique,
 	fechaHoraBajaLogica timestamp,
 	fechaInicio timestamp
 );
 
 create table dj.competenciaLugar(
+	id serial primary key,
 	idCompetencia integer references dj.competencia(id),
 	idLugar integer references dj.lugarRealizacion(id),
-	primary key (idCompetencia,idLugar)
+	disponibilidad integer
 );
 
 create table dj.fixture(
@@ -141,13 +137,13 @@ create table dj.participante(
 );
 
 create table dj.renglonTabla(
+    id serial primary key,
 	idParticipante integer references dj.participante(id),
 	partidosEmpatados integer,
 	partidosGanados integer,
 	tantosAFavor integer,
 	tantosEnContra integer,
-	partidosPerdidos integer,
-	primary key(idParticipante)
+	partidosPerdidos integer
 );
 
 create table dj.resultado(
@@ -178,10 +174,10 @@ create table dj.resultadoPorPuntuacion(
 );
 
 create table dj.sett(
+	id serial primary key,
 	idResultado integer references dj.resultadoPorSets(id),
 	puntajeA integer,
-	puntajeB integer,
-	primary key (idResultado)
+	puntajeB integer
 );
 
 create table dj.encuentro(
@@ -192,28 +188,29 @@ create table dj.encuentro(
 	idParticipanteB integer references dj.participante(id),
 	sePresentaA boolean,
 	sePresentaB boolean,
+    idLugarRealizacion integer references dj.lugarRealizacion(id),
 	fechaEncuentro timestamp
 );
 
 create table dj.encuentroLiga(
-	idEncuentro integer references dj.encuentro(id),
-	primary key(idEncuentro)
+	id integer references dj.encuentro(id),
+	primary key(id)
 );
 
 create table dj.encuentroEliminatoriaDoble(
-	idEncuentro integer references dj.encuentro(id),
+	id integer references dj.encuentro(id),
 	destinoPerdedor integer,
 	destinoGanador integer,
-	primary key(idEncuentro)
+	primary key(id)
 );
 
 create table dj.encuentroEliminatoriaSimple(
-	idEncuentro integer references dj.encuentro(id),
+	id integer references dj.encuentro(id),
 	destinoGanador integer,
-	primary key(idEncuentro)
+	primary key(id)
 );
 
-alter table dj.encuentroEliminatoriaDoble add foreign key (destinoPerdedor) references dj.encuentroEliminatoriaDoble(idEncuentro);
-alter table dj.encuentroEliminatoriaDoble add  foreign key (destinoGanador) references dj.encuentroEliminatoriaDoble(idEncuentro);
-alter table dj.encuentroEliminatoriaSimple add  foreign key (destinoGanador) references dj.encuentroEliminatoriaSimple(idEncuentro);
+alter table dj.encuentroEliminatoriaDoble add foreign key (destinoPerdedor) references dj.encuentroEliminatoriaDoble(id);
+alter table dj.encuentroEliminatoriaDoble add  foreign key (destinoGanador) references dj.encuentroEliminatoriaDoble(id);
+alter table dj.encuentroEliminatoriaSimple add  foreign key (destinoGanador) references dj.encuentroEliminatoriaSimple(id);
 alter table dj.resultado add foreign key (idEncuentro) references dj.encuentro(id);

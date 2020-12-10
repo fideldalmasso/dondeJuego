@@ -30,6 +30,12 @@ public class PopupError extends JPanel {
 	public JLabel text;
 	public JButton button;
 	
+	public void setWidth(int width) {
+		Dimension d = this.getPreferredSize();
+		
+		this.setPreferredSize(new Dimension(width, d.height));
+	}
+	
 	
 	public PopupError() {
 		super();

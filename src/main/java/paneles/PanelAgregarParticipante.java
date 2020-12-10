@@ -232,7 +232,9 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 			if(gestorCompetencia.verificarCompetencia(dto) != null) {
 				m = gestorParticipante.crearParticipante(dto);
 				if(m.getAccion()==0){
+					
 					pexito.setText(m.getTexto());
+					pexito.setWidth(220);
 					pexito.setVisible(true);
 					return;
 				}
