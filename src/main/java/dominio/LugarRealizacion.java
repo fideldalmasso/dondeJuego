@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class LugarRealizacion {
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "dj.deporteLugar", 
 	  joinColumns = @JoinColumn(name = "idLugar"), 
 	  inverseJoinColumns = @JoinColumn(name = "idDeporte"))
