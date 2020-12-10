@@ -40,9 +40,9 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
         
         <properties>
 	        <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"></property>
-	        <property name="hibernate.connection.password" value="8Gr8YWh-wiWKRnSzAlMJZEQDFMtCMG3g"></property>
-	        <property name="hibernate.connection.url" value="jdbc:postgresql://motty.db.elephantsql.com:5432/xwhxadsq"></property>
-	        <property name="hibernate.connection.username" value="xwhxadsq"></property>
+	        <property name="hibernate.connection.password" value="candadomongodb"></property>
+	        <property name="hibernate.connection.url" value="jdbc:postgresql://190.17.252.128:5432/dondejuego"></property>
+	        <property name="hibernate.connection.username" value="juampi"></property>
 	        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"></property>
         </properties>
     </persistence-unit>
