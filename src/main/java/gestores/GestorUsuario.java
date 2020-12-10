@@ -10,8 +10,9 @@ public class GestorUsuario {
 		this.ud = new UsuarioDAO();
 	}
 	
-	void save(Usuario usr) {
+	public Usuario save(Usuario usr) {
 		ud.save(usr);
+		return usr;
 	}
 	void update(Usuario usr) {
 		ud.update(usr);
