@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -29,7 +30,7 @@ public class PopupError extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public MyIcon icon;
-	public JLabel text;
+	public JTextArea text;
 	public JButton button;
 	
 	public void setWidth(int width) {
@@ -44,7 +45,7 @@ public class PopupError extends JPanel {
 	public PopupError() {
 		super();
 		this.setLayout(new GridBagLayout());
-		this.setPreferredSize(new Dimension(250,38));
+		this.setPreferredSize(new Dimension(250,110));
 //		this.setMinimumSize(new Dimension(100,38));
 		this.setBorder(new EmptyBorder(10,25,10,10));
 		this.setOpaque(false);
@@ -52,7 +53,10 @@ public class PopupError extends JPanel {
 		this.setVisible(false);
 
 		this.icon = new MyIcon("icon/error4.png", 20, 20, false);
-		this.text = new JLabel();
+		this.text = new JTextArea();
+		text.setLineWrap(true);
+		text.setWrapStyleWord(true);
+		text.setOpaque(false);
 		this.text.setForeground(Color.WHITE);
 		
 		this.button = new JButton(Gui.emoji("icon/cerrar.png", 10, 10, false));
@@ -69,7 +73,7 @@ public class PopupError extends JPanel {
 		
 		Gui.colocar2(1 , 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, new Insets(0, 0, 0, 0), this, icon);
 //		Gui.colocar2(2 , 1, 1, 1, 1, 1, 0, 0, Gui.BOTH, Gui.WEST, new Insets(0, 10, 0, 0), this, scroll);
-		Gui.colocar2(2 , 1, 1, 1, 1, 1, 0, 0, Gui.BOTH, Gui.WEST, new Insets(0, 10, 0, 0), this, text);
+		Gui.colocar2(2 , 1, 1, 1, 1, 1, 0, 0, Gui.HORIZONTAL, Gui.CENTER, new Insets(0, 10, 0, 0), this, text);
 		Gui.colocar2(3 , 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.NORTHEAST, new Insets(0, 0, 0, 0), this, button);
 		
 	}

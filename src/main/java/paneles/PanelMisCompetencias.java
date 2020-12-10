@@ -46,6 +46,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 	App padre;
 
 
+	MyIcon cargando1;
 	MyIcon cargando2;
 	VerInterfazCompetenciaDTO filtro;
 	MyJTable table;
@@ -60,7 +61,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 
 		super();
 		this.padre = padre;
-		GestorCompetencia gestorCompetencia = new GestorCompetencia();
+		gestorCompetencia = new GestorCompetencia();
 		GestorDeporte gestorDeporte = new GestorDeporte();
 		this.setPreferredSize(new Dimension(700, 734));
 
@@ -104,7 +105,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_lblNewLabel.gridy = 0;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 
-		MyJTextField camponombre = new MyJTextField("Ingrese uno...");
+		camponombre = new MyJTextField("Ingrese uno...");
 		GridBagConstraints gbc_myJTextField = new GridBagConstraints();
 		gbc_myJTextField.insets = new Insets(5, 5, 5, 5);
 		gbc_myJTextField.gridwidth = 2;
@@ -121,7 +122,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_label_2.gridy = 1;
 		panel.add(label_2, gbc_label_2);
 
-		MyJComboBox combodeporte = new MyJComboBox();
+		combodeporte = new MyJComboBox();
 		GridBagConstraints gbc_myJComboBox = new GridBagConstraints();
 		gbc_myJComboBox.gridwidth = 2;
 		gbc_myJComboBox.insets = new Insets(10, 5, 5, 5);
@@ -130,7 +131,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_myJComboBox.gridy = 1;
 		panel.add(combodeporte, gbc_myJComboBox);
 
-		MyIcon cargando1 = new MyIcon("icon/loading3.gif",24,24,true);
+		cargando1 = new MyIcon("icon/loading3.gif",24,24,true);
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_1.gridx = 3;
@@ -145,7 +146,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_label.gridy = 2;
 		panel.add(label, gbc_label);
 
-		MyJComboBox combomodalidad = new MyJComboBox(new String[] {"Liga", "Eliminatoria Simple", "Eliminatoria Doble" });
+		combomodalidad = new MyJComboBox(new String[] {"Liga", "Eliminatoria Simple", "Eliminatoria Doble" });
 		GridBagConstraints gbc_myJComboBox_1 = new GridBagConstraints();
 		gbc_myJComboBox_1.gridwidth = 2;
 		gbc_myJComboBox_1.insets = new Insets(10, 5, 5, 5);
@@ -162,7 +163,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbc_label_1.gridy = 3;
 		panel.add(label_1, gbc_label_1);
 
-		MyJComboBox comboestado = new MyJComboBox(new String[] {"CREADA","PLANIFICADA","ENDISPUTA","FINALIZADA"});
+		comboestado = new MyJComboBox(new String[] {"CREADA","PLANIFICADA","ENDISPUTA","FINALIZADA"});
 		GridBagConstraints gbc_myJComboBox_2 = new GridBagConstraints();
 		gbc_myJComboBox_2.insets = new Insets(10, 5, 5, 5);
 		gbc_myJComboBox_2.gridwidth = 2;
@@ -189,12 +190,12 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 
 		tablemodel = new PanelMisCompetenciasTM();
 
-		MyJTable table = new MyJTable(tablemodel);
+		table = new MyJTable(tablemodel);
 		table.setJTableColumnsWidth(36,14,30,14,6);
 
 		scrollPane.setViewportView(table);
 
-		MyIcon cargando2 = new MyIcon("icon/loading3.gif",24,24,true,false,true);
+		cargando2 = new MyIcon("icon/loading3.gif",24,24,true,false,true);
 		GridBagConstraints gbc_cargando2 = new GridBagConstraints();
 		gbc_cargando2.anchor = GridBagConstraints.NORTH;
 		gbc_cargando2.insets = new Insets(0, 0, 5, 0);
@@ -216,7 +217,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 
-		MyPaginator paginador = new MyPaginator(tablemodel.getRowsperpage());
+		paginador = new MyPaginator(tablemodel.getRowsperpage());
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) paginador.getLayout();
 		gridBagLayout_1.rowWeights = new double[]{0.0};
 		gridBagLayout_1.rowHeights = new int[]{23};
@@ -315,7 +316,8 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		});
 
 		botonbuscar.addActionListener(e->{
-			new trabajador3().execute();
+			PanelMisCompetencias.Trabajador3 xd  = this.new Trabajador3();
+			xd.execute();
 		});
 
 
@@ -345,35 +347,38 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 
 	}
 
-	class trabajador3 extends SwingWorker<PanelMisCompetenciasTM, Void>{
-		private PanelMisCompetenciasTM t;
+	class Trabajador3 extends SwingWorker<PanelMisCompetenciasTM, Void>{
+		
+
+		public PanelMisCompetenciasTM t;
 		@Override
-		protected PanelMisCompetenciasTM doInBackground() throws Exception {
-			cargando2.setVisible(true);
+		public PanelMisCompetenciasTM doInBackground() throws Exception {
+			PanelMisCompetencias.this.cargando2.setVisible(true);
 			VerInterfazCompetenciaDTO filtro = new VerInterfazCompetenciaDTO();
-			filtro.setNombre(camponombre.getText());
-			filtro.setDeporte(combodeporte.getSelectedItem());
-			filtro.setModalidad(combomodalidad.getSelectedItem());
-			filtro.setEstado(comboestado.getSelectedItem());
-			t= new PanelMisCompetenciasTM(gestorCompetencia.getCompetencias(filtro));
-			return t;
+			filtro.setNombre(PanelMisCompetencias.this.camponombre.getText());
+			filtro.setDeporte(PanelMisCompetencias.this.combodeporte.getSelectedItem());
+			filtro.setModalidad(PanelMisCompetencias.this.combomodalidad.getSelectedItem());
+			filtro.setEstado(PanelMisCompetencias.this.comboestado.getSelectedItem());
+			this.t= new PanelMisCompetenciasTM(PanelMisCompetencias.this.gestorCompetencia.getCompetencias(filtro));
+			return this.t;
 		}
 		@Override 
-		protected void done() {
-			tablemodel=t;
-			if(t!=null) { 
+		public void done() {
+			PanelMisCompetencias.this.tablemodel=this.t;
+			if(this.t!=null) { 
 
-				table.setModel(t);
-				table.setJTableColumnsWidth(36,14,30,14,6);
-				cargando2.setVisible(false);
-				paginador.setDataSize(t.getTam());
+				PanelMisCompetencias.this.table.setModel(this.t);
+				PanelMisCompetencias.this.table.setJTableColumnsWidth(36,14,30,14,6);
+				PanelMisCompetencias.this.cargando2.setVisible(false);
+				PanelMisCompetencias.this.paginador.setDataSize(this.t.getTam());
 			}
 			else {
 				Gui.imprimir("Hubo un error haciendo la consulta en la db");
 			}
 		}
-	}
+	
 
+}
 }
 
 

@@ -164,6 +164,8 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			mapacomponentes.put(errores.PUNTOSPOREMPATE, puntosporempate);
 			puntosporempate.setEnabled(false);
 			
+			mapacomponentes.put(errores.CANTIDADMAXIMASETS, cantidadmaximadesets);
+			
 		}
 		{
 			reglamento.setComponent(new MyJTextArea("(Opcional)Ingrese uno..."));
@@ -320,6 +322,10 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 
 	
 	public boolean agregarCompetencia() {
+		
+		for(Map.Entry<errores, MyPack> i : mapacomponentes.entrySet())
+			i.getValue().clearError();
+		
 		
 		if(tablalugares.isEditing()) {
 			Gui.imprimir("se tuvo que detener la tabla");

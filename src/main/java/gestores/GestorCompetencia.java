@@ -196,7 +196,7 @@ public class GestorCompetencia {
 				break;
 		}
 		if(m.equals(null)){
-			mensaje.put(errores.MODALIDAD,"Modalidad inexistente");
+			mensaje.put(errores.MODALIDAD,"Modalidad inexistente.");
 		}else {
 			//md.save(m);
 			compe.setModalidad(m);
@@ -213,7 +213,7 @@ public class GestorCompetencia {
 			case "Sets":
 				s = new SistemaPuntuacionPorSets(cdto.getCantidadMaximaSets());
 				if(cdto.getCantidadMaximaSets()%2==0) 
-					mensaje.put(errores.CANTIDADMAXIMASETS,"La cantidad de sets debe ser un número impar");
+					mensaje.put(errores.CANTIDADMAXIMASETS,"La cantidad de sets debe ser un número impar.");
 				
 				break;
 			default:
@@ -221,7 +221,7 @@ public class GestorCompetencia {
 				break;
 		}
 		if(s.equals(null)) {
-			mensaje.put(errores.SISTEMAPUNTUACION,"Sistema puntuación inexistente");
+			mensaje.put(errores.SISTEMAPUNTUACION,"Sistema puntuación inexistente.");
 		}else {
 			//sd.save(s);
 			compe.setSistemaPuntuacion(s);
@@ -230,17 +230,17 @@ public class GestorCompetencia {
 		(new GestorAutenticacion()).getUsuario().getCompetencias().add(compe);
 		
 		if((new GestorAutenticacion()).getUsuario()==null) {
-			mensaje.put(errores.USUARIO,"Ingrese con algun usuario");
+			mensaje.put(errores.USUARIO,"Ingrese con algun usuario.");
 		}else{
 			compe.setUsuario((new GestorAutenticacion()).getUsuario());
 		}
 		
 		if(cdto.getLugares().isEmpty()) {
-			mensaje.put(errores.LUGAR,"Debe seleccionar al menos un lugar de realizacion");
+			mensaje.put(errores.LUGAR,"Debe seleccionar al menos un lugar de realización.");
 		}else {
 			for(Pair p : cdto.getLugares()){
 				if(p.getSecond()<1) {
-					mensaje.put(errores.LUGAR,"Debe seleccionar una disponibilidad mayor o igual a 1");
+					mensaje.put(errores.LUGAR,"Debe seleccionar una disponibilidad mayor o igual a 1.");
 					break;
 				}
 			}
@@ -253,7 +253,7 @@ public class GestorCompetencia {
 				compe.getLugares().add(cl);
 			}
 			cd.save(compe);
-			mensaje.put(errores.EXITO,"Competencia agregada con exito");
+			mensaje.put(errores.EXITO,"Competencia agregada con éxito.");
 			
 		}
 		

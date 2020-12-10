@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import app.App;
 import dtos.VerInterfazCompetenciaDTO;
@@ -48,7 +50,6 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		this.padre = padre;
 		GestorDeporte gestorDeporte = new GestorDeporte();
 		this.setPreferredSize(new Dimension(890, 790));
-
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {570};
 		gridBagLayout.rowHeights = new int[] {71, 56, 30, 30, 30};
@@ -202,6 +203,26 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 			tablemodel.setActualPage(tablemodel.getTotalpages());
 		});
 
+//		this.addAncestorListener(new AncestorListener() {
+//			
+//			@Override
+//			public void ancestorRemoved(AncestorEvent event) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void ancestorMoved(AncestorEvent event) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void ancestorAdded(AncestorEvent event) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 
 
 	}
