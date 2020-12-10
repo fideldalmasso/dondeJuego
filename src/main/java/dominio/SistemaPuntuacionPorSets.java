@@ -7,7 +7,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dj.sistemaPuntuacionPorSets")
-@PrimaryKeyJoinColumn(name = "idSistemaPuntuacion")
 public class SistemaPuntuacionPorSets extends SistemaPuntuacion {
 	@Column(name="cantidadMaximaDeSets")
 	private Integer cantidadMaximaDeSets;

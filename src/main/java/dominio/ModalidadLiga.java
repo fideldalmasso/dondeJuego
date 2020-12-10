@@ -7,7 +7,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dj.modalidadLiga")
-@PrimaryKeyJoinColumn(name = "idModalidad")
 public class ModalidadLiga extends Modalidad {
 	@Column(name="permiteEmpate")
 	private Boolean permiteEmpate;

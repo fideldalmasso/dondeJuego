@@ -6,7 +6,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dj.modalidadEliminatoriaSimple")
-@PrimaryKeyJoinColumn(name = "idModalidad")
 public class ModalidadEliminatoriaSimple extends Modalidad {
 	public ModalidadEliminatoriaSimple() {
 		super();
