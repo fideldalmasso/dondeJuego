@@ -15,6 +15,7 @@ public class PopupExito extends PopupError {
 	
 	
 	public PopupExito(String text, int width) {
+		this();
 		this.setPreferredSize(new Dimension(width,50));
 		this.text.setText(text);
 	}

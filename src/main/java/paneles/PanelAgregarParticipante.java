@@ -212,7 +212,9 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 		//			
 		//		});
 		PopupError perror = new PopupError();
+		perror.setWidth(300);
 		PopupExito pexito = new PopupExito();
+		pexito.setWidth(220);
 		capas.colocarPopup(perror, botonagregar, false);
 		capas.colocarPopup(pexito, botonagregar, false);
 
@@ -234,7 +236,6 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 				if(m.getAccion()==0){
 					
 					pexito.setText(m.getTexto());
-					pexito.setWidth(220);
 					pexito.setVisible(true);
 					return;
 				}

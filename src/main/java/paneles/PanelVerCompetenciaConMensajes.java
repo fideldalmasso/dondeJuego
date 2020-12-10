@@ -60,6 +60,9 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		panelinterno.setFocusable(true);
 		panelcapas.setFocusable(true);
 
+		exitogenerandofixture=new PopupExito();
+		exitogenerandofixture.setWidth(300);
+		colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
 
 		colocarPopup(fixturepopup, panelinterno.botongenerarfixture,true);
 		fixturepopup.acceptbutton.addActionListener(e->{
@@ -67,9 +70,9 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 			Mensaje m = gestor.generarFixture(idCompetencia);
 			if(m.getAccion()==1) {
 				m = gestor.crearFixture();
-				if(m.getAccion()==1) {
-					exitogenerandofixture=new PopupExito(m.getMensaje().get(0), 200);
-					colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
+				if(m.getAccion()==0) {
+					exitogenerandofixture.setText(m.getMensaje().get(0));
+					exitogenerandofixture.setVisible(true);
 					return;
 				}
 			}
@@ -84,7 +87,7 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 	}
 
 	private void crearPanelInterno() {
-		panelinterno = new PanelVerCompetencia(padre,idCompetencia);
+		panelinterno = new PanelVerCompetencia(padre,idCompetencia,this);
 		Dimension di = panelinterno.getPreferredSize();
 		Dimension de = panelcapas.getPreferredSize();
 		int x = (de.width-di.width)/2;

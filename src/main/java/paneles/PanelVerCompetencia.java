@@ -57,7 +57,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 	
 	private String nombreCompetencia ="";
 	
-	public PanelVerCompetencia(App padre, int idCompetencia) {
+	public PanelVerCompetencia(App padre, int idCompetencia, PanelVerCompetenciaConMensajes capas) {
 		super();
 		gestor = new GestorCompetencia();
 		this.idCompetencia=idCompetencia;

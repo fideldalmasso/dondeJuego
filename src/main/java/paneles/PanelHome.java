@@ -91,9 +91,9 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_botontodaslascompetencias.gridx = 0;
 		gbc_botontodaslascompetencias.gridy = 0;
 		panel_1.add(botontodaslascompetencias, gbc_botontodaslascompetencias);
-		botontodaslascompetencias.addActionListener(e->{
-			padre.nuevoPanel(new PanelVerCompetenciaConMensajes(padre,1));
-		});
+//		botontodaslascompetencias.addActionListener(e->{
+//			padre.nuevoPanel(new PanelVerCompetenciaConMensajes(padre,1));
+//		});
 		
 		MyHomeButton botonmiperfil = new MyHomeButton("Mi perfil", "icon/usuario.png");
 		GridBagConstraints gbc_botonmiperfil = new GridBagConstraints();
@@ -101,9 +101,9 @@ public class PanelHome extends PanelPersonalizado {
 		gbc_botonmiperfil.gridx = 1;
 		gbc_botonmiperfil.gridy = 0;
 		panel_1.add(botonmiperfil, gbc_botonmiperfil);
-		botonmiperfil.addActionListener(e->{
-			padre.nuevoPanel(new PanelVerParticipantes(padre,1,"Competencia Uno"));
-		});
+//		botonmiperfil.addActionListener(e->{
+//			padre.nuevoPanel(new PanelVerParticipantes(padre,1,"Competencia Uno"));
+//		});
 		
 		
 		MyHomeButton botoncerrarsesion = new MyHomeButton("Cerrar sesión", "icon/salir.png");

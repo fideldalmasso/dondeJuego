@@ -19,6 +19,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
 //https://stackoverflow.com/questions/35190710/paintcomponent-is-drawing-on-other-components
@@ -34,8 +36,10 @@ public class PopupError extends JPanel {
 		Dimension d = this.getPreferredSize();
 		
 		this.setPreferredSize(new Dimension(width, d.height));
+		this.setMinimumSize(new Dimension(width, d.height));
 	}
 	
+
 	
 	public PopupError() {
 		super();
@@ -60,7 +64,11 @@ public class PopupError extends JPanel {
 			this.setVisible(false);
 		});
 		
+		
+		//JScrollPane scroll = new JScrollPane(text, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
 		Gui.colocar2(1 , 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, new Insets(0, 0, 0, 0), this, icon);
+//		Gui.colocar2(2 , 1, 1, 1, 1, 1, 0, 0, Gui.BOTH, Gui.WEST, new Insets(0, 10, 0, 0), this, scroll);
 		Gui.colocar2(2 , 1, 1, 1, 1, 1, 0, 0, Gui.BOTH, Gui.WEST, new Insets(0, 10, 0, 0), this, text);
 		Gui.colocar2(3 , 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.NORTHEAST, new Insets(0, 0, 0, 0), this, button);
 		
