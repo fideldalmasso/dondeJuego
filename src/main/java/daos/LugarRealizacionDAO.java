@@ -31,12 +31,13 @@ public class LugarRealizacionDAO {
 		return lr;
 	}
 	
-	public void save(LugarRealizacion lr) {
+	public Integer save(LugarRealizacion lr) {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(lr);
 		em.getTransaction().commit();
 		em.close();
+		return lr.getId();
 	}
 	
 	public List<LugarRealizacion> getAll(){
