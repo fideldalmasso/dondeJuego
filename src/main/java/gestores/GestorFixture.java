@@ -32,18 +32,18 @@ public class GestorFixture {
 		Mensaje mensaje = new Mensaje();
 		if (c.getModalidad() instanceof ModalidadEliminatoriaSimple) {
 			mensaje.add("Caso de uso no implementado.");
-			mensaje.setAccion(0);
+			mensaje.setAccion(1);
 		}else if(c.getModalidad() instanceof ModalidadEliminatoriaDoble) {
 			mensaje.add("Caso de uso no implementado.");
-			mensaje.setAccion(0);
+			mensaje.setAccion(1);
 		}else {
 			if(c.getEstado().equals(EstadoCompetencia.ENDISPUTA) 
 			|| c.getEstado().equals(EstadoCompetencia.FINALIZADA)) {
 				mensaje.add("No se pudo volver a crear el fixture.");
-				mensaje.setAccion(0);
-			}else {
-				mensaje.add("¿Desea generar el fixture nuevamente?");
 				mensaje.setAccion(1);
+			}else {
+				mensaje.add("¿Desea generar el fixture?");
+				mensaje.setAccion(2);
 			}
 		}
 		
@@ -60,7 +60,7 @@ public class GestorFixture {
 		
 		if(dt<ps.size()/2) {
 			mensaje.add("Lugares de realizacion insuficientes.");
-			mensaje.setAccion(0);
+			mensaje.setAccion(1);
 		}else {
 			if(ps.size()%2==1) {
 				ps.add(new Participante());

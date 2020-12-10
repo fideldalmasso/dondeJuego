@@ -34,7 +34,7 @@ public class PanelVerCompetenciaTM2 extends AbstractTableModel {
 		this.dto=dto;
 
 		tam=dto.getProximosEncuetros().size();
-		data2= new Object[tam][2];
+		data2= new Object[tam][4];
 				
 		for(int i=0; i<tam; i++) {
 			data2[i][0]=dto.getProximosEncuetros().get(i).getNombreParticipanteA();

@@ -367,7 +367,7 @@ public class GestorCompetencia {
 			fechas.sort((f1,f2)->f1.getNumero().compareTo(f2.getNumero()));
 			for(Fecha f: fechas) {
 				for(Encuentro e: f.getEncuentros()) {
-					if(e.getVigente()!=null) {
+					if(e.getVigente()==null) {
 						String pa=null,pb=null;
 						if(e.getParticipanteA()!=null) pa=e.getParticipanteA().getNombre();
 						if(e.getParticipanteB()!=null) pb=e.getParticipanteB().getNombre();
