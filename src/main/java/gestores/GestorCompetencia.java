@@ -276,6 +276,7 @@ public class GestorCompetencia {
 	public void agregarParticipante(Participante p, Competencia compe) {
 		compe.getParticipantes().add(p);
 		compe.setEstado(EstadoCompetencia.CREADA);
+		
 		compe.setFixture(null);
 		cd.update(compe);
 	}

@@ -55,7 +55,7 @@ public class Competencia {
 	private Set<CompetenciaLugar> lugares;
 	@OneToMany(mappedBy="competencia", fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Set<Participante> participantes;
-	@OneToOne(mappedBy = "competencia", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "competencia", fetch=FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval=true)
 	private Fixture fixture;
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
