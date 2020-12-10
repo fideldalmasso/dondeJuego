@@ -33,7 +33,7 @@ public class CargarDatosRonal {
 	      prod.save(prov);
 	      Localidad loc = new Localidad(prov, "Canarinha");
 	      locd.save(loc);
-	      
+	     
 	      Usuario usr2 = new Usuario("Ronaldinho", "Asis", "6789", TipoDocumento.DNI, "43321332", "ronaldinho@hotmail.com",new HashSet<Competencia>(),
 	  			new HashSet<RegistroSesion>(), new HashSet<LugarRealizacion>(), loc);   
 	      Usuario theusr2 = gu.save(usr2);
@@ -56,10 +56,11 @@ public class CargarDatosRonal {
 			
 			lr = grl.getLugarRealizacion(lugar);
 			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
+			/*
 			ArrayList<Pair> lp = new ArrayList<Pair>();
 			Pair np = new Pair(lugar, 3);
 			lp.add(np);
-			
 			CompetenciaDTO cdto = new CompetenciaDTO("Competencia Tres", nuevodeporte.getId(), lp, "Liga", "la unicaes que no hay reglas", true, 2, 3, 1, "Resultado Final", 1, 1);
 			
 			gc = new GestorCompetencia();
@@ -73,21 +74,31 @@ public class CargarDatosRonal {
 			gp.crearParticipante(pdto2);
 			gp.crearParticipante(pdto3);
 			
-		
+		*/
 			nuevodeporte = gd.crearDeporte("Basket");
 			grl = new GestorLugarRealizacion();
 			lugar = b; // cambiar
 			
 			lr = grl.getLugarRealizacion(lugar);
 			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
+			/*
 			lp = new ArrayList<Pair>();
 			np = new Pair(lugar, 3);
 			lp.add(np);
+			*/
 			lugar = a;
 			lr = grl.getLugarRealizacion(lugar);
-			np = new Pair(lugar, 5);
+			
+			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
+			
+		//	np = new Pair(lugar, 5);
 			lugar = c;
 			lr = grl.getLugarRealizacion(lugar);
+			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
+			/*
 			np = new Pair(lugar, 6);
 			
 			cdto = new CompetenciaDTO("Competencia Cuatro", nuevodeporte.getId(), lp, "Liga", "esta es la competencia de muchos", true, 1, 5, 1, "Resultado Final", 1, 1);
@@ -119,14 +130,19 @@ public class CargarDatosRonal {
 			
 			lr = grl.getLugarRealizacion(lugar);
 			lr.getDeportes().add(nuevodeporte);
+			
 			lp = new ArrayList<Pair>();
 			np = new Pair(lugar, 3);
 			lp.add(np);
 			lugar = b;
 			lr = grl.getLugarRealizacion(lugar);
+			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
 			np = new Pair(lugar, 5);
 			lugar = c;
 			lr = grl.getLugarRealizacion(lugar);
+			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
 			np = new Pair(lugar, 6);
 			
 			cdto = new CompetenciaDTO("Competencia Cinco", nuevodeporte.getId(), lp, "Eliminatoria doble", "esta es la prohibida muchachos", false, 3, 6, 3, "Resultado Final", 1, 1);
@@ -147,7 +163,7 @@ public class CargarDatosRonal {
 			gp.crearParticipante(pdto);
 			pdto = new ParticipanteDTO("Fidel Quiroga", "FideQuiroga@gmail.com", compe.getId());
 			gp.crearParticipante(pdto);
-			
+			*/
 			
 	}
 

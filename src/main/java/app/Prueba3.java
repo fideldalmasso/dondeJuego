@@ -105,6 +105,7 @@ public class Prueba3{
 			
 			lr = grl.getLugarRealizacion(lugar);
 			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
 			ArrayList<Pair> lp = new ArrayList<Pair>();
 			Pair np = new Pair(lugar, 3);
 			lp.add(np);
@@ -128,6 +129,7 @@ public class Prueba3{
 			
 			lr = grl.getLugarRealizacion(lugar);
 			lr.getDeportes().add(nuevodeporte);
+			ld.update(lr);
 			lp = new ArrayList<Pair>();
 			np = new Pair(lugar, 3);
 			lp.add(np);
