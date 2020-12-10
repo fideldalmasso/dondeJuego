@@ -22,6 +22,15 @@ public class Mensaje {
 	public Mensaje() {
 		this.mensaje = new ArrayList<String>();
 	}
+	
+	
+	
+	public Mensaje(Integer accion, String texto) {
+		super();
+		this.accion = accion;
+		this.texto = texto;
+	}
+	
 	public List<String> getMensaje(){
 		return this.mensaje;
 	}

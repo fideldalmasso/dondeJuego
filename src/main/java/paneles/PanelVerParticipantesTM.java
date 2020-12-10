@@ -54,8 +54,8 @@ public class PanelVerParticipantesTM extends AbstractTableModel {
 		for(int i=0; i<tam; i++) {
 			data[i][0]=dtos.get(i).getNombre();
 			data[i][1]=dtos.get(i).getEmail();
-			data[i][2]=Gui.emoji("icon/lapiz.png", 24, 24, false);
-			data[i][3]=Gui.emoji("icon/basura.png", 24, 24, false);
+			data[i][2]=Gui.emoji("icon/lapiz.png", 18, 18, false);
+			data[i][3]=Gui.emoji("icon/basura.png", 18, 18, false);
 		}
 
 		this.totalpages= (int) Math.ceil((double) tam/ rowsperpage);

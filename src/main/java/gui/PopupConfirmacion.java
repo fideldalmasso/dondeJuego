@@ -51,12 +51,12 @@ public class PopupConfirmacion extends JPanel {
 		this.closebutton.addActionListener(e->{
 			this.setVisible(false);
 		});
-		
-
-		
-		
-		
+	
 		acceptbutton = new JButton("Si");
+		
+		this.acceptbutton.addActionListener(e->{
+			this.setVisible(false);
+		});
 		
 		Gui.colocar2(1, 1, 1, 1, 0, 0, 0, 0, Gui.HORIZONTAL, Gui.NORTHWEST, new Insets(5, 0, 0, 0), this, texto);
 		Gui.colocar2(2, 1, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.NORTHEAST, new Insets(0, 15, 0, 0), this, closebutton);

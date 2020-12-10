@@ -135,6 +135,7 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 						public void mouseClicked(MouseEvent e) {
 							super.mouseClicked(e);
 							p.setVisible(true);
+							Gui.imprimir("Punto: "+p.getLocation().toString());
 						}
 					});
 				}

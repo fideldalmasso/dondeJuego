@@ -333,6 +333,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 			private VerCompetenciaDTO t;
 			@Override
 			protected VerCompetenciaDTO doInBackground() throws Exception {
+				gestor = new GestorCompetencia();
 				t= gestor.getCompetenciaDTO(idCompetencia);
 				dto = t;
 				return t;
@@ -340,9 +341,12 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 			@Override 
 			protected void done() {
 				
-				if(t==null || t.getNombre()== null || t.getModalidad()==null || t.getDeporte() == null || t.getEstado() == null || t.getParticipantes()==null || t.getProximosEncuetros()==null)
+				if(t==null || t.getNombre()== null || t.getModalidad()==null || t.getDeporte() == null || t.getEstado() == null || t.getParticipantes()==null || t.getProximosEncuetros()==null) {
 					Gui.imprimir("El dto VerCompetenciaDTO tiene campos nulos REVISAR!");
-				
+					if(t==null)
+						Gui.imprimir("El dto es null");
+					return;
+				}
 				nombreCompetencia = t.getNombre();
 				botonverparticipantes.setEnabled(true);
 				nombre.setText(t.getNombre());
@@ -350,7 +354,7 @@ public class PanelVerCompetencia extends PanelPersonalizado {
 				deporte.setText(t.getDeporte());
 				estado.setText(t.getEstado());
 			
-				if(estado.getText().equals("En disputa") || estado.getText().equals("Finalizada") || modalidad.getText().equals("Eliminatoria doble") || modalidad.getText().equals("Eliminatoria Simple"));
+				if(estado.getText().equals("En disputa") || estado.getText().equals("Finalizada") || modalidad.getText().equals("Eliminatoria doble") || modalidad.getText().equals("Eliminatoria Simple"))
 					botongenerarfixture.setEnabled(false);
 				
 				tabla1.setModel(new PanelVerCompetenciaTM1(t));

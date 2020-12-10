@@ -308,7 +308,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(table.getSelectedColumn()==4) {
-					padre.nuevoPanel(new PanelVerCompetencia(padre, (int)tablemodel.getValueAt(table.getSelectedRow(), 5)));
+					padre.nuevoPanel(new PanelVerCompetenciaConMensajes(padre, (int)tablemodel.getValueAt(table.getSelectedRow(), 5)));
 					Gui.imprimir("cambiar a panel ver competencia");
 				}
 			}

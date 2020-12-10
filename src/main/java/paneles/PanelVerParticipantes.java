@@ -33,14 +33,8 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 	PanelVerParticipantesTM tablemodel;	
 	App padre;
 
-
-	MyIcon cargando2;
 	VerInterfazCompetenciaDTO filtro;
 	MyJTable table;
-	MyJTextField camponombre;
-	MyJComboBox combodeporte;
-	MyJComboBox combomodalidad;
-	MyJComboBox comboestado;
 	MyPaginator paginador;
 	int idCompetencia;
 	String nombreCompetencia;
@@ -160,43 +154,14 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		panel_1.add(botonagregarparticipante, gbc_botonagregarparticipante);
 
 
-		SwingWorker<String[], Void> trabajador1 = new SwingWorker<String[], Void>(){
-			private String[] t;
-			@Override
-			protected String[] doInBackground() throws Exception {
-				t = gestorDeporte
-						.getAllDeportes()
-						.stream()
-						.map(d->d.getNombre())
-						.collect(Collectors.toList())
-						.toArray(new String[0]);
-
-				return t;
-			}
-			@Override 
-			protected void done() {
-				if(t!=null) {
-					combodeporte.setModel(new DefaultComboBoxModel<String>(t!=null?t:new String[] {" "}));
-					cargando1.setVisible(false);
-				}
-			}
-
-		};
-		trabajador1.execute();
-
 
 		SwingWorker<PanelVerParticipantesTM, Void> trabajador2 = new SwingWorker<PanelVerParticipantesTM, Void>(){
 			private PanelVerParticipantesTM t;
 			@Override
 			protected PanelVerParticipantesTM doInBackground() throws Exception {
-				cargando2.setVisible(true);
+				cargando1.setVisible(true);
 				GestorParticipante gestor = new GestorParticipante();
 				t= new PanelVerParticipantesTM(gestor.getParticipantes(idCompetencia));
-				//				List<VerInterfazCompetenciaDTO> lista = new ArrayList<VerInterfazCompetenciaDTO>();
-				//				for(int i=0; i<50; i++) {
-				//					lista.add(new VerInterfazCompetenciaDTO(i, "xd"+i, "xd", "xd", "xd"));
-				//				}
-				//				t = new PanelMisCompetenciasTM(lista);
 				return t;
 			}
 			@Override 
@@ -205,7 +170,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 				if(t!=null) { 
 					table.setModel(t);
 					table.setJTableColumnsWidth(48,48,2,2);
-					cargando2.setVisible(false);
+					cargando1.setVisible(false);
 					paginador.setDataSize(t.getTam());
 				}
 				else {
@@ -214,19 +179,6 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 			}
 		};
 		trabajador2.execute();
-
-
-
-
-		//		table.addMouseListener(new MouseAdapter() {
-		//			public void mouseClicked(MouseEvent e) {
-		//				if(table.getSelectedColumn()==4) {
-		//					padre.nuevoPanel(new PanelVerCompetencia(padre, (int)tablemodel.getValueAt(table.getSelectedRow(), 5)));
-		//					Gui.imprimir("cambiar a panel ver competencia");
-		//				}
-		//			}
-		//		});
-
 
 
 		botonagregarparticipante.addActionListener(e->{
@@ -254,34 +206,6 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 
 	}
 
-	//	class trabajador3 extends SwingWorker<PanelMisCompetenciasTM, Void>{
-	//		private PanelMisCompetenciasTM t;
-	//		@Override
-	//		protected PanelMisCompetenciasTM doInBackground() throws Exception {
-	//			cargando2.setVisible(true);
-	//			VerInterfazCompetenciaDTO filtro = new VerInterfazCompetenciaDTO();
-	//			filtro.setNombre(camponombre.getText());
-	//			filtro.setDeporte(combodeporte.getSelectedItem());
-	//			filtro.setModalidad(combomodalidad.getSelectedItem());
-	//			filtro.setEstado(comboestado.getSelectedItem());
-	//			t= new PanelMisCompetenciasTM(gestorCompetencia.getCompetencias(filtro));
-	//			return t;
-	//		}
-	//		@Override 
-	//		protected void done() {
-	//			tablemodel=t;
-	//			if(t!=null) { 
-	//
-	//				table.setModel(t);
-	//				table.setJTableColumnsWidth(40,40,10,10);
-	//				cargando2.setVisible(false);
-	//				paginador.setDataSize(t.getTam());
-	//			}
-	//			else {
-	//				Gui.imprimir("Hubo un error haciendo la consulta en la db");
-	//			}
-	//		}
-	//	}
 
 }
 
