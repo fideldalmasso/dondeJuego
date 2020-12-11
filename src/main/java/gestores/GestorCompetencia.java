@@ -22,7 +22,7 @@ public class GestorCompetencia {
 	private CompetenciaDAO cd;
 	private ModalidadDAO md;
 	private CompetenciaLugarDAO cld;
-	private DeporteDAO dd;
+	private GestorDeporte gd;
 	private GestorLugarRealizacion glr;
 	private GestorUsuario gu;
 	private SistemaPuntuacionDAO sd;
@@ -34,7 +34,7 @@ public class GestorCompetencia {
 		this.gu = new GestorUsuario();
 		this.md = new ModalidadDAO();
 		this.cld = new CompetenciaLugarDAO();
-		this.dd = new DeporteDAO();
+		this.gd = new GestorDeporte();
 		this.sd = new SistemaPuntuacionDAO();
 	}
 	public Competencia crearCompetencia2(CompetenciaDTO cdto) {
@@ -54,7 +54,7 @@ public class GestorCompetencia {
 		
 		compe.setReglamento(cdto.getReglamento());
 		
-		Deporte d = dd.get(cdto.getDeporte());
+		Deporte d = gd.get(cdto.getDeporte());
 		if(d==null) {
 			mensaje.put(errores.DEPORTE,"Deporte inexistente");
 		}else {
@@ -166,7 +166,7 @@ public class GestorCompetencia {
 		
 		compe.setReglamento(cdto.getReglamento());
 		
-		Deporte d = dd.get(cdto.getDeporte());
+		Deporte d = gd.get(cdto.getDeporte());
 		if(d==null) {
 			mensaje.put(errores.DEPORTE,"Deporte inexistente");
 		}else {
@@ -296,12 +296,12 @@ public class GestorCompetencia {
 	
 	public Deporte crearDeporte(String nombre) {
 		Deporte deporte = new Deporte(nombre);
-		dd.save(deporte);
+		gd.save(deporte);
 		return deporte;
 	}
 	
 	public List<Deporte> getAllDeportes(){
-		return dd.getAll();
+		return gd.getAllDeportes();
 	}
 	
 	public Competencia getCompetencia(Integer id) {
