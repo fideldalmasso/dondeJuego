@@ -22,15 +22,15 @@ MostrarFixture-> MostrarFixture :mostrar(fdto)
 activate MostrarFixture
 loop boton volver no presionado
 
-    opt boton gestionar resultado presionado
-    UsuarioAutenticado-> MostrarFixture: gestionarResultado()
-    activate MostrarFixture
-    ref over MostrarFixture
-    CU018 Gestionar Resultados del Fixture
-    end
-    MostrarFixture--> UsuarioAutenticado
-    deactivate MostrarFixture
-    end
+	opt boton gestionar resultado presionado
+	UsuarioAutenticado-> MostrarFixture: gestionarResultado()
+	activate MostrarFixture
+	ref over MostrarFixture
+	CU018 Gestionar Resultados del Fixture
+	end
+	MostrarFixture--> UsuarioAutenticado
+	deactivate MostrarFixture
+	end
 end
 MostrarFixture-> in1
 deactivate MostrarFixture

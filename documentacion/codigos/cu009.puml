@@ -19,9 +19,9 @@ activate UsuarioAutenticado
 UsuarioAutenticado -> VerParticipantes: agregarParticipantes()
 
 activate VerParticipantes
-VerParticipantes -> GestorCompetencia: verificarCompetencia(ParticipanteDTO pdto)
+VerParticipantes -> GestorCompetencia: verificarCompetenciaNoIniciada(Integer idCompetencia)
 activate GestorCompetencia
-GestorCompetencia -> CD: getCompetencia(pdto.getId())
+GestorCompetencia -> CD: getCompetencia(idCompetencia)
 activate CD
 CD -> GestorCompetencia: competencia
 deactivate CD
@@ -29,7 +29,7 @@ deactivate CD
 
 
 
-alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA2'
+alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA'
     GestorCompetencia -> VerParticipantes
     deactivate GestorCompetencia
 VerParticipantes -> VerParticipantes: mostrarMensajeCompetenciaIniciada()
@@ -47,11 +47,15 @@ AltaParticipante -> GestorParticipante: crearParticipante(ParticipanteDTO pdto)
 activate GestorParticipante
 
 
-GestorParticipante -> PD: verificarExistencia(pdto.getNombre(),pdto.getIdCompetencia(),pdto.getEmail())
+GestorParticipante -> PD: verificarExistenciaNombre(pdto.getNombre(),pdto.getIdCompetencia())
 activate PD
+PD -> GestorParticipante: List<Participante>
+deactivate PD
+GestorParticipante -> PD: verificarExistenciaMail(pdto.getIdCompetencia(),pdto.getEmail())
+activate PD
+PD -> GestorParticipante: List<Participante>
+deactivate PD
 loop existeParticipante
-PD -> GestorParticipante
- deactivate PD
 GestorParticipante -> AltaParticipante
  deactivate GestorParticipante
 AltaParticipante -> VerParticipantes
@@ -64,13 +68,17 @@ VerParticipantes -> VerParticipantes: mostrarMensajeDatosRepetidos()
     activate AltaParticipante
 AltaParticipante -> GestorParticipante: crearParticipante(ParticipanteDTO pdto)
 activate GestorParticipante
-    GestorParticipante -> PD: verificarExistencia(pdto.getNombre(),pdto.getIdCompetencia(),pdto.getEmail())
+    GestorParticipante -> PD: verificarExistenciaNombre(pdto.getNombre(),pdto.getIdCompetencia())
 activate PD
+PD -> GestorParticipante: List<Participante>
+deactivate PD
+GestorParticipante -> PD: verificarExistenciaMail(pdto.getIdCompetencia(),pdto.getEmail())
+activate PD
+PD -> GestorParticipante: List<Participante>
+deactivate PD
 
 end
 
-PD -> GestorParticipante
- deactivate PD
 
 GestorParticipante -> GestorCompetencia: verificarCompetencia(ParticipanteDTO pdto)
 activate GestorCompetencia
@@ -83,7 +91,7 @@ deactivate CD
 
 
 alt competencia.estado!='CREADA' && competencia.estado!='PLANIFICADA'
-    GestorCompetencia -> GestorParticipante
+    GestorCompetencia -> GestorParticipante: null
     deactivate GestorCompetencia
 GestorParticipante -> AltaParticipante
 deactivate GestorParticipante
@@ -135,7 +143,7 @@ AltaParticipante -> AltaParticipante: mostrarMensajeExito()
 AltaParticipante -> UsuarioAutenticado  
 deactivate AltaParticipante  
 end
-
+end
 note right of PD
 ParticipanteDTO
 String nombre
@@ -146,4 +154,3 @@ end note
 hide footbox
 
 @enduml
-
