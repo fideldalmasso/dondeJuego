@@ -1,5 +1,7 @@
 package paneles;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -46,6 +48,15 @@ public class PanelVerParticipantesTM extends AbstractTableModel {
 	
 	public PanelVerParticipantesTM(List<ParticipanteDTO> lista) {
 		super();
+		
+		Collections.sort(lista,new Comparator<ParticipanteDTO>() {
+			@Override
+			public int compare(ParticipanteDTO o1, ParticipanteDTO o2) {
+				return o1.getNombre().compareTo(o2.getNombre());
+			}
+		});
+		
+		
 		dtos=lista;
 
 		tam=dtos.size();

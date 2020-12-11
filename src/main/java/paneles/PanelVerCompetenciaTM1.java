@@ -1,6 +1,8 @@
 package paneles;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -8,6 +10,7 @@ import javax.swing.table.AbstractTableModel;
 import dominio.LugarRealizacion;
 import dominio.Pair;
 import dtos.CompetenciaDTO;
+import dtos.ParticipanteDTO;
 import dtos.VerCompetenciaDTO;
 import gestores.GestorLugarRealizacion;
 import gui.Gui;
@@ -39,7 +42,14 @@ public class PanelVerCompetenciaTM1 extends AbstractTableModel {
 		}
 		tam=dto.getParticipantes().size();
 		data2= new Object[tam][2];
-				
+		
+		Collections.sort(dto.getParticipantes(),new Comparator<ParticipanteDTO>() {
+			@Override
+			public int compare(ParticipanteDTO o1, ParticipanteDTO o2) {
+				return o1.getNombre().compareTo(o2.getNombre());
+			}
+		});
+		
 		for(int i=0; i<tam; i++) {
 			data2[i][0]=dto.getParticipantes().get(i).getNombre();
 			data2[i][1]=dto.getParticipantes().get(i).getEmail();

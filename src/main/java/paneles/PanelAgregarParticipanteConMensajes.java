@@ -88,12 +88,8 @@ public class PanelAgregarParticipanteConMensajes extends JPanel {
 				super.componentMoved(e);
 //				Gui.DEBUG=false;
 				Dimension popupSize = p.getPreferredSize();
-				Gui.imprimir(c.toString());
-				Gui.imprimir(c.getLocation().toString());
 				Point point = SwingUtilities.convertPoint(c, c.getX(), c.getY(), panelcapas);
-				Gui.imprimir(point.toString());
 				point.setLocation(point.getX()+20, point.getY()-popupSize.height/2 +10);
-				Gui.imprimir(point.toString());
 				p.setBounds(new Rectangle(point, popupSize));
 				panelcapas.setLayer(p, 1);
 				panelcapas.add(p);

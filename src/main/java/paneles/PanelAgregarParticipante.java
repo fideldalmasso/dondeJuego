@@ -92,7 +92,7 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 		//		gbc_cargando1.gridy = 0;
 		//		panel.add(cargando1, gbc_cargando1);
 
-		MyTitle myTitle = new MyTitle("Agregar Participate");
+		MyTitle myTitle = new MyTitle("Agregar Participante");
 		GridBagConstraints gbc_myTitle = new GridBagConstraints();
 		gbc_myTitle.gridx = 1;
 		gbc_myTitle.gridy = 0;
@@ -219,14 +219,23 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 		capas.colocarPopup(pexito, botonagregar, false);
 
 		camponombre.addChangeListener(e->{
-			botonagregar.setEnabled(camponombre.hasChanged() || campoemail.hasChanged());
+			botonagregar.setEnabled(camponombre.hasChanged() && campoemail.hasChanged());
 		});
 
 		campoemail.addChangeListener(e->{
-			botonagregar.setEnabled(camponombre.hasChanged() || campoemail.hasChanged());
+			botonagregar.setEnabled(camponombre.hasChanged() && campoemail.hasChanged());
 		});
 
 		botonagregar.addActionListener(e->{
+			if(!(camponombre.hasChanged() && campoemail.hasChanged())) {
+				botonagregar.setEnabled(false);
+				return;
+			}
+				
+			error1.setEnabled(false);
+			error2.setEnabled(false);
+			pexito.setVisible(false);
+			perror.setVisible(false);
 			ParticipanteDTO dto = new ParticipanteDTO(camponombre.getText(), campoemail.getText(), idCompetencia);
 			GestorCompetencia gestorCompetencia = new GestorCompetencia();
 			GestorParticipante gestorParticipante = new GestorParticipante();
@@ -242,14 +251,19 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 			}
 			perror.setText(m.getTexto());
 			switch (m.getAccion()) {
-					case 1:
+					case 1:{
+						error1.setEnabled(true);
 						capas.colocarPopup(perror, error1, false);
 						break;
-					case 2:
+					}
+					case 2:{
+						error2.setEnabled(true);
 						capas.colocarPopup(perror, error2, false);
 						break;
-					case 3:
+					}
+					case 3:{
 						capas.colocarPopup(perror, botonagregar, false);
+					}
 					case -1:
 						break;
 						
@@ -260,29 +274,6 @@ public class PanelAgregarParticipante extends PanelPersonalizado {
 		});
 
 
-		//		SwingWorker<String[], Void> trabajador1 = new SwingWorker<String[], Void>(){
-		//			private String[] t;
-		//			@Override
-		//			protected String[] doInBackground() throws Exception {
-		//				t = gestorDeporte
-		//						.getAllDeportes()
-		//						.stream()
-		//						.map(d->d.getNombre())
-		//						.collect(Collectors.toList())
-		//						.toArray(new String[0]);
-		//
-		//				return t;
-		//			}
-		//			@Override 
-		//			protected void done() {
-		//				if(t!=null) {
-		//					combodeporte.setModel(new DefaultComboBoxModel<String>(t!=null?t:new String[] {" "}));
-		//					cargando1.setVisible(false);
-		//				}
-		//			}
-		//
-		//		};
-		//		trabajador1.execute();
 
 
 

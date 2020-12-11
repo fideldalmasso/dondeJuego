@@ -1,12 +1,15 @@
 package paneles;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import dominio.LugarRealizacion;
 import dominio.Pair;
+import dtos.VerInterfazCompetenciaDTO;
 import gestores.GestorLugarRealizacion;
 import gui.Gui;
 
@@ -42,6 +45,14 @@ public class PanelAltaCompetenciaTM extends AbstractTableModel {
 			this.data = gestor.getAllLugarRealizacion();
 		else
 			this.data = gestor.getAllLugarRealizacion(idDeporte);
+		
+		Collections.sort(data,new Comparator<LugarRealizacion>() {
+			@Override
+			public int compare(LugarRealizacion o1, LugarRealizacion o2) {
+				return o1.getNombre().compareTo(o2.getNombre());
+			}
+		});
+		
 		this.data2 = new Object[data.size()][3];
 		
 		for(int i=0; i<data.size(); i++) {

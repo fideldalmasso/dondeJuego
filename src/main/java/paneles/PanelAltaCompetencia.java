@@ -72,8 +72,32 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 	JPanel panel1;
 	JLayeredPane panel2;
 	
+	//--------------
+	PopupError nombrepopup = new PopupError();
+	PopupError deportepopup = new PopupError();
+	PopupError lugarpopup = new PopupError();
+	PopupError modalidadpopup = new PopupError();
+	PopupError puntuacionpopup = new PopupError();
+	PopupError partidoganadopopup = new PopupError();
+	PopupError empatepopup = new PopupError();
+	PopupError presentarsepopup = new PopupError();
+	PopupError maxsetspopup = new PopupError();
+	PopupError abandonopopup = new PopupError();
+	PopupExito exitopopup = new PopupExito("Competencia añadida con éxito",300);
 	
-	public PanelAltaCompetencia(App padre) {
+	
+	PopupConfirmacion confirmacionaceptar = new PopupConfirmacion();
+	PopupConfirmacionIzquierda confirmacioncancelar = new PopupConfirmacionIzquierda();
+	
+	
+	//--------------
+	
+
+	public PanelAltaCompetencia() {
+		super();
+	}
+	
+	public void cargar(App padre, PanelAltaCompetenciaConMensajes capas) {
 		
 		panel1 = new JPanel(new GridBagLayout());
 		panel2 = new JLayeredPane();
@@ -177,32 +201,7 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			Gui.colocar2(1, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, new JLabel("    "));
 			Gui.colocar2(2, 0, 1, 1, 0, 0, 0, 0, Gui.NONE, Gui.WEST, insetvacio, panelBotones, botonaceptar);
 			botonaceptar.setEnabled(false);
-//			botonaceptar.addActionListener(e->{
-//				
-//				if(tablalugares.isEditing()) {
-//					Gui.imprimir("se tuvo que detener la tabla");
-//					tablalugares.getCellEditor().stopCellEditing();
-//				}
-//				
-//				if(!nombre.component().hasChanged()) nombre.component().setText(null);
-//				if(!reglamento.component().hasChanged()) reglamento.component().setText(null);
-//				
-//				dto=new CompetenciaDTO();
-//				dto.setNombre(nombre.component().getText());
-//				dto.setDeporte(listaDeportes.get(deporte.component().getSelectedIndex()).getId());
-//				dto.setLugares(tablemodel.getSelected());
-//				dto.setModalidad(modalidad.component().getSelectedItem());
-//				dto.setReglamento(reglamento.component().getText());
-//				dto.setPermiteEmpate(empatepermitido.component().isSelected());
-//				dto.setPuntosPorPresentarse((Integer)puntosporpresentarse.component().getValue());
-//				dto.setPuntosPorGanar((Integer)puntosporpartidoganado.component().getValue());
-//				dto.setPuntosPorEmpate((Integer)puntosporempate.component().getValue());
-//				dto.setSistemaPuntuacion(formapuntuacion.component().getSelectedItem());
-//				dto.setPuntosPorAbandono((Integer)puntosporabandono.component().getValue());
-//				dto.setCantidadMaximaSets((Integer)cantidadmaximadesets.component().getValue());
-//				
-//				this.validar(new GestorCompetencia().crearCompetencia(dto));
-//			});
+
 			
 		}
 		
@@ -291,6 +290,80 @@ public class PanelAltaCompetencia extends PanelPersonalizado {
 			
 		}
 		trabajador1.execute();
+		
+		//-----
+		
+		capas.colocarPopup(nombrepopup, 666,130);
+		capas.colocarPopup(nombrepopup, 666,130);
+		capas.colocarPopup(deportepopup, 666,166);
+		capas.colocarPopup(lugarpopup, 935,208);
+		capas.colocarPopup(modalidadpopup, 666,371);
+		capas.colocarPopup(puntuacionpopup, 666,412);
+		capas.colocarPopup(partidoganadopopup, 666,451);
+		capas.colocarPopup(empatepopup, 666,490);
+		capas.colocarPopup(presentarsepopup, 666,527);
+		capas.colocarPopup(maxsetspopup, 935,452);
+		capas.colocarPopup(abandonopopup, 935,491);
+		capas.colocarPopup(exitopopup,904,732);	
+
+		capas.colocarPopup(confirmacionaceptar, 906, 732);
+		capas.colocarPopup(confirmacioncancelar, 706-confirmacioncancelar.getPreferredSize().width, 732);
+		
+		capas.conectarError(nombre.error(), nombrepopup);
+		capas.conectarError(deporte.error(), deportepopup);
+		capas.conectarError(lugar.error(), lugarpopup);
+		capas.conectarError(modalidad.error(), modalidadpopup);
+		capas.conectarError(formapuntuacion.error(), puntuacionpopup);
+		capas.conectarError(puntosporpartidoganado.error(), partidoganadopopup);
+		capas.conectarError(puntosporempate.error(), empatepopup);
+		capas.conectarError(puntosporpresentarse.error(), presentarsepopup);
+		capas.conectarError(cantidadmaximadesets.error(), maxsetspopup);
+		capas.conectarError(puntosporabandono.error(), abandonopopup);
+
+		
+		botonaceptar.addActionListener(e->{
+			confirmacionaceptar.setVisible(true);
+			confirmacioncancelar.setVisible(false);
+			exitopopup.setVisible(false);
+		});
+		
+		confirmacionaceptar.acceptbutton.addActionListener(e->{
+			confirmacioncancelar.setVisible(false);
+			if(agregarCompetencia())
+				exitopopup.setVisible(true);
+			
+		});
+		
+		botoncancelar.addActionListener(e->{
+			confirmacioncancelar.setVisible(true);
+			confirmacionaceptar.setVisible(false);
+		});
+		
+		
+		confirmacioncancelar.acceptbutton.addActionListener(e->{
+			confirmacioncancelar.setVisible(false);
+			padre.volverAtras();
+		});
+		
+		
+		//-----
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 	

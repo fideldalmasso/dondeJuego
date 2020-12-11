@@ -1,5 +1,7 @@
 package paneles;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -46,6 +48,12 @@ public class PanelMisCompetenciasTM extends AbstractTableModel {
 	
 	public PanelMisCompetenciasTM(List<VerInterfazCompetenciaDTO> lista) {
 		super();
+		Collections.sort(lista,new Comparator<VerInterfazCompetenciaDTO>() {
+			@Override
+			public int compare(VerInterfazCompetenciaDTO o1, VerInterfazCompetenciaDTO o2) {
+				return o1.getNombre().compareTo(o2.getNombre());
+			}
+		});
 		dtos=lista;
 
 		tam=dtos.size();

@@ -4,9 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.stream.Collectors;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,14 +14,10 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 import app.App;
-import dtos.VerInterfazCompetenciaDTO;
-import gestores.GestorDeporte;
 import gestores.GestorParticipante;
 import gui.Gui;
 import gui.MyIcon;
-import gui.MyJComboBox;
 import gui.MyJTable;
-import gui.MyJTextField;
 import gui.MyPaginator;
 import gui.MyTitle;
 import gui.PanelPersonalizado;
@@ -35,11 +29,11 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 	PanelVerParticipantesTM tablemodel;	
 	App padre;
 
-	VerInterfazCompetenciaDTO filtro;
 	MyJTable table;
 	MyPaginator paginador;
 	int idCompetencia;
 	String nombreCompetencia;
+	MyIcon cargando1;
 
 
 	public PanelVerParticipantes(App padre, int idCompetencia, String nombreCompetencia) {
@@ -48,7 +42,6 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		this.idCompetencia=idCompetencia;
 		this.nombreCompetencia=nombreCompetencia;
 		this.padre = padre;
-		GestorDeporte gestorDeporte = new GestorDeporte();
 		this.setPreferredSize(new Dimension(890, 790));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {570};
@@ -71,7 +64,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 
-		MyIcon cargando1 = new MyIcon("icon/loading3.gif", 30, 30, true);
+		cargando1 = new MyIcon("icon/loading3.gif", 30, 30, true);
 		GridBagConstraints gbc_cargando1 = new GridBagConstraints();
 		gbc_cargando1.insets = new Insets(0, 0, 0, 5);
 		gbc_cargando1.gridx = 0;
@@ -102,7 +95,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 
 		tablemodel = new PanelVerParticipantesTM();
 
-		MyJTable table = new MyJTable(tablemodel);
+		table = new MyJTable(tablemodel);
 		table.setJTableColumnsWidth(48,48,2,2);
 
 		scrollPane.setViewportView(table);
@@ -121,7 +114,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 
-		MyPaginator paginador = new MyPaginator(tablemodel.getRowsperpage());
+		paginador = new MyPaginator(tablemodel.getRowsperpage());
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) paginador.getLayout();
 		gridBagLayout_1.rowWeights = new double[]{0.0};
 		gridBagLayout_1.rowHeights = new int[]{23};
@@ -135,7 +128,7 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		gbc_myPaginator.gridy = 0;
 		panel_1.add(paginador, gbc_myPaginator);
 
-		JButton botoncancelar = new JButton("Cancelar");
+		JButton botoncancelar = new JButton("Volver");
 		GridBagConstraints gbc_botoncancelar = new GridBagConstraints();
 		gbc_botoncancelar.anchor = GridBagConstraints.EAST;
 		gbc_botoncancelar.fill = GridBagConstraints.VERTICAL;
@@ -154,32 +147,6 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 		gbc_botonagregarparticipante.gridy = 0;
 		panel_1.add(botonagregarparticipante, gbc_botonagregarparticipante);
 
-
-
-		SwingWorker<PanelVerParticipantesTM, Void> trabajador2 = new SwingWorker<PanelVerParticipantesTM, Void>(){
-			private PanelVerParticipantesTM t;
-			@Override
-			protected PanelVerParticipantesTM doInBackground() throws Exception {
-				cargando1.setVisible(true);
-				GestorParticipante gestor = new GestorParticipante();
-				t= new PanelVerParticipantesTM(gestor.getParticipantes(idCompetencia));
-				return t;
-			}
-			@Override 
-			protected void done() {
-				tablemodel=t;
-				if(t!=null) { 
-					table.setModel(t);
-					table.setJTableColumnsWidth(48,48,2,2);
-					cargando1.setVisible(false);
-					paginador.setDataSize(t.getTam());
-				}
-				else {
-					Gui.imprimir("Hubo un error cargando la tabla desde la db");
-				}
-			}
-		};
-		trabajador2.execute();
 
 
 		botonagregarparticipante.addActionListener(e->{
@@ -203,29 +170,62 @@ public class PanelVerParticipantes extends PanelPersonalizado {
 			tablemodel.setActualPage(tablemodel.getTotalpages());
 		});
 
-//		this.addAncestorListener(new AncestorListener() {
-//			
-//			@Override
-//			public void ancestorRemoved(AncestorEvent event) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void ancestorMoved(AncestorEvent event) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void ancestorAdded(AncestorEvent event) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+		this.addAncestorListener(new AncestorListener() {
+
+			@Override
+			public void ancestorAdded(AncestorEvent event) {
+				ejecutarTrabajador3();
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void ancestorRemoved(AncestorEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void ancestorMoved(AncestorEvent event) {
+				
+			}
+			
+		});
 
 
 	}
+	
+	public void ejecutarTrabajador3() {
+		PanelVerParticipantes.Trabajador3 t  = this.new Trabajador3();
+		t.execute();
+	}
+	
+	class Trabajador3 extends SwingWorker<PanelVerParticipantesTM, Void>{
+		private PanelVerParticipantesTM t;
+		@Override
+		protected PanelVerParticipantesTM doInBackground() throws Exception {
+			PanelVerParticipantes.this.cargando1.setVisible(true);
+			GestorParticipante gestor = new GestorParticipante();
+			t= new PanelVerParticipantesTM(gestor.getParticipantes(PanelVerParticipantes.this.idCompetencia));
+			return t;
+		}
+		@Override 
+		protected void done() {
+			tablemodel=t;
+			if(t!=null) { 
+				PanelVerParticipantes.this.table.setModel(t);
+				PanelVerParticipantes.this.table.setJTableColumnsWidth(48,48,2,2);
+				PanelVerParticipantes.this.cargando1.setVisible(false);
+				PanelVerParticipantes.this.paginador.setDataSize(t.getTam());
+			}
+			else {
+				Gui.imprimir("Hubo un error cargando la tabla desde la db");
+			}
+		}
+	}
+
+	
+	
 
 
 }

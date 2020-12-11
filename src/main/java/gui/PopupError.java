@@ -53,7 +53,7 @@ public class PopupError extends JPanel {
 		this.setVisible(false);
 
 		this.icon = new MyIcon("icon/error4.png", 20, 20, false);
-		this.text = new JTextArea();
+		this.text = new JTextArea("");
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		text.setOpaque(false);

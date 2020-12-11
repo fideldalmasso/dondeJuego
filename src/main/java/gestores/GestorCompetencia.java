@@ -41,7 +41,7 @@ public class GestorCompetencia {
 
 		Mensaje2<errores> mensaje = new Mensaje2<errores>();
 		
-		List<Competencia> competencias= cd.getAllCompetencias(); //TODO no se puede hacer una consulta que devuelva solo los nombres de las competencias?
+		List<Competencia> competencias= cd.getAllCompetencias();
 		Competencia compe = new Competencia();
 		if(cdto.getNombre()==null) {
 			mensaje.put(errores.NOMBRE,"Ingrese el nombre de la competencia");
@@ -153,7 +153,7 @@ public class GestorCompetencia {
 		
 		Mensaje2<errores> mensaje = new Mensaje2<errores>();
 		
-		List<Competencia> competencias= cd.getAllCompetencias(); //TODO no se puede hacer una consulta que devuelva solo los nombres de las competencias?
+		List<Competencia> competencias= cd.getAllCompetencias(); 
 		Competencia compe = new Competencia();
 		if(cdto.getNombre()==null) {
 			mensaje.put(errores.NOMBRE,"Ingrese el nombre de la competencia");

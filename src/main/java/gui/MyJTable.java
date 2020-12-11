@@ -1,17 +1,31 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class MyJTable extends JTable {
 
+	
+	public void ordenar() {
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.getModel());
+		this.setRowSorter(sorter);
+
+		List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+		sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+		sorter.setSortKeys(sortKeys);
+	}
 	
 	public MyJTable() {
 		// TODO Auto-generated constructor stub

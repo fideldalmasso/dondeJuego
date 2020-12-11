@@ -33,10 +33,6 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 	private int idCompetencia;
 
 
-//	PopupConfirmacion fixturepopup = new PopupConfirmacion();
-//	PopupError errorgenerandofixture = new PopupError();
-//	PopupExito exitogenerandofixture;
-
 	public PanelVerCompetenciaConMensajes(App padre, int idCompetencia) {
 		this.idCompetencia = idCompetencia;
 		this.setPreferredSize(new Dimension(1100, 800));
@@ -60,26 +56,6 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 		panelinterno.setFocusable(true);
 		panelcapas.setFocusable(true);
 
-//		exitogenerandofixture=new PopupExito();
-//		exitogenerandofixture.setWidth(300);
-//		colocarPopup(exitogenerandofixture, panelinterno.botongenerarfixture,false);
-//
-//		colocarPopup(fixturepopup, panelinterno.botongenerarfixture,true);
-//		fixturepopup.acceptbutton.addActionListener(e->{
-//			GestorFixture gestor = new GestorFixture();
-//			Mensaje m = gestor.generarFixture(idCompetencia);
-//			if(m.getAccion()==1) {
-//				m = gestor.crearFixture();
-//				if(m.getAccion()==0) {
-//					exitogenerandofixture.setText(m.getMensaje().get(0));
-//					exitogenerandofixture.setVisible(true);
-//					return;
-//				}
-//			}
-//				errorgenerandofixture.setText(m.getMensaje().toString());
-//				errorgenerandofixture.setVisible(true);
-//		});
-//		colocarPopup(errorgenerandofixture, panelinterno.botongenerarfixture,false);
 
 
 		this.add(panelcapas);
@@ -112,12 +88,8 @@ public class PanelVerCompetenciaConMensajes extends JPanel {
 				super.componentMoved(e);
 //				Gui.DEBUG=false;
 				Dimension popupSize = p.getPreferredSize();
-				Gui.imprimir(c.toString());
-				Gui.imprimir(c.getLocation().toString());
 				Point point = SwingUtilities.convertPoint(c, c.getX(), c.getY(), panelcapas);
-				Gui.imprimir(point.toString());
 				point.setLocation(point.getX()+20, point.getY()-popupSize.height/2 +10);
-				Gui.imprimir(point.toString());
 				p.setBounds(new Rectangle(point, popupSize));
 				panelcapas.setLayer(p, 1);
 				panelcapas.add(p);

@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +40,7 @@ import gui.MyJTextField;
 import gui.MyPaginator;
 import gui.MyTitle;
 import gui.PanelPersonalizado;
+import gui.PredefinedRowSorter;
 import guiejemplos.BubbleLabelRight;
 
 public class PanelMisCompetencias extends PanelPersonalizado {
@@ -192,7 +195,6 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 
 		table = new MyJTable(tablemodel);
 		table.setJTableColumnsWidth(36,14,25,19,6);
-
 		scrollPane.setViewportView(table);
 
 		cargando2 = new MyIcon("icon/loading3.gif",24,24,true,false,true);
@@ -295,6 +297,7 @@ public class PanelMisCompetencias extends PanelPersonalizado {
 					table.setJTableColumnsWidth(36,14,25,19,6);
 					cargando2.setVisible(false);
 					paginador.setDataSize(t.getTam());
+//					table.ordenar();
 				}
 				else {
 					Gui.imprimir("Hubo un error cargando la tabla desde la db");
