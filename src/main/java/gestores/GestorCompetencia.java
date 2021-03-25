@@ -220,7 +220,7 @@ public class GestorCompetencia {
 				s=null;
 				break;
 		}
-		if(s.equals(null)) {
+		if(s==null) {
 			mensaje.put(errores.SISTEMAPUNTUACION,"Sistema puntuación inexistente.");
 		}else {
 			//sd.save(s);
